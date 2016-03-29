@@ -1,0 +1,45 @@
+GEO.id,Id
+GEO.id2,Id2
+GEO.display-label,Geography
+HD01_VD01,Estimate; Total:
+HD02_VD01,Margin of Error; Total:
+HD01_VD02,Estimate; With an Internet subscription:
+HD02_VD02,Margin of Error; With an Internet subscription:
+HD01_VD03,Estimate; With an Internet subscription: - Dial-up alone
+HD02_VD03,Margin of Error; With an Internet subscription: - Dial-up alone
+HD01_VD04,Estimate; With an Internet subscription: - DSL:
+HD02_VD04,Margin of Error; With an Internet subscription: - DSL:
+HD01_VD05,Estimate; With an Internet subscription: - DSL: - With mobile broadband
+HD02_VD05,Margin of Error; With an Internet subscription: - DSL: - With mobile broadband
+HD01_VD06,Estimate; With an Internet subscription: - DSL: - Without mobile broadband
+HD02_VD06,Margin of Error; With an Internet subscription: - DSL: - Without mobile broadband
+HD01_VD07,Estimate; With an Internet subscription: - Cable modem:
+HD02_VD07,Margin of Error; With an Internet subscription: - Cable modem:
+HD01_VD08,Estimate; With an Internet subscription: - Cable modem: - With mobile broadband
+HD02_VD08,Margin of Error; With an Internet subscription: - Cable modem: - With mobile broadband
+HD01_VD09,Estimate; With an Internet subscription: - Cable modem: - Without mobile broadband
+HD02_VD09,Margin of Error; With an Internet subscription: - Cable modem: - Without mobile broadband
+HD01_VD10,Estimate; With an Internet subscription: - Fiber-optic:
+HD02_VD10,Margin of Error; With an Internet subscription: - Fiber-optic:
+HD01_VD11,Estimate; With an Internet subscription: - Fiber-optic: - With mobile broadband
+HD02_VD11,Margin of Error; With an Internet subscription: - Fiber-optic: - With mobile broadband
+HD01_VD12,Estimate; With an Internet subscription: - Fiber-optic: - Without mobile broadband
+HD02_VD12,Margin of Error; With an Internet subscription: - Fiber-optic: - Without mobile broadband
+HD01_VD13,Estimate; With an Internet subscription: - Satellite Internet service:
+HD02_VD13,Margin of Error; With an Internet subscription: - Satellite Internet service:
+HD01_VD14,Estimate; With an Internet subscription: - Satellite Internet service: - With mobile broadband
+HD02_VD14,Margin of Error; With an Internet subscription: - Satellite Internet service: - With mobile broadband
+HD01_VD15,Estimate; With an Internet subscription: - Satellite Internet service: - Without mobile broadband
+HD02_VD15,Margin of Error; With an Internet subscription: - Satellite Internet service: - Without mobile broadband
+HD01_VD16,"Estimate; With an Internet subscription: - Two or more fixed broadband types, or other:"
+HD02_VD16,"Margin of Error; With an Internet subscription: - Two or more fixed broadband types, or other:"
+HD01_VD17,"Estimate; With an Internet subscription: - Two or more fixed broadband types, or other: - With mobile broadband"
+HD02_VD17,"Margin of Error; With an Internet subscription: - Two or more fixed broadband types, or other: - With mobile broadband"
+HD01_VD18,"Estimate; With an Internet subscription: - Two or more fixed broadband types, or other: - Without mobile broadband"
+HD02_VD18,"Margin of Error; With an Internet subscription: - Two or more fixed broadband types, or other: - Without mobile broadband"
+HD01_VD19,Estimate; With an Internet subscription: - Mobile broadband alone or with dialup
+HD02_VD19,Margin of Error; With an Internet subscription: - Mobile broadband alone or with dialup
+HD01_VD20,Estimate; Internet access without a subscription
+HD02_VD20,Margin of Error; Internet access without a subscription
+HD01_VD21,Estimate; No Internet access
+HD02_VD21,Margin of Error; No Internet access
