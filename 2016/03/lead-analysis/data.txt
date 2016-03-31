@@ -1,6 +1,24 @@
 [ {
   "type": "Feature",
   "properties": {
+    "real.town.name": "Andover",
+"Count": 1,
+"Population": 26},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": AndoverBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Ashford",
+"Count": 2,
+"Population": 186},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": AshfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
     "real.town.name": "Barkhamsted",
 "Count": 2,
 "Population": 470},
@@ -11,8 +29,8 @@
   "type": "Feature",
   "properties": {
     "real.town.name": "Bethany",
-"Count": 2,
-"Population": 825},
+"Count": 3,
+"Population": 850},
   "geometry": {
     "type": "MultiPolygon",
     "coordinates": BethanyBorders}
@@ -28,36 +46,9 @@
 },{
   "type": "Feature",
   "properties": {
-    "real.town.name": "Bridgeport",
-"Count": 6,
-"Population": 3616},
-  "geometry": {
-    "type": "MultiPolygon",
-    "coordinates": BridgeportBorders}
-},{
-  "type": "Feature",
-  "properties": {
-    "real.town.name": "Bridgewater",
-"Count": 1,
-"Population": 49},
-  "geometry": {
-    "type": "MultiPolygon",
-    "coordinates": BridgewaterBorders}
-},{
-  "type": "Feature",
-  "properties": {
-    "real.town.name": "Bristol",
-"Count": 1,
-"Population": 52079},
-  "geometry": {
-    "type": "MultiPolygon",
-    "coordinates": BristolBorders}
-},{
-  "type": "Feature",
-  "properties": {
     "real.town.name": "Brookfield",
-"Count": 5,
-"Population": 470},
+"Count": 8,
+"Population": 1723},
   "geometry": {
     "type": "MultiPolygon",
     "coordinates": BrookfieldBorders}
@@ -65,8 +56,8 @@
   "type": "Feature",
   "properties": {
     "real.town.name": "Canterbury",
-"Count": 2,
-"Population": 611},
+"Count": 1,
+"Population": 310},
   "geometry": {
     "type": "MultiPolygon",
     "coordinates": CanterburyBorders}
@@ -91,18 +82,18 @@
 },{
   "type": "Feature",
   "properties": {
-    "real.town.name": "Clinton",
-"Count": 6,
-"Population": 1258},
+    "real.town.name": "Colchester",
+"Count": 1,
+"Population": 252},
   "geometry": {
     "type": "MultiPolygon",
-    "coordinates": ClintonBorders}
+    "coordinates": ColchesterBorders}
 },{
   "type": "Feature",
   "properties": {
     "real.town.name": "Colebrook",
-"Count": 1,
-"Population": 170},
+"Count": 2,
+"Population": 670},
   "geometry": {
     "type": "MultiPolygon",
     "coordinates": ColebrookBorders}
@@ -119,20 +110,11 @@
   "type": "Feature",
   "properties": {
     "real.town.name": "Coventry",
-"Count": 1,
-"Population": 34},
+"Count": 3,
+"Population": 764},
   "geometry": {
     "type": "MultiPolygon",
     "coordinates": CoventryBorders}
-},{
-  "type": "Feature",
-  "properties": {
-    "real.town.name": "Cromwell",
-"Count": 1,
-"Population": 38},
-  "geometry": {
-    "type": "MultiPolygon",
-    "coordinates": CromwellBorders}
 },{
   "type": "Feature",
   "properties": {
@@ -145,18 +127,9 @@
 },{
   "type": "Feature",
   "properties": {
-    "real.town.name": "Derby",
-"Count": 1,
-"Population": 27},
-  "geometry": {
-    "type": "MultiPolygon",
-    "coordinates": DerbyBorders}
-},{
-  "type": "Feature",
-  "properties": {
     "real.town.name": "Durham",
-"Count": 1,
-"Population": 140},
+"Count": 2,
+"Population": 235},
   "geometry": {
     "type": "MultiPolygon",
     "coordinates": DurhamBorders}
@@ -182,20 +155,11 @@
   "type": "Feature",
   "properties": {
     "real.town.name": "East Hampton",
-"Count": 4,
-"Population": 1247},
+"Count": 6,
+"Population": 1500},
   "geometry": {
     "type": "MultiPolygon",
     "coordinates": EastHamptonBorders}
-},{
-  "type": "Feature",
-  "properties": {
-    "real.town.name": "East Hartford",
-"Count": 1,
-"Population": 276},
-  "geometry": {
-    "type": "MultiPolygon",
-    "coordinates": EastHartfordBorders}
 },{
   "type": "Feature",
   "properties": {
@@ -205,15 +169,6 @@
   "geometry": {
     "type": "MultiPolygon",
     "coordinates": EastLymeBorders}
-},{
-  "type": "Feature",
-  "properties": {
-    "real.town.name": "East Windsor",
-"Count": 4,
-"Population": 1375},
-  "geometry": {
-    "type": "MultiPolygon",
-    "coordinates": EastWindsorBorders}
 },{
   "type": "Feature",
   "properties": {
@@ -227,47 +182,38 @@
   "type": "Feature",
   "properties": {
     "real.town.name": "Easton",
-"Count": 3,
-"Population": 545},
+"Count": 2,
+"Population": 115},
   "geometry": {
     "type": "MultiPolygon",
     "coordinates": EastonBorders}
 },{
   "type": "Feature",
   "properties": {
-    "real.town.name": "Enfield",
-"Count": 2,
-"Population": 6865},
+    "real.town.name": "Ellington",
+"Count": 1,
+"Population": 60},
   "geometry": {
     "type": "MultiPolygon",
-    "coordinates": EnfieldBorders}
+    "coordinates": EllingtonBorders}
 },{
   "type": "Feature",
   "properties": {
     "real.town.name": "Essex",
-"Count": 1,
-"Population": 38},
+"Count": 2,
+"Population": 110},
   "geometry": {
     "type": "MultiPolygon",
     "coordinates": EssexBorders}
 },{
   "type": "Feature",
   "properties": {
-    "real.town.name": "Farmington",
-"Count": 2,
-"Population": 130},
-  "geometry": {
-    "type": "MultiPolygon",
-    "coordinates": FarmingtonBorders}
-},{
-  "type": "Feature",
-  "properties": {
-    "real.town.name": "Glastonbury",
+    "real.town.name": "Franklin",
 "Count": 1,
-"Population": 114},
+"Population": 50},
   "geometry": {
     "type": "MultiPolygon",
-    "coordinates": GlastonburyBorders}
+    "coordinates": FranklinBorders}
 },{
   "type": "Feature",
   "properties": {
@@ -289,27 +235,27 @@
 },{
   "type": "Feature",
   "properties": {
+    "real.town.name": "Griswold",
+"Count": 2,
+"Population": 806},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": GriswoldBorders}
+},{
+  "type": "Feature",
+  "properties": {
     "real.town.name": "Groton",
-"Count": 1,
-"Population": 50},
+"Count": 3,
+"Population": 110},
   "geometry": {
     "type": "MultiPolygon",
     "coordinates": GrotonBorders}
 },{
   "type": "Feature",
   "properties": {
-    "real.town.name": "Guilford",
-"Count": 1,
-"Population": 70},
-  "geometry": {
-    "type": "MultiPolygon",
-    "coordinates": GuilfordBorders}
-},{
-  "type": "Feature",
-  "properties": {
     "real.town.name": "Haddam",
-"Count": 4,
-"Population": 1486},
+"Count": 5,
+"Population": 1095},
   "geometry": {
     "type": "MultiPolygon",
     "coordinates": HaddamBorders}
@@ -322,15 +268,6 @@
   "geometry": {
     "type": "MultiPolygon",
     "coordinates": HamdenBorders}
-},{
-  "type": "Feature",
-  "properties": {
-    "real.town.name": "Hartford",
-"Count": 2,
-"Population": 710},
-  "geometry": {
-    "type": "MultiPolygon",
-    "coordinates": HartfordBorders}
 },{
   "type": "Feature",
   "properties": {
@@ -353,20 +290,20 @@
   "type": "Feature",
   "properties": {
     "real.town.name": "Hebron",
-"Count": 2,
-"Population": 1317},
+"Count": 3,
+"Population": 1538},
   "geometry": {
     "type": "MultiPolygon",
     "coordinates": HebronBorders}
 },{
   "type": "Feature",
   "properties": {
-    "real.town.name": "Killingly",
-"Count": 3,
-"Population": 493},
+    "real.town.name": "Killingworth",
+"Count": 1,
+"Population": 543},
   "geometry": {
     "type": "MultiPolygon",
-    "coordinates": KillinglyBorders}
+    "coordinates": KillingworthBorders}
 },{
   "type": "Feature",
   "properties": {
@@ -388,18 +325,9 @@
 },{
   "type": "Feature",
   "properties": {
-    "real.town.name": "Litchfield",
-"Count": 1,
-"Population": 140},
-  "geometry": {
-    "type": "MultiPolygon",
-    "coordinates": LitchfieldBorders}
-},{
-  "type": "Feature",
-  "properties": {
     "real.town.name": "Madison",
 "Count": 3,
-"Population": 147},
+"Population": 179},
   "geometry": {
     "type": "MultiPolygon",
     "coordinates": MadisonBorders}
@@ -407,8 +335,8 @@
   "type": "Feature",
   "properties": {
     "real.town.name": "Manchester",
-"Count": 3,
-"Population": 167},
+"Count": 2,
+"Population": 507},
   "geometry": {
     "type": "MultiPolygon",
     "coordinates": ManchesterBorders}
@@ -416,8 +344,8 @@
   "type": "Feature",
   "properties": {
     "real.town.name": "Mansfield",
-"Count": 4,
-"Population": 885},
+"Count": 8,
+"Population": 1495},
   "geometry": {
     "type": "MultiPolygon",
     "coordinates": MansfieldBorders}
@@ -443,8 +371,8 @@
   "type": "Feature",
   "properties": {
     "real.town.name": "Middlefield",
-"Count": 3,
-"Population": 200},
+"Count": 4,
+"Population": 300},
   "geometry": {
     "type": "MultiPolygon",
     "coordinates": MiddlefieldBorders}
@@ -452,8 +380,8 @@
   "type": "Feature",
   "properties": {
     "real.town.name": "Middletown",
-"Count": 4,
-"Population": 3035},
+"Count": 2,
+"Population": 2940},
   "geometry": {
     "type": "MultiPolygon",
     "coordinates": MiddletownBorders}
@@ -461,20 +389,11 @@
   "type": "Feature",
   "properties": {
     "real.town.name": "Montville",
-"Count": 10,
-"Population": 3648},
+"Count": 14,
+"Population": 4233},
   "geometry": {
     "type": "MultiPolygon",
     "coordinates": MontvilleBorders}
-},{
-  "type": "Feature",
-  "properties": {
-    "real.town.name": "New Britain",
-"Count": 1,
-"Population": 73164},
-  "geometry": {
-    "type": "MultiPolygon",
-    "coordinates": NewBritainBorders}
 },{
   "type": "Feature",
   "properties": {
@@ -496,6 +415,15 @@
 },{
   "type": "Feature",
   "properties": {
+    "real.town.name": "New Milford",
+"Count": 2,
+"Population": 552},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewMilfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
     "real.town.name": "Newington",
 "Count": 1,
 "Population": 110},
@@ -506,8 +434,8 @@
   "type": "Feature",
   "properties": {
     "real.town.name": "Newtown",
-"Count": 2,
-"Population": 199},
+"Count": 3,
+"Population": 501},
   "geometry": {
     "type": "MultiPolygon",
     "coordinates": NewtownBorders}
@@ -542,8 +470,8 @@
   "type": "Feature",
   "properties": {
     "real.town.name": "Old Lyme",
-"Count": 3,
-"Population": 155},
+"Count": 5,
+"Population": 275},
   "geometry": {
     "type": "MultiPolygon",
     "coordinates": OldLymeBorders}
@@ -559,18 +487,18 @@
 },{
   "type": "Feature",
   "properties": {
-    "real.town.name": "Plainville",
-"Count": 1,
-"Population": 100},
+    "real.town.name": "Plainfield",
+"Count": 2,
+"Population": 237},
   "geometry": {
     "type": "MultiPolygon",
-    "coordinates": PlainvilleBorders}
+    "coordinates": PlainfieldBorders}
 },{
   "type": "Feature",
   "properties": {
     "real.town.name": "Pomfret",
-"Count": 2,
-"Population": 121},
+"Count": 4,
+"Population": 487},
   "geometry": {
     "type": "MultiPolygon",
     "coordinates": PomfretBorders}
@@ -579,7 +507,7 @@
   "properties": {
     "real.town.name": "Portland",
 "Count": 2,
-"Population": 86},
+"Population": 124},
   "geometry": {
     "type": "MultiPolygon",
     "coordinates": PortlandBorders}
@@ -597,7 +525,7 @@
   "properties": {
     "real.town.name": "Redding",
 "Count": 4,
-"Population": 162},
+"Population": 559},
   "geometry": {
     "type": "MultiPolygon",
     "coordinates": ReddingBorders}
@@ -606,10 +534,19 @@
   "properties": {
     "real.town.name": "Ridgefield",
 "Count": 4,
-"Population": 2234},
+"Population": 3176},
   "geometry": {
     "type": "MultiPolygon",
     "coordinates": RidgefieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Roxbury",
+"Count": 1,
+"Population": 49},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": RoxburyBorders}
 },{
   "type": "Feature",
   "properties": {
@@ -622,27 +559,27 @@
 },{
   "type": "Feature",
   "properties": {
-    "real.town.name": "South Windsor",
-"Count": 2,
-"Population": 169},
-  "geometry": {
-    "type": "MultiPolygon",
-    "coordinates": SouthWindsorBorders}
-},{
-  "type": "Feature",
-  "properties": {
     "real.town.name": "Southbury",
 "Count": 2,
-"Population": 342},
+"Population": 81},
   "geometry": {
     "type": "MultiPolygon",
     "coordinates": SouthburyBorders}
 },{
   "type": "Feature",
   "properties": {
-    "real.town.name": "Stafford",
+    "real.town.name": "Sprague",
 "Count": 1,
-"Population": 240},
+"Population": 40},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SpragueBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Stafford",
+"Count": 4,
+"Population": 457},
   "geometry": {
     "type": "MultiPolygon",
     "coordinates": StaffordBorders}
@@ -650,8 +587,8 @@
   "type": "Feature",
   "properties": {
     "real.town.name": "Stamford",
-"Count": 2,
-"Population": 142},
+"Count": 1,
+"Population": 70},
   "geometry": {
     "type": "MultiPolygon",
     "coordinates": StamfordBorders}
@@ -669,19 +606,10 @@
   "properties": {
     "real.town.name": "Stonington",
 "Count": 1,
-"Population": 25},
+"Population": 445},
   "geometry": {
     "type": "MultiPolygon",
     "coordinates": StoningtonBorders}
-},{
-  "type": "Feature",
-  "properties": {
-    "real.town.name": "Suffield",
-"Count": 1,
-"Population": 141},
-  "geometry": {
-    "type": "MultiPolygon",
-    "coordinates": SuffieldBorders}
 },{
   "type": "Feature",
   "properties": {
@@ -695,8 +623,8 @@
   "type": "Feature",
   "properties": {
     "real.town.name": "Thompson",
-"Count": 4,
-"Population": 370},
+"Count": 3,
+"Population": 293},
   "geometry": {
     "type": "MultiPolygon",
     "coordinates": ThompsonBorders}
@@ -704,38 +632,29 @@
   "type": "Feature",
   "properties": {
     "real.town.name": "Tolland",
-"Count": 2,
-"Population": 255},
+"Count": 4,
+"Population": 456},
   "geometry": {
     "type": "MultiPolygon",
     "coordinates": TollandBorders}
 },{
   "type": "Feature",
   "properties": {
-    "real.town.name": "Vernon",
-"Count": 1,
-"Population": 366},
-  "geometry": {
-    "type": "MultiPolygon",
-    "coordinates": VernonBorders}
-},{
-  "type": "Feature",
-  "properties": {
     "real.town.name": "Voluntown",
-"Count": 2,
-"Population": 407},
+"Count": 3,
+"Population": 623},
   "geometry": {
     "type": "MultiPolygon",
     "coordinates": VoluntownBorders}
 },{
   "type": "Feature",
   "properties": {
-    "real.town.name": "Waterbury",
+    "real.town.name": "Warren",
 "Count": 1,
-"Population": 107271},
+"Population": 140},
   "geometry": {
     "type": "MultiPolygon",
-    "coordinates": WaterburyBorders}
+    "coordinates": WarrenBorders}
 },{
   "type": "Feature",
   "properties": {
@@ -748,15 +667,6 @@
 },{
   "type": "Feature",
   "properties": {
-    "real.town.name": "West Hartford",
-"Count": 1,
-"Population": 35},
-  "geometry": {
-    "type": "MultiPolygon",
-    "coordinates": WestHartfordBorders}
-},{
-  "type": "Feature",
-  "properties": {
     "real.town.name": "Weston",
 "Count": 3,
 "Population": 471},
@@ -766,18 +676,9 @@
 },{
   "type": "Feature",
   "properties": {
-    "real.town.name": "Wethersfield",
-"Count": 2,
-"Population": 110},
-  "geometry": {
-    "type": "MultiPolygon",
-    "coordinates": WethersfieldBorders}
-},{
-  "type": "Feature",
-  "properties": {
     "real.town.name": "Willington",
-"Count": 1,
-"Population": 400},
+"Count": 2,
+"Population": 326},
   "geometry": {
     "type": "MultiPolygon",
     "coordinates": WillingtonBorders}
@@ -785,17 +686,26 @@
   "type": "Feature",
   "properties": {
     "real.town.name": "Wilton",
-"Count": 1,
-"Population": 259},
+"Count": 2,
+"Population": 292},
   "geometry": {
     "type": "MultiPolygon",
     "coordinates": WiltonBorders}
 },{
   "type": "Feature",
   "properties": {
+    "real.town.name": "Winchester",
+"Count": 1,
+"Population": 25},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WinchesterBorders}
+},{
+  "type": "Feature",
+  "properties": {
     "real.town.name": "Wolcott",
-"Count": 2,
-"Population": 163},
+"Count": 3,
+"Population": 451},
   "geometry": {
     "type": "MultiPolygon",
     "coordinates": WolcottBorders}

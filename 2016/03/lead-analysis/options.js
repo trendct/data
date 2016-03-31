@@ -9,7 +9,7 @@ var menubar = [{
       "var": "Count",
         "real": "Count",
         "min": 1,
-        "max": 10,
+        "max": 14,
         "munge": function(val) {
             return val;
         }
@@ -17,7 +17,7 @@ var menubar = [{
       "var": "Population",
         "real": "Population",
         "min": 25,
-        "max": 107271,
+        "max": 4233,
         "munge": function(val) {
             return val;
         }
