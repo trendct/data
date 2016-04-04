@@ -161,9 +161,10 @@ list <- ct_all_current_for_map %>%
   select(name_link, ppb, year.end, Population.Served.Count,   Is.School.Or.Daycare.Ind, address, city.s.served, primary.water.source.type, Owner.Type.Description)
 
 list <- data.frame(list)
-fancytable(list, headline = "Elevated lead levels in drinking water systems", subhead = "Since 2010.", height = 400,
-           paging = "false", sourceline = "Source: U.S. EPA, Safe Drinking Water Information System", byline = "Andrew Ba Tran/TrendCT.org", col = 0,
-           desc_asc = "desc")
+
+#fancytable(list, headline = "Elevated lead levels in drinking water systems", subhead = "Since 2010.", height = 400,
+#           paging = "false", sourceline = "Source: U.S. EPA, Safe Drinking Water Information System", byline = "Andrew Ba Tran/TrendCT.org", col = 0,
+#           desc_asc = "desc")
 
 devtools::install_github("wesm/feather/R")
 library(feather)
