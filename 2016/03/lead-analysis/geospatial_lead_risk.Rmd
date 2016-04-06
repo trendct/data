@@ -48,7 +48,7 @@ housing <- getCensus(name="acs5",
                              "B25034_004E","B25034_005E","B25034_006E","B25034_007E",
                              "B25034_008E","B25034_009E","B25034_010E", "B17004_001E"
                              ), 
-                      region="tract:*", regionin="state:09")
+                      region="tract:*", regionin="state:09") #change state FIPS code here for a tract data for a different state-- but you'll need to bring in the matching shape file
 
 # S1701 is not accessible via the Census API but I found the equivalent in B06012
 
@@ -112,7 +112,7 @@ df <- subset(df, tract!=990000)
 
 ## Generating the map
 
-```{r map}
+```{r map, fig.width=12, fig.height=7}
 gpclibPermit()
 gpclibPermitStatus()
 censustracts <- readOGR(dsn="maps/census_tracts/wgs84", layer="tractct_37800_0000_2010_s100_census_1_shp_wgs84")
