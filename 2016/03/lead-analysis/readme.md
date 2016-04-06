@@ -18,7 +18,7 @@ Check us out on Twitter [@TrendCT](http://www.trendct.org) and on [Facebook/Tren
 * Methodology and process (RMarkdown) of analysis [[Lead](http://trendct.github.io/data/2016/03/lead-analysis/elevated_lead_levels.html)][[Violations](http://trendct.github.io/data/2016/03/lead-analysis/violations.html)]
 * HTML of leaflet mapping output used in [Where lead was detected in Connecticut’s drinking water](http://trendct.org/2016/04/04/where-lead-was-detected-in-connecticuts-drinking-water) 
 
-### How to get the list of data from the EPA
+### How to get the list of lead violations from the EPA
 
 Lead ALE violations in CT
 
@@ -30,6 +30,12 @@ Lead ALE violations in CT
 6. Set Sample Start Date and Sample End Date to '1/1/2000' and '1/1/2016'
 7. Click the 'View Reports' button at the top right
 
+### How to get the list of all drinking water violations from the EPA
 
-
+1. Visit the SDWIS [Federal Reports Search](https://ofmpub.epa.gov/apex/sfdw/f?p=108:200:::NO)
+2. Click the 'Advanced Search Options' button
+3. In the top-most section, select 'Violations'
+4. Select 'Connecticut' from 'Primary Agency'
+5. Set Compliance Period Start Date and Compliance Period End Date to '1/1/2000' and '1/1/2016'
+6. Click the 'View Reports' button at the top right
 
