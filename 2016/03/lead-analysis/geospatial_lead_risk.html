@@ -175,7 +175,6 @@ poverty$tract_id &lt;- paste0(poverty$state, poverty$county, poverty$tract)
 old$tract_id &lt;- paste0(old$state, old$county, old$tract)
 
 old &lt;- old[c(&quot;tract_id&quot;, &quot;risk&quot;, &quot;z_housing&quot;, &quot;weighted_housing&quot;)]
-#colnames(old) &lt;- c(&quot;tract_id&quot;, &quot;risk&quot;, &quot;z_housing&quot;, &quot;weighted_housing&quot;)
 
 df &lt;- left_join(poverty, old)</code></pre>
 <pre><code>## Joining by: &quot;tract_id&quot;</code></pre>
@@ -184,10 +183,7 @@ df &lt;- left_join(poverty, old)</code></pre>
 # calculating deciles on risk score
 
 df &lt;- mutate(df, quantile = ntile(riskscore_raw, 10))
-df$id &lt;- df$tract
-df &lt;- subset(df, tract!=990000)
-990000</code></pre>
-<pre><code>## [1] 990000</code></pre>
+df$id &lt;- df$tract</code></pre>
 <div id="generating-the-map" class="section level2">
 <h2>Generating the map</h2>
 <pre class="r"><code>gpclibPermit()</code></pre>

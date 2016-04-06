@@ -95,7 +95,6 @@ poverty$tract_id <- paste0(poverty$state, poverty$county, poverty$tract)
 old$tract_id <- paste0(old$state, old$county, old$tract)
 
 old <- old[c("tract_id", "risk", "z_housing", "weighted_housing")]
-#colnames(old) <- c("tract_id", "risk", "z_housing", "weighted_housing")
 
 df <- left_join(poverty, old)
 
@@ -105,9 +104,6 @@ df$riskscore_raw <- df$weighted_housing + df$weighted_poverty
 
 df <- mutate(df, quantile = ntile(riskscore_raw, 10))
 df$id <- df$tract
-df <- subset(df, tract!=990000)
-990000
-
 ```
 
 ## Generating the map
@@ -120,7 +116,6 @@ censustracts_only <- censustracts
 censustracts <- fortify(censustracts, region="TRACTCE10")
 
 risk_map <- left_join(censustracts, df)
-
 
 ggplot() +
   geom_polygon(data = risk_map, aes(x=long, y=lat, group=group, fill=quantile), color = "black", size=0.2) +
