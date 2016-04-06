@@ -1,24 +1,33 @@
+---
+title: "Drinking water violations in Connecticut"
+author: "Andrew Ba Tran"
+date: "April 5, 2016"
+output: html_document
+---
+
+```{r setup, message=FALSE}
 library(stringr)
 library(dplyr)
 library(lubridate)
 library(tidyr)
 library(ggplot2)
-#schools <- read.csv("school_lead_update.csv", stringsAsFactors=FALSE)
+library(DT)
+```
+This is the analysis to go with the following story: 
 
-#schools_unique <- schools[!duplicated(schools$Name),]
-#schools_unique$Name <- str_to_upper(schools_unique$Name)
+* [Drinking water violations across Connecticut](http://trendct.org/2016/04/06/drinking-water-violations-across-connecticut)
 
-#colnames(schools_unique)[colnames(schools_unique) == 'Name'] <- 'name'
+The data is from the U.S. Environmental Protection Agency's Safe Drinking Water Information System (SDWIS) as of April 2016. 
 
-#violations_schools <- left_join(actions, schools_unique)
-#violations_schools <- violations_schools[!is.na(violations_schools$Town),]
-
-#violations_schools <- subset(violations_schools, rule=="Lead and Copper Rule")
-
-##
+```{r ingesting, copy=TRUE}
 
 violations <- read.csv("data/violation_report.csv", stringsAsFactors=FALSE)
 cities <- read.csv("data/cities.csv", stringsAsFactors=FALSE)
+actions <- read.csv("data/actions_count.csv", stringsAsFactors=FALSE)
+all <- actions
+all$PWS.ID <- all$water.system.id
+all <- all[!duplicated(all$PWS.ID),]
+
 violations <- left_join(violations, all, by="PWS.ID")
 violations <- left_join(violations, cities, by="city.s.served")
 
@@ -30,11 +39,11 @@ violations_list <- violations %>%
          Compliance.Period.End.Date, Compliance.Status,
          RTC.Date, Is.Major.Violation, address,
          link, towns.served)
+```
 
-write.csv(violations_list, "data/violations_joined.csv")
+## Violations over time by compliance status
 
-
-##
+```{r pressure, , message=FALSE, warning=FALSE}
 v_count <- violations_list %>%
   group_by(Contaminant.Name, Is.Major.Violation) %>%
   summarise(Count=n())
@@ -78,9 +87,11 @@ violations_by_year$type <- as.factor(violations_by_year$type)
 ggplot(violations_by_year, aes(x=year, y=violations, group=type, colour=type)) +
   geom_line() +
   geom_point()
+```
 
-#ggplot(violations_by_year, aes(x=year, y=violations, fill=type)) +
-#  geom_bar(stat="identity", position=position_dodge())
+### Major violations over time
+
+```{r most} 
 
 
 major_year <- violations_list %>%
@@ -91,7 +102,10 @@ ggplot(major_year, aes(x=end.year, y=major, group=Is.Major.Violation, colour=Is.
   geom_line() +
   geom_point()
 
-## bar chart/mostest
+```
+
+```{r table} 
+all_links_only <- all[c("name", "link")]
 
 most_system <- violations_list %>%
   group_by(PWS.Name) %>%
@@ -141,13 +155,21 @@ colnames(systems_most) <- c("name", "violations", "percent.health.based", "perce
 
 systems_most <- left_join(systems_most, all_links_only)
 systems_most$system <- paste0("<a href='", systems_most$link, "' target='_blank'>", systems_most$name, "</a>")
-systems_most <- systems_most[c("system", "violations", "percent.health.based", "percent.complied")]
+systems_most <- systems_most[c("name", "violations", "percent.health.based", "percent.complied")]
 systems_most <- data.frame(systems_most)
-library(trendct)
+```
 
-fancytable(systems_most, headline = "Drinking water system violations in Connecticut", subhead = "Since 2000.", height = 400,
-           paging = "false", sourceline = "U.S. EPA, Safe Drinking Water Information System", byline = "Andrew Ba Tran/TrendCT.org", col = 0,
-           desc_asc = "desc")
+### Rate of compliance and health-based violations
+
+```{r datatable}
+datatable(systems_most)
+```
+
+-----
+
+### 10 most-frequent drinking water violation by rule
+
+```{r chart1}
 
 violations_rule <- violations %>%
   group_by(Rule.Name) %>%
@@ -162,11 +184,17 @@ violations_type <- violations %>%
 violations_type <- violations_type[1:10,]
 
 violations_rule <- data.frame(violations_rule)
-trendchart(violations_rule, headline = "10 most-frequent drinking water violation by rule", subhead = "ANDREW BA TRAN/TRENDCT.ORG", src = "U.S. EPA, Safe Drinking Water Information System",
-           byline = "Andrew Ba Tran/TrendCT.org", type = "bar", xTitle = "", yTitle = "",
-           xSuffix = "", ySuffix = "", xPrefix = "", yPrefix = "", option = "")
+c <- ggplot(violations_rule, aes(x=Rule.Name, y=Count))
+ c + geom_bar(stat="identity") + coord_flip()
+```
 
+-----
+
+### 10 most-frequent drinking water violation by type
+
+```{r chart2}
 violations_type <- data.frame(violations_type)
-trendchart(violations_type, headline = "10 most-frequent drinking water violation by type", subhead = "ANDREW BA TRAN/TRENDCT.ORG", src = "U.S. EPA, Safe Drinking Water Information System",
-           byline = "Andrew Ba Tran/TrendCT.org", type = "bar", xTitle = "", yTitle = "",
-           xSuffix = "", ySuffix = "", xPrefix = "", yPrefix = "", option = "")
+c <- ggplot(violations_type, aes(x=Violation.Type, y=Count))
+ c + geom_bar(stat="identity") + coord_flip()
+```
+
