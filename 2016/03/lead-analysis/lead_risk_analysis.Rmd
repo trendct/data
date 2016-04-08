@@ -1,0 +1,742 @@
+---
+title: "Which neighborhoods have the highest risk of lead poisoning in CT?"
+author: "Andrew Ba Tran"
+date: "April 8, 2016"
+output: html_document
+---
+
+#### This is an exploratory analysis looking at the relationships between various data sets:
+1. Department of Health stats on the number of children who have tested for high levels of lead in their blood
+2. U.S. Environmental Protection Agency data on public drinking water systems in CT that tested for elevated levels of lead
+3. U.S. Census data on housing and poverty. Combined, they can predict lead exposure risk.
+* Based on methodology described by [Sarah Frostenson](https://github.com/voxmedia/data-projects/tree/master/vox-lead-exposure-risk) at Vox and Rad Cunningham from the Washington State Department of Health. 
+* Check out the Vox story that looks at lead risk exposure for all census tracts across the country: [The risk of lead poisoning isn’t just in Flint. So we mapped the risk in every neighborhood in America.](http://www.vox.com/a/lead-exposure-risk-map)
+
+This analysis is the basis for the TrendCT.org story [Which neighborhoods have the highest risk of lead poisoning in CT?](http://trendct.org/2016/04/08/where-the-risk-for-lead-poisoning-in-connecticut-is-highest/) Not all of what was produced here ended up in the story. We encourage visitors to look over our calculations and expand upon our analysis.
+
+-----
+
+First, let's load up a bunch of packages for data wrangling, geospatial analysis, visualizations, and a neat package that interfaces with the Census API ([censusapi R package](https://github.com/hrecht/censusapi)).
+
+```{r setup, message=FALSE, warning=FALSE}
+library(dplyr)
+library(scales)
+require(rgdal)
+require(ggmap)
+require(Cairo)
+require(maptools)
+library(ggplot2)
+#devtools::install_github("hrecht/censusapi")
+library(censusapi)
+source("keys.R")
+library(stringr)
+library(rvest)
+library(tidyr)
+library(corrgram)
+library(gridExtra)
+```
+
+Alright, setting up the 
+```{r map1, message=FALSE, warning=FALSE, fig.width=12, fig.height=7}
+gpclibPermit()
+gpclibPermitStatus()
+
+## Setting up the town tracts from the ctgeo towns shapefile in the maps folder
+## Other state town (county subdivisions) border shapefiles can be downloaded from the Census
+## https://www.census.gov/cgi-bin/geo/shapefiles/index.php
+towntracts <- readOGR(dsn="maps", layer="ctgeo")
+towntracts <- fortify(towntracts, region="NAME10")
+
+# Bringing in data 
+# This data is a cleaned up spreadsheet from a previous story:
+# http://trendct.org/2016/01/27/children-screened-for-lead-poisoning-in-connecticut/
+
+# The original data set can be found on the CT Department of Health website:
+# http://www.ct.gov/dph/cwp/view.asp?a=3140&q=387576
+
+screenings_total <- read.csv("data/confirmed.town.total.csv", stringsAsFactors=FALSE)
+
+## Note: BLL stands for blood lead levels. There are different groupings: 5, 10, 15, and 20.
+## Health officials must be notified if a child has five or more micrograms of lead per deciliter of blood (µg/dL) 
+
+# BLL5 total children
+bll5_total <- screenings_total[c("Town", "BLL5")]
+colnames(bll5_total) <- c("id", "bll5")
+
+# joining the data to the formatted shapefile
+bll5_total_map <- left_join(towntracts, bll5_total)
+
+dtm5_total <- ggplot() +
+  geom_polygon(data = bll5_total_map, aes(x=long, y=lat, group=group, fill=bll5), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Blues", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Lead-poisoned children by town (BLL 5 and up)", fill="")
+
+# BLL10 total children
+bll10_total <- screenings_total[c("Town", "BLL10")]
+colnames(bll10_total) <- c("id", "bll10")
+
+bll10_total_map <- left_join(towntracts, bll10_total)
+
+dtm10_total <- ggplot() +
+  geom_polygon(data = bll10_total_map, aes(x=long, y=lat, group=group, fill=bll10), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Blues", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Lead-poisoned children by town (BLL 10 and up)", fill="")
+
+# BLL15 total children
+bll15_total <- screenings_total[c("Town", "BLL15")]
+colnames(bll15_total) <- c("id", "bll15")
+
+bll15_total_map <- left_join(towntracts, bll15_total)
+
+dtm15_total <- ggplot() +
+  geom_polygon(data = bll15_total_map, aes(x=long, y=lat, group=group, fill=bll15), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Blues", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="lead-poisoned children by town (BLL 15 and up)", fill="")
+
+# BLL20  total children
+bll20_total <- screenings_total[c("Town", "BLL20")]
+colnames(bll20_total) <- c("id", "bll20")
+
+bll20_total_map <- left_join(towntracts, bll20_total)
+
+dtm20_total <- ggplot() +
+  geom_polygon(data = bll20_total_map, aes(x=long, y=lat, group=group, fill=bll20), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Blues", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Lead-poisoned children by town (BLL 20 and up)", fill="")
+
+# Output of the totals map
+grid.arrange(dtm5_total,dtm10_total,dtm15_total,dtm20_total, ncol=2)
+```
+
+#### Not that interesting, right? Looks like a population map.
+
+Let's try it again with percent of children
+
+```{r percent.children, message=FALSE, warning=FALSE, fig.width=12, fig.height=7}
+# This data is a cleaned up spreadsheet from a previous project
+# The original data set can be found on the CT Department of Health website:
+# http://www.ct.gov/dph/cwp/view.asp?a=3140&q=387576
+
+screenings_percent <- read.csv("data/confirmed.town.percent.csv", stringsAsFactors=FALSE)
+
+# BLL5 percent
+bll5_percent <- screenings_percent[c("Town", "BLL5")]
+colnames(bll5_percent) <- c("id", "bll5")
+
+bll5_percent_map <- left_join(towntracts, bll5_percent)
+
+dtm5_percent <- ggplot() +
+  geom_polygon(data = bll5_percent_map, aes(x=long, y=lat, group=group, fill=bll5), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Blues", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="% of lead-poisoned children by town (BLL 5 +)", fill="")
+
+# BLL10 percent
+bll10_percent <- screenings_percent[c("Town", "BLL10")]
+colnames(bll10_percent) <- c("id", "bll10")
+
+bll10_percent_map <- left_join(towntracts, bll10_percent)
+
+dtm10_percent <- ggplot() +
+  geom_polygon(data = bll10_percent_map, aes(x=long, y=lat, group=group, fill=bll10), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Blues", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Percent of lead-poisoned children by town (BLL 10 +)", fill="")
+
+# BLL15 percent
+bll15_percent <- screenings_percent[c("Town", "BLL15")]
+colnames(bll15_percent) <- c("id", "bll15")
+
+bll15_percent_map <- left_join(towntracts, bll15_percent)
+
+dtm15_percent <- ggplot() +
+  geom_polygon(data = bll15_percent_map, aes(x=long, y=lat, group=group, fill=bll15), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Blues", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="% of lead-poisoned children by town (BLL 15 +)", fill="")
+
+# BLL20 percent
+bll20_percent <- screenings_percent[c("Town", "BLL20")]
+colnames(bll20_percent) <- c("id", "bll20")
+
+bll20_percent_map <- left_join(towntracts, bll20_percent)
+
+dtm20_percent <- ggplot() +
+  geom_polygon(data = bll20_percent_map, aes(x=long, y=lat, group=group, fill=bll20), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Blues", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="% of lead-poisoned children by town (BLL 20 +)", fill="")
+
+# Outputting the maps
+
+grid.arrange(dtm5_percent,dtm10_percent,dtm15_percent,dtm20_percent, ncol=2)
+```
+
+#### This looks more interesting. Unsurprisingly, rural areas with small populations have a higher percent.
+
+### Looking at where children have been screened
+
+```{r screened, message=FALSE, warning=FALSE, fig.width=12, fig.height=7}
+# This data is a cleaned up spreadsheet from a previous project
+# The original data set can be found on the CT Department of Health website:
+# http://www.ct.gov/dph/cwp/view.asp?a=3140&q=387576
+
+screened <- read.csv("data/children.screened.csv", stringsAsFactors=FALSE)
+screened_total <- screened[c("Town", "Children.Under.6.Screened")]
+
+colnames(screened_total) <- c("id", "Children.Under.6.Screened")
+
+screened_total_map <- left_join(towntracts, screened_total)
+dtm_s <- ggplot() +
+  geom_polygon(data = screened_total_map, aes(x=long, y=lat, group=group, fill=Children.Under.6.Screened), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Children screened for lead-poisoning by town", fill="")
+
+screened_percent <- screened[c("Town", "Percent.9m.2yrs.Screened")]
+
+colnames(screened_percent) <- c("id", "Percent.9m.2yrs.Screened")
+
+screened_percent_map <- left_join(towntracts, screened_percent)
+dtm_p <- ggplot() +
+  geom_polygon(data = screened_percent_map, aes(x=long, y=lat, group=group, fill=Percent.9m.2yrs.Screened), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="% of children screened by town", fill="")
+
+grid.arrange(dtm_s,dtm_p, ncol=2)
+```
+
+-----
+
+#### Alright, let's look at the lead risk formula as applied to towns
+
+**What's going on here**
+
+ * Pulling housing and poverty data by census tract from the Census via the excellent [censusapi R package](https://github.com/hrecht/censusapi)
+ * Calculating a housing score based on weighted categorizations of home ages
+ * Determining percent of those living beneath the poverty line by census tract
+ * Getting a Z score for housing and poverty
+ * Creating an overall score by combining both poverty and housing Z scores (after adjusting them a bit)
+ * Splitting the range of results between 1 and 10, creating an overall score
+ * Joining the results to the town shape file and mapping it like above
+ * Here's the same process as below but applied to census tracts in Connecticut: [Replicating the Vox lead risk map for CT](http://trendct.github.io/data/2016/03/lead-analysis/geospatial_lead_risk.html)
+ 
+```{r censusstuff, message=FALSE, warning=FALSE, fig.width=12, fig.height=7}
+housing_towns <- getCensus(name="acs5", 
+                           vintage=2014,
+                           key=censuskey, 
+                           vars=c("NAME", "B25034_001E", "B25034_002E", "B25034_003E", 
+                                  "B25034_004E","B25034_005E","B25034_006E","B25034_007E",
+                                  "B25034_008E","B25034_009E","B25034_010E", "B17004_001E"
+                           ), 
+                           region="county subdivision:*", regionin="state:09")
+
+housing_towns <- subset(housing_towns, county.subdivision!="00000")
+housing_towns$id <- sub(" town.*","",housing_towns$NAME)
+
+old <- housing_towns
+
+# Calculating a housing score based on weighted categorizations of home ages
+
+old$age_39 <- old$B25034_010E * .68
+old$age40_59 <- (old$B25034_009E + old$B25034_008E) * .43
+old$age60_79 <- (old$B25034_007E + old$B25034_006E) * .08
+old$age80_99 <- (old$B25034_005E + old$B25034_004E) * .03
+old$age00_10 <- (old$B25034_003E + old$B25034_002E) * 0
+old$total <-  old$B25034_001E
+
+old$risk_sum <- old$age_39 + old$age40_59 + old$age60_79 + old$age80_99 + old$age80_99 + old$age00_10
+old$risk <- old$risk_sum/old$total*100
+
+poverty_towns <- getCensus(name="acs5", 
+                     vintage=2014,
+                     key=censuskey, 
+                     vars=c("NAME", "B06012_001E", "B06012_002E"
+                     ), 
+                     region="county subdivision:*", regionin="state:09")
+poverty_towns <- subset(poverty_towns, county.subdivision!="00000")
+poverty_towns$id <- sub(" town.*","",housing_towns$NAME)
+
+# Determining percent of those living beneath the poverty line 
+
+poverty_towns$percent_poverty <- poverty_towns$B06012_002E/poverty_towns$B06012_001E * 100
+
+# Z score
+# (x-mean(x))/sd(x)
+
+poverty_towns$z_poverty <- (poverty_towns$percent_poverty - mean(poverty_towns$percent_poverty))/sd(poverty_towns$percent_poverty)
+old$z_housing <-  (old$risk - mean(old$risk))/sd(old$risk)
+
+# Calcuating weighted figures
+poverty_towns$weighted_poverty <- poverty_towns$z_poverty * .42
+old$weighted_housing <- old$z_housing * .58
+
+old <- old[c("id", "risk", "z_housing", "weighted_housing")]
+df <- left_join(poverty_towns, old)
+
+df$riskscore_raw <- df$weighted_housing + df$weighted_poverty
+df <- mutate(df, quantile = ntile(riskscore_raw, 10))
+
+## mapping
+
+gpclibPermit()
+gpclibPermitStatus()
+towntracts <- readOGR(dsn="maps", layer="ctgeo")
+towntracts_only <- towntracts
+towntracts <- fortify(towntracts, region="NAME10")
+
+df_town_map <- left_join(towntracts, df)
+
+dtm_df1 <- ggplot() +
+  geom_polygon(data = df_town_map , aes(x=long, y=lat, group=group, fill=quantile), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Blues", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Estimated lead risk by town", fill="")
+
+dtm_df1
+```
+
+-----
+
+### Checking for correlations between different columns of data
+
+```{r comparison, message=FALSE, warning=FALSE, fig.width=12, fig.height=7}
+# Comparing results
+
+comparing <- df[c("id", "quantile", "riskscore_raw", "percent_poverty", "risk")]
+
+comparing <- left_join(comparing, bll5_total)
+comparing <- left_join(comparing, bll10_total)
+comparing <- left_join(comparing, bll15_total)
+comparing <- left_join(comparing, bll20_total)
+
+colnames(bll5_percent) <- c("id", "bll5.percent")
+comparing <- left_join(comparing, bll5_percent)
+
+colnames(bll10_percent) <- c("id", "bll10.percent")
+comparing <- left_join(comparing, bll10_percent)
+
+colnames(bll15_percent) <- c("id", "bll15.percent")
+comparing <- left_join(comparing, bll15_percent)
+
+colnames(bll20_percent) <- c("id", "bll20.percent")
+comparing <- left_join(comparing, bll20_percent)
+
+#dtm_df1$quantile
+#dtm_df1$riskscore_raw
+
+corrgram(comparing,order=TRUE, lower.panel=panel.shade,
+         upper.panel=panel.pie)
+
+```
+
+#### Looks like there's a correlation between blood lead levels and in the risk score. (A coefficient of `r cor(comparing$bll10, comparing$riskscore_raw)` -- that's pretty significant) 
+
+----
+
+### Analyzing elevated lead actions
+
+```{r elevated, message=FALSE, warning=FALSE, fig.width=12, fig.height=7}
+# This data set is from another story
+# Methodology on how to get the raw data is at
+# https://github.com/trendct/data/tree/master/2016/03/lead-analysis#how-to-get-the-list-of-lead-violations-from-the-epa
+
+ct <- read.csv("data/lead_ale_samples_ct.csv", stringsAsFactors=FALSE)
+
+# The data set doesn't have the business address. But we can get it from another data set
+# -- this one is a list of all public drinking systems in Connecticut
+
+summary <- read.csv("data/water_system_summary.csv", stringsAsFactors=FALSE)
+
+# Join it to the dataset with elevated lead action levels
+
+ct <- left_join(ct, summary, by="PWS.ID")
+
+# Creating a new column with the link-- fortunately the EPA's URL structure is based on a few variables we already have
+
+ct$link <- paste0("https://oaspub.epa.gov/enviro/sdw_report_v3.first_table?pws_id=",
+                           ct$PWS.ID, "&state=CT&source=",
+                          ct$Primary.Source.Code, "&population=", 
+                         ct$Population.Served.Count)
+
+# Looking at towns served by drinking water systems with elevated lead violations
+served <- ct %>%
+  group_by(Cities.Served) %>%
+  dplyr::summarise(Total=n())
+
+served_single <- served[!grepl(",", served$Cities.Served),]
+served_single <- served_single[!grepl("-", served_single$Cities.Served),]
+colnames(served_single) <- c("id", "Total")
+served_single$id <- str_to_title(served_single$id)
+comparing <- left_join(comparing, served_single)
+
+cor(comparing$riskscore_raw, comparing$Total, use = "complete")
+
+comparing$Total[is.na(comparing$Total)] <- 0
+cor(comparing$riskscore_raw, comparing$Total)
+
+# scrape addresses of listed drinking water headquarter by visiting each individual drinking water page
+
+# creating a temp column
+ct$address.city <- ","
+
+# Visiting each link in the row, finding the third row in the first table and getting the string found there
+
+ct <- read.csv("data/ct_dataframe.csv", stringsAsFactors=FALSE)
+
+## The following chunk of code might take more time than you're willing to spend since it's scraping 500+ websites
+## That's why I brought in the dataframe above
+## If you'd like to unskip, just comment out the line above and uncomment the following lines where SKIPPING OPTION begins
+
+### BEGIN SKIPPING OPTION
+
+#for (i in 1:nrow(ct)) {
+#  i_url <- ct$link[i] %>% read_html()
+#  ct$address.city[i] <- i_url %>% html_node("tr:nth-child(3) td") %>%
+#    html_text()
+#}
+
+# Cleaning up the address names to isolate the city
+
+#ct$town.city <- sub(",.*","",ct$address.city)
+#ct$state <- sub(".*,","",ct$address.city)
+#ct$state <- sub("  .*$","",ct$state)
+
+### END SKIPPING OPTION
+
+# Ignoring drinking water systems outside of Connecticut-- there's quite a few in New York and Mass.
+ct_only <- subset(ct, state=="CT")
+
+hq <- ct %>%
+  group_by(town.city) %>%
+  dplyr::summarise(Total=n())
+
+# Bringing in a custom package I wrote that cleans up town names, renames hamlets and villages
+library(ctnamecleaner)
+
+hq2 <- ctnamecleaner(town.city, hq)
+hq3 <- hq2[!is.na(hq2$real.town.name),]
+
+hq4 <- hq3 %>%
+  group_by(real.town.name) %>%
+  dplyr::summarise(Total=sum(Total))
+
+colnames(hq4) <- c("id", "town.hqs")
+comparing <- left_join(comparing, hq4)
+```
+
+### Is there a correlation between the number of violations per town (since 2000) and the risk score? 
+
+Based on the town where the drinking water system indicated it was located.
+
+```{r correl1}
+cor(comparing$riskscore_raw, comparing$town.hqs, use = "complete")
+```
+
+#### Guess not.
+
+```{r next, message=FALSE, warning=FALSE, fig.width=12, fig.height=7}
+#comparing$town.hqs[is.na(comparing$town.hqs)] <- 0
+#cor(comparing$riskscore_raw, comparing$town.hqs)
+
+## cleaner towns served instances
+
+## Had to bring this out of R to clean by hand. Sorry!
+
+## Now I'm bringing it back in
+
+tserv <- read.csv("data/towns_served.csv", stringsAsFactors=FALSE)
+tserv$Towns <- str_to_title(tserv$Towns)
+colnames(tserv) <- c("id", "towns.served")
+comparing <- left_join(comparing, tserv)
+
+cor(comparing$riskscore_raw, comparing$towns.served, use = "complete")
+
+comparing$towns.served[is.na(comparing$towns.served)] <- 0
+cor(comparing$riskscore_raw, comparing$towns.served)
+
+cor(comparing$bll20.percent, comparing$towns.served)
+
+cor(comparing$bll20.percent, comparing$town.hqs)
+```
+
+-----
+
+Alright, there is not much of a correlation between number of elevated lead water violations from drinking water systems in the towns they serve. 
+
+### Mapping elevated lead action level violations by town (since 2000)
+
+```{r map_time, message=FALSE, warning=FALSE, fig.width=12, fig.height=7}
+
+served_count_map <- left_join(towntracts, comparing)
+
+dtm_served <- ggplot() +
+  geom_polygon(data = served_count_map, aes(x=long, y=lat, group=group, fill=towns.served), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Blues", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Towns served", fill="")
+
+dtm_hqs <- ggplot() +
+  geom_polygon(data = served_count_map, aes(x=long, y=lat, group=group, fill=town.hqs), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Blues", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="System address", fill="")
+
+## Outputting the results
+grid.arrange(dtm_served,dtm_hqs, ncol=2)
+```
+
+-----
+
+#### Determining median and average parts per billion in water systems with elevated levels of lead reported. 
+
+Towns based on locations drinking water systems indicated they were headquartered.
+
+```{r ppbs, message=FALSE, warning=FALSE, fig.width=12, fig.height=7}
+ppbs_towns <- ct %>%
+  group_by(town.city) %>%
+  summarize(median.ppb=median(Sample.Measure..mg.L.)*1000, average.ppb=mean(Sample.Measure..mg.L.)*1000)
+
+ppbs_towns_clean <- ctnamecleaner(town.city, ppbs_towns)
+ppbs_towns_clean <- ppbs_towns_clean[!is.na(ppbs_towns_clean$real.town.name),]
+
+ppbs_towns_clean <- ppbs_towns_clean %>%
+  group_by(real.town.name) %>%
+  summarize(median.ppb=median(median.ppb), average.ppb=mean(average.ppb))
+
+colnames(ppbs_towns_clean) <- c("id", "median.ppb.hq", "average.ppb.hq")
+comparing <- left_join(comparing, ppbs_towns_clean)
+
+ppb_map_hq <- left_join(towntracts, comparing)
+
+
+dtm_median <- ggplot() +
+  geom_polygon(data = ppb_map_hq, aes(x=long, y=lat, group=group, fill=median.ppb.hq), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Blues", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Median PPB by town", fill="")
+
+
+dtm_avg <- ggplot() +
+  geom_polygon(data = ppb_map_hq, aes(x=long, y=lat, group=group, fill=average.ppb.hq), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Blues", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Average PPB by town", fill="")
+
+grid.arrange(dtm_median,dtm_avg, ncol=2)
+```
+
+------
+
+And is there a correlation between the risk score and median/average ppb in water systems with elevated levels of lead reported?
+
+```{r cor_risk}
+cor(comparing$riskscore_raw, comparing$median.ppb.hq, use = "complete")
+cor(comparing$riskscore_raw, comparing$average.ppb.hq, use = "complete")
+
+comparing$median.ppb.hq[is.na(comparing$median.ppb.hq)] <- 0
+comparing$average.ppb.hq[is.na(comparing$average.ppb.hq)] <- 0
+
+cor(comparing$riskscore_raw, comparing$median.ppb.hq)
+cor(comparing$riskscore_raw, comparing$average.ppb.hq)
+
+```
+
+Nope.
+
+------
+
+### Determining median and average parts per billion in water systems with elevated levels of lead reported. 
+
+This time in towns based on locations drinking water systems indicated they were served.
+
+```{r served, message=FALSE, warning=FALSE, fig.width=12, fig.height=7}
+ppbs_served <- ct %>%
+  group_by(Cities.Served) %>%
+  summarize(median.ppb=median(Sample.Measure..mg.L.)*1000, average.ppb=mean(Sample.Measure..mg.L.)*1000)
+
+ppbs_served_clean <- ctnamecleaner(Cities.Served, ppbs_served)
+ppbs_served_clean <- ppbs_served_clean[!is.na(ppbs_served_clean$real.town.name),]
+
+ppbs_served_clean <- ppbs_served_clean %>%
+  group_by(real.town.name) %>%
+  summarize(median.ppb=median(median.ppb), average.ppb=mean(average.ppb))
+
+colnames(ppbs_served_clean) <- c("id", "median.ppb.served", "average.ppb.served")
+comparing <- left_join(comparing, ppbs_served_clean)
+
+ppb_map_hq <- left_join(towntracts, comparing)
+
+
+dtm_median_served <- ggplot() +
+  geom_polygon(data = ppb_map_hq, aes(x=long, y=lat, group=group, fill=median.ppb.served), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Blues", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Median PPB by town served", fill="")
+
+
+dtm_avg_served <- ggplot() +
+  geom_polygon(data = ppb_map_hq, aes(x=long, y=lat, group=group, fill=average.ppb.served), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Blues", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Average PPB by town served", fill="")
+
+grid.arrange(dtm_median_served,dtm_avg_served, ncol=2)
+```
+
+-----
+
+And is there a correlation between the risk score and median/average ppb in water systems with elevated levels of lead reported?
+
+(Based on towns served)
+
+```{r served_correlation}
+cor(comparing$riskscore_raw, comparing$median.ppb.served, use = "complete")
+cor(comparing$riskscore_raw, comparing$average.ppb.served, use = "complete")
+
+comparing$median.ppb.served[is.na(comparing$median.ppb.served)] <- 0
+comparing$average.ppb.served[is.na(comparing$average.ppb.served)] <- 0
+
+cor(comparing$riskscore_raw, comparing$median.ppb.served)
+cor(comparing$riskscore_raw, comparing$average.ppb.served)
+```
+
+Doesn't look like it.
+
+-----
+
+### Categorizing the towns 
+
+Adding factorization to the towns might yield more insights.
+
+```{r urban_rural, message=FALSE, warning=FALSE, fig.width=9, fig.height=4}
+## urban or rural?
+
+designation <- read.csv("data/urban_or_rural.csv", stringsAsFactors=FALSE)
+town_des <- designation[c("NAME10", "Type", "perc_urban")]
+colnames(town_des) <-c("id", "Type", "perc_urban")
+
+comparing <- left_join(comparing, town_des)
+
+big_df <- comparing
+big_df_0 <- big_df
+big_df_0[is.na(big_df_0)] <- 0
+
+big_df_na <- big_df
+big_df_na[big_df_na==0] <- NA
+
+raw_scatter1_0 <- big_df_0[c("id", "riskscore_raw", "bll5.percent")]
+raw_scatter1_0 <- raw_scatter1_0 %>%
+  gather("Type", "Score", 2:3)
+
+p <- ggplot(big_df_na, aes(riskscore_raw, bll5.percent))
+p + geom_point(aes(colour = factor(Type))) + labs(title = "Percent of children with lead detected in blood versus risk score by town type", x = "Risk score", y="% of children with lead detected in blood stream")
+cor(big_df_na$riskscore_raw, big_df_na$bll5.percent, use="complete")
+
+p <- ggplot(big_df_na, aes(riskscore_raw, bll5))
+p + geom_point(aes(colour = Type)) + labs(title = "Number of children with lead detected in blood versus risk score by town type", x = "Risk score", y="Children with lead detected in blood stream")
+cor(big_df_0$riskscore_raw, big_df_0$bll5)
+
+p <- ggplot(big_df_0, aes(bll5.percent, quantile))+ labs(title = "Number of children with lead detected in blood versus risk score by town type", x = "% of children with lead detected in blood stream", y="Risk score")
+p + geom_point(aes(colour = factor(Type)))
+cor(big_df_0$quantile, big_df_0$bll5.percent)
+
+
+corrgram(big_df_na,order=TRUE, lower.panel=panel.shade,
+         upper.panel=panel.pie)
+```
+
+Interesting.
+
+-----
+
+### Boxplots
+
+```{r boxplots, message=FALSE, warning=FALSE, fig.width=9, fig.height=4}
+p <- ggplot(big_df_na, aes(factor(Type), quantile))
+p + geom_boxplot() + labs(title = "Risk scores by town type")
+
+p <- ggplot(big_df_0, aes(factor(Type), bll5.percent))
+p + geom_boxplot() + labs(title = "Percent of children with lead detected in blood by town type")
+
+p <- ggplot(big_df_na, aes(factor(Type), median.ppb.served))
+p + geom_boxplot() + labs(title = "Median ppb detected in some town's drinking water")
+```
+
+### Final maps with the most interesting data points
+
+```{r last_maps,  message=FALSE, warning=FALSE, fig.width=12, fig.height=7}
+# final maps
+
+big_df_na_map <- left_join(towntracts, big_df_na, by="id")
+
+map1 <- ggplot() +
+  geom_polygon(data =big_df_na_map, aes(x=long, y=lat, group=group, fill=riskscore_raw), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Blues", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Lead risk score", fill="")
+
+map2 <- ggplot() +
+  geom_polygon(data =big_df_na_map, aes(x=long, y=lat, group=group, fill=bll5), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Blues", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Lead-poisoned children by town (BLL 5 and up)", fill="")
+
+map3 <- ggplot() +
+  geom_polygon(data =big_df_na_map, aes(x=long, y=lat, group=group, fill=towns.served), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Blues", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Median PPB detected in drinking water systems", fill="")
+
+map4 <- ggplot() +
+  geom_polygon(data =big_df_na_map, aes(x=long, y=lat, group=group, fill=median.ppb.served), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Blues", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Frequency of elevated action lead levels detected in drinking water", fill="")
+
+grid.arrange(map2, map1, map3, map4, ncol=2)
+```
+
+-----
+
+## Conclusions
+
+Large urban areas like New Haven and Hartford have some of the highest risks for lead exposure, and the data on children who test positive for high lead levels in their blood reflects that. But the formula indicates there's also high risk in pockets of towns like Mansfield, Norwich and Danbury.
+
+After applying the formula to towns and comparing it to the number of children reported to have high lead levels, we found a strong correlation between the estimate and the actuality (a coefficient of about .57).
+
+According to our analysis, there's a closer link between lead poisoning and old buildings or poverty than to drinking water systems with high lead levels.
+
+This is in line with findings by the Connecticut Department of Health in 2013.
+
+Though the tragedy in Flint, Mich., where thousands of children drank toxic water in their homes and schools, has increased awareness of lead in public drinking water systems, Connecticut officials did not trace any of the 140 cases of lead-poisoned children it investigated in 2013 back to drinking water.
+
+Most cases were attributed to paint- and dust-related hazards.
+
+Read the full story at [TrendCT.org](http://trendct.org/2016/04/08/where-the-risk-for-lead-poisoning-in-connecticut-is-highest/).

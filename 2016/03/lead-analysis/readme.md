@@ -17,7 +17,7 @@ Check us out on Twitter [@TrendCT](http://www.trendct.org) and on [Facebook/Tren
 * Scripts used to pull violations and action data from the EPA drinking water database
 * Methodology and process (RMarkdown) of analysis [[Lead](http://trendct.github.io/data/2016/03/lead-analysis/elevated_lead_levels.html)][[Violations](http://trendct.github.io/data/2016/03/lead-analysis/violations.html)]
 * HTML of leaflet mapping output used in [Where lead was detected in Connecticut’s drinking water](http://trendct.org/2016/04/04/where-lead-was-detected-in-connecticuts-drinking-water) 
-* Data and methodology used in [Which neighborhoods have the highest risk of lead poisoning in CT?](http://trendct.org/2016/04/08/where-the-risk-for-lead-poisoning-in-connecticut-is-highest/) which was based on Vox's [lead exposure project](https://github.com/voxmedia/data-projects/tree/master/vox-lead-exposure-risk).
+* [Walkthrough]((http://trendct.github.io/data/2016/03/lead-analysis/elevated_lead_levels.html)]: Data and methodology used in [Which neighborhoods have the highest risk of lead poisoning in CT?](http://trendct.org/2016/04/08/where-the-risk-for-lead-poisoning-in-connecticut-is-highest/) which was based on Vox's [lead exposure project](https://github.com/voxmedia/data-projects/tree/master/vox-lead-exposure-risk).
 
 
 ### How to get the list of lead violations from the EPA

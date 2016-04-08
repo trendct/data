@@ -1,19 +1,13 @@
 # Replicating Vox risk of lead by census block
+# This is the raw script. For a thorough walkthrough, visit http://trendct.github.io/data/2016/03/lead-analysis/geospatial_lead_risk.html
 
-library(rvest)
 library(dplyr)
-library(RCurl)
 library(scales)
 require(rgdal)
 require(ggmap)
 require(Cairo)
-require(gpclib)
 require(maptools)
-require(reshape)
-library(stringr)
 library(ggplot2)
-library(tidyr)
-library(gridExtra)
 #devtools::install_github("hrecht/censusapi")
 library(censusapi)
 source("keys.R")
