@@ -12,6 +12,6 @@ schools$PWS.Name <- str_to_upper(schools$School.Name)
 ls$PWS.Name <- as.character(ls$PWS.Name)
 ls_joined <- left_join(ls, schools, by="PWS.Name")
 
-#Quesiton 2
+#Queston 2
 # Is there a correlation with lead testing and where children were found with high levels of lead?
-
+# Answered.

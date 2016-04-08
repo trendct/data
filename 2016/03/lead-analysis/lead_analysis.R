@@ -5,9 +5,9 @@ library(ggmap)
 library(leaflet)
 library(stringr)
 library(lubridate)
-ct <- read.csv("lead_ale_samples_ct.csv", stringsAsFactors=FALSE)
+ct <- read.csv("data/lead_ale_samples_ct.csv", stringsAsFactors=FALSE)
 
-actions <- read.csv("actions_count.csv", stringsAsFactors=FALSE)
+actions <- read.csv("data/actions_count.csv", stringsAsFactors=FALSE)
 
 all <- actions
 all$PWS.ID <- all$water.system.id

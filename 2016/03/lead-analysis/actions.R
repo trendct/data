@@ -128,3 +128,6 @@ for (x in 1:nrow(w_table_all)) {
 }
 
 v_dataframe_count <- left_join(v_dataframe_count, w_table_all)
+actions <- v_dataframe_count
+details <- actions[!duplicated(actions$name),]
+write.csv(details, "data/details.csv")

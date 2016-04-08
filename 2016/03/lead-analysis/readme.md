@@ -2,7 +2,7 @@
 ## Lead in water data analysis repository
 
 This repository contains source data and analysis code for the following stories published on TrendCT.org. 
-
+* [Which neighborhoods have the highest risk of lead poisoning in CT?](http://trendct.org/2016/04/08/where-the-risk-for-lead-poisoning-in-connecticut-is-highest/)
 * [Drinking water violations across Connecticut](http://trendct.org/2016/04/06/drinking-water-violations-across-connecticut)
 * [Where lead was detected in Connecticut’s drinking water](http://trendct.org/2016/04/04/where-lead-was-detected-in-connecticuts-drinking-water) 
 * [Most CT schools don’t test water for lead, but that could change](http://ctmirror.org/2016/04/01/most-ct-schools-dont-test-water-for-lead-but-that-could-change)
@@ -17,6 +17,8 @@ Check us out on Twitter [@TrendCT](http://www.trendct.org) and on [Facebook/Tren
 * Scripts used to pull violations and action data from the EPA drinking water database
 * Methodology and process (RMarkdown) of analysis [[Lead](http://trendct.github.io/data/2016/03/lead-analysis/elevated_lead_levels.html)][[Violations](http://trendct.github.io/data/2016/03/lead-analysis/violations.html)]
 * HTML of leaflet mapping output used in [Where lead was detected in Connecticut’s drinking water](http://trendct.org/2016/04/04/where-lead-was-detected-in-connecticuts-drinking-water) 
+* Data and methodology used in [Which neighborhoods have the highest risk of lead poisoning in CT?](http://trendct.org/2016/04/08/where-the-risk-for-lead-poisoning-in-connecticut-is-highest/) which was based on Vox's [lead exposure project](https://github.com/voxmedia/data-projects/tree/master/vox-lead-exposure-risk).
+
 
 ### How to get the list of lead violations from the EPA
 

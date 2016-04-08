@@ -5,39 +5,44 @@ date: "April 6, 2016"
 output: html_document
 ---
 
-**Explanation text will eventually go here**
+This is an exploratory map going over the steps described by [Sarah Frostenson](https://github.com/voxmedia/data-projects/tree/master/vox-lead-exposure-risk) at Vox and Rad Cunningham from the Washington State Department of Health that estimates a neighborhood's risk for lead exposure. It inspired the TrendCT.org story [Which neighborhoods have the highest risk of lead poisoning in CT?](http://trendct.org/2016/04/08/where-the-risk-for-lead-poisoning-in-connecticut-is-highest/)
 
-Based on the Vox story: [The risk of lead poisoning isn’t just in Flint. So we mapped the risk in every neighborhood in America.](http://www.vox.com/a/lead-exposure-risk-map) and the methodology as described by [Sarah Frostenson](https://github.com/voxmedia/data-projects/tree/master/vox-lead-exposure-risk)
+Check out the Vox story this was based on: [The risk of lead poisoning isn’t just in Flint. So we mapped the risk in every neighborhood in America.](http://www.vox.com/a/lead-exposure-risk-map)
+
+### Overview
+
+**What's going on here**
+
+* Pulling housing and poverty data by census tract from the Census via the excellent [censusapi R package](https://github.com/hrecht/censusapi)
+* Calculating a housing score based on weighted categorizations of home ages
+* Determining percent of those living beneath the poverty line by census tract
+* Getting a Z score for housing and poverty
+* Creating an overall score by combining both poverty and housing Z scores (after adjusting them a bit)
+* Splitting the range of results between 1 and 10, creating an overall score
+* Joining the results to a census tract shape file and mapping it
+* Evolution of this methodology: STATA script via WA-DOH -> Python script via Vox -> R script via TrendCT.org
+
+------
 
 First, load a bunch of packages. 
 
-(Probably don't need all of these, but this is from a prior project. I'll clean it up soon)
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-
-library(rvest)
+```{r setup, message=FALSE, warning=FALSE}
 library(dplyr)
-library(RCurl)
 library(scales)
 require(rgdal)
 require(ggmap)
 require(Cairo)
-require(gpclib)
 require(maptools)
-require(reshape)
-library(stringr)
 library(ggplot2)
-library(tidyr)
-library(gridExtra)
 #devtools::install_github("hrecht/censusapi")
 library(censusapi)
 source("keys.R")
+library(DT)
 ```
 
-Pulling the data via the Census API.
+Then, pull the data via the Census API - [censusapi R package](https://github.com/hrecht/censusapi).
 
-And then assessing the lead risk based on a formula by WA-DOH.
+And assess the lead risk based on a [formula by WA-DOH](https://assets.documentcloud.org/documents/2644455/Expert-Panel-Childhood-Lead-Screening-Guidelines.pdf).
 
 ```{r pulling_data}
 
@@ -46,18 +51,29 @@ housing <- getCensus(name="acs5",
                       key=censuskey, 
                       vars=c("NAME", "B25034_001E", "B25034_002E", "B25034_003E", 
                              "B25034_004E","B25034_005E","B25034_006E","B25034_007E",
-                             "B25034_008E","B25034_009E","B25034_010E", "B17004_001E"
-                             ), 
-                      region="tract:*", regionin="state:09") #change state FIPS code here for a tract data for a different state-- but you'll need to bring in the matching shape file
+                             "B25034_008E","B25034_009E","B25034_010E", "B17004_001E"), 
+                      region="tract:*", regionin="state:09") 
 
-# S1701 is not accessible via the Census API but I found the equivalent in B06012
+# Change state FIPS code above for a tract data for a different state-- but you'll need to bring in the matching shape file
 
-poverty <- getCensus(name="acs5", 
-                      vintage=2014,
-                      key=censuskey, 
-                      vars=c("NAME", "B06012_001E", "B06012_002E"
-                      ), 
-                      region="tract:*", regionin="state:09")
+# You can only pull one state at a time but you can loop the function to get tracts for all states with this code
+
+# tracts <- NULL
+## For all states in the fips list
+# for (f in fips) {
+    ## Define what state to get
+    # stateget <- paste("state:", f, sep="")
+    ## Get data for all tracts within that state
+    # temp <- getCensus(name="acs5", vintage=2014, 
+    # key=censuskey, 
+    # vars=c("NAME", "B25034_001E", "B25034_002E", "B25034_003E", 
+    #                         "B25034_004E","B25034_005E","B25034_006E","B25034_007E",
+    #                         "B25034_008E","B25034_009E","B25034_010E", "B17004_001E"), 
+    # region="tract:*", regionin=stateget)
+    ## Bind to existing data
+    # tracts <- rbind(tracts, temp)
+# }
+## You can apply this to poverty below, too
 
 old <- housing
 
@@ -72,13 +88,37 @@ old$risk_sum <- old$age_39 + old$age40_59 + old$age60_79 + old$age80_99 + old$ag
 old$risk <- old$risk_sum/old$total*100
 old <- subset(old, total>0)
 
-# Poverty
+
+## Displaying the new columns of the downloaded dataframe
+
+datatable(head(old[c("NAME", "total", "risk_sum", "risk")]))
+```
+
+-----
+
+S1701 (part of the original Vox methodology) is not accessible via the Census API but I found the equivalent in B06012.
+
+```{r pulling_poverty}
+poverty <- getCensus(name="acs5", 
+                      vintage=2014,
+                      key=censuskey, 
+                      vars=c("NAME", "B06012_001E", "B06012_002E"
+                      ), 
+                      region="tract:*", regionin="state:09")
 
 poverty$percent_poverty <- poverty$B06012_002E/poverty$B06012_001E * 100
 poverty <- subset(poverty, B06012_001E>0)
 
-# Z score
+## Displaying the first few rows of the downloaded dataframe
 
+datatable(head(poverty[c("NAME", "B06012_001E", "B06012_002E", "percent_poverty")]))
+```
+
+-----
+
+Determining the Z score now.
+
+```{r Z}
 # (x-mean(x))/sd(x)
 
 poverty$z_poverty <- (poverty$percent_poverty - mean(poverty$percent_poverty))/sd(poverty$percent_poverty)
@@ -104,15 +144,25 @@ df$riskscore_raw <- df$weighted_housing + df$weighted_poverty
 
 df <- mutate(df, quantile = ntile(riskscore_raw, 10))
 df$id <- df$tract
+
+## Displaying the new columns of the downloaded dataframe
+datatable(head(df[c("id", "z_poverty", "weighted_poverty", "risk", "z_housing", "weighted_housing", "riskscore_raw", "quantile")]))
 ```
 
+-----
 ## Generating the map
 
+Download the census blocks for other states from the [Census](here https://www.census.gov/geo/maps-data/data/cbf/cbf_tracts.html).
+
 ```{r map, fig.width=12, fig.height=7}
+# Setting up the environment to handle spatial information
 gpclibPermit()
 gpclibPermitStatus()
+
+# Bringing in the shapefiles in a folder downloaded from the Census
+# Find other states here https://www.census.gov/geo/maps-data/data/cbf/cbf_tracts.html
+
 censustracts <- readOGR(dsn="maps/census_tracts/wgs84", layer="tractct_37800_0000_2010_s100_census_1_shp_wgs84")
-censustracts_only <- censustracts
 censustracts <- fortify(censustracts, region="TRACTCE10")
 
 risk_map <- left_join(censustracts, df)
@@ -122,5 +172,5 @@ ggplot() +
   coord_map() +
   scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=10)) +
   theme_nothing(legend=TRUE) +
-  labs(title="Estimated lead risk", fill="")
+  labs(title="Estimated lead risk in Connecticut", fill="")
 ```

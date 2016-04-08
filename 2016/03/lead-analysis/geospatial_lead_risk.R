@@ -55,7 +55,6 @@ poverty$percent_poverty <- poverty$B06012_002E/poverty$B06012_001E * 100
 poverty <- subset(poverty, B06012_001E>0)
 
 # Z score
-
 # (x-mean(x))/sd(x)
 
 poverty$z_poverty <- (poverty$percent_poverty - mean(poverty$percent_poverty))/sd(poverty$percent_poverty)
