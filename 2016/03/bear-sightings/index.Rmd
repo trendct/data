@@ -1,0 +1,121 @@
+---
+title: "Bear sightings in Connecticut"
+author: "Andrew Ba Tran"
+date: "March 18, 2016"
+output: html_document
+---
+
+This is an exploratory analysis of bear sighting data from the Department of Energy & Environmental Protection that contributed to the story: [Where bears have been sighted in Connecticut](http://trendct.org/2016/03/22/where-bears-have-been-sighted-in-connecticut/)
+
+```{r setup, message=FALSE, warning=FALSE}
+library(rvest)
+library(dplyr)
+library(RCurl)
+library(scales)
+require(rgdal)
+require(ggmap)
+require(Cairo)
+require(gpclib)
+require(maptools)
+require(reshape)
+library(stringr)
+library(ggplot2)
+library(tidyr)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r bears, message=FALSE, warning=FALSE, fig.width=12, fig.height=7}
+
+# Bringing in the data provided by DEEP
+burl <- "https://docs.google.com/spreadsheets/d/1iFb5ndUvQqc9adJLsbqPSkZeoU7Fr3Qem7st0qX_6pY/pub?output=csv"
+gurl <- getURL(burl)
+
+bear_data <- read.csv(textConnection(gurl))
+
+# Let's take a look at how it looks
+head(bear_data)
+```
+
+-----
+
+### Bears by town?
+
+```{r map1, message=FALSE, warning=FALSE, fig.width=12, fig.height=7}
+gpclibPermit()
+gpclibPermitStatus()
+towntracts <- readOGR(dsn="maps", layer="ctgeo")
+towntracts_only <- towntracts
+towntracts <- fortify(towntracts, region="NAME10")
+
+colnames(bear_data) <- c("id", "sightings")
+
+bears_total_map <- left_join(towntracts, bear_data)
+
+
+dtm <- ggplot() +
+  geom_polygon(data = bears_total_map, aes(x=long, y=lat, group=group, fill=sightings), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Blues", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Bear sightings by town in Connecticut | 3/15 - 3/16", fill="")
+
+dtm
+```
+
+-----
+
+## Calculating bears per capita
+
+```{r percapita, message=FALSE, warning=FALSE, fig.width=12, fig.height=7}
+# Bringing in my package that can append Connecticut-specific data
+library(ctnamecleaner)
+
+bear_data_pop <- ctpopulator(id, bear_data)
+bear_data_pop$percapita <- round((bear_data_pop$sightings/bear_data_pop$pop2013)*1000, 2)
+
+bear_data_pop$id <- str_to_title(bear_data_pop$id)
+
+bears_percapita_map <- left_join(towntracts, bear_data_pop)
+
+#bears_percapita_map <- merge(towntracts, bear_data_pop, by="id", all.x=TRUE)
+
+dtm2 <- ggplot() +
+  geom_polygon(data = bears_percapita_map, aes(x=long, y=lat, group=group, fill=percapita), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Blues", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Bear sightings per 1,0000 residents in CT | 3/15 - 3/16", fill="")
+
+dtm2
+```
+-----
+
+## Bear sightings over time
+
+```{r bearhistorical, message=FALSE, warning=FALSE, fig.width=12, fig.height=7}
+## Bear historical
+
+## Also provided by DEEP
+bh <- read.csv("data/bear_history.csv")
+
+bh$Year <- factor(bh$Year)
+
+levels(bh$Month) 
+
+bh$Month <- factor(bh$Month, levels=c("Jan", "Feb", "Mar", "Apr", "May", "Jun", 
+                      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"), ordered=TRUE)
+
+ggplot(data=bh, aes(x=Month, y=Sightings, colour=Year, group=Year)) +
+  geom_line()
+
+head(bear_data_pop)
+```
+
+## Conclusions
+
+Read the story [Where bears have been sighted in Connecticut](http://trendct.org/2016/03/22/where-bears-have-been-sighted-in-connecticut/)
