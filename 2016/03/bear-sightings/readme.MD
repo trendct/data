@@ -8,4 +8,4 @@
 
 * Folder with raw historical data
 * Script used in analysis
-* [RMarkdown](http://trendct.github.io/data/2016/04/bear_sightings) of script to walkthrough quick methodology
+* [RMarkdown](http://trendct.github.io/data/2016/03/bear-sightings/) of script to walkthrough quick methodology
