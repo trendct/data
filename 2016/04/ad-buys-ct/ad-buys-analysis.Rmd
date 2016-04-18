@@ -23,6 +23,7 @@ This analysis is based off data aggregated by the Sunlight Foundation's [Politic
 Let's load up the packages we'll need
 
 ```{r setup, message=FALSE, warning=FALSE}
+library(RCurl)
 library(dplyr)
 library(lubridate)
 library(stringr)
@@ -31,10 +32,14 @@ library(tidyr)
 library(DT)
 ```
 
-#### Bringing in the data from `ad_extractor.R` and `parser_totals.R` and joining them.
+#### Bringing in the data from [`ad_extractor.R`](https://github.com/trendct/data/blob/master/2016/04/ad-buys-ct/ad_extractor.R) and [`parser_totals.R`](https://github.com/trendct/data/blob/master/2016/04/ad-buys-ct/parser_totals.R) and joining them.
 
 ```{r begin, message=FALSE, warning=FALSE, fig.width=12, fig.height=7}
-totals <- read.csv("data/ad_buys.csv", stringsAsFactors=FALSE)
+url <- "http://trendct.github.io/data/2016/04/ad-buys-ct/data/ad_buys.csv"
+the_csv <- getURL(url)
+totals <- read.csv(textConnection(the_csv), stringsAsFactors=FALSE)
+  
+# totals <- read.csv("data/ad_buys.csv", stringsAsFactors=FALSE)
 totals$gross.amount <- gsub("\\$", "", totals$gross.amount)
 totals$gross.amount <- gsub(",", "", totals$gross.amount)
 totals$gross.amount <- as.numeric(totals$gross.amount)
@@ -56,7 +61,11 @@ totals$sheet <- gsub(".xlsx", "", totals$sheet)
 # joining the data with the original dataframe from ad_extractor.R
 # this will add more details like station and advertiser
 
-presi_table <- read.csv("data/ads_dataframe.csv", stringsAsFactors=FALSE)
+url <- "http://trendct.github.io/data/2016/04/ad-buys-ct/data/ads_dataframe.csv"
+the_csv <- getURL(url)
+presi_table <- read.csv(textConnection(the_csv), stringsAsFactors=FALSE)
+
+# presi_table <- read.csv("data/ads_dataframe.csv", stringsAsFactors=FALSE)
 totals <- left_join(totals, presi_table, by="sheet")
 
 # create a new column identifying the candidate based on what group bought the ad
