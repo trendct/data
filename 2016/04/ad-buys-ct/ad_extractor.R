@@ -119,3 +119,7 @@ write.csv(presi_table, "data/ads_dataframe.csv")
 # Check out parser_totals.R to see the script that took the data from the spreadsheets
 # and turned it into a dataframe
 # A half dozen failed to convert so I had to input the information I was looking for by hand
+
+# Options for future versions: 
+# 1) Integrate Cometdocs API http://www.cometdocs.com/conversionApiTools
+# 2) Use pdftools package but figure out a way to parse the text output
