@@ -16,6 +16,7 @@ This analysis is based off data aggregated by the Sunlight Foundation's [Politic
 * [`ad_extractor.R`](https://github.com/trendct/data/blob/master/2016/04/ad-buys-ct/ad_extractor.R) pulled the dataframe from politicaladsleuth.com and PDFs from the FCC
 * [`parser_totals.R`](https://github.com/trendct/data/blob/master/2016/04/ad-buys-ct/parser_totals.R) extracted data from the converted PDFs and pulled it into a dataframe
 * Data is only as recent as 4/15/16. Primary election day is 4/26/16, so expect more filings between then.
+* Check out [the repo](https://github.com/trendct/data/tree/master/2016/04/ad-buys-ct) with all scripts and data
 
 -----
 
