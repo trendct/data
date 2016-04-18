@@ -13,8 +13,8 @@ This analysis accompanies the Trend CT story
 
 This analysis is based off data aggregated by the Sunlight Foundation's [PoliticalAdSleuth.com](http://politicaladsleuth.com).
 
-* `ad_extractor.R` pulled the dataframe from politicaladsleuth.com and PDFs from the FCC
-* `parser_totals.R` extracted data from the converted PDFs and pulled it into a dataframe
+* [`ad_extractor.R`](https://github.com/trendct/data/blob/master/2016/04/ad-buys-ct/ad_extractor.R) pulled the dataframe from politicaladsleuth.com and PDFs from the FCC
+* [`parser_totals.R`](https://github.com/trendct/data/blob/master/2016/04/ad-buys-ct/parser_totals.R) extracted data from the converted PDFs and pulled it into a dataframe
 * Data is only as recent as 4/15/16. Primary election day is 4/26/16, so expect more filings between then.
 
 -----
@@ -82,6 +82,7 @@ totals <- totals[c("candidate",  "tv.station", "market", "date", "time.period.st
 
 * Determining the group purchasing the ads
 * Discarding out-of-date contracts
+* Discarding invoices
 
 ```{r preliminary, message=FALSE, warning=FALSE, fig.width=12, fig.height=7 }
 # create a new column identifying the group
@@ -105,7 +106,7 @@ for (i in 1:nrow(totals)) {
 }
 
 
-# Picking out the most-recent contracts, discarding the others
+# Picking out the most-recent contracts, discarding the invoices with no pricing data
 check <- totals %>%
   group_by(tv.station, time.period.start, time.period.end, candidate) %>%
   arrange(-spots)

@@ -5,6 +5,10 @@
 # each ad ran and how much was paid for each spot but that was too difficult to do on deadline.
 # I might revisit this in the future or perhaps whoever is reading this would like to try
 
+# Options for future versions: 
+# 1) Integrate Cometdocs API http://www.cometdocs.com/conversionApiTools
+# 2) Use pdftools package but figure out a way to parse the text output
+
 #install.packages("readxl")
 library(XLConnect)
 library(dplyr)
