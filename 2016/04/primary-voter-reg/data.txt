@@ -1,0 +1,1691 @@
+[ {
+  "type": "Feature",
+  "properties": {
+    "Town": "Andover",
+"Democratic": 22.29,
+"Republican": 17.84,
+"Unaffiliated": 26.24},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": AndoverBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Ansonia",
+"Democratic": 15.37,
+"Republican": 6.94,
+"Unaffiliated": 19.76},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": AnsoniaBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Ashford",
+"Democratic": 22.37,
+"Republican": 11.88,
+"Unaffiliated": 25.99},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": AshfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Avon",
+"Democratic": 18.47,
+"Republican": 21.04,
+"Unaffiliated": 24.19},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": AvonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Barkhamsted",
+"Democratic": 18.4,
+"Republican": 20.36,
+"Unaffiliated": 29.93},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BarkhamstedBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Beacon Falls",
+"Democratic": 17.19,
+"Republican": 16.02,
+"Unaffiliated": 32.18},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BeaconFallsBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Berlin",
+"Democratic": 23.66,
+"Republican": 15.55,
+"Unaffiliated": 24.39},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BerlinBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Bethany",
+"Democratic": 19.6,
+"Republican": 19.55,
+"Unaffiliated": 32.89},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BethanyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Bethel",
+"Democratic": 16.24,
+"Republican": 16.42,
+"Unaffiliated": 27.51},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BethelBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Bethlehem",
+"Democratic": 16.71,
+"Republican": 21.92,
+"Unaffiliated": 29.79},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BethlehemBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Bloomfield",
+"Democratic": 37.13,
+"Republican": 6.56,
+"Unaffiliated": 17.06},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BloomfieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Bolton",
+"Democratic": 19.9,
+"Republican": 18.23,
+"Unaffiliated": 26.35},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BoltonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Bozrah",
+"Democratic": 22.8,
+"Republican": 12.18,
+"Unaffiliated": 27.92},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BozrahBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Branford",
+"Democratic": 22.16,
+"Republican": 11.07,
+"Unaffiliated": 31.84},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BranfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Bridgeport",
+"Democratic": 29.33,
+"Republican": 2.51,
+"Unaffiliated": 10.7},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BridgeportBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Bridgewater",
+"Democratic": 22.85,
+"Republican": 23.37,
+"Unaffiliated": 26.08},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BridgewaterBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Bristol",
+"Democratic": 20.58,
+"Republican": 9.91,
+"Unaffiliated": 21.31},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BristolBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Brookfield",
+"Democratic": 13.49,
+"Republican": 21.07,
+"Unaffiliated": 25.41},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BrookfieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Brooklyn",
+"Democratic": 16.55,
+"Republican": 12.74,
+"Unaffiliated": 29.12},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BrooklynBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Burlington",
+"Democratic": 16.52,
+"Republican": 17.34,
+"Unaffiliated": 25.4},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BurlingtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Canaan",
+"Democratic": 24.3,
+"Republican": 16.55,
+"Unaffiliated": 24.91},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": CanaanBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Canterbury",
+"Democratic": 14.94,
+"Republican": 19.42,
+"Unaffiliated": 29.07},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": CanterburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Canton",
+"Democratic": 21.55,
+"Republican": 21.01,
+"Unaffiliated": 25.89},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": CantonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Chaplin",
+"Democratic": 15.86,
+"Republican": 17.77,
+"Unaffiliated": 20.6},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ChaplinBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Cheshire",
+"Democratic": 15.93,
+"Republican": 14.77,
+"Unaffiliated": 27.01},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": CheshireBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Chester",
+"Democratic": 22.85,
+"Republican": 11.8,
+"Unaffiliated": 23.11},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ChesterBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Clinton",
+"Democratic": 19.48,
+"Republican": 16.81,
+"Unaffiliated": 30.42},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ClintonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Colchester",
+"Democratic": 19.31,
+"Republican": 14.24,
+"Unaffiliated": 29.77},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ColchesterBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Colebrook",
+"Democratic": 16.35,
+"Republican": 17.99,
+"Unaffiliated": 29.15},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ColebrookBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Columbia",
+"Democratic": 22.02,
+"Republican": 15.92,
+"Unaffiliated": 25.24},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ColumbiaBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Cornwall",
+"Democratic": 27.12,
+"Republican": 12.38,
+"Unaffiliated": 24.42},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": CornwallBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Coventry",
+"Democratic": 18.21,
+"Republican": 13.35,
+"Unaffiliated": 27.86},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": CoventryBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Cromwell",
+"Democratic": 22.49,
+"Republican": 14.6,
+"Unaffiliated": 27.95},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": CromwellBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Danbury",
+"Democratic": 13.46,
+"Republican": 8.56,
+"Unaffiliated": 19.97},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": DanburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Darien",
+"Democratic": 11.48,
+"Republican": 28.49,
+"Unaffiliated": 20.08},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": DarienBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Deep River",
+"Democratic": 23.06,
+"Republican": 13.74,
+"Unaffiliated": 30.94},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": DeepRiverBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Derby",
+"Democratic": 17.1,
+"Republican": 6.69,
+"Unaffiliated": 18.02},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": DerbyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Durham",
+"Democratic": 16.69,
+"Republican": 19.86,
+"Unaffiliated": 31.11},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": DurhamBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "East Granby",
+"Democratic": 19.62,
+"Republican": 19.94,
+"Unaffiliated": 29.35},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EastGranbyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "East Haddam",
+"Democratic": 19.81,
+"Republican": 15.77,
+"Unaffiliated": 28.89},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EastHaddamBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "East Hampton",
+"Democratic": 18.52,
+"Republican": 13.53,
+"Unaffiliated": 28.05},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EastHamptonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "East Hartford",
+"Democratic": 24.09,
+"Republican": 5.07,
+"Unaffiliated": 22.31},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EastHartfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "East Haven",
+"Democratic": 18.68,
+"Republican": 9.56,
+"Unaffiliated": 23.53},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EastHavenBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "East Lyme",
+"Democratic": 18.01,
+"Republican": 13.77,
+"Unaffiliated": 25.25},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EastLymeBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "East Windsor",
+"Democratic": 20.41,
+"Republican": 12.94,
+"Unaffiliated": 29.73},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EastWindsorBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Eastford",
+"Democratic": 18.24,
+"Republican": 25.7,
+"Unaffiliated": 26.97},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EastfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Easton",
+"Democratic": 15.87,
+"Republican": 21.96,
+"Unaffiliated": 28.04},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EastonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Ellington",
+"Democratic": 14.74,
+"Republican": 15.71,
+"Unaffiliated": 28.82},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EllingtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Enfield",
+"Democratic": 17.08,
+"Republican": 10.34,
+"Unaffiliated": 19.36},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EnfieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Essex",
+"Democratic": 22.75,
+"Republican": 20.35,
+"Unaffiliated": 26.93},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EssexBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Fairfield",
+"Democratic": 17.78,
+"Republican": 17.89,
+"Unaffiliated": 25.2},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": FairfieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Farmington",
+"Democratic": 21.16,
+"Republican": 17.69,
+"Unaffiliated": 28.91},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": FarmingtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Franklin",
+"Democratic": 17.74,
+"Republican": 15.9,
+"Unaffiliated": 26.82},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": FranklinBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Glastonbury",
+"Democratic": 20.12,
+"Republican": 16.52,
+"Unaffiliated": 24.54},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": GlastonburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Goshen",
+"Democratic": 17.95,
+"Republican": 25.8,
+"Unaffiliated": 26.04},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": GoshenBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Granby",
+"Democratic": 17.31,
+"Republican": 20.36,
+"Unaffiliated": 24.44},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": GranbyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Greenwich",
+"Democratic": 13.18,
+"Republican": 19.82,
+"Unaffiliated": 18.1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": GreenwichBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Griswold",
+"Democratic": 17.98,
+"Republican": 11.56,
+"Unaffiliated": 24.4},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": GriswoldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Groton",
+"Democratic": 12.93,
+"Republican": 8.36,
+"Unaffiliated": 19.24},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": GrotonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Guilford",
+"Democratic": 22.25,
+"Republican": 14.25,
+"Unaffiliated": 25.61},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": GuilfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Haddam",
+"Democratic": 21.29,
+"Republican": 16.13,
+"Unaffiliated": 31.08},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": HaddamBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Hamden",
+"Democratic": 23.76,
+"Republican": 22.1,
+"Unaffiliated": 21.95},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": HamdenBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Hampton",
+"Democratic": 21.65,
+"Republican": 17.58,
+"Unaffiliated": 25.4},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": HamptonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Hartford",
+"Democratic": 29.44,
+"Republican": 1.43,
+"Unaffiliated": 9.67},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": HartfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Hartland",
+"Democratic": 15.02,
+"Republican": 27.34,
+"Unaffiliated": 24.06},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": HartlandBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Harwinton",
+"Democratic": 16.54,
+"Republican": 21.4,
+"Unaffiliated": 30.02},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": HarwintonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Hebron",
+"Democratic": 18.95,
+"Republican": 17,
+"Unaffiliated": 30.69},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": HebronBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Kent",
+"Democratic": 24.53,
+"Republican": 14.74,
+"Unaffiliated": 22.91},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": KentBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Killingly",
+"Democratic": 14.02,
+"Republican": 9.49,
+"Unaffiliated": 27.85},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": KillinglyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Killingworth",
+"Democratic": 17.57,
+"Republican": 20.4,
+"Unaffiliated": 29.12},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": KillingworthBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Lebanon",
+"Democratic": 16.32,
+"Republican": 15.71,
+"Unaffiliated": 25.24},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": LebanonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Ledyard",
+"Democratic": 13.76,
+"Republican": 14.46,
+"Unaffiliated": 20.31},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": LedyardBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Lisbon",
+"Democratic": 20.17,
+"Republican": 12.64,
+"Unaffiliated": 26.6},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": LisbonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Litchfield",
+"Democratic": 17.21,
+"Republican": 21.33,
+"Unaffiliated": 22.44},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": LitchfieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Lyme",
+"Democratic": 24.29,
+"Republican": 21.43,
+"Unaffiliated": 27.8},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": LymeBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Madison",
+"Democratic": 18.38,
+"Republican": 20.66,
+"Unaffiliated": 24.98},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MadisonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Manchester",
+"Democratic": 20.07,
+"Republican": 8.22,
+"Unaffiliated": 21.28},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ManchesterBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Mansfield",
+"Democratic": 17.96,
+"Republican": 5.51,
+"Unaffiliated": 18.48},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MansfieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Marlborough",
+"Democratic": 19.49,
+"Republican": 16.57,
+"Unaffiliated": 26.32},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MarlboroughBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Meriden",
+"Democratic": 18.39,
+"Republican": 6.74,
+"Unaffiliated": 23.96},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MeridenBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Middlebury",
+"Democratic": 14.85,
+"Republican": 30.6,
+"Unaffiliated": 23.38},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MiddleburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Middlefield",
+"Democratic": 21.51,
+"Republican": 14.68,
+"Unaffiliated": 34.2},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MiddlefieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Middletown",
+"Democratic": 24.3,
+"Republican": 7.52,
+"Unaffiliated": 16.87},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MiddletownBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Milford",
+"Democratic": 17.81,
+"Republican": 13.75,
+"Unaffiliated": 30.28},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MilfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Monroe",
+"Democratic": 12.63,
+"Republican": 16.5,
+"Unaffiliated": 30.28},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MonroeBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Montville",
+"Democratic": 13.12,
+"Republican": 8.61,
+"Unaffiliated": 22.15},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MontvilleBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Morris",
+"Democratic": 16.51,
+"Republican": 27.39,
+"Unaffiliated": 28.24},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MorrisBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Naugatuck",
+"Democratic": 17.35,
+"Republican": 11.04,
+"Unaffiliated": 23.85},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NaugatuckBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "New Britain",
+"Democratic": 18.62,
+"Republican": 3.91,
+"Unaffiliated": 12.6},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewBritainBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "New Canaan",
+"Democratic": 13.3,
+"Republican": 32.56,
+"Unaffiliated": 18.46},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewCanaanBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "New Fairfield",
+"Democratic": 14.98,
+"Republican": 21.66,
+"Unaffiliated": 31.42},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewFairfieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "New Hartford",
+"Democratic": 17.57,
+"Republican": 20.53,
+"Unaffiliated": 25.06},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewHartfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "New Haven",
+"Democratic": 37.9,
+"Republican": 2.09,
+"Unaffiliated": 14.45},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewHavenBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "New London",
+"Democratic": 26.42,
+"Republican": 4.86,
+"Unaffiliated": 22.13},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewLondonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "New Milford",
+"Democratic": 14.02,
+"Republican": 15.3,
+"Unaffiliated": 23.92},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewMilfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Newington",
+"Democratic": 23.77,
+"Republican": 10.43,
+"Unaffiliated": 21.93},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewingtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Newtown",
+"Democratic": 16.52,
+"Republican": 18.96,
+"Unaffiliated": 24.23},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewtownBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Norfolk",
+"Democratic": 27.12,
+"Republican": 14.43,
+"Unaffiliated": 29.73},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NorfolkBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "North Branford",
+"Democratic": 14.61,
+"Republican": 13.36,
+"Unaffiliated": 33.3},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NorthBranfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "North Canaan",
+"Democratic": 15.4,
+"Republican": 16.77,
+"Unaffiliated": 29.58},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NorthCanaanBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "North Haven",
+"Democratic": 16.11,
+"Republican": 15.93,
+"Unaffiliated": 31.48},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NorthHavenBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "North Stonington",
+"Democratic": 18.01,
+"Republican": 21,
+"Unaffiliated": 33.19},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NorthStoningtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Norwalk",
+"Democratic": 19.73,
+"Republican": 10.38,
+"Unaffiliated": 21.63},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NorwalkBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Norwich",
+"Democratic": 15.44,
+"Republican": 5.9,
+"Unaffiliated": 17.6},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NorwichBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Old Lyme",
+"Democratic": 20.45,
+"Republican": 21.27,
+"Unaffiliated": 25.48},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": OldLymeBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Old Saybrook",
+"Democratic": 20.89,
+"Republican": 22.65,
+"Unaffiliated": 28.9},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": OldSaybrookBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Orange",
+"Democratic": 18.14,
+"Republican": 17.83,
+"Unaffiliated": 36.8},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": OrangeBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Oxford",
+"Democratic": 11.24,
+"Republican": 21.17,
+"Unaffiliated": 31.15},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": OxfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Plainfield",
+"Democratic": 19.28,
+"Republican": 10.14,
+"Unaffiliated": 25.8},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": PlainfieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Plainville",
+"Democratic": 20.98,
+"Republican": 11.79,
+"Unaffiliated": 26.08},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": PlainvilleBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Plymouth",
+"Democratic": 15.23,
+"Republican": 13.99,
+"Unaffiliated": 31.97},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": PlymouthBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Pomfret",
+"Democratic": 17.92,
+"Republican": 15.19,
+"Unaffiliated": 24.96},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": PomfretBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Portland",
+"Democratic": 20.8,
+"Republican": 13.03,
+"Unaffiliated": 23.13},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": PortlandBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Preston",
+"Democratic": 15.39,
+"Republican": 16.54,
+"Unaffiliated": 28.67},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": PrestonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Prospect",
+"Democratic": 13.73,
+"Republican": 20.14,
+"Unaffiliated": 29.91},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ProspectBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Putnam",
+"Democratic": 18.12,
+"Republican": 9.94,
+"Unaffiliated": 25.92},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": PutnamBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Redding",
+"Democratic": 22.93,
+"Republican": 22.93,
+"Unaffiliated": 28.24},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ReddingBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Ridgefield",
+"Democratic": 19.32,
+"Republican": 23.8,
+"Unaffiliated": 23.81},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": RidgefieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Rocky Hill",
+"Democratic": 21.68,
+"Republican": 11.86,
+"Unaffiliated": 22.61},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": RockyHillBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Roxbury",
+"Democratic": 21.56,
+"Republican": 21.51,
+"Unaffiliated": 29.64},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": RoxburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Salem",
+"Democratic": 18.91,
+"Republican": 14.76,
+"Unaffiliated": 24.44},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SalemBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Salisbury",
+"Democratic": 30.01,
+"Republican": 14.88,
+"Unaffiliated": 23.4},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SalisburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Scotland",
+"Democratic": 18.17,
+"Republican": 15.76,
+"Unaffiliated": 29.56},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ScotlandBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Seymour",
+"Democratic": 13.57,
+"Republican": 13.06,
+"Unaffiliated": 30.64},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SeymourBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Sharon",
+"Democratic": 21.63,
+"Republican": 16.72,
+"Unaffiliated": 19.61},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SharonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Shelton",
+"Democratic": 13.22,
+"Republican": 15.67,
+"Unaffiliated": 29.41},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SheltonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Sherman",
+"Democratic": 17.34,
+"Republican": 22.99,
+"Unaffiliated": 31.04},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ShermanBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Simsbury",
+"Democratic": 21.47,
+"Republican": 21.86,
+"Unaffiliated": 25.31},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SimsburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Somers",
+"Democratic": 10.77,
+"Republican": 15.88,
+"Unaffiliated": 20.77},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SomersBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "South Windsor",
+"Democratic": 21.67,
+"Republican": 13.6,
+"Unaffiliated": 23.34},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SouthWindsorBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Southbury",
+"Democratic": 15.62,
+"Republican": 21.9,
+"Unaffiliated": 27.96},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SouthburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Southington",
+"Democratic": 17.33,
+"Republican": 14.16,
+"Unaffiliated": 32.01},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SouthingtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Sprague",
+"Democratic": 19.69,
+"Republican": 11.32,
+"Unaffiliated": 23.11},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SpragueBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Stafford",
+"Democratic": 22.03,
+"Republican": 12.04,
+"Unaffiliated": 27.31},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": StaffordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Stamford",
+"Democratic": 19.23,
+"Republican": 10.16,
+"Unaffiliated": 17.14},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": StamfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Sterling",
+"Democratic": 12.21,
+"Republican": 12.47,
+"Unaffiliated": 33.1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SterlingBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Stonington",
+"Democratic": 22.31,
+"Republican": 15.06,
+"Unaffiliated": 30.91},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": StoningtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Stratford",
+"Democratic": 20.47,
+"Republican": 11.56,
+"Unaffiliated": 28.94},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": StratfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Suffield",
+"Democratic": 14.23,
+"Republican": 15.45,
+"Unaffiliated": 20.91},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SuffieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Thomaston",
+"Democratic": 13.09,
+"Republican": 14.85,
+"Unaffiliated": 26.27},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ThomastonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Thompson",
+"Democratic": 17.28,
+"Republican": 11.66,
+"Unaffiliated": 28.47},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ThompsonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Tolland",
+"Democratic": 17.05,
+"Republican": 15.1,
+"Unaffiliated": 29.85},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": TollandBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Torrington",
+"Democratic": 16.35,
+"Republican": 12.69,
+"Unaffiliated": 22.67},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": TorringtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Trumbull",
+"Democratic": 17.58,
+"Republican": 17.34,
+"Unaffiliated": 31.55},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": TrumbullBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Union",
+"Democratic": 12.68,
+"Republican": 20.85,
+"Unaffiliated": 20.56},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": UnionBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Vernon",
+"Democratic": 15.59,
+"Republican": 9.33,
+"Unaffiliated": 21.9},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": VernonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Voluntown",
+"Democratic": 14.69,
+"Republican": 12.77,
+"Unaffiliated": 23.35},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": VoluntownBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Wallingford",
+"Democratic": 15.53,
+"Republican": 10.84,
+"Unaffiliated": 28.04},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WallingfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Warren",
+"Democratic": 15.39,
+"Republican": 23.05,
+"Unaffiliated": 27.12},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WarrenBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Washington",
+"Democratic": 21.39,
+"Republican": 20.13,
+"Unaffiliated": 24.79},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WashingtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Waterbury",
+"Democratic": 24.21,
+"Republican": 6.36,
+"Unaffiliated": 20.11},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WaterburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Waterford",
+"Democratic": 20.17,
+"Republican": 13.64,
+"Unaffiliated": 29.92},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WaterfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Watertown",
+"Democratic": 15.45,
+"Republican": 17.26,
+"Unaffiliated": 31.09},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WatertownBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "West Hartford",
+"Democratic": 28.78,
+"Republican": 11,
+"Unaffiliated": 21.79},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WestHartfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "West Haven",
+"Democratic": 26.3,
+"Republican": 4.5,
+"Unaffiliated": 13.28},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WestHavenBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Westbrook",
+"Democratic": 15.08,
+"Republican": 17.36,
+"Unaffiliated": 27.94},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WestbrookBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Weston",
+"Democratic": 21.01,
+"Republican": 17.71,
+"Unaffiliated": 21.31},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WestonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Westport",
+"Democratic": 22.31,
+"Republican": 16.52,
+"Unaffiliated": 21.14},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WestportBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Wethersfield",
+"Democratic": 23.02,
+"Republican": 12.61,
+"Unaffiliated": 22.18},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WethersfieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Willington",
+"Democratic": 16.55,
+"Republican": 12.58,
+"Unaffiliated": 23.6},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WillingtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Wilton",
+"Democratic": 17.18,
+"Republican": 22.7,
+"Unaffiliated": 22.98},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WiltonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Winchester",
+"Democratic": 13.48,
+"Republican": 11.82,
+"Unaffiliated": 23.25},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WinchesterBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Windham",
+"Democratic": 15.73,
+"Republican": 4.81,
+"Unaffiliated": 14.96},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WindhamBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Windsor",
+"Democratic": 32.61,
+"Republican": 9.73,
+"Unaffiliated": 25.63},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WindsorBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Windsor Locks",
+"Democratic": 19.08,
+"Republican": 10.77,
+"Unaffiliated": 26.69},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WindsorLocksBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Wolcott",
+"Democratic": 15.53,
+"Republican": 17.14,
+"Unaffiliated": 31.73},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WolcottBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Woodbridge",
+"Democratic": 26.39,
+"Republican": 15.37,
+"Unaffiliated": 32.28},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WoodbridgeBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Woodbury",
+"Democratic": 16.46,
+"Republican": 24.39,
+"Unaffiliated": 25.82},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WoodburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Woodstock",
+"Democratic": 17.32,
+"Republican": 20.11,
+"Unaffiliated": 24.02},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WoodstockBorders}
+} ]
