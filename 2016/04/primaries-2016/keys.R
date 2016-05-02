@@ -38,3 +38,42 @@ serverkey <- "breorz:CtMirror2013!@secure.ctmirror.org"
 # dem_results$total <- dem_results$clinton_count + dem_results$sanders_count + dem_results$others_count
 # dem_results$vote_diff <- dem_results$clinton_count - dem_results$sanders_count
 # dem_results$percent_diff <- dem_results$clinton_per - dem_results$sanders_per
+
+# 
+# rep_results <- read.csv("data/rep_results_ap.csv", stringsAsFactors=FALSE)
+# 
+# #rep_results$Town <- gsub(" .*", "", rep_results$Town)
+# 
+# rep_results$trump_per <- gsub("%.*", "", rep_results$trump)
+# rep_results$trump_per <- as.numeric(rep_results$trump_per)
+# rep_results$trump_count <- gsub(".*%", "", rep_results$trump)
+# rep_results$trump_count <- gsub(",", "", rep_results$trump_count)
+# rep_results$trump_count <- gsub("\n", "", rep_results$trump_count)
+# rep_results$trump_count <- as.numeric(rep_results$trump_count)
+# 
+# rep_results$kasich_per <- gsub("%.*", "", rep_results$kasich)
+# rep_results$kasich_per <- as.numeric(rep_results$kasich_per)
+# rep_results$kasich_count <- gsub(".*%", "", rep_results$kasich)
+# rep_results$kasich_count <- gsub(",", "", rep_results$kasich_count)
+# rep_results$kasich_count <- gsub("\n", "", rep_results$kasich_count)
+# rep_results$kasich_count <- as.numeric(rep_results$kasich_count)
+# 
+# rep_results$others_per <- gsub("%.*", "", rep_results$others)
+# rep_results$others_per <- as.numeric(rep_results$others_per)
+# rep_results$others_count <- gsub(".*%", "", rep_results$others)
+# rep_results$others_count <- gsub(",", "", rep_results$others_count)
+# rep_results$others_count <- gsub("\n", "", rep_results$others_count)
+# rep_results$others_count <- as.numeric(rep_results$others_count)
+# 
+# rep_results$Town <- gsub(" of ", "", rep_results$Town)
+# rep_results$Town <- gsub('[0-9]+', '', rep_results$Town)
+# 
+# rep_results$Town <- str_trim(rep_results$Town)
+# 
+# rep_results$trump <- NULL
+# rep_results$kasich <- NULL
+# rep_results$others <- NULL
+# 
+# rep_results$total <- rep_results$trump_count + rep_results$kasich_count + rep_results$others_count
+# rep_results$vote_diff <- rep_results$trump_count - rep_results$kasich_count
+# rep_results$percent_diff <- rep_results$trump_per - rep_results$kasich_per

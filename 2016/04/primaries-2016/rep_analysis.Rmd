@@ -5,6 +5,10 @@ date: "April 29, 2016"
 output: html_document
 ---
 
+This is the methodology used behind the story: [Analyzing Trump’s win in Connecticut’s Republican primary](http://trendct.org/2016/05/02/analyzing-trumps-win-in-connecticuts-primary-election/).
+
+Visit the [repo](https://github.com/trendct/data/tree/master/2016/04/primaries-2016) for the data. 
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyr)
