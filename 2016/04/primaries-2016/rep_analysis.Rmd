@@ -1,0 +1,345 @@
+---
+title: "Analyzing Connecticut's Republican primary results"
+author: "Andrew Ba Tran"
+date: "April 29, 2016"
+output: html_document
+---
+
+This is the methodology used behind the story: [Analyzing Trump’s win in Connecticut’s Republican primary](http://trendct.org/2016/05/02/analyzing-trumps-win-in-connecticuts-primary-election/).
+
+Visit the [repo](https://github.com/trendct/data/tree/master/2016/04/primaries-2016) for the data. 
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyr)
+library(dplyr)
+library(scales)
+library(ggplot2)
+library(ggalt)
+library(stringr)
+library(knitr)
+
+
+rep_results <- read.csv("data/RepublicanPresidentialPreferencePrimary.csv", stringsAsFactors=FALSE)
+rep_results <- rep_results %>%
+  group_by(Town.Name, Candidate.Name) %>%
+  summarise(votes=sum(Vote.Totals))
+
+rep_results$Candidate.Name <- gsub("Donald J. Trump", "trump_count", rep_results$Candidate.Name)
+rep_results$Candidate.Name <- gsub("John R. Kasich", "kasich_count", rep_results$Candidate.Name)
+rep_results$Candidate.Name <- gsub("Ben Carson", "others_count", rep_results$Candidate.Name)
+rep_results$Candidate.Name <- gsub("Ted Cruz", "others_count", rep_results$Candidate.Name)
+rep_results$Candidate.Name <- gsub("Uncommitted", "others_count", rep_results$Candidate.Name)
+
+rep_results <- rep_results %>%
+  group_by(Town.Name, Candidate.Name) %>%
+  summarise(votes=sum(votes)) %>%
+  spread(Candidate.Name, votes)
+
+rep_results$vote_diff <- rep_results$trump_count - rep_results$kasich_count
+rep_results$total <- rep_results$trump_count + rep_results$kasich_count + rep_results$others_count
+rep_results$trump_per <- round(rep_results$trump_count/rep_results$total*100,1)
+rep_results$kasich_per <- round(rep_results$kasich_count/rep_results$total*100,1)
+rep_results$others_per <- round(rep_results$others_count/rep_results$total*100,1)
+rep_results$percent_diff <- rep_results$trump_per - rep_results$kasich_per
+names(rep_results)[names(rep_results) == 'Town.Name'] <- 'Town'
+rep_results <- data.frame(rep_results)
+
+
+## Republicans
+# 
+# rep_results <- read.csv("data/rep_results_ap.csv", stringsAsFactors=FALSE)
+# 
+# #rep_results$Town <- gsub(" .*", "", rep_results$Town)
+# 
+# rep_results$trump_per <- gsub("%.*", "", rep_results$trump)
+# rep_results$trump_per <- as.numeric(rep_results$trump_per)
+# rep_results$trump_count <- gsub(".*%", "", rep_results$trump)
+# rep_results$trump_count <- gsub(",", "", rep_results$trump_count)
+# rep_results$trump_count <- gsub("\n", "", rep_results$trump_count)
+# rep_results$trump_count <- as.numeric(rep_results$trump_count)
+# 
+# rep_results$kasich_per <- gsub("%.*", "", rep_results$kasich)
+# rep_results$kasich_per <- as.numeric(rep_results$kasich_per)
+# rep_results$kasich_count <- gsub(".*%", "", rep_results$kasich)
+# rep_results$kasich_count <- gsub(",", "", rep_results$kasich_count)
+# rep_results$kasich_count <- gsub("\n", "", rep_results$kasich_count)
+# rep_results$kasich_count <- as.numeric(rep_results$kasich_count)
+# 
+# rep_results$others_per <- gsub("%.*", "", rep_results$others)
+# rep_results$others_per <- as.numeric(rep_results$others_per)
+# rep_results$others_count <- gsub(".*%", "", rep_results$others)
+# rep_results$others_count <- gsub(",", "", rep_results$others_count)
+# rep_results$others_count <- gsub("\n", "", rep_results$others_count)
+# rep_results$others_count <- as.numeric(rep_results$others_count)
+# 
+# rep_results$Town <- gsub(" of ", "", rep_results$Town)
+# rep_results$Town <- gsub('[0-9]+', '', rep_results$Town)
+# 
+# rep_results$Town <- str_trim(rep_results$Town)
+# 
+# rep_results$trump <- NULL
+# rep_results$kasich <- NULL
+# rep_results$others <- NULL
+# 
+# rep_results$total <- rep_results$trump_count + rep_results$kasich_count + rep_results$others_count
+# rep_results$vote_diff <- rep_results$trump_count - rep_results$kasich_count
+# rep_results$percent_diff <- rep_results$trump_per - rep_results$kasich_per
+
+```
+
+## Who won the Republican presidential primary election in Connecticut?
+```{r results, fig.width=10, fig.height=5}
+
+zults <- rep_results %>%
+  summarise(trump=sum(trump_count), kasich=sum(kasich_count)) %>%
+  gather("candidate", "votes", 1:2)
+
+ggplot(zults, aes(x = candidate, fill=candidate)) +
+  geom_bar(stat="identity", aes(y=votes), position="dodge") +
+  geom_text(aes(x= candidate, y=votes, label=paste0(as.character(round(votes/sum(votes)*100,0)),"%")), hjust=1) + coord_flip()
+```
+
+
+## Mapping the results
+```{r map_results, fig.width=10, fig.height=5}
+library(rgdal)
+require(maptools)
+
+
+town_shape <- readOGR(dsn="maps", layer="ctgeo")
+town_shape_df <- fortify(town_shape, region="NAME10")
+
+town_map <- rep_results %>%
+  mutate(winner=ifelse(trump_per>kasich_per, "trump", "kasich"))
+
+names(town_map)[names(town_map) == 'Town'] <- 'id'
+
+voters_map <- left_join(town_shape_df, town_map)
+
+
+theme_opts <- list(theme(panel.grid.minor = element_blank(),
+                        panel.grid.major = element_blank(),
+                        panel.background = element_blank(),
+                        plot.background = element_rect(fill="#e6e8ed"),
+                        panel.border = element_blank(),
+                        axis.line = element_blank(),
+                        axis.text.x = element_blank(),
+                        axis.text.y = element_blank(),
+                        axis.ticks = element_blank(),
+                        axis.title.x = element_blank(),
+                        axis.title.y = element_blank(),
+                        plot.title = element_text(size=22)))
+
+# plot map
+ggplot(voters_map, aes(long,lat, group=group, fill=winner)) + 
+  geom_polygon() + 
+  geom_path(color = "white") +
+  labs(title="Connecticut primary winner by town") + 
+  coord_equal() + 
+  theme_opts
+```
+
+-----
+
+## Towns with the closest margins
+
+```{r close_margins}
+total_margins <- rep_results[c("Town", "trump_count", "kasich_count", "vote_diff")]
+total_margins <- arrange(total_margins, vote_diff)
+total_margins <- subset(total_margins, (vote_diff<16) & (vote_diff > -16))
+
+kable(total_margins)
+```
+
+Trump needed just 15 votes to tie Kasich in Salisbury.
+
+Kasich was just 12 votes behind in Cornwall.
+
+-----
+
+### Where was Trump most successful against Kasich?
+
+```{r large_margins_trump}
+## Towns with the widest margins
+
+percent_margins <- rep_results[c("Town", "trump_per", "kasich_per", "percent_diff")]
+percent_margins <- arrange(percent_margins, percent_diff)
+
+trump_lead <- tail(percent_margins, 5)
+kable(trump_lead)
+```
+
+Derby, Sterling, East Haven, and Wolcott saw the biggest win margins for Trump at about 5 to 1 votes to Kasich.
+
+-----
+
+### Where did Trump lose to Kasich?
+
+```{r large_margins_kasich}
+kasich_lead <- head(percent_margins, 5)
+kable(kasich_lead)
+```
+
+Kasich beat Trump by single digit percent points in Darien, New Canaan, Salisbury, and West Hartford.
+
+-----
+
+## How did Trump do in this year's primary election versus the 2008 primary?
+
+```{r states, fig.height=15, fig.width=7}
+
+rep2008 <- read.csv("data/rep2008.csv", stringsAsFactors=FALSE)
+rep2008_total <- rep2008[c("Town", "mccain_total_2008")]
+rep2008_percent <- rep2008[c("Town", "mccain_per_2008")]
+
+timechange <- rep_results[c("Town", "trump_per", "trump_count")]
+timechange_total <- timechange[c("Town", "trump_count")]
+timechange_percent <- timechange[c("Town", "trump_per")]
+
+timechange_total <- left_join(rep2008_total, timechange_total)
+timechange_percent <- left_join(rep2008_percent, timechange_percent)
+
+timechange_percent <- arrange(timechange_percent, trump_per)
+timechange_percent$Town <- factor(timechange_percent$Town, levels=unique(timechange_percent$Town))
+
+library(tidyr)
+library(scales)
+library(ggplot2)
+devtools::install_github("hrbrmstr/ggalt")
+library(ggalt)
+
+
+gg <- ggplot(timechange_percent, aes(x=trump_per, xend=mccain_per_2008, y=Town, group=Town))
+gg <- gg + geom_dumbbell(color="#a3c4dc", size=0.5, point.colour.l="#0e668b")
+# gg <- gg + scale_x_continuous(label=percent)
+gg <- gg + labs(x=NULL, y=NULL)
+gg <- gg + theme_bw()
+gg <- gg+ theme(axis.title = element_text(family = "Trebuchet MS", color="#666666", face="bold", size=6)) 
+gg <- gg + theme(plot.background=element_rect(fill="#f7f7f7"))
+gg <- gg + theme(panel.background=element_rect(fill="#f7f7f7"))
+gg <- gg + theme(panel.grid.minor=element_blank())
+gg <- gg + theme(panel.grid.major.y=element_blank())
+gg <- gg + theme(panel.grid.major.x=element_line())
+gg <- gg+ geom_vline(xintercept = 50)
+gg <- gg + theme(axis.ticks=element_blank())
+gg <- gg + theme(axis.text = element_text(size = 7))
+gg <- gg + labs(title = "Percentage of votes by town, McCain 2008 vs. Trump 2016")
+gg <- gg + annotate("text", x = 68, y = 40, label = "2008", size=3, colour="gray30")
+gg <- gg + annotate("text", x = 68, y = 43, label = "2016", size=3, colour="gray30")
+gg <- gg + annotate("point", x = 66, y = 40, colour = "#a3c4dc", size = 2) 
+gg <- gg + annotate("point", x = 66, y = 43, colour = "#0e668b", size = 2)
+gg <- gg + theme(legend.position="top")
+gg <- gg + theme(panel.border=element_blank())
+gg
+
+
+```
+
+## Results in towns that McCain won in 2008
+
+```{r bernie_obama_towns, fig.width=10, fig.height=5}
+## How'd Trump and Kasich do in McCain towns?
+
+mccain_towns <- subset(rep2008, mccain_per_2008>romney_per_2008)
+mccain_towns <- left_join(mccain_towns, percent_margins)
+
+names(mccain_towns)[names(mccain_towns) == 'Town'] <- 'id'
+
+mccain_town_map <- mccain_towns %>%
+  mutate(winner=ifelse(trump_per>kasich_per, "trump", "kasich"))
+
+mccain_voters_map <- left_join(town_shape_df, mccain_town_map)
+mccain_voters_map <- mccain_voters_map[!is.na(mccain_voters_map$winner),]
+
+# plot map
+ggplot(mccain_voters_map, aes(long,lat, group=group, fill=winner)) + 
+  geom_polygon() + 
+    geom_path(color = "white") +
+  labs(title="2016 winners in towns that McCain won in 2008") + 
+  coord_equal() + 
+  theme_opts
+
+m_town_results <- mccain_town_map %>%
+  group_by(winner) %>%
+  summarise(towns=n())
+kable(m_town_results)
+```
+
+In 2016, trump picked up 159 towns out of the 165 towns that McCain won in 2008.
+
+-----
+
+## Results in towns that Romney won in 2008
+
+```{r trump_map, fig.width=10, fig.height=5}
+
+romney_towns <- subset(rep2008, mccain_per_2008<romney_per_2008)
+romney_towns <- left_join(romney_towns, percent_margins)
+
+names(romney_towns)[names(romney_towns) == 'Town'] <- 'id'
+
+romney_town_map <- romney_towns %>%
+  mutate(winner=ifelse(trump_per>kasich_per, "trump", "kasich"))
+
+romney_voters_map <- left_join(town_shape_df, romney_town_map)
+romney_voters_map <- romney_voters_map[!is.na(romney_voters_map$winner),]
+
+# plot map
+ggplot(romney_voters_map, aes(long,lat, group=group, fill=winner)) + 
+  geom_polygon() +
+    geom_path(color = "white") +
+  labs(title="2016 winners in towns that Romney won in 2008") + 
+  coord_equal() + 
+  theme_opts
+
+r_town_results <- romney_town_map %>%
+  group_by(winner) %>%
+  summarise(towns=n())
+kable(r_town_results)
+```
+
+Mitt Romney only won 4 towns in Connecticut in 2008. Trump won them all in 2016.
+
+-----
+
+```{r urban, fig.width=10, fig.height=5}
+urban <- read.csv("data/urban_rural.csv", stringsAsFactors=FALSE)
+urban <- urban[c("NAME10", "Type")]
+colnames(urban) <- c("Town", "Type")
+
+rep_results2 <- left_join(rep_results, urban)
+
+rep_percent <- rep_results2 %>%
+  select(Town, Type, trump_per, kasich_per) %>%
+  gather("candidate", "percent", 3:4)
+
+rep_percent$candidate <- gsub("_per", "", rep_percent$candidate )
+```
+
+## Votes by town category
+
+
+```{r rep_percent, fig.width=10, fig.height=5}
+ggplot(rep_percent, aes(x = Type, y = percent, fill = candidate)) +
+geom_boxplot() + labs(title="Candidate support winner by town type") 
+
+```
+
+Trump won the majority in all town types.
+
+```{r urban_tally, fig.width=10, fig.height=5}
+rep_total <- rep_results2 %>%
+  select(Type, trump_count, kasich_count) %>%
+  gather("candidate", "votes", 2:3) %>%
+  group_by(Type, candidate) %>%
+  summarise(votes=sum(votes))
+  
+
+rep_total$candidate <- gsub("_count", "", rep_total$candidate )
+
+ggplot(rep_total, aes(x=candidate, y=votes, fill=Type)) + geom_bar(stat="identity")  + coord_flip() +
+   labs(title="Primary votes by town type") 
+
+```
+

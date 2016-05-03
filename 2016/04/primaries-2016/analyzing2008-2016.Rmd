@@ -1,0 +1,342 @@
+---
+title: "Analyzing Connecticut's Democratic primary results"
+author: "Andrew Ba Tran"
+date: "April 28, 2016"
+output: html_document
+---
+
+This is the methodology used behind the story: [Analyzing Connecticut’s Democratic primary results](http://trendct.org/2016/04/29/analyzing-connecticuts-democratic-primary-results/).
+
+Visit the [repo](https://github.com/trendct/data/tree/master/2016/04/primaries-2016) for the data. 
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyr)
+library(dplyr)
+library(scales)
+library(ggplot2)
+library(ggalt)
+library(stringr)
+library(knitr)
+
+
+dem_results <- read.csv("data/DemocraticPresidentialPreferencePrimary.csv", stringsAsFactors=FALSE)
+dem_results <- dem_results %>%
+  group_by(Town.Name, Candidate.Name) %>%
+  summarise(votes=sum(Vote.Totals))
+
+dem_results$Candidate.Name <- gsub("Bernie Sanders", "sanders_count", dem_results$Candidate.Name)
+dem_results$Candidate.Name <- gsub("Hillary Clinton", "clinton_count", dem_results$Candidate.Name)
+dem_results$Candidate.Name <- gsub("Roque Rocky De La Fuente", "others_count", dem_results$Candidate.Name)
+dem_results$Candidate.Name <- gsub("Uncommitted", "others_count", dem_results$Candidate.Name)
+
+dem_results <- dem_results %>%
+  group_by(Town.Name, Candidate.Name) %>%
+  summarise(votes=sum(votes)) %>%
+  spread(Candidate.Name, votes)
+
+dem_results$vote_diff <- dem_results$clinton_count - dem_results$sanders_count
+dem_results$total <- dem_results$clinton_count + dem_results$sanders_count + dem_results$others_count
+dem_results$clinton_per <- round(dem_results$clinton_count/dem_results$total*100,1)
+dem_results$sanders_per <- round(dem_results$sanders_count/dem_results$total*100,1)
+dem_results$others_per <- round(dem_results$others_count/dem_results$total*100,1)
+dem_results$percent_diff <- dem_results$clinton_per - dem_results$sanders_per
+names(dem_results)[names(dem_results) == 'Town.Name'] <- 'Town'
+dem_results <- data.frame(dem_results)
+
+```
+
+## Who won the Democratic presidential primary election in Connecticut?
+```{r results, fig.width=10, fig.height=5}
+
+zults <- dem_results %>%
+  summarise(Clinton=sum(clinton_count), Sanders=sum(sanders_count)) %>%
+  gather("candidate", "votes", 1:2)
+
+ggplot(zults, aes(x = candidate, fill=candidate)) +
+  geom_bar(stat="identity", aes(y=votes), position="dodge") +
+  geom_text(aes(x= candidate, y=votes, label=paste0(as.character(round(votes/sum(votes)*100,0)),"%")), hjust=1) + coord_flip()
+```
+
+
+## Mapping the results
+```{r map_results, fig.width=10, fig.height=5}
+library(rgdal)
+require(maptools)
+
+
+town_shape <- readOGR(dsn="maps", layer="ctgeo")
+town_shape_df <- fortify(town_shape, region="NAME10")
+
+town_map <- dem_results %>%
+  mutate(winner=ifelse(clinton_per>sanders_per, "Clinton", "Sanders"))
+
+names(town_map)[names(town_map) == 'Town'] <- 'id'
+
+voters_map <- left_join(town_shape_df, town_map)
+
+
+theme_opts <- list(theme(panel.grid.minor = element_blank(),
+                        panel.grid.major = element_blank(),
+                        panel.background = element_blank(),
+                        plot.background = element_rect(fill="#e6e8ed"),
+                        panel.border = element_blank(),
+                        axis.line = element_blank(),
+                        axis.text.x = element_blank(),
+                        axis.text.y = element_blank(),
+                        axis.ticks = element_blank(),
+                        axis.title.x = element_blank(),
+                        axis.title.y = element_blank(),
+                        plot.title = element_text(size=22)))
+
+# plot map
+ggplot(voters_map, aes(long,lat, group=group, fill=winner)) + 
+  geom_polygon() + 
+  geom_path(color = "white") +
+  labs(title="Connecticut primary winner by town") + 
+  coord_equal() + 
+  theme_opts
+```
+
+-----
+
+## Towns with the closest margins
+
+```{r close_margins}
+total_margins <- dem_results[c("Town", "clinton_count", "sanders_count", "vote_diff")]
+total_margins <- arrange(total_margins, vote_diff)
+total_margins <- subset(total_margins, (vote_diff<6) & (vote_diff > -6))
+
+kable(total_margins)
+```
+
+Hillary Clinton needed just two votes to beat Bernie Sanders in Killingworth and Newington.
+
+Sanders was just three votes behind in Sharon.
+
+-----
+
+### Where was Hillary most successful against Bernie?
+
+```{r large_margins_clinton}
+## Towns with the widest margins
+
+percent_margins <- dem_results[c("Town", "clinton_per", "sanders_per", "percent_diff")]
+percent_margins <- arrange(percent_margins, percent_diff)
+
+clinton_lead <- tail(percent_margins, 5)
+kable(clinton_lead)
+```
+
+Bloomfield, Westport, and Weston saw the biggest win margins for Hillary at about 3 to 1 votes.
+
+-----
+
+### Where did Hillary lost the most to Bernie?
+
+```{r large_margins_sanders}
+sanders_lead <- head(percent_margins, 5)
+kable(sanders_lead)
+```
+
+Sanders did quite well in Voluntown, Sterling, and Canaan with a 40 percent point difference between town votes.
+
+-----
+
+## How did Hillary in this year's primary election versus the 2008 primary?
+
+```{r states, fig.height=15, fig.width=7}
+
+dem2008 <- read.csv("data/dem2008.csv", stringsAsFactors=FALSE)
+dem2008_total <- dem2008[c("Town", "clinton_total_2008")]
+dem2008_percent <- dem2008[c("Town", "clinton_per_2008")]
+
+timechange <- dem_results[c("Town", "clinton_per", "clinton_count")]
+timechange_total <- timechange[c("Town", "clinton_count")]
+timechange_percent <- timechange[c("Town", "clinton_per")]
+
+timechange_total <- left_join(dem2008_total, timechange_total)
+timechange_percent <- left_join(dem2008_percent, timechange_percent)
+
+timechange_percent <- arrange(timechange_percent, clinton_per)
+timechange_percent$Town <- factor(timechange_percent$Town, levels=unique(timechange_percent$Town))
+
+library(tidyr)
+library(scales)
+library(ggplot2)
+devtools::install_github("hrbrmstr/ggalt")
+library(ggalt)
+
+
+gg <- ggplot(timechange_percent, aes(x=clinton_per, xend=clinton_per_2008, y=Town, group=Town))
+gg <- gg + geom_dumbbell(color="#a3c4dc", size=0.5, point.colour.l="#0e668b")
+# gg <- gg + scale_x_continuous(label=percent)
+gg <- gg + labs(x=NULL, y=NULL)
+gg <- gg + theme_bw()
+gg <- gg+ theme(axis.title = element_text(family = "Trebuchet MS", color="#666666", face="bold", size=6)) 
+gg <- gg + theme(plot.background=element_rect(fill="#f7f7f7"))
+gg <- gg + theme(panel.background=element_rect(fill="#f7f7f7"))
+gg <- gg + theme(panel.grid.minor=element_blank())
+gg <- gg + theme(panel.grid.major.y=element_blank())
+gg <- gg + theme(panel.grid.major.x=element_line())
+gg <- gg+ geom_vline(xintercept = 50)
+gg <- gg + theme(axis.ticks=element_blank())
+gg <- gg + theme(axis.text = element_text(size = 7))
+gg <- gg + labs(title = "Percentage of votes for Clinton by town, 2008 vs. 2016")
+gg <- gg + annotate("text", x = 68, y = 140, label = "2008", size=3, colour="gray30")
+gg <- gg + annotate("text", x = 68, y = 143, label = "2016", size=3, colour="gray30")
+gg <- gg + annotate("point", x = 66, y = 140, colour = "#a3c4dc", size = 2) 
+gg <- gg + annotate("point", x = 66, y = 143, colour = "#0e668b", size = 2)
+gg <- gg + theme(legend.position="top")
+gg <- gg + theme(panel.border=element_blank())
+gg
+
+
+```
+
+## Results in towns that Obama won in 2008
+
+```{r bernie_obama_towns, fig.width=10, fig.height=5}
+## How'd Bernie and Hillary do in Obama towns?
+
+obama_towns <- subset(dem2008, obama_per_2008>clinton_per_2008)
+obama_towns <- left_join(obama_towns, percent_margins)
+
+names(obama_towns)[names(obama_towns) == 'Town'] <- 'id'
+
+obama_town_map <- obama_towns %>%
+  mutate(winner=ifelse(clinton_per>sanders_per, "Clinton", "Sanders"))
+
+obama_voters_map <- left_join(town_shape_df, obama_town_map)
+obama_voters_map <- obama_voters_map[!is.na(obama_voters_map$winner),]
+
+# plot map
+ggplot(obama_voters_map, aes(long,lat, group=group, fill=winner)) + 
+  geom_polygon() + 
+    geom_path(color = "white") +
+  labs(title="2016 winners in towns that Obama won in 2008") + 
+  coord_equal() + 
+  theme_opts
+
+o_town_results <- obama_town_map %>%
+  group_by(winner) %>%
+  summarise(towns=n())
+kable(o_town_results)
+```
+
+In 2016, Clinton picked up 37 towns that Obama won in 2008.
+
+-----
+
+## Results in towns that Clinton won in 2008
+
+```{r clinton_map, fig.width=10, fig.height=5}
+
+clinton_towns <- subset(dem2008, obama_per_2008<clinton_per_2008)
+clinton_towns <- left_join(clinton_towns, percent_margins)
+
+names(clinton_towns)[names(clinton_towns) == 'Town'] <- 'id'
+
+clinton_town_map <- clinton_towns %>%
+  mutate(winner=ifelse(clinton_per>sanders_per, "Clinton", "Sanders"))
+
+clinton_voters_map <- left_join(town_shape_df, clinton_town_map)
+clinton_voters_map <- clinton_voters_map[!is.na(clinton_voters_map$winner),]
+
+# plot map
+ggplot(clinton_voters_map, aes(long,lat, group=group, fill=winner)) + 
+  geom_polygon() +
+    geom_path(color = "white") +
+  labs(title="2016 winners in towns that Clinton won in 2008") + 
+  coord_equal() + 
+  theme_opts
+
+c_town_results <- clinton_town_map %>%
+  group_by(winner) %>%
+  summarise(towns=n())
+kable(c_town_results)
+```
+
+Interestingly, Clinton lost 63 of the towns she won in 2008. 
+
+In 2016, she only won 16 of the towns she won in 2008.
+
+But that didn't make much of a difference because she still won the towns with larger populations.
+
+-----
+
+```{r urban, fig.width=10, fig.height=5}
+urban <- read.csv("data/urban_rural.csv", stringsAsFactors=FALSE)
+urban <- urban[c("NAME10", "Type")]
+colnames(urban) <- c("Town", "Type")
+
+dem_results2 <- left_join(dem_results, urban)
+
+dem_percent <- dem_results2 %>%
+  select(Town, Type, clinton_per, sanders_per) %>%
+  gather("candidate", "percent", 3:4)
+
+dem_percent$candidate <- gsub("_per", "", dem_percent$candidate )
+```
+
+## Votes by town category
+
+Sanders has claimed most of his support comes from urban areas with young people and the less-affluent.
+
+How did he do in those urban areas versus rural and mixed towns?
+
+```{r dem_percent, fig.width=10, fig.height=5}
+ggplot(dem_percent, aes(x = Type, y = percent, fill = candidate)) +
+geom_boxplot() + labs(title="Candidate support winner by town type") 
+
+```
+
+Sanders had more support from rural towns than Clinton, as well as in towns with a mix of urban and rural areas.
+
+Clinton edged out Sanders in support in more-populous, urban cities.
+
+And that made the biggest difference.
+
+```{r urban_tally, fig.width=10, fig.height=5}
+dem_total <- dem_results2 %>%
+  select(Type, clinton_count, sanders_count) %>%
+  gather("candidate", "votes", 2:3) %>%
+  group_by(Type, candidate) %>%
+  summarise(votes=sum(votes))
+  
+
+dem_total$candidate <- gsub("_count", "", dem_total$candidate )
+
+ggplot(dem_total, aes(x=candidate, y=votes, fill=Type)) + geom_bar(stat="identity")  + coord_flip() +
+   labs(title="Primary votes by town type") 
+
+```
+
+## The problem with the primary elections
+
+```{r problem, fig.width=10, fig.height=5} 
+
+count_head <- c("Population", "Registered.voters", "Voted.in.primaries")
+count <- c(3597000, 559741, 231588)
+
+count <- data.frame(cbind(count_head, count))
+colnames(count) <- c("Type", "Count")
+count$Count <- as.numeric(as.character(count$Count))
+# Dem
+# 731241
+
+# Rep
+# 415689 
+
+# Unaf
+# 94542
+
+count$Type <- factor(count$Type, levels=rev(levels(count$Type)))
+
+ggplot(count, aes(x = Type, fill=Type)) +
+  geom_bar(stat="identity", aes(y=Count), position="dodge") +
+  geom_text(aes(x= Type, y=Count, label=paste0(as.character(round(Count/3597000*100,0)),"%")), hjust=1) + coord_flip() + labs(title="Who actually voted in the CT primaries") 
+
+```
+
+The number of residents who participated in Connecticut's presidential primary is tiny compared to the rest of the state's population. Six percent of the state helped decide the final candidates who will face off during the general election in November.
