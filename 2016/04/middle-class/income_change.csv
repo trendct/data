@@ -1,0 +1,175 @@
+,town,2000,2014,2000_adj,diff,diff_pct,beat
+0,Geography,,,,,,False
+1,"County subdivisions not defined, Fairfield County, Connecticut",0.0,,0.0,,,False
+2,"Bethel town, Fairfield County, Connecticut",68891.0,85377.0,94709.52,-9332.52,-9.8538351794,False
+3,"Bridgeport town, Fairfield County, Connecticut",34658.0,41204.0,47646.9,-6442.9,-13.5221808764,False
+4,"Brookfield town, Fairfield County, Connecticut",82706.0,106920.0,113702.02,-6782.02,-5.9647313214,False
+5,"Danbury town, Fairfield County, Connecticut",53664.0,65981.0,73775.85,-7794.85,-10.5655848086,False
+6,"Darien town, Fairfield County, Connecticut",146755.0,199444.0,201754.89,-2310.89,-1.14539479068,False
+7,"Easton town, Fairfield County, Connecticut",125557.0,132000.0,172612.44,-40612.44,-23.5281072442,False
+8,"Fairfield town, Fairfield County, Connecticut",83512.0,120082.0,114810.09,5271.91,4.59185251052,True
+9,"Greenwich town, Fairfield County, Connecticut",99086.0,135258.0,136220.81,-962.81,-0.706800965286,False
+10,"Monroe town, Fairfield County, Connecticut",85000.0,108688.0,116855.75,-8167.75,-6.98960042617,False
+11,"New Canaan town, Fairfield County, Connecticut",141788.0,179810.0,194926.39,-15116.39,-7.75492225552,False
+12,"New Fairfield town, Fairfield County, Connecticut",84375.0,101750.0,115996.52,-14246.52,-12.2818512142,False
+13,"Newtown town, Fairfield County, Connecticut",90193.0,108667.0,123994.95,-15327.95,-12.3617534424,False
+14,"Norwalk town, Fairfield County, Connecticut",59839.0,76051.0,82265.07,-6214.07,-7.55371629782,False
+15,"Redding town, Fairfield County, Connecticut",104137.0,121667.0,143164.79,-21497.79,-15.0161153451,False
+16,"Ridgefield town, Fairfield County, Connecticut",107351.0,147936.0,147583.31,352.69,0.238976887021,True
+17,"Shelton town, Fairfield County, Connecticut",67292.0,88369.0,92511.26,-4142.26,-4.47757386506,False
+18,"Sherman town, Fairfield County, Connecticut",76202.0,115442.0,104760.49,10681.51,10.1961245122,True
+19,"Stamford town, Fairfield County, Connecticut",60556.0,77221.0,83250.79,-6029.79,-7.24292225936,False
+20,"Stratford town, Fairfield County, Connecticut",53494.0,66451.0,73542.13,-7091.13,-9.64226899602,False
+21,"Trumbull town, Fairfield County, Connecticut",79507.0,108554.0,109304.12,-750.12,-0.686268733512,False
+22,"Weston town, Fairfield County, Connecticut",146697.0,208078.0,201675.15,6402.85,3.17483338924,True
+23,"Westport town, Fairfield County, Connecticut",119872.0,151771.0,164796.85,-13025.85,-7.90418627541,False
+24,"Wilton town, Fairfield County, Connecticut",141428.0,175019.0,194431.47,-19412.47,-9.98422220436,False
+25,"Avon town, Hartford County, Connecticut",90934.0,116565.0,125013.66,-8448.66,-6.75818946506,False
+26,"Berlin town, Hartford County, Connecticut",68068.0,87518.0,93578.08,-6060.08,-6.47596103703,False
+27,"Bloomfield town, Hartford County, Connecticut",53812.0,73519.0,73979.31,-460.31,-0.622214508354,False
+28,"Bristol town, Hartford County, Connecticut",47422.0,60208.0,65194.51,-4986.51,-7.6486655088,False
+29,"Burlington town, Hartford County, Connecticut",82711.0,109037.0,113708.89,-4671.89,-4.10864093388,False
+30,"Canton town, Hartford County, Connecticut",65013.0,89452.0,89378.15,73.85,0.0826264584801,True
+31,"East Granby town, Hartford County, Connecticut",68696.0,71272.0,94441.44,-23169.44,-24.5331286774,False
+32,"East Hartford town, Hartford County, Connecticut",41424.0,50355.0,56948.62,-6593.62,-11.578191008,False
+33,"East Windsor town, Hartford County, Connecticut",51092.0,72866.0,70239.93,2626.07,3.73871386261,True
+34,"Enfield town, Hartford County, Connecticut",52810.0,68162.0,72601.79,-4439.79,-6.11526244739,False
+35,"Farmington town, Hartford County, Connecticut",67073.0,92933.0,92210.18,722.82,0.783883081022,True
+36,"Glastonbury town, Hartford County, Connecticut",80660.0,108157.0,110889.23,-2732.23,-2.46392729032,False
+37,"Granby town, Hartford County, Connecticut",81151.0,100262.0,111564.25,-11302.25,-10.1307094342,False
+38,"Hartford town, Hartford County, Connecticut",24820.0,29313.0,34121.88,-4808.88,-14.0932445692,False
+39,"Hartland town, Hartford County, Connecticut",64674.0,91550.0,88912.1,2637.9,2.96686277796,True
+40,"Manchester town, Hartford County, Connecticut",49426.0,63198.0,67949.56,-4751.56,-6.99277522916,False
+41,"Marlborough town, Hartford County, Connecticut",80265.0,112714.0,110346.2,2367.8,2.14579206171,True
+42,"New Britain town, Hartford County, Connecticut",34185.0,40515.0,46996.63,-6481.63,-13.7916910212,False
+43,"Newington town, Hartford County, Connecticut",57118.0,79008.0,78524.31,483.69,0.615974849063,True
+44,"Plainville town, Hartford County, Connecticut",48136.0,55506.0,66176.1,-10670.1,-16.1237969599,False
+45,"Rocky Hill town, Hartford County, Connecticut",60247.0,75442.0,82825.98,-7383.98,-8.91505298217,False
+46,"Simsbury town, Hartford County, Connecticut",82996.0,109823.0,114100.7,-4277.7,-3.74905675425,False
+47,"Southington town, Hartford County, Connecticut",60538.0,81285.0,83226.04,-1941.04,-2.33225081958,False
+48,"South Windsor town, Hartford County, Connecticut",73990.0,94217.0,101719.49,-7502.49,-7.37566615798,False
+49,"Suffield town, Hartford County, Connecticut",66698.0,94610.0,91694.64,2915.36,3.17942248315,True
+50,"West Hartford town, Hartford County, Connecticut",61665.0,84092.0,84775.41,-683.41,-0.806141780972,False
+51,"Wethersfield town, Hartford County, Connecticut",53289.0,78008.0,73260.31,4747.69,6.48057590802,True
+52,"Windsor town, Hartford County, Connecticut",64137.0,79244.0,88173.85,-8929.85,-10.1275491543,False
+53,"Windsor Locks town, Hartford County, Connecticut",48837.0,67222.0,67139.81,82.19,0.122416193909,True
+54,"Barkhamsted town, Litchfield County, Connecticut",65972.0,81792.0,90696.56,-8904.56,-9.81796884027,False
+55,"Bethlehem town, Litchfield County, Connecticut",68542.0,88616.0,94229.73,-5613.73,-5.95749345774,False
+56,"Bridgewater town, Litchfield County, Connecticut",80420.0,93750.0,110559.29,-16809.29,-15.2038693447,False
+57,"Canaan town, Litchfield County, Connecticut",54688.0,68021.0,75183.61,-7162.61,-9.52682373193,False
+58,"Colebrook town, Litchfield County, Connecticut",58684.0,78854.0,80677.21,-1823.21,-2.25988231373,False
+59,"Cornwall town, Litchfield County, Connecticut",54886.0,80234.0,75455.82,4778.18,6.33242074634,True
+60,"Goshen town, Litchfield County, Connecticut",64432.0,81528.0,88579.41,-7051.41,-7.96055200639,False
+61,"Harwinton town, Litchfield County, Connecticut",66222.0,91802.0,91040.25,761.75,0.836717825357,True
+62,"Kent town, Litchfield County, Connecticut",53906.0,64648.0,74108.54,-9460.54,-12.7657892059,False
+63,"Litchfield town, Litchfield County, Connecticut",58418.0,82188.0,80311.52,1876.48,2.33650166253,True
+64,"Morris town, Litchfield County, Connecticut",58050.0,84464.0,79805.6,4658.4,5.83718435799,True
+65,"New Hartford town, Litchfield County, Connecticut",69321.0,82245.0,95300.68,-13055.68,-13.6994615358,False
+66,"New Milford town, Litchfield County, Connecticut",65354.0,79028.0,89846.95,-10818.95,-12.0415328511,False
+67,"Norfolk town, Litchfield County, Connecticut",58906.0,73188.0,80982.41,-7794.41,-9.62481852541,False
+68,"North Canaan town, Litchfield County, Connecticut",39020.0,63607.0,53643.66,9963.34,18.5731920603,True
+69,"Plymouth town, Litchfield County, Connecticut",53750.0,71441.0,73894.08,-2453.08,-3.31972466536,False
+70,"Roxbury town, Litchfield County, Connecticut",87794.0,90078.0,120696.87,-30618.87,-25.3684043339,False
+71,"Salisbury town, Litchfield County, Connecticut",53051.0,84141.0,72933.11,11207.89,15.3673551011,True
+72,"Sharon town, Litchfield County, Connecticut",53000.0,72083.0,72863.0,-780.0,-1.07050217532,False
+73,"Thomaston town, Litchfield County, Connecticut",54297.0,73679.0,74646.08,-967.08,-1.29555363122,False
+74,"Torrington town, Litchfield County, Connecticut",41841.0,55460.0,57521.9,-2061.9,-3.58454779832,False
+75,"Warren town, Litchfield County, Connecticut",62798.0,100250.0,86333.03,13916.97,16.1200991092,True
+76,"Washington town, Litchfield County, Connecticut",65288.0,77125.0,89756.21,-12631.21,-14.0727978599,False
+77,"Watertown town, Litchfield County, Connecticut",59420.0,78767.0,81689.04,-2922.04,-3.57702820354,False
+78,"Winchester town, Litchfield County, Connecticut",46671.0,60163.0,64162.05,-3999.05,-6.23273414737,False
+79,"Woodbury town, Litchfield County, Connecticut",68322.0,84868.0,93927.28,-9059.28,-9.64499344599,False
+80,"County subdivisions not defined, Middlesex County, Connecticut",0.0,,0.0,,,False
+81,"Chester town, Middlesex County, Connecticut",65156.0,74063.0,89574.74,-15511.74,-17.3170918498,False
+82,"Clinton town, Middlesex County, Connecticut",60471.0,71028.0,83133.93,-12105.93,-14.5619604414,False
+83,"Cromwell town, Middlesex County, Connecticut",60662.0,80028.0,83396.51,-3368.51,-4.03914983972,False
+84,"Deep River town, Middlesex County, Connecticut",51677.0,65577.0,71044.17,-5467.17,-7.69545199838,False
+85,"Durham town, Middlesex County, Connecticut",77639.0,117328.0,106736.04,10591.96,9.92350849816,True
+86,"East Haddam town, Middlesex County, Connecticut",62304.0,82773.0,85653.89,-2880.89,-3.36340824684,False
+87,"East Hampton town, Middlesex County, Connecticut",66326.0,96066.0,91183.23,4882.77,5.35489914099,True
+88,"Essex town, Middlesex County, Connecticut",66746.0,88550.0,91760.63,-3210.63,-3.49891887185,False
+89,"Haddam town, Middlesex County, Connecticut",78571.0,99010.0,108017.33,-9007.33,-8.33878230465,False
+90,"Killingworth town, Middlesex County, Connecticut",80805.0,112344.0,111088.57,1255.43,1.13011626669,True
+91,"Middlefield town, Middlesex County, Connecticut",59448.0,100694.0,81727.54,18966.46,23.2069385669,True
+92,"Middletown town, Middlesex County, Connecticut",47162.0,61373.0,64837.07,-3464.07,-5.34273063234,False
+93,"Old Saybrook town, Middlesex County, Connecticut",62742.0,74896.0,86256.04,-11360.04,-13.1701385781,False
+94,"Portland town, Middlesex County, Connecticut",63285.0,82770.0,87002.54,-4232.54,-4.8648464746,False
+95,"Westbrook town, Middlesex County, Connecticut",57531.0,78417.0,79092.1,-675.1,-0.853561860161,False
+96,"County subdivisions not defined, New Haven County, Connecticut",0.0,,0.0,,,False
+97,"Ansonia town, New Haven County, Connecticut",43026.0,43144.0,59151.01,-16007.01,-27.0612623521,False
+98,"Beacon Falls town, New Haven County, Connecticut",56592.0,87273.0,77801.18,9471.82,12.1743911853,True
+99,"Bethany town, New Haven County, Connecticut",74898.0,97500.0,102967.79,-5467.79,-5.31019457638,False
+100,"Branford town, New Haven County, Connecticut",58009.0,71058.0,79749.24,-8691.24,-10.8982104406,False
+101,"Cheshire town, New Haven County, Connecticut",80466.0,107716.0,110622.53,-2906.53,-2.62743041585,False
+102,"Derby town, New Haven County, Connecticut",45670.0,52136.0,62785.91,-10649.91,-16.9622611188,False
+103,"East Haven town, New Haven County, Connecticut",47930.0,61435.0,65892.89,-4457.89,-6.7653581441,False
+104,"Guilford town, New Haven County, Connecticut",76843.0,99441.0,105641.72,-6200.72,-5.8695750126,False
+105,"Hamden town, New Haven County, Connecticut",52351.0,67771.0,71970.77,-4199.77,-5.83538289225,False
+106,"Madison town, New Haven County, Connecticut",87497.0,108231.0,120288.56,-12057.56,-10.0238626184,False
+107,"Meriden town, New Haven County, Connecticut",43237.0,53401.0,59441.08,-6040.08,-10.1614573625,False
+108,"Middlebury town, New Haven County, Connecticut",70469.0,95320.0,96878.92,-1558.92,-1.60914262876,False
+109,"Milford town, New Haven County, Connecticut",61183.0,80743.0,84112.77,-3369.77,-4.00625255832,False
+110,"Naugatuck town, New Haven County, Connecticut",51247.0,58641.0,70453.02,-11812.02,-16.7658107488,False
+111,"New Haven town, New Haven County, Connecticut",29604.0,37508.0,40698.8,-3190.8,-7.84003459561,False
+112,"North Branford town, New Haven County, Connecticut",64438.0,87408.0,88587.66,-1179.66,-1.33163016158,False
+113,"North Haven town, New Haven County, Connecticut",65703.0,84078.0,90326.74,-6248.74,-6.9179292865,False
+114,"Orange town, New Haven County, Connecticut",79365.0,105190.0,109108.9,-3918.9,-3.59173266342,False
+115,"Oxford town, New Haven County, Connecticut",77126.0,98504.0,106030.78,-7526.78,-7.09867455469,False
+116,"Prospect town, New Haven County, Connecticut",67560.0,100592.0,92879.7,7712.3,8.30353672546,True
+117,"Seymour town, New Haven County, Connecticut",52408.0,77465.0,72049.13,5415.87,7.51691241796,True
+118,"Southbury town, New Haven County, Connecticut",61919.0,76896.0,85124.6,-8228.6,-9.666535878,False
+119,"Wallingford town, New Haven County, Connecticut",57308.0,75533.0,78785.52,-3252.52,-4.12832205715,False
+120,"Waterbury town, New Haven County, Connecticut",34285.0,41136.0,47134.11,-5998.11,-12.7256248182,False
+121,"West Haven town, New Haven County, Connecticut",42393.0,49993.0,58280.77,-8287.77,-14.2204195312,False
+122,"Wolcott town, New Haven County, Connecticut",61376.0,83317.0,84378.1,-1061.1,-1.25755379654,False
+123,"Woodbridge town, New Haven County, Connecticut",102121.0,134045.0,140393.25,-6348.25,-4.5217629765,False
+124,"County subdivisions not defined, New London County, Connecticut",0.0,,0.0,,,False
+125,"Bozrah town, New London County, Connecticut",57059.0,76307.0,78443.2,-2136.2,-2.72324433475,False
+126,"Colchester town, New London County, Connecticut",64807.0,98899.0,89094.95,9804.05,11.0040468062,True
+127,"East Lyme town, New London County, Connecticut",66539.0,81711.0,91476.06,-9765.06,-10.6749897186,False
+128,"Franklin town, New London County, Connecticut",62083.0,93636.0,85350.06,8285.94,9.70818298195,True
+129,"Griswold town, New London County, Connecticut",50156.0,59545.0,68953.14,-9408.14,-13.6442517339,False
+130,"Groton town, New London County, Connecticut",46154.0,60157.0,63451.3,-3294.3,-5.19185580122,False
+131,"Lebanon town, New London County, Connecticut",61173.0,90149.0,84099.02,6049.98,7.19387693222,True
+132,"Ledyard town, New London County, Connecticut",62647.0,87101.0,86125.44,975.56,1.1327199025,True
+133,"Lisbon town, New London County, Connecticut",55149.0,80850.0,75817.38,5032.62,6.63781839995,True
+134,"Lyme town, New London County, Connecticut",73250.0,77500.0,100702.16,-23202.16,-23.0403796701,False
+135,"Montville town, New London County, Connecticut",55086.0,67044.0,75730.77,-8686.77,-11.4705951095,False
+136,"New London town, New London County, Connecticut",33809.0,41230.0,46479.72,-5249.72,-11.2946463533,False
+137,"North Stonington town, New London County, Connecticut",57887.0,78854.0,79581.51,-727.51,-0.914169635635,False
+138,"Norwich town, New London County, Connecticut",39181.0,49695.0,53865.0,-4170.0,-7.74157616263,False
+139,"Old Lyme town, New London County, Connecticut",68386.0,87817.0,94015.26,-6198.26,-6.59282333528,False
+140,"Preston town, New London County, Connecticut",54942.0,67069.0,75532.81,-8463.81,-11.2054748129,False
+141,"Salem town, New London County, Connecticut",68750.0,104583.0,94515.68,10067.32,10.6514813203,True
+142,"Sprague town, New London County, Connecticut",43125.0,67076.0,59287.11,7788.89,13.1375774599,True
+143,"Stonington town, New London County, Connecticut",52437.0,81673.0,72089.0,9584.0,13.2946774126,True
+144,"Voluntown town, New London County, Connecticut",56802.0,75086.0,78089.89,-3003.89,-3.84670794132,False
+145,"Waterford town, New London County, Connecticut",56047.0,75181.0,77051.93,-1870.93,-2.42814164421,False
+146,"Andover town, Tolland County, Connecticut",67452.0,97426.0,92731.22,4694.78,5.06278252351,True
+147,"Bolton town, Tolland County, Connecticut",67394.0,88625.0,92651.49,-4026.49,-4.34584484286,False
+148,"Columbia town, Tolland County, Connecticut",70208.0,93953.0,96520.1,-2567.1,-2.65965327429,False
+149,"Coventry town, Tolland County, Connecticut",64680.0,92663.0,88920.35,3742.65,4.20899153006,True
+150,"Ellington town, Tolland County, Connecticut",62405.0,84339.0,85792.74,-1453.74,-1.69447904333,False
+151,"Hebron town, Tolland County, Connecticut",75138.0,101974.0,103297.73,-1323.73,-1.28147056087,False
+152,"Mansfield town, Tolland County, Connecticut",48888.0,66404.0,67209.93,-805.93,-1.19912340334,False
+153,"Somers town, Tolland County, Connecticut",65273.0,95139.0,89735.59,5403.41,6.0214793261,True
+154,"Stafford town, Tolland County, Connecticut",52699.0,62859.0,72449.19,-9590.19,-13.2371252184,False
+155,"Tolland town, Tolland County, Connecticut",77398.0,107290.0,106404.72,885.28,0.83199316722,True
+156,"Union town, Tolland County, Connecticut",58214.0,84405.0,80031.07,4373.93,5.46528991803,True
+157,"Vernon town, Tolland County, Connecticut",47816.0,60556.0,65736.17,-5180.17,-7.88024309904,False
+158,"Willington town, Tolland County, Connecticut",51690.0,73384.0,71062.04,2321.96,3.26751103683,True
+159,"Ashford town, Windham County, Connecticut",55000.0,77250.0,75612.54,1637.46,2.16559316748,True
+160,"Brooklyn town, Windham County, Connecticut",49756.0,59369.0,68403.23,-9034.23,-13.2073149177,False
+161,"Canterbury town, Windham County, Connecticut",55547.0,81496.0,76364.54,5131.46,6.71968953129,True
+162,"Chaplin town, Windham County, Connecticut",51602.0,78750.0,70941.06,7808.94,11.0076449379,True
+163,"Eastford town, Windham County, Connecticut",57159.0,73173.0,78580.68,-5407.68,-6.88169153028,False
+164,"Hampton town, Windham County, Connecticut",54464.0,73929.0,74875.66,-946.66,-1.26430938973,False
+165,"Killingly town, Windham County, Connecticut",41087.0,57016.0,56485.32,530.68,0.939500741078,True
+166,"Plainfield town, Windham County, Connecticut",42851.0,62630.0,58910.42,3719.58,6.31395939801,True
+167,"Pomfret town, Windham County, Connecticut",57938.0,91625.0,79651.63,11973.37,15.0321719719,True
+168,"Putnam town, Windham County, Connecticut",43010.0,46418.0,59129.01,-12711.01,-21.4970790142,False
+169,"Scotland town, Windham County, Connecticut",56848.0,77344.0,78153.13,-809.13,-1.03531362084,False
+170,"Sterling town, Windham County, Connecticut",49167.0,71696.0,67593.49,4102.51,6.06938626782,True
+171,"Thompson town, Windham County, Connecticut",46065.0,67519.0,63328.94,4190.06,6.61634317581,True
+172,"Windham town, Windham County, Connecticut",35087.0,41019.0,48236.68,-7217.68,-14.9630530128,False
+173,"Woodstock town, Windham County, Connecticut",55313.0,70927.0,76042.85,-5115.85,-6.72758845835,False
