@@ -1,0 +1,18 @@
+	Location								
+	Intersection		Non-Intersection		Unknown		Total		
+Age	Intersection Number	Intersection Percent	Nonintersection Number	NonIntersectNum Percent	Unknown Number	Unknown Percent	Total Number	Total Percent	
+
+< 5	0	0.0	1	100.0	0	0.0	1	100.0	
+5 - 9	0	0.0	2	100.0	0	0.0	2	100.0	
+10 - 15	0	0.0	1	100.0	0	0.0	1	100.0	
+16 - 20	0	0.0	2	100.0	0	0.0	2	100.0	
+21 - 24	0	0.0	2	100.0	0	0.0	2	100.0	
+25 - 34	0	0.0	9	100.0	0	0.0	9	100.0	
+35 - 44	0	0.0	5	100.0	0	0.0	5	100.0	
+45 - 54	1	25.0	3	75.0	0	0.0	4	100.0	
+55 - 64	2	33.3	4	66.7	0	0.0	6	100.0	
+65 - 74	1	14.3	6	85.7	0	0.0	7	100.0	
+75 +	4	44.4	5	55.6	0	0.0	9	100.0	
+Unknown	0	-	0	-	0	-	0	-	
+Blank	0	-	0	-	0	-	0	-	
+Total	8	16.7	40	83.3	0	0.0	48	100.0	
