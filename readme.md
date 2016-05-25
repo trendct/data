@@ -1,6 +1,7 @@
 # Data
 
 *Data repos from previous stories will eventually be migrated into this folder*
+
 |  **Story** | **Repo** | **Data** | **Methodology** | **Date** |
 |  ------ | ------ | ------ | ------ | ------ |
 |  Connecticut middle class losing ground, as in most of the nation | middle-class | data | Jupyter Notebook | Tue May 24 2016 21:00:00 GMT-0700 (MST) |
