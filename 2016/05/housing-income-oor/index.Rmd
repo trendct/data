@@ -13,7 +13,7 @@ This is the methodology used behind the story: [A mismatch between rents and wag
 
 Visit the [repo](https://github.com/trendct/data/tree/master/2016/05/housing-income-oor) for the data used in this analysis or visit the National Low Income Housing Coalition's [Out of Reach 2016](http://nlihc.org/oor) page for even more thorough data sets.
 
-A chart used in this analysis is based on code form [rud.is](https://rud.is/b/2016/04/17/ggplot2-exercising-with-ggalt-dumbbells/).
+A chart used in this analysis is based on code from [rud.is](https://rud.is/b/2016/04/17/ggplot2-exercising-with-ggalt-dumbbells/).
 
 What this analysis does:
 
@@ -34,7 +34,7 @@ library(stringr)
 
 ### Step 1. Download 50 spreadsheets and 3 different sheets from each
 
-```{r getting_data, warning=FALSE, message=FALSE, comment=FALSE, results=FALSE}
+```{r getting_data, warning=FALSE, message=FALSE, comment=FALSE, include=FALSE}
 for (i in 1:length(state.abb)) {
   file_name <- paste0("2016-OOR-", state.abb[i], ".xls")
   file_url <- paste0("http://nlihc.org/sites/default/files/oor/files/reports/state/", file_name)
