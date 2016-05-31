@@ -1,0 +1,658 @@
+"","State","metro","two.bed.cost","income.two.bed"
+"1","Alabama","Anniston-Oxford",635,25480
+"2","Alabama","Auburn-Opelika",569,29920
+"3","Alabama","Birmingham-Hoover",569,33600
+"4","Alabama","Chilton County",1208.96,22760
+"5","Alabama","Columbus",1123.84,31080
+"6","Alabama","Daphne-Fairhope-Foley",1292,34920
+"7","Alabama","Decatur",1230,25280
+"8","Alabama","Dothan",1012,25880
+"9","Alabama","Florence-Muscle Shoals",916,24760
+"10","Alabama","Gadsden",1503,25440
+"11","Alabama","Henry County",1292,23200
+"12","Alabama","Huntsville",1369,29080
+"13","Alabama","Mobile",1194,31520
+"14","Alabama","Montgomery",1090,31520
+"15","Alabama","Pickens County",1092,22760
+"16","Alabama","Tuscaloosa",1230,32160
+"17","Alabama","Walker County",895,25000
+"18","Alaska","Anchorage",1292,51680
+"19","Alaska","Fairbanks",1230,49200
+"20","Alaska","Matanuska-Susitna Borough",1012,40480
+"21","Arizona","Flagstaff",1135,45400
+"22","Arizona","Lake Havasu City-Kingman",754,30160
+"23","Arizona","Phoenix-Mesa-Scottsdale",914,36560
+"24","Arizona","Prescott",838,33520
+"25","Arizona","Sierra Vista-Douglas",802,32080
+"26","Arizona","Tucson",862,34480
+"27","Arizona","Yuma",822,32880
+"28","Arkansas","Fayetteville-Springdale-Rogers",709,28360
+"29","Arkansas","Fort Smith",658,26320
+"30","Arkansas","Grant County",617,24680
+"31","Arkansas","Hot Springs",740,29600
+"32","Arkansas","Jonesboro",647,25880
+"33","Arkansas","Little River County",617,24680
+"34","Arkansas","Little Rock-North Little Rock-Conway",768,30720
+"35","Arkansas","Memphis",827,33080
+"36","Arkansas","Pine Bluff",651,26040
+"37","Arkansas","Poinsett County",617,24680
+"38","Arkansas","Texarkana",712,28480
+"39","California","Bakersfield",826,33040
+"40","California","Chico",907,36280
+"41","California","El Centro",836,33440
+"42","California","Fresno",862,34480
+"43","California","Hanford-Corcoran",818,32720
+"44","California","Los Angeles-Long Beach",1490,59600
+"45","California","Madera",942,37680
+"46","California","Merced",784,31360
+"47","California","Modesto",936,37440
+"48","California","Napa",1500,60000
+"49","California","Oakland-Fremont",2103,84120
+"50","California","Oxnard-Thousand Oaks-Ventura",1602,64080
+"51","California","Redding",871,34840
+"52","California","Riverside-San Bernardino-Ontario ",1187,47480
+"53","California","Sacramento--Roseville--Arden-Arcade",1026,41040
+"54","California","Salinas",1399,55960
+"55","California","San Benito County",1353,54120
+"56","California","San Diego-Carlsbad",1499,59960
+"57","California","San Francisco",2289,91560
+"58","California","San Jose-Sunnyvale-Santa Clara",1994,79760
+"59","California","San Luis Obispo-Paso Robles-Arroyo Grande",1310,52400
+"60","California","Oranga County",1672,66880
+"61","California","Santa Cruz-Watsonville",1604,64160
+"62","California","Santa Maria-Santa Barbara",1451,58040
+"63","California","Santa Rosa",1414,56560
+"64","California","Stockton-Lodi",967,38680
+"65","California","Vallejo-Fairfield",1284,51360
+"66","California","Visalia-Porterville",758,30320
+"67","California","Yolo",1164,46560
+"68","California","Yuba City",861,34440
+"69","Colorado","Boulder",1381,55240
+"70","Colorado","Colorado Springs",891,35640
+"71","Colorado","Denver-Aurora-Lakewood ",1227,49080
+"72","Colorado","Fort Collins",975,39000
+"73","Colorado","Grand Junction",797,31880
+"74","Colorado","Greeley",812,32480
+"75","Colorado","Pueblo",782,31280
+"76","Colorado","Teller County",919,36760
+"77","Connecticut","Bridgeport",1207,48280
+"78","Connecticut","Colchester-Lebanon",1199,47960
+"79","Connecticut","Danbury",1775,71000
+"80","Connecticut","Hartford-West Hartford-East Hartford ",1210,48400
+"81","Connecticut","Milford-Ansonia-Seymour",1274,50960
+"82","Connecticut","New Haven-Meriden",1260,50400
+"83","Connecticut","Norwich-New London",1119,44760
+"84","Connecticut","Southern Middlesex County",1324,52960
+"85","Connecticut","Stamford-Norwalk",1932,77280
+"86","Connecticut","Waterbury",990,39600
+"87","Delaware","Dover †",952,38080
+"88","Delaware","Philadelphia-Camden-Wilmington ",1210,48400
+"89","Delaware","Sussex County",1012,40480
+"90","Florida","Baker County",724,28960
+"91","Florida","Cape Coral-Fort Myers",911,36440
+"92","Florida","Crestview-Fort Walton Beach-Destin",930,37200
+"93","Florida","Deltona-Daytona Beach-Ormond Beach",896,35840
+"94","Florida","Fort Lauderdale",1253,50120
+"95","Florida","Gainesville",887,35480
+"96","Florida","Gulf County",738,29520
+"97","Florida","Homosassa Springs",776,31040
+"98","Florida","Jacksonville",960,38400
+"99","Florida","Lakeland-Winter Haven",901,36040
+"100","Florida","Miami-Miami Beach-Kendall",1250,50000
+"101","Florida","Naples-Immokalee-Marco Island",1042,41680
+"102","Florida","North Port-Sarasota-Bradenton",974,38960
+"103","Florida","Ocala",780,31200
+"104","Florida","Orlando-Kissimmee-Sanford",1003,40120
+"105","Florida","Palm Bay-Melbourne-Titusville",872,34880
+"106","Florida","Palm Coast",927,37080
+"107","Florida","Panama City-Lynn Haven-Panama City Beach",881,35240
+"108","Florida","Pensacola-Ferry Pass-Brent",838,33520
+"109","Florida","Port St. Lucie",923,36920
+"110","Florida","Punta Gorda",848,33920
+"111","Florida","Sebastian-Vero Beach",833,33320
+"112","Florida","Sebring",737,29480
+"113","Florida","Tallahassee",914,36560
+"114","Florida","Tampa-St. Petersburg-Clearwater",992,39680
+"115","Florida","The Villages",728,29120
+"116","Florida","Wakulla County",798,31920
+"117","Florida","Walton County",771,30840
+"118","Florida","West Palm Beach-Boca Raton ",1240,49600
+"119","Georgia","Albany",713,28520
+"120","Georgia","Athens-Clarke County",759,30360
+"121","Georgia","Atlanta-Sandy Springs-Roswell",949,37960
+"122","Georgia","Augusta-Richmond County",735,29400
+"123","Georgia","Brunswick",792,31680
+"124","Georgia","Butts County",796,31840
+"125","Georgia","Chattanooga",767,30680
+"126","Georgia","Columbus",777,31080
+"127","Georgia","Dalton",677,27080
+"128","Georgia","Gainesville",829,33160
+"129","Georgia","Haralson County",745,29800
+"130","Georgia","Hinesville",843,33720
+"131","Georgia","Lamar County",645,25800
+"132","Georgia","Lincoln County",645,25800
+"133","Georgia","Long County",645,25800
+"134","Georgia","Macon",705,28200
+"135","Georgia","Meriwether County",649,25960
+"136","Georgia","Monroe County",667,26680
+"137","Georgia","Morgan County, GA",667,26680
+"138","Georgia","Murray County",645,25800
+"139","Georgia","Peach County",659,26360
+"140","Georgia","Pulaski County",645,25800
+"141","Georgia","Rome",670,26800
+"142","Georgia","Savannah",897,35880
+"143","Georgia","Valdosta",700,28000
+"144","Georgia","Warner Robins",806,32240
+"145","Hawaii","Honolulu ",1985,79400
+"146","Hawaii","Kalawao County †",658,26320
+"147","Hawaii","Maui County",1286,51440
+"148","Idaho","Boise City",789,31560
+"149","Idaho","Butte County",658,26320
+"150","Idaho","Coeur d'Alene",768,30720
+"151","Idaho","Gem County",701,28040
+"152","Idaho","Idaho Falls",681,27240
+"153","Idaho","Lewiston",728,29120
+"154","Idaho","Logan",658,26320
+"155","Idaho","Pocatello",658,26320
+"156","Illinois","Bloomington ",830,33200
+"157","Illinois","Bond County",692,27680
+"158","Illinois","Cape Girardeau",658,26320
+"159","Illinois","Champaign-Urbana",824,32960
+"160","Illinois","Chicago-Joliet-Naperville ",1176,47040
+"161","Illinois","Danville",671,26840
+"162","Illinois","Davenport-Moline-Rock Island",712,28480
+"163","Illinois","De Witt County",635,25400
+"164","Illinois","Decatur",694,27760
+"165","Illinois","DeKalb County",891,35640
+"166","Illinois","Grundy County",991,39640
+"167","Illinois","Jackson County",738,29520
+"168","Illinois","Kankakee",823,32920
+"169","Illinois","Kendall County",1093,43720
+"170","Illinois","Macoupin County",635,25400
+"171","Illinois","Peoria",750,30000
+"172","Illinois","Rockford",776,31040
+"173","Illinois","Springfield",777,31080
+"174","Illinois","St. Louis",840,33600
+"175","Illinois","Williamson County",696,27840
+"176","Indiana","Anderson",702,28080
+"177","Indiana","Bloomington",924,36960
+"178","Indiana","Carroll County",650,26000
+"179","Indiana","Cincinnati",787,31480
+"180","Indiana","Columbus",787,31480
+"181","Indiana","Elkhart-Goshen",781,31240
+"182","Indiana","Evansville",752,30080
+"183","Indiana","Fort Wayne",708,28320
+"184","Indiana","Gary",867,34680
+"185","Indiana","Indianapolis-Carmel-Anderson",809,32360
+"186","Indiana","Jasper County",752,30080
+"187","Indiana","Kokomo",673,26920
+"188","Indiana","Lafayette-West Lafayette",832,33280
+"189","Indiana","Louisville",817,32680
+"190","Indiana","Michigan City-La Porte",759,30360
+"191","Indiana","Muncie",790,31600
+"192","Indiana","Owen County",747,29880
+"193","Indiana","Putnam County",650,26000
+"194","Indiana","Scott County",755,30200
+"195","Indiana","South Bend-Mishawaka",787,31480
+"196","Indiana","Sullivan County",705,28200
+"197","Indiana","Terre Haute",697,27880
+"198","Indiana","Union County",650,26000
+"199","Indiana","Washington County",659,26360
+"200","Iowa","Ames",778,31120
+"201","Iowa","Benton County",619,24760
+"202","Iowa","Bremer County",649,25960
+"203","Iowa","Cedar Rapids",731,29240
+"204","Iowa","Davenport-Moline-Rock Island",712,28480
+"205","Iowa","Des Moines-West Des Moines",844,33760
+"206","Iowa","Dubuque",707,28280
+"207","Iowa","Iowa City",863,34520
+"208","Iowa","Jones County",663,26520
+"209","Iowa","Omaha-Council Bluffs",836,33440
+"210","Iowa","Plymouth County",628,25120
+"211","Iowa","Sioux City",711,28440
+"212","Iowa","Washington County",698,27920
+"213","Iowa","Waterloo-Cedar Falls",729,29160
+"214","Kansas","Kansas City ",893,35720
+"215","Kansas","Kingman County",659,26360
+"216","Kansas","Lawrence",835,33400
+"217","Kansas","Manhattan",912,36480
+"218","Kansas","St. Joseph",699,27960
+"219","Kansas","Sumner County",658,26320
+"220","Kansas","Topeka",727,29080
+"221","Kansas","Wichita",742,29680
+"222","Kentucky","Allen County",622,24880
+"223","Kentucky","Bowling Green",725,29000
+"224","Kentucky","Butler County",622,24880
+"225","Kentucky","Cincinnati",787,31480
+"226","Kentucky","Clarksville",797,31880
+"227","Kentucky","Elizabethtown",648,25920
+"228","Kentucky","Evansville",752,30080
+"229","Kentucky","Grant County",730,29200
+"230","Kentucky","Huntington-Ashland",658,26320
+"231","Kentucky","Lexington-Fayette",796,31840
+"232","Kentucky","Louisville",817,32680
+"233","Kentucky","Meade County",680,27200
+"234","Kentucky","Owensboro",663,26520
+"235","Kentucky","Shelby County",816,32640
+"236","Louisiana","Acadia Parish",582,23280
+"237","Louisiana","Alexandria",726,29040
+"238","Louisiana","Baton Rouge",842,33680
+"239","Louisiana","Hammond",783,31320
+"240","Louisiana","Houma-Thibodaux",857,34280
+"241","Louisiana","Iberia Parish",708,28320
+"242","Louisiana","Iberville Parish",635,25400
+"243","Louisiana","Lafayette",877,35080
+"244","Louisiana","Lake Charles",762,30480
+"245","Louisiana","Monroe, LA",737,29480
+"246","Louisiana","New Orleans-Metairie",963,38520
+"247","Louisiana","Shreveport-Bossier City",819,32760
+"248","Louisiana","St. James Parish",579,23160
+"249","Louisiana","Vermilion Parish",634,25360
+"250","Louisiana","Webster Parish",585,23400
+"251","Maine","Bangor",892,35680
+"252","Maine","Cumberland County",962,38480
+"253","Maine","Lewiston-Auburn",777,31080
+"254","Maine","Penobscot County (part)",760,30400
+"255","Maine","Portland",1109,44360
+"256","Maine","Sagadahoc County",896,35840
+"257","Maine","York County",968,38720
+"258","Maine","York-Kittery-South Berwick",1196,47840
+"259","Maryland","Baltimore-Columbia-Towson ",1298,51920
+"260","Maryland","California-Lexington Park",1155,46200
+"261","Maryland","Cumberland",658,26320
+"262","Maryland","Hagerstown",898,35920
+"263","Maryland","Philadelphia-Camden-Wilmington ",1210,48400
+"264","Maryland","Salisbury",956,38240
+"265","Maryland","Somerset County",719,28760
+"266","Maryland","Washington-Arlington-Alexandria ",1623,64920
+"267","Maryland","Worcester County",873,34920
+"268","Massachusetts","Barnstable Town",1457,58280
+"269","Massachusetts","Berkshire County",934,37360
+"270","Massachusetts","Boston-Cambridge-Quincy",1567,62680
+"271","Massachusetts","Brockton",1199,47960
+"272","Massachusetts","Eastern Worcester County",1093,43720
+"273","Massachusetts","Easton-Raynham",1304,52160
+"274","Massachusetts","Fitchburg-Leominster",994,39760
+"275","Massachusetts","Franklin County",919,36760
+"276","Massachusetts","Lawrence",1173,46920
+"277","Massachusetts","Lowell",1213,48520
+"278","Massachusetts","New Bedford",864,34560
+"279","Massachusetts","Pittsfield",842,33680
+"280","Massachusetts","Providence-Fall River",972,38880
+"281","Massachusetts","Springfield",1001,40040
+"282","Massachusetts","Taunton-Mansfield-Norton",1074,42960
+"283","Massachusetts","Western Worcester County",795,31800
+"284","Massachusetts","Worcester",1062,42480
+"285","Michigan","Ann Arbor",1019,40760
+"286","Michigan","Barry County",684,27360
+"287","Michigan","Battle Creek",718,28720
+"288","Michigan","Bay City",687,27480
+"289","Michigan","Cass County",726,29040
+"290","Michigan","Detroit-Warren-Livonia",863,34520
+"291","Michigan","Flint",738,29520
+"292","Michigan","Grand Rapids-Wyoming",776,31040
+"293","Michigan","Holland-Grand Haven",749,29960
+"294","Michigan","Jackson",752,30080
+"295","Michigan","Kalamazoo-Portage",769,30760
+"296","Michigan","Lansing-East Lansing",848,33920
+"297","Michigan","Livingston County",864,34560
+"298","Michigan","Midland",778,31120
+"299","Michigan","Monroe, MI",808,32320
+"300","Michigan","Montcalm County",658,26320
+"301","Michigan","Muskegon",760,30400
+"302","Michigan","Niles-Benton Harbor",703,28120
+"303","Michigan","Saginaw",709,28360
+"304","Minnesota","Duluth",755,30200
+"305","Minnesota","Fargo",771,30840
+"306","Minnesota","Fillmore County",658,26320
+"307","Minnesota","Grand Forks",833,33320
+"308","Minnesota","La Crosse-Onalaska",828,33120
+"309","Minnesota","Le Sueur County",710,28400
+"310","Minnesota","Mankato-North Mankato",815,32600
+"311","Minnesota","Mille Lacs County",795,31800
+"312","Minnesota","Minneapolis-St. Paul-Bloomington",1027,41080
+"313","Minnesota","Rochester",908,36320
+"314","Minnesota","Sibley County",658,26320
+"315","Minnesota","St. Cloud",735,29400
+"316","Minnesota","Wabasha County",694,27760
+"317","Mississippi","Benton County",638,25520
+"318","Mississippi","Gulfport-Biloxi",801,32040
+"319","Mississippi","Hattiesburg",731,29240
+"320","Mississippi","Jackson",831,33240
+"321","Mississippi","Marshall County",638,25520
+"322","Mississippi","Memphis",827,33080
+"323","Mississippi","Pascagoula",768,30720
+"324","Mississippi","Simpson County",638,25520
+"325","Mississippi","Tate County",683,27320
+"326","Mississippi","Tunica County",673,26920
+"327","Mississippi","Yazoo County",648,25920
+"328","Missouri","Bates County",630,25200
+"329","Missouri","Callaway County",630,25200
+"330","Missouri","Cape Girardeau",658,26320
+"331","Missouri","Columbia",825,33000
+"332","Missouri","Dallas County",630,25200
+"333","Missouri","Jefferson City",630,25200
+"334","Missouri","Joplin",667,26680
+"335","Missouri","Kansas City ",893,35720
+"336","Missouri","McDonald County",630,25200
+"337","Missouri","Moniteau County",630,25200
+"338","Missouri","Polk County",630,25200
+"339","Missouri","Springfield",686,27440
+"340","Missouri","St. Joseph",699,27960
+"341","Missouri","St. Louis",840,33600
+"342","Montana","Billings",775,31000
+"343","Montana","Golden Valley County",658,26320
+"344","Montana","Great Falls",738,29520
+"345","Montana","Missoula",885,35400
+"346","Nebraska","Hall County",680,27200
+"347","Nebraska","Hamilton County",631,25240
+"348","Nebraska","Howard County",631,25240
+"349","Nebraska","Lincoln",762,30480
+"350","Nebraska","Merrick County",631,25240
+"351","Nebraska","Omaha-Council Bluffs",836,33440
+"352","Nebraska","Saunders County",720,28800
+"353","Nebraska","Seward County",631,25240
+"354","Nebraska","Sioux City",711,28440
+"355","Nevada","Carson City",841,33640
+"356","Nevada","Las Vegas-Henderson-Paradise",968,38720
+"357","Nevada","Reno",931,37240
+"358","New Hampshire","Boston-Cambridge-Quincy",1567,62680
+"359","New Hampshire","Hillsborough County",1036,41440
+"360","New Hampshire","Lawrence",1173,46920
+"361","New Hampshire","Manchester",1161,46440
+"362","New Hampshire","Nashua",1230,49200
+"363","New Hampshire","Portsmouth-Rochester",1107,44280
+"364","New Hampshire","Western Rockingham County",1356,54240
+"365","New Jersey","Atlantic City-Hammonton",1152,46080
+"366","New Jersey","Bergen-Passaic",1440,57600
+"367","New Jersey","Jersey City",1460,58400
+"368","New Jersey","Middlesex-Somerset-Hunterdon",1578,63120
+"369","New Jersey","Monmouth-Ocean",1417,56680
+"370","New Jersey","Newark",1324,52960
+"371","New Jersey","Ocean City",1051,42040
+"372","New Jersey","Philadelphia-Camden-Wilmington ",1210,48400
+"373","New Jersey","Trenton",1328,53120
+"374","New Jersey","Vineland-Bridgeton",1129,45160
+"375","New Jersey","Warren County",1223,48920
+"376","New Mexico","Albuquerque ",941,37640
+"377","New Mexico","Farmington",787,31480
+"378","New Mexico","Las Cruces",660,26400
+"379","New Mexico","Santa Fe",943,37720
+"380","New York","Albany-Schenectady-Troy",1005,40200
+"381","New York","Binghamton",729,29160
+"382","New York","Buffalo-Cheektowaga-Niagara Falls",755,30200
+"383","New York","Elmira",895,35800
+"384","New York","Glens Falls",872,34880
+"385","New York","Ithaca",1084,43360
+"386","New York","Kingston",1146,45840
+"387","New York","Nassau-Suffolk",1608,64320
+"388","New York","New York",1571,62840
+"389","New York","Poughkeepsie-Newburgh-Middletown",1271,50840
+"390","New York","Rochester",863,34520
+"391","New York","Syracuse",809,32360
+"392","New York","Utica-Rome",741,29640
+"393","New York","Watertown-Fort Drum",1087,43480
+"394","New York","Westchester County Statutory Exception Area",1510,60400
+"395","New York","Yates County",691,27640
+"396","North Carolina","Asheville",819,32760
+"397","North Carolina","Brunswick County",825,33000
+"398","North Carolina","Burlington",809,32360
+"399","North Carolina","Charlotte-Concord-Gastonia",864,34560
+"400","North Carolina","Craven County",916,36640
+"401","North Carolina","Davidson County",648,25920
+"402","North Carolina","Durham-Chapel Hill",937,37480
+"403","North Carolina","Fayetteville",835,33400
+"404","North Carolina","Gates County",648,25920
+"405","North Carolina","Goldsboro",746,29840
+"406","North Carolina","Greensboro-High Point",741,29640
+"407","North Carolina","Greenville",742,29680
+"408","North Carolina","Haywood County",724,28960
+"409","North Carolina","Hickory-Lenoir-Morganton",665,26600
+"410","North Carolina","Hoke County",671,26840
+"411","North Carolina","Iredell County",854,34160
+"412","North Carolina","Jacksonville",792,31680
+"413","North Carolina","Jones County",648,25920
+"414","North Carolina","Lincoln County",772,30880
+"415","North Carolina","Pamlico County",676,27040
+"416","North Carolina","Pender County",686,27440
+"417","North Carolina","Person County",648,25920
+"418","North Carolina","Raleigh",947,37880
+"419","North Carolina","Rockingham County",648,25920
+"420","North Carolina","Rocky Mount",671,26840
+"421","North Carolina","Rowan County",684,27360
+"422","North Carolina","Virginia Beach-Norfolk-Newport News ",1150,46000
+"423","North Carolina","Wilmington",897,35880
+"424","North Carolina","Winston-Salem",698,27920
+"425","North Dakota","Bismarck",821,32840
+"426","North Dakota","Fargo",771,30840
+"427","North Dakota","Grand Forks",833,33320
+"428","North Dakota","Oliver County",653,26120
+"429","North Dakota","Sioux County",653,26120
+"430","Ohio","Akron",786,31440
+"431","Ohio","Brown County",658,26320
+"432","Ohio","Canton-Massillon",684,27360
+"433","Ohio","Cincinnati",787,31480
+"434","Ohio","Cleveland-Elyria",773,30920
+"435","Ohio","Columbus",831,33240
+"436","Ohio","Dayton",743,29720
+"437","Ohio","Hocking County",658,26320
+"438","Ohio","Huntington-Ashland",658,26320
+"439","Ohio","Lima",678,27120
+"440","Ohio","Mansfield",658,26320
+"441","Ohio","Perry County",658,26320
+"442","Ohio","Springfield",681,27240
+"443","Ohio","Toledo",695,27800
+"444","Ohio","Union County",809,32360
+"445","Ohio","Weirton-Steubenville",658,26320
+"446","Ohio","Wheeling",658,26320
+"447","Ohio","Youngstown-Warren-Boardman",660,26400
+"448","Oklahoma","Cotton County",658,26320
+"449","Oklahoma","Fort Smith",658,26320
+"450","Oklahoma","Grady County",658,26320
+"451","Oklahoma","Lawton",742,29680
+"452","Oklahoma","Le Flore County",658,26320
+"453","Oklahoma","Lincoln County",658,26320
+"454","Oklahoma","Oklahoma City",791,31640
+"455","Oklahoma","Okmulgee County",658,26320
+"456","Oklahoma","Pawnee County",658,26320
+"457","Oklahoma","Tulsa",783,31320
+"458","Oregon","Albany",830,33200
+"459","Oregon","Bend-Redmond",827,33080
+"460","Oregon","Corvallis",838,33520
+"461","Oregon","Eugene-Springfield",909,36360
+"462","Oregon","Grants Pass",879,35160
+"463","Oregon","Medford",858,34320
+"464","Oregon","Portland-Vancouver-Hillsboro",1208,48320
+"465","Oregon","Salem",797,31880
+"466","Pennsylvania","Allentown-Bethlehem-Easton",998,39920
+"467","Pennsylvania","Altoona",811,32440
+"468","Pennsylvania","Armstrong County",650,26000
+"469","Pennsylvania","Chambersburg-Waynesboro",875,35000
+"470","Pennsylvania","Columbia County",743,29720
+"471","Pennsylvania","East Stroudsburg",947,37880
+"472","Pennsylvania","Erie",742,29680
+"473","Pennsylvania","Gettysburg",892,35680
+"474","Pennsylvania","Harrisburg-Carlisle",886,35440
+"475","Pennsylvania","Johnstown",638,25520
+"476","Pennsylvania","Lancaster",897,35880
+"477","Pennsylvania","Lebanon",783,31320
+"478","Pennsylvania","Montour County",839,33560
+"479","Pennsylvania","Philadelphia-Camden-Wilmington ",1210,48400
+"480","Pennsylvania","Pike County",1163,46520
+"481","Pennsylvania","Pittsburgh",827,33080
+"482","Pennsylvania","Reading",892,35680
+"483","Pennsylvania","Scranton--Wilkes-Barre",707,28280
+"484","Pennsylvania","Sharon",686,27440
+"485","Pennsylvania","State College",886,35440
+"486","Pennsylvania","Williamsport",754,30160
+"487","Pennsylvania","York-Hanover",893,35720
+"488","Rhode Island","Newport-Middleton-Portsmouth",1219,48760
+"489","Rhode Island","Providence-Fall River",972,38880
+"490","Rhode Island","Westerly-Hopkinton-New Shoreham",1069,42760
+"491","South Carolina","Anderson",663,26520
+"492","South Carolina","Augusta-Richmond County",735,29400
+"493","South Carolina","Beaufort County",949,37960
+"494","South Carolina","Charleston-North Charleston",927,37080
+"495","South Carolina","Charlotte-Concord-Gastonia",864,34560
+"496","South Carolina","Chester County",632,25280
+"497","South Carolina","Columbia",806,32240
+"498","South Carolina","Darlington County",632,25280
+"499","South Carolina","Florence",650,26000
+"500","South Carolina","Greenville-Mauldin-Easley",729,29160
+"501","South Carolina","Jasper County",758,30320
+"502","South Carolina","Kershaw County",643,25720
+"503","South Carolina","Lancaster County",632,25280
+"504","South Carolina","Laurens County",643,25720
+"505","South Carolina","Myrtle Beach-North Myrtle Beach-Conway",797,31880
+"506","South Carolina","Spartanburg",677,27080
+"507","South Carolina","Sumter",821,32840
+"508","South Carolina","Union County",632,25280
+"509","South Dakota","Custer County",762,30480
+"510","South Dakota","Meade County",708,28320
+"511","South Dakota","Rapid City",825,33000
+"512","South Dakota","Sioux City",711,28440
+"513","South Dakota","Sioux Falls",745,29800
+"514","Tennessee","Campbell County",586,23440
+"515","Tennessee","Chattanooga",767,30680
+"516","Tennessee","Clarksville",797,31880
+"517","Tennessee","Cleveland",765,30600
+"518","Tennessee","Crockett County",671,26840
+"519","Tennessee","Hickman County",666,26640
+"520","Tennessee","Jackson",738,29520
+"521","Tennessee","Johnson City",658,26320
+"522","Tennessee","Kingsport-Bristol-Bristol",660,26400
+"523","Tennessee","Knoxville",807,32280
+"524","Tennessee","Macon County",586,23440
+"525","Tennessee","Maury County",692,27680
+"526","Tennessee","Memphis",827,33080
+"527","Tennessee","Morgan County, TN",621,24840
+"528","Tennessee","Morristown",586,23440
+"529","Tennessee","Morristown",629,25160
+"530","Tennessee","Nashville-Davidson--Murfreesboro--Franklin",925,37000
+"531","Tennessee","Roane County",695,27800
+"532","Tennessee","Smith County",612,24480
+"533","Texas","Abilene",786,31440
+"534","Texas","Amarillo",814,32560
+"535","Texas","Aransas County",838,33520
+"536","Texas","Atascosa County",728,29120
+"537","Texas","Austin County",817,32680
+"538","Texas","Austin-Round Rock",1126,45040
+"539","Texas","Beaumont-Port Arthur",805,32200
+"540","Texas","Brazoria County",870,34800
+"541","Texas","Brownsville-Harlingen",678,27120
+"542","Texas","College Station-Bryan",862,34480
+"543","Texas","Corpus Christi",996,39840
+"544","Texas","Dallas",986,39440
+"545","Texas","El Paso",817,32680
+"546","Texas","Falls County",658,26320
+"547","Texas","Fort Worth-Arlington",913,36520
+"548","Texas","Hood County",822,32880
+"549","Texas","Houston-The Woodlands-Sugar Land",948,37920
+"550","Texas","Hudspeth County",725,29000
+"551","Texas","Kendall County",1025,41000
+"552","Texas","Killeen-Temple",783,31320
+"553","Texas","Lampasas County",658,26320
+"554","Texas","Laredo",756,30240
+"555","Texas","Longview",781,31240
+"556","Texas","Lubbock",798,31920
+"557","Texas","Lynn County",658,26320
+"558","Texas","Martin County",658,26320
+"559","Texas","McAllen-Edinburg-Mission",729,29160
+"560","Texas","Medina County",658,26320
+"561","Texas","Midland",1256,50240
+"562","Texas","Newton County",658,26320
+"563","Texas","Odessa",1024,40960
+"564","Texas","Oldham County",735,29400
+"565","Texas","Rusk County",662,26480
+"566","Texas","San Angelo",881,35240
+"567","Texas","San Antonio-New Braunfels",929,37160
+"568","Texas","Sherman-Denison",788,31520
+"569","Texas","Somervell County",658,26320
+"570","Texas","Texarkana-Texarkana",712,28480
+"571","Texas","Tyler",846,33840
+"572","Texas","Victoria",856,34240
+"573","Texas","Waco",779,31160
+"574","Texas","Wichita Falls",769,30760
+"575","Texas","Wise County",902,36080
+"576","Utah","Box Elder County",661,26440
+"577","Utah","Logan",658,26320
+"578","Utah","Ogden-Clearfield",826,33040
+"579","Utah","Provo-Orem",788,31520
+"580","Utah","Salt Lake City",938,37520
+"581","Utah","St. George",794,31760
+"582","Utah","Tooele County",769,30760
+"583","Vermont","Burlington-South Burlington",1356,54240
+"584","Virginia","Blacksburg-Christiansburg-Radford",795,31800
+"585","Virginia","Buckingham County",728,29120
+"586","Virginia","Charlottesville",1171,46840
+"587","Virginia","Culpeper County",967,38680
+"588","Virginia","Floyd County",658,26320
+"589","Virginia","Franklin County",691,27640
+"590","Virginia","Giles County",658,26320
+"591","Virginia","Harrisonburg",808,32320
+"592","Virginia","Kingsport-Bristol-Bristol",660,26400
+"593","Virginia","Lynchburg",750,30000
+"594","Virginia","Pulaski County",658,26320
+"595","Virginia","Rappahannock County",1046,41840
+"596","Virginia","Petersburg city",966,38640
+"597","Virginia","Richmond",966,38640
+"598","Virginia","Roanoke",845,33800
+"599","Virginia","Staunton-Waynesboro",753,30120
+"600","Virginia","Virginia Beach-Norfolk-Newport News ",1150,46000
+"601","Virginia","Warren County",956,38240
+"602","Virginia","Washington-Arlington-Alexandria ",1623,64920
+"603","Virginia","Winchester",928,37120
+"604","Virginia","Winchester-WV",928,37120
+"605","Washington","Bellingham",910,36400
+"606","Washington","Bremerton-Silverdale",1015,40600
+"607","Washington","Columbia County",800,32000
+"608","Washington","Kennewick-Richland",841,33640
+"609","Washington","Lewiston",728,29120
+"610","Washington","Longview",748,29920
+"611","Washington","Mount Vernon-Anacortes",962,38480
+"612","Washington","Olympia-Tumwater",1021,40840
+"613","Washington","Pend Oreille County",696,27840
+"614","Washington","Portland-Vancouver-Hillsboro",1208,48320
+"615","Washington","Seattle-Bellevue",1523,60920
+"616","Washington","Spokane",789,31560
+"617","Washington","Stevens County",658,26320
+"618","Washington","Tacoma ",1126,45040
+"619","Washington","Walla Walla County",885,35400
+"620","Washington","Wenatchee",791,31640
+"621","Washington","Yakima",759,30360
+"622","West Virginia","Boone County",582,23280
+"623","West Virginia","Charleston",784,31360
+"624","West Virginia","Cumberland",658,26320
+"625","West Virginia","Fayette County",596,23840
+"626","West Virginia","Huntington-Ashland",658,26320
+"627","West Virginia","Jefferson County",872,34880
+"628","West Virginia","Lincoln County",593,23720
+"629","West Virginia","Martinsburg",793,31720
+"630","West Virginia","Morgantown",725,29000
+"631","West Virginia","Parkersburg-Vienna",689,27560
+"632","West Virginia","Putnam County",743,29720
+"633","West Virginia","Raleigh County",712,28480
+"634","West Virginia","Weirton-Steubenville",658,26320
+"635","West Virginia","Wheeling",658,26320
+"636","West Virginia","Winchester",928,37120
+"637","Wisconsin","Appleton",718,28720
+"638","Wisconsin","Columbia County",769,30760
+"639","Wisconsin","Duluth",755,30200
+"640","Wisconsin","Eau Claire",735,29400
+"641","Wisconsin","Fond du Lac",709,28360
+"642","Wisconsin","Green Bay",756,30240
+"643","Wisconsin","Green County",671,26840
+"644","Wisconsin","Iowa County",734,29360
+"645","Wisconsin","Janesville-Beloit",770,30800
+"646","Wisconsin","Kenosha County",919,36760
+"647","Wisconsin","La Crosse-Onalaska",828,33120
+"648","Wisconsin","Madison",936,37440
+"649","Wisconsin","Milwaukee-Waukesha-West Allis ",907,36280
+"650","Wisconsin","Minneapolis-St. Paul-Bloomington",1027,41080
+"651","Wisconsin","Oconto County",658,26320
+"652","Wisconsin","Oshkosh-Neenah",704,28160
+"653","Wisconsin","Racine",888,35520
+"654","Wisconsin","Sheboygan",684,27360
+"655","Wisconsin","Wausau",733,29320
+"656","Wyoming","Casper",822,32880
+"657","Wyoming","Cheyenne",774,30960

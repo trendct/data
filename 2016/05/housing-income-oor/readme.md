@@ -4,10 +4,12 @@
 This repository contains source data and analysis code for the Trend CT story:
 
 * [A mismatch between rents and wages in Connecticut](http://trendct.org/2016/05/31/the-increasingly-high-cost-of-housing-in-connecticut/)
+* [Only California and Hawaii beat some metros in CT for price of a two-bedroom](http://trendct.org/2016/06/01/comparing-the-cost-of-renting-a-two-bedroom/)
 
 # Walkthroughs
 
 * Examining state housing and wage estimates - [[RMarkdown](http://trendct.github.io/data/2016/05/housing-income-oor/)]
+* Counties housing and metro rent analysis - [[RMarkdown](http://trendct.github.io/data/2016/05/housing-income-oor/county_metro_analysis.html)]
 
 ### The Data
 
