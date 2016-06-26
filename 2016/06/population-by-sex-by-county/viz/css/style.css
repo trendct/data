@@ -1,0 +1,21 @@
+.short-row:nth-child(even){
+    background-color: #eee;
+}
+
+.short-row{
+    /* max-height: 20px; */
+}
+
+.spark-tooltip{
+    color: black;
+    background-color: #555;
+    font-size: 14px;
+    
+}
+
+.col-header {
+    text-align:center;
+    font-weight: bold;
+    border-bottom: 3px solid #999;
+    margin-bottom: 5px;
+}

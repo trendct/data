@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html>
+  <meta charset="UTF-8">
+  <head><script   src="https://code.jquery.com/jquery-1.12.4.min.js"   integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="   crossorigin="anonymous"></script> 
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-sparklines/2.1.2/jquery.sparkline.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/spark.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  </head>
+  <body>
+
+    <div id="spark_container" class="container">
+      <div class="row">
+	<div id="selector" style="font-family: 'Lato';">
+	  <h3>Population share change by age group from 2010 to 2015</h3>
+	  <p>The chart shows the change in each age groups population as a proportion of the overall county population, from 2010 to 2015.</p>
+	  <form class="form-inline">    
+	    <div id="county-selector" class="form-group">
+	      <label for="county-list">Select a county</label>
+	      <select class="form-control" id="county-list">
+	      </select>
+	    </div>
+	    <div id="gender-selector" class="form-group">
+	      <label for="gender-list">Select a county</label>
+	      <select class="form-control" id="gender-list">
+		<option value="MALE">Men</option>
+		<option value="FEMALE">Women</option>
+	      </select>
+	    </div>
+	  </form>
+	</div>
+      </div>
+      <div id="spark_table">
+	<div class="row">
+	  <div class="col-xs-4 col-header">Age</div>
+	  <div class="col-xs-4 col-header">Trend</div>
+	  <div class="col-xs-4 col-header">&nbsp;</div>
+	  
+	</div>
+	<div id="spark_body">
+	</div>
+	
+      </div>
+
+  </body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html>
+  <meta charset="UTF-8">
+  <head><script   src="https://code.jquery.com/jquery-1.12.4.min.js"   integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="   crossorigin="anonymous"></script> 
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+
+    <script src="js/main.js"></script>
+    <script src="js/pyramid.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <div id="selector" style="font-family: 'Lato';">
+      <h3>Population by age group and county</h3>
+      <p>Population is in percentage, relative to the county's overall population<p>
+	<form class="form-inline">    
+	  <div id="county-selector" class="form-group">
+	    <label for="sel1">Select a county</label>
+	    <select class="form-control" id="county-list">
+	    </select>
+	  </div>
+	  <div id="year-selector" class="form-group">
+	    <label for="sel1">Select a year</label>
+	    <select class="form-control" id="year-list">
+	    </select>
+	  </div>
+	</form>
+    </div>
+    <div id="container"></div>
+  </body>
+</htmL>
