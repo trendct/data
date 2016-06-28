@@ -120,8 +120,8 @@ gg <- gg + geom_map(data=counties_all, map=cmap,
                     color="#2b2b2b", size=0.05)
 gg <- gg + scale_fill_gradient(name="Cost",labels=dollar_format(), low = "#ce1256", high = "#4eb3d3")
 gg <- gg + coord_proj(us_laea_proj)
-gg <- gg + labs(title="Average monthly cost of a two-bedroom dwelling",
-                subtitle="Data from some counties, mostly in New England, were not available",
+gg <- gg + labs(title="Average monthly cost of a two-bedroom dwelling by county",
+                subtitle="Some county-level data, mostly in New England, were not available",
                 caption="SOURCE: National Low Income Housing Coalition\nAndrew Ba Tran/TrendCT.org")
 gg <- gg + theme_map(base_family="Arial Narrow")
 gg <- gg + theme(legend.position=c(0.8, 0.25))
