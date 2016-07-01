@@ -107,7 +107,7 @@ y2013$breaks <- ifelse(y2013$County.Rate >= 191 & y2013$County.Rate <= 260, "191
 y2013$breaks <- ifelse(y2013$County.Rate >= 261 & y2013$County.Rate <= 410, "260-410", y2013$breaks)
 y2013$breaks <- ifelse(y2013$County.Rate >= 411, "411+", y2013$breaks)
 
-y2013$breaks <- as.factor(y2013$breaks, levels=c("0-40", "41-60", "61-70", "71-90", "91-110", "111-140", "141-190", "191-260", "260-410","411+"))
+y2013$breaks <- factor(y2013$breaks, levels=c("0-40", "41-60", "61-70", "71-90", "91-110", "111-140", "141-190", "191-260", "260-410","411+"))
 #y2013$breaks <- cut(y2013$County.Rate, 5)
 
 gg <- ggplot()
