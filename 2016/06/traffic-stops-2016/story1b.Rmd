@@ -1,0 +1,1065 @@
+---
+title: "story1b"
+author: "Andrew Ba Tran"
+date: "June 3, 2016"
+output: html_document
+---
+
+```{r setup, include=FALSE, echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#Exploring different ways to visualize traffic data.
+
+```{r cars, echo=FALSE, message=FALSE, warning=FALSE}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(ggalt)
+library(scales)
+library(DT)
+library(gridExtra)
+explore <- read.csv("data/mega_df.csv")
+```
+
+# Driving-age residents versus traffic stops
+
+```{r pressure, fig.width=8, fig.height=6, echo=FALSE}
+dept <- subset(explore, is.na(ReportingOfficerIdentificationID))
+state <- subset(dept, DepartmentName=="Connecticut average")
+dept <- subset(dept, DepartmentName!="Connecticut average")
+
+#dept <- subset(dept, white_16 < 100)
+```
+
+```{r, fig.width=6, fig.height=9, echo=FALSE}
+stops_race1 <- dept %>%
+  dplyr::select(DepartmentName, black_p, hispanic_p, minorities_p, black_16, hispanic_16, minorities_16, b_t_s_diff, h_t_s_diff, m_t_s_diff, b_t_s_pop_diff, h_t_s_pop_diff, m_t_s_pop_diff, b_distance, h_distance, m_distance, resident_b_p_r, resident_h_p_r, resident_m_p_r) %>%
+  gather("Ethnicity", "Percent", 2:19)
+
+
+stops_race2 <- state %>%
+  dplyr::select(DepartmentName, black_p, hispanic_p, minorities_p, black_16, hispanic_16, minorities_16, b_t_s_diff, h_t_s_diff, m_t_s_diff, b_t_s_pop_diff, h_t_s_pop_diff, m_t_s_pop_diff, b_distance, h_distance, m_distance, resident_b_p_r, resident_h_p_r, resident_m_p_r) %>%
+  gather("Ethnicity", "Percent", 2:19)
+
+stops_race2$DepartmentName <- gsub("Connecticut average", "Connecticut", stops_race2$DepartmentName)
+
+stops_race <- rbind(stops_race1, stops_race2)
+
+stops_race$Ethnicity <- gsub("black_16", "Black driving population", stops_race$Ethnicity)
+stops_race$Ethnicity <- gsub("black_p", "Black traffic stops", stops_race$Ethnicity)
+stops_race$Ethnicity <- gsub("hispanic_p", "Hispanic traffic stops", stops_race$Ethnicity)
+stops_race$Ethnicity <- gsub("hispanic_16", "Hispanic driving population", stops_race$Ethnicity)
+#stops_race$Ethnicity <- gsub("white_p", "White traffic stops", stops_race$Ethnicity)
+#stops_race$Ethnicity <- gsub("white_16", "White driving population", stops_race$Ethnicity)
+stops_race$Ethnicity <- gsub("minorities_p", "Non-White traffic stops", stops_race$Ethnicity)
+stops_race$Ethnicity <- gsub("minorities_16", "Non-White driving population", stops_race$Ethnicity)
+
+stops_race$Ethnicity <- gsub("b_t_s_diff", "Black stops difference between town and state average", stops_race$Ethnicity)
+stops_race$Ethnicity <- gsub("h_t_s_diff", "Hispanic stops difference between town and state average", stops_race$Ethnicity)
+stops_race$Ethnicity <- gsub("m_t_s_diff", "Minority stops difference between town and state average", stops_race$Ethnicity)
+
+stops_race$Ethnicity <- gsub("b_t_s_pop_diff", "Black population difference between town and state average", stops_race$Ethnicity)
+stops_race$Ethnicity <- gsub("h_t_s_pop_diff", "Hispanic population difference between town and state average", stops_race$Ethnicity)
+stops_race$Ethnicity <- gsub("m_t_s_pop_diff", "Minority population difference between town and state average", stops_race$Ethnicity)
+
+stops_race$Ethnicity <- gsub("b_distance", "Black distance between stops and population", stops_race$Ethnicity)
+stops_race$Ethnicity <- gsub("h_distance", "Hispanic distance between stops and population", stops_race$Ethnicity)
+stops_race$Ethnicity <- gsub("m_distance", "Minority distance between stops and population", stops_race$Ethnicity)
+
+stops_race$Ethnicity <- gsub("resident_b_p_r", "Black non-resident stops", stops_race$Ethnicity)
+stops_race$Ethnicity <- gsub("resident_h_p_r", "Hispanic non-resident stops", stops_race$Ethnicity)
+stops_race$Ethnicity <- gsub("resident_m_p_r", "Minority non-resident stops", stops_race$Ethnicity)
+
+stops_race$type <- stops_race$Ethnicity 
+stops_race$type <- gsub("Black ", "", stops_race$type)
+stops_race$type <- gsub("Hispanic ", "", stops_race$type)
+stops_race$type <- gsub("Non-White ", "", stops_race$type)
+stops_race$type <- gsub("Minority ", "", stops_race$type)
+
+stops_race$type <- gsub(" ", "_", stops_race$type)
+stops_race$type <- gsub("-", "_", stops_race$type)
+
+
+#stops_race$type <- gsub("White_", "", stops_race$type)
+
+stops_race$Ethnicity<- gsub(" traffic stops", "", stops_race$Ethnicity)
+stops_race$Ethnicity<- gsub(" driving population", "", stops_race$Ethnicity)
+stops_race$Ethnicity<- gsub(" stops difference between town and state average", "", stops_race$Ethnicity)
+stops_race$Ethnicity<- gsub(" population difference between town and state average", "", stops_race$Ethnicity)
+stops_race$Ethnicity<- gsub(" distance between stops and population", "", stops_race$Ethnicity)
+stops_race$Ethnicity<- gsub(" non-resident stops", "", stops_race$Ethnicity)
+
+stops_race$Ethnicity<- gsub("Non-White", "Minority", stops_race$Ethnicity)
+stops_race$Percent <- stops_race$Percent/100
+
+stops_race <- stops_race %>%
+  spread(type, Percent)
+
+
+
+stops_race$type <- "blank"
+
+stops_race$DepartmentName <- as.character(stops_race$DepartmentName)
+
+for (i in 1:nrow(stops_race)) {
+  
+  if (stops_race$DepartmentName[i]=="Connecticut") {
+    stops_race$type[i] <-"Connecticut"
+  } else {
+    stops_race$type[i] <-"Department"
+  }
+}
+
+```
+
+```{r lolly, fig.width=9, fig.height=6, echo=FALSE}
+
+stops_race_sub <- subset(stops_race, distance_between_stops_and_population > .10)
+
+# officers_sub <- officers %>%
+#   select(ReportingOfficerIdentificationID, minorities_p)
+# officers_sub$minorities_p <- round(officers_sub$minorities_p/100,2)
+# officers_sub <- subset(officers_sub, !is.na(minorities_p))
+# 
+# officers_sub$ReportingOfficerIdentificationID <- gsub(".*--", "", officers_sub$ReportingOfficerIdentificationID)
+
+officers_m1 <- stops_race_sub %>%
+  filter(Ethnicity=="Minority") %>%
+#  filter(DepartmentName!="Connecticut") %>%
+  arrange(-distance_between_stops_and_population)
+  
+officers_m1$DepartmentName <- factor(officers_m1$DepartmentName, levels = officers_m1$DepartmentName[order(officers_m1$distance_between_stops_and_population)])
+
+
+officers_s1 <- stops_race %>%
+  filter(DepartmentName=="Connecticut") %>%
+  filter(Ethnicity=="Minority")
+
+gg <- ggplot(officers_m1, aes(y=reorder(DepartmentName, distance_between_stops_and_population), x= traffic_stops))
+gg <- gg + geom_lollipop(point.colour="steelblue", point.size=4, horizontal=TRUE)
+gg <- gg + scale_x_continuous(expand=c(0,0), labels=percent,
+                              breaks=seq(0, 1, by=0.2), limits=c(0, .87))
+#gg <- gg + coord_flip()
+gg <- gg + labs(x=NULL, y=NULL, 
+                title="Minorities town and state average stops")
+gg <- gg + theme_minimal(base_family="Arial Narrow")
+gg <- gg + theme(panel.grid.major.y=element_blank())
+gg <- gg + theme(panel.grid.minor=element_blank())
+gg <- gg + scale_y_discrete(expand=c(0.04,0))
+gg <- gg + theme(axis.text.x=element_blank())
+
+gg <- gg + geom_vline(xintercept = officers_s1$traffic_stops[1], color="tomato")
+
+gg <- gg + geom_text(data=officers_m1, aes(x=traffic_stops, y=DepartmentName, label=paste0(round(traffic_stops*100,0), "%")),
+                     color="#00688B", size=7, hjust=-.5, family="Calibri")
+gg <- gg + theme(axis.line.y=element_line(color="#2b2b2b", size=0.15))
+#gg <- gg + theme(axis.text.y=element_text(margin=margin(r=-5, l=0)))
+gg <- gg + theme(text = element_text(size=24))
+gg <- gg + theme(plot.margin=unit(rep(30, 4), "pt"))
+gg <- gg + theme(plot.title=element_text(face="bold"))
+gg <- gg + theme(plot.subtitle=element_text(margin=margin(b=10)))
+gg <- gg + theme(plot.caption=element_text(size=8, margin=margin(t=10)))
+gg <- gg + annotate("text", x = (officers_s1$driving_population[1]), y = 16, hjust = -.22, label = paste0("State average (",round(officers_s1$traffic_stops[1]*100,0), "%)"), size=5, colour="tomato")
+gg <- gg + geom_rect(data=officers_m1, aes(xmin=.76, xmax=.87, ymin=-Inf, ymax=Inf), fill="#efefe3")
+gg <- gg + geom_text(data=filter(officers_m1, DepartmentName=="Wethersfield"), aes(x=.815, y=DepartmentName, label="DIFF"),
+                     color="#7a7d7e", size=7, vjust=-2, family="Calibri")
+gg <- gg + geom_text(data=officers_m1, aes(label=paste0(round(stops_difference_between_town_and_state_average*100,0),"%"), y=DepartmentName, x=.815), fontface="bold", size=7, family="Calibri")
+
+gg
+
+hh <- ggplot(officers_m1, aes(y=reorder(DepartmentName, distance_between_stops_and_population), x= driving_population))
+hh <- hh + geom_lollipop(point.colour="steelblue", point.size=4, horizontal=TRUE)
+hh <- hh + scale_x_continuous(expand=c(0,0), labels=percent,
+                              breaks=seq(0, 1, by=0.2), limits=c(0, .87))
+#hh <- hh + coord_flip()
+hh <- hh + labs(x=NULL, y=NULL, 
+                title="Minorities town and state population")
+hh <- hh + theme_minimal(base_family="Arial Narrow")
+hh <- hh + theme(panel.grid.major.y=element_blank())
+hh <- hh + theme(panel.grid.minor=element_blank())
+hh <- hh + scale_y_discrete(expand=c(0.05,0))
+hh <- hh + theme(axis.text.x=element_blank())
+
+hh <- hh + geom_vline(xintercept = officers_s1$driving_population[1], color="tomato")
+
+hh <- hh + geom_text(data=officers_m1, aes(x=driving_population, y=DepartmentName, label=paste0(round(driving_population*100,0), "%")),
+                     color="#00688B", size=7, hjust=-.5, family="Calibri")
+hh <- hh + theme(axis.line.y=element_line(color="#2b2b2b", size=0.15))
+hh <- hh + theme(axis.text.y=element_text(margin=margin(r=-5, l=0)))
+hh <- hh + theme(text = element_text(size=24))
+hh <- hh + theme(plot.margin=unit(rep(30, 4), "pt"))
+hh <- hh + theme(plot.title=element_text(face="bold"))
+hh <- hh + theme(plot.subtitle=element_text(margin=margin(b=10)))
+hh <- hh + theme(plot.caption=element_text(size=8, margin=margin(t=10)))
+hh <- hh + annotate("text", x = (officers_s1$driving_population[1]), hjust=-.05, y = 15.65, label = paste0("State average (",round(officers_s1$driving_population[1]*100,2), "%)"), size=5, colour="tomato")
+hh <- hh + geom_rect(data=officers_m1, aes(xmin=.76, xmax=.87, ymin=-Inf, ymax=Inf), fill="#efefe3")
+hh <- hh + geom_text(data=filter(officers_m1, DepartmentName=="Wethersfield"), aes(x=.815, y=DepartmentName, label="DIFF"),
+                     color="#7a7d7e", size=7, vjust=-2, family="Calibri")
+hh <- hh + geom_text(data=officers_m1, aes(label=paste0(round(population_difference_between_town_and_state_average*100,0),"%"), y=DepartmentName, x=.815), fontface="bold", size=7, family="Calibri")
+
+
+hh
+
+grid.arrange(gg, hh, ncol=2)
+
+hoohah <- grid.arrange(gg, hh, ncol=2)
+ggsave(hoohah, file = "img/population_m2.png", width = 13, height = 8, type = "cairo-png", dpi=300)
+
+# g <- arrangeGrob(gg, hh, ncol=2)
+#  ggsave(file="whatever.pdf", g)
+```
+
+```{r lolly2, fig.width=9, fig.height=6, echo=FALSE}
+
+stops_race_sub <- subset(stops_race, distance_between_stops_and_population > .10)
+
+# officers_sub <- officers %>%
+#   select(ReportingOfficerIdentificationID, minorities_p)
+# officers_sub$minorities_p <- round(officers_sub$minorities_p/100,2)
+# officers_sub <- subset(officers_sub, !is.na(minorities_p))
+# 
+# officers_sub$ReportingOfficerIdentificationID <- gsub(".*--", "", officers_sub$ReportingOfficerIdentificationID)
+
+officers_m1 <- stops_race_sub %>%
+  filter(Ethnicity=="Black") %>%
+#  filter(DepartmentName!="Connecticut") %>%
+  arrange(-distance_between_stops_and_population)
+  
+officers_m1$DepartmentName <- factor(officers_m1$DepartmentName, levels = officers_m1$DepartmentName[order(officers_m1$distance_between_stops_and_population)])
+officers_m1 <- subset(officers_m1, DepartmentName!="SCSU")
+
+officers_s1 <- stops_race %>%
+  filter(DepartmentName=="Connecticut") %>%
+  filter(Ethnicity=="Black")
+
+
+gg <- ggplot(officers_m1, aes(y=reorder(DepartmentName, distance_between_stops_and_population), x= traffic_stops))
+gg <- gg + geom_lollipop(point.colour="steelblue", point.size=3, horizontal=TRUE)
+gg <- gg + scale_x_continuous(expand=c(0,0), labels=percent,
+                              breaks=seq(0, 1, by=0.2), limits=c(0, .81))
+#gg <- gg + coord_flip()
+gg <- gg + labs(x=NULL, y=NULL, 
+                title="Black town and state average stops")
+gg <- gg + theme_minimal(base_family="Arial Narrow")
+gg <- gg + theme(panel.grid.major.y=element_blank())
+gg <- gg + theme(panel.grid.minor=element_blank())
+gg <- gg + scale_y_discrete(expand=c(0.04,0))
+gg <- gg + theme(axis.text.x=element_blank())
+
+gg <- gg + geom_vline(xintercept = officers_s1$traffic_stops[1], color="tomato")
+
+gg <- gg + geom_text(data=officers_m1, aes(x=traffic_stops, y=DepartmentName, label=paste0(round(traffic_stops*100,0), "%")),
+                     color="#00688B", size=7, hjust=-.5, family="Calibri")
+gg <- gg + theme(axis.line.y=element_line(color="#2b2b2b", size=0.15))
+gg <- gg + theme(axis.text.y=element_text(margin=margin(r=-5, l=0)))
+gg <- gg + theme(text = element_text(size=24))
+gg <- gg + theme(plot.margin=unit(rep(30, 4), "pt"))
+gg <- gg + theme(plot.title=element_text(face="bold"))
+gg <- gg + theme(plot.subtitle=element_text(margin=margin(b=10)))
+gg <- gg + theme(plot.caption=element_text(size=8, margin=margin(t=10)))
+gg <- gg + annotate("text", x = (officers_s1$driving_population[1]), y = 5.6, hjust = -.22, label = paste0("State average (",round(officers_s1$traffic_stops[1]*100,0), "%)"), size=6, colour="tomato")
+
+gg <- gg + geom_rect(data=officers_m1, aes(xmin=.72, xmax=.81, ymin=-Inf, ymax=Inf), fill="#efefe3")
+gg <- gg + geom_text(data=filter(officers_m1, DepartmentName=="Woodbridge"), aes(x=.765, y=DepartmentName, label="DIFF"),
+                     color="#7a7d7e", size=7, vjust=-2, family="Calibri")
+gg <- gg + geom_text(data=officers_m1, aes(label=paste0(round(stops_difference_between_town_and_state_average*100,0),"%"), y=DepartmentName, x=.765), fontface="bold", size=7, family="Calibri")
+
+gg
+
+
+
+hh <- ggplot(officers_m1, aes(y=reorder(DepartmentName, distance_between_stops_and_population), x= driving_population))
+hh <- hh + geom_lollipop(point.colour="steelblue", point.size=3, horizontal=TRUE)
+hh <- hh + scale_x_continuous(expand=c(0,0), labels=percent,
+                              breaks=seq(0, 1, by=0.2), limits=c(0, .81))
+#hh <- hh + coord_flip()
+hh <- hh + labs(x=NULL, y=NULL, 
+                title="Black town and state population")
+hh <- hh + theme_minimal(base_family="Arial Narrow")
+hh <- hh + theme(panel.grid.major.y=element_blank())
+hh <- hh + theme(panel.grid.minor=element_blank())
+hh <- hh + scale_y_discrete(expand=c(0.05,0))
+hh <- hh + theme(axis.text.x=element_blank())
+
+hh <- hh + geom_vline(xintercept = officers_s1$driving_population[1], color="tomato")
+
+hh <- hh + geom_text(data=officers_m1, aes(x=driving_population, y=DepartmentName, label=paste0(round(driving_population*100,0), "%")),
+                     color="#00688B", size=7, hjust=-.5, family="Calibri")
+hh <- hh + theme(axis.line.y=element_line(color="#2b2b2b", size=0.15))
+hh <- hh + theme(axis.text.y=element_text(margin=margin(r=-5, l=0)))
+hh <- hh + theme(text = element_text(size=24))
+hh <- hh + theme(plot.margin=unit(rep(30, 4), "pt"))
+hh <- hh + theme(plot.title=element_text(face="bold"))
+hh <- hh + theme(plot.subtitle=element_text(margin=margin(b=10)))
+hh <- hh + theme(plot.caption=element_text(size=8, margin=margin(t=10)))
+hh <- hh + annotate("text", x = (officers_s1$driving_population[1]), hjust=-.05, y = 5.6, label = paste0("State average (",round(officers_s1$driving_population[1]*100,2), "%)"), size=6, colour="tomato")
+hh <- hh + geom_rect(data=officers_m1, aes(xmin=.72, xmax=.81, ymin=-Inf, ymax=Inf), fill="#efefe3")
+hh <- hh + geom_text(data=filter(officers_m1, DepartmentName=="Woodbridge"), aes(x=.765, y=DepartmentName, label="DIFF"),
+                     color="#7a7d7e", size=7, vjust=-1.5, family="Calibri")
+hh <- hh + geom_text(data=officers_m1, aes(label=paste0(round(population_difference_between_town_and_state_average*100,0),"%"), y=DepartmentName, x=.765), size=7, fontface="bold", family="Calibri")
+
+hoohah <- grid.arrange(gg, hh, ncol=2)
+ggsave(hoohah, file = "img/population_b2.png", width = 13, height = 8, type = "cairo-png", dpi=300)
+
+```
+
+```{r lolly3, fig.width=9, fig.height=6, echo=FALSE}
+
+stops_race_sub <- subset(stops_race, distance_between_stops_and_population > .10)
+
+# officers_sub <- officers %>%
+#   select(ReportingOfficerIdentificationID, minorities_p)
+# officers_sub$minorities_p <- round(officers_sub$minorities_p/100,2)
+# officers_sub <- subset(officers_sub, !is.na(minorities_p))
+# 
+# officers_sub$ReportingOfficerIdentificationID <- gsub(".*--", "", officers_sub$ReportingOfficerIdentificationID)
+
+officers_m1 <- stops_race_sub %>%
+  filter(Ethnicity=="Hispanic") %>%
+#  filter(DepartmentName!="Connecticut") %>%
+  arrange(-distance_between_stops_and_population)
+  
+officers_m1$DepartmentName <- factor(officers_m1$DepartmentName, levels = officers_m1$DepartmentName[order(officers_m1$distance_between_stops_and_population)])
+
+
+officers_s1 <- stops_race %>%
+  filter(DepartmentName=="Connecticut") %>%
+  filter(Ethnicity=="Hispanic")
+
+gg <- ggplot(officers_m1, aes(y=reorder(DepartmentName, distance_between_stops_and_population), x= traffic_stops))
+gg <- gg + geom_lollipop(point.colour="steelblue", point.size=3, horizontal=TRUE)
+gg <- gg + scale_x_continuous(expand=c(0,0), labels=percent,
+                              breaks=seq(0, 1, by=0.2), limits=c(0, .81))
+#gg <- gg + coord_flip()
+gg <- gg + labs(x=NULL, y=NULL, 
+                title="Hispanic town and state average stops")
+gg <- gg + theme_minimal(base_family="Arial Narrow")
+gg <- gg + theme(panel.grid.major.y=element_blank())
+gg <- gg + theme(panel.grid.minor=element_blank())
+gg <- gg + scale_y_discrete(expand=c(0.04,0))
+gg <- gg + theme(axis.text.x=element_blank())
+
+gg <- gg + geom_vline(xintercept = officers_s1$traffic_stops[1], color="tomato")
+
+gg <- gg + geom_text(data=officers_m1, aes(x=traffic_stops, y=DepartmentName, label=paste0(round(traffic_stops*100,0), "%")),
+                     color="#00688B", size=7, hjust=-.5, family="Calibri")
+gg <- gg + theme(axis.line.y=element_line(color="#2b2b2b", size=0.15))
+gg <- gg + theme(axis.text.y=element_text(margin=margin(r=-5, l=0)))
+gg <- gg + theme(text = element_text(size=24))
+gg <- gg + theme(plot.margin=unit(rep(30, 4), "pt"))
+gg <- gg + theme(plot.title=element_text(face="bold"))
+gg <- gg + theme(plot.subtitle=element_text(margin=margin(b=10)))
+gg <- gg + theme(plot.caption=element_text(size=8, margin=margin(t=10)))
+gg <- gg + annotate("text", x = (officers_s1$driving_population[1]), y = 4.5, hjust = -.22, label = paste0("State average (",round(officers_s1$traffic_stops[1]*100,0), "%)"), size=6, colour="tomato")
+
+gg <- gg + geom_rect(data=officers_m1, aes(xmin=.72, xmax=.81, ymin=-Inf, ymax=Inf), fill="#efefe3")
+gg <- gg + geom_text(data=filter(officers_m1, DepartmentName=="Wethersfield"), aes(x=.765, y=DepartmentName, label="DIFF"),
+                     color="#7a7d7e", size=7, vjust=-2, family="Calibri")
+gg <- gg + geom_text(data=officers_m1, aes(label=paste0(round(stops_difference_between_town_and_state_average*100,0),"%"), y=DepartmentName, x=.765), fontface="bold", size=7, family="Calibri")
+
+gg
+
+
+
+
+hh <- ggplot(officers_m1, aes(y=reorder(DepartmentName, distance_between_stops_and_population), x= driving_population))
+hh <- hh + geom_lollipop(point.colour="steelblue", point.size=3, horizontal=TRUE)
+hh <- hh + scale_x_continuous(expand=c(0,0), labels=percent,
+                              breaks=seq(0, 1, by=0.2), limits=c(0, .81))
+#hh <- hh + coord_flip()
+hh <- hh + labs(x=NULL, y=NULL, 
+                title="Hispanic town and state population")
+hh <- hh + theme_minimal(base_family="Arial Narrow")
+hh <- hh + theme(panel.grid.major.y=element_blank())
+hh <- hh + theme(panel.grid.minor=element_blank())
+hh <- hh + scale_y_discrete(expand=c(0.05,0))
+hh <- hh + theme(axis.text.x=element_blank())
+
+hh <- hh + geom_vline(xintercept = officers_s1$driving_population[1], color="tomato")
+
+hh <- hh + geom_text(data=officers_m1, aes(x=driving_population, y=DepartmentName, label=paste0(round(driving_population*100,0), "%")),
+                     color="#00688B", size=7, hjust=-.5, family="Calibri")
+hh <- hh + theme(axis.line.y=element_line(color="#2b2b2b", size=0.15))
+hh <- hh + theme(axis.text.y=element_text(margin=margin(r=-5, l=0)))
+hh <- hh + theme(text = element_text(size=24))
+hh <- hh + theme(plot.margin=unit(rep(30, 4), "pt"))
+hh <- hh + theme(plot.title=element_text(face="bold"))
+hh <- hh + theme(plot.subtitle=element_text(margin=margin(b=10)))
+hh <- hh + theme(plot.caption=element_text(size=8, margin=margin(t=10)))
+hh <- hh + annotate("text", x = (officers_s1$driving_population[1]), hjust=-.05, y = 4.5, label = paste0("State average (",round(officers_s1$driving_population[1]*100,2), "%)"), size=6, colour="tomato")
+hh <- hh + geom_rect(data=officers_m1, aes(xmin=.72, xmax=.81, ymin=-Inf, ymax=Inf), fill="#efefe3")
+hh <- hh + geom_text(data=filter(officers_m1, DepartmentName=="Wethersfield"), aes(x=.765, y=DepartmentName, label="DIFF"),
+                     color="#7a7d7e", size=7, vjust=-1.5, family="Calibri")
+hh <- hh + geom_text(data=officers_m1, aes(label=paste0(round(population_difference_between_town_and_state_average*100,0),"%"), y=DepartmentName, x=.765), size=7, fontface="bold", family="Calibri")
+
+hh
+
+
+hoohah <- grid.arrange(gg, hh, ncol=2)
+ggsave(hoohah, file = "img/population_h2.png", width = 13, height = 8, type = "cairo-png", dpi=300)
+
+
+# g <- arrangeGrob(gg, hh, ncol=2)
+#  ggsave(file="whatever.pdf", g)
+```
+
+
+```{r next_plot, fig.width=9, fig.height=6, echo=FALSE}
+aa <- ggplot(stops_race_sub, aes(population_difference_between_town_and_state_average, stops_difference_between_town_and_state_average, group = DepartmentName, color=DepartmentName)) +   
+  geom_point(size = 2, aes(colour = Ethnicity)) +
+  #geom_line(colour="lightgray") +
+ # geom_text(data = stops_race,aes(x=traffic_stops,y=driving_population + 3, label=Ethnicity)) +
+  geom_abline(intercept = .1) +
+ ylim(-.3,.65) + xlim(-.3,.65) +
+#  expand_limits(x = 0, y = 0) +
+  theme_minimal()  +  labs(title="Percent of driving population versus traffic stops")
+
+bb <- ggplot(stops_race, aes(population_difference_between_town_and_state_average, stops_difference_between_town_and_state_average, group = DepartmentName, color=DepartmentName)) +   
+  geom_point(size = 2, aes(colour = Ethnicity)) +
+  #geom_line(colour="lightgray") +
+ # geom_text(data = stops_race,aes(x=traffic_stops,y=driving_population + 3, label=Ethnicity)) +
+  geom_abline(intercept = .1) +
+
+ylim(-.3,.65) + xlim(-.3,.65) +
+#  expand_limits(x = 0, y = 0) +
+  theme_minimal()  +  labs(title="Percent of driving population versus traffic stops")
+
+grid.arrange(aa, bb, ncol=2)
+
+
+stops_race$range <- ifelse(stops_race$distance_between_stops_and_population > .10, "disparity detected", "normal range")
+
+
+cc <- ggplot(stops_race, aes(population_difference_between_town_and_state_average, stops_difference_between_town_and_state_average, group = DepartmentName, color=DepartmentName)) +   
+  geom_point(size = 2, aes(colour = range)) +
+  #geom_line(colour="lightgray") +
+ # geom_text(data = stops_race,aes(x=traffic_stops,y=driving_population + 3, label=Ethnicity)) +
+#  geom_hline(yintercept = .099) + 
+  geom_abline(intercept = .1) +
+
+  ylim(-.3,.65) + xlim(-.3,.65) +
+#  expand_limits(x = 0, y = 0) +
+  theme_minimal()  +  labs(title="Percent of driving population versus traffic stops")
+
+grid.arrange(bb, cc, ncol=2)
+
+```
+
+# Estimated Driving Population
+
+```{r edp1, fig.width=9, fig.height=6}
+
+stops_race1 <- dept %>%
+  dplyr::select(DepartmentName, edp_b_p, edp_b, edp_h_p, edp_h, edp_m_p, edp_m, edp_b_diff, edp_h_diff, edp_m_diff, edp_b_ratio, edp_h_ratio, edp_m_ratio) %>%
+  gather("Ethnicity", "Percent", 2:13)
+
+
+#-----------
+
+stops_race <- stops_race1
+
+stops_race$type<- ifelse(grepl("_p", stops_race$Ethnicity), "Traffic stops", "Estimated Driving Population")
+stops_race$type<- ifelse(grepl("_ratio", stops_race$Ethnicity), "Ratio", stops_race$type)
+stops_race$type<- ifelse(grepl("_diff", stops_race$Ethnicity), "Difference", stops_race$type)
+
+
+stops_race$Ethnicity <- ifelse(grepl("_b", stops_race$Ethnicity), "Black", stops_race$Ethnicity)
+stops_race$Ethnicity <- ifelse(grepl("_h", stops_race$Ethnicity), "Hispanic", stops_race$Ethnicity)
+stops_race$Ethnicity <- ifelse(grepl("_m", stops_race$Ethnicity), "Minority", stops_race$Ethnicity)
+
+stops_race <- stops_race %>%
+  spread(type, Percent)
+stops_race$type <- "blank"
+
+stops_race$DepartmentName <- as.character(stops_race$DepartmentName)
+
+stops_race <- subset(stops_race, !is.na(Difference))
+
+
+ggplot(stops_race, aes(`Traffic stops`, `Estimated Driving Population`, group = DepartmentName, color=DepartmentName)) +   
+  geom_point(size = 2, aes(colour = as.factor(Ethnicity))) +
+  #geom_line(colour="lightgray") +
+ # geom_text(data = stops_race,aes(x=traffic_stops,y=driving_population + 3, label=Ethnicity)) +
+  geom_abline(intercept = 0.1) +
+ ylim(0,100) + xlim(0,100) +
+#  expand_limits(x = 0, y = 0) +
+  theme_minimal()  +  labs(title="Estimated driving population versus traffic stops")
+
+
+## Minorities dumbbell chart
+
+stops_race_sub <- subset(stops_race, Difference > 10)
+
+# officers_sub <- officers %>%
+#   select(ReportingOfficerIdentificationID, minorities_p)
+# officers_sub$minorities_p <- round(officers_sub$minorities_p/100,2)
+# officers_sub <- subset(officers_sub, !is.na(minorities_p))
+# 
+# officers_sub$ReportingOfficerIdentificationID <- gsub(".*--", "", officers_sub$ReportingOfficerIdentificationID)
+
+officers_m1 <- stops_race_sub %>%
+  filter(Ethnicity=="Minority") %>%
+#  filter(DepartmentName!="Connecticut") %>%
+  arrange(-Difference)
+  
+officers_m1$DepartmentName <- factor(officers_m1$DepartmentName, levels = officers_m1$DepartmentName[order(officers_m1$Difference)])
+
+officers_m1$Difference <- round(officers_m1$Difference/100,2)
+officers_m1$`Estimated Driving Population` <- round(officers_m1$`Estimated Driving Population`/100,2)
+officers_m1$`Traffic stops` <- round(officers_m1$`Traffic stops`/100,2)
+# gg <- ggplot(officers_m1, aes(y=reorder(DepartmentName, distance_between_stops_and_population), x= traffic_stops))
+
+# Minorities dumbbell
+
+library(extrafont)
+
+
+gg <- ggplot()
+
+gg <- gg + geom_segment(data=officers_m1, aes(y=DepartmentName, yend=DepartmentName, x=0, xend=.655), color="#b2b2b2", size=0.15)
+
+gg <- gg + geom_dumbbell(data=officers_m1, aes(y=DepartmentName, x=`Estimated Driving Population`, xend=`Traffic stops`),
+                         size=1.5, color="#b2b2b2", point.size.l=3, point.size.r=3,
+                         point.colour.l="tomato", point.colour.r="steelblue")
+
+#   point.colour.l="tomato", point.colour.r="steelblue"
+#gg <- gg + geom_lollipop(point.colour="steelblue", point.size=3, horizontal=TRUE)
+gg <- gg + scale_x_continuous(expand=c(0,0), labels=percent,
+                              breaks=seq(0, 1, by=0.2), limits=c(0, .70))
+
+# text below points
+gg <- gg + geom_text(data=filter(officers_m1, DepartmentName=="Wethersfield"),
+                     aes(x=`Estimated Driving Population`, y=DepartmentName, label="Est. driving population"),
+                     color="tomato", size=6, vjust=-2, fontface="bold", family="Calibri")
+gg <- gg + geom_text(data=filter(officers_m1, DepartmentName=="Wethersfield"),
+                     aes(x=`Traffic stops`, y=DepartmentName, label="Traffic stops"),
+                     color="steelblue", size=6, vjust=-2, fontface="bold", family="Calibri")
+# text above points
+
+gg <- gg + geom_text(data=officers_m1, aes(x=`Estimated Driving Population`, y=DepartmentName, label=paste0(round(`Estimated Driving Population`*100,2), "%")),
+                     color="tomato", size=6, vjust=1.75, family="Calibri")
+
+gg <- gg + geom_text(data=officers_m1, color="steelblue", size=6, vjust=1.75, family="Calibri",
+                     aes(x=`Traffic stops`, y=DepartmentName, label=paste0(round(`Traffic stops`*100,2), "%")),
+                     color="tomato", size=6, vjust=1.75, family="Calibri")
+# difference column
+gg <- gg + geom_rect(data=officers_m1, aes(xmin=.665, xmax=.7, ymin=-Inf, ymax=Inf), fill="#efefe3")
+gg <- gg + geom_text(data=officers_m1, aes(label=round(Difference*100,2), y=DepartmentName, x=.68), fontface="bold", size=6, family="Calibri")
+gg <- gg + geom_text(data=filter(officers_m1, DepartmentName=="Wethersfield"), aes(x=.68, y=DepartmentName, label="DIFF"),
+                     color="#7a7d7e", size=7, vjust=-2, fontface="bold", family="Calibri")
+#gg <- gg + scale_x_continuous(expand=c(0,0), limits=c(0, 1.175))
+gg <- gg + scale_y_discrete(expand=c(0.095,0))
+gg <- gg + labs(x=NULL, y=NULL, title="Minorities stopped compared to estimated driving population")
+gg <- gg + theme_bw(base_family="Calibri")
+gg <- gg + theme(text = element_text(size=24))
+
+gg <- gg + theme(panel.grid.major=element_blank())
+gg <- gg + theme(panel.grid.minor=element_blank())
+gg <- gg + theme(panel.border=element_blank())
+gg <- gg + theme(axis.ticks=element_blank())
+gg <- gg + theme(axis.text.x=element_blank())
+gg <- gg + theme(plot.title=element_text(face="bold", family="Lato Black", size=22))
+gg <- gg + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(b=12)))
+gg <- gg + theme(plot.caption=element_text(size=7, margin=margin(t=12), color="#7a7d7e"))
+gg
+
+ggsave(gg, file = "img/edp_m.png", width = 13, height = 8, type = "cairo-png", dpi=300)
+
+# Black
+
+officers_m1 <- stops_race_sub %>%
+  filter(Ethnicity=="Black") %>%
+#  filter(DepartmentName!="Connecticut") %>%
+  arrange(-Difference)
+  
+officers_m1$DepartmentName <- factor(officers_m1$DepartmentName, levels = officers_m1$DepartmentName[order(officers_m1$Difference)])
+
+officers_m1$Difference <- round(officers_m1$Difference/100,2)
+officers_m1$`Estimated Driving Population` <- round(officers_m1$`Estimated Driving Population`/100,2)
+officers_m1$`Traffic stops` <- round(officers_m1$`Traffic stops`/100,2)
+
+hh <- ggplot()
+
+hh <- hh + geom_segment(data=officers_m1, aes(y=DepartmentName, yend=DepartmentName, x=0, xend=.655), color="#b2b2b2", size=0.15)
+
+hh <- hh + geom_dumbbell(data=officers_m1, aes(y=DepartmentName, x=`Estimated Driving Population`, xend=`Traffic stops`),
+                         size=1.5, color="#b2b2b2", point.size.l=3, point.size.r=3,
+                         point.colour.l="tomato", point.colour.r="steelblue")
+
+#   point.colour.l="tomato", point.colour.r="steelblue"
+#hh <- hh + geom_lollipop(point.colour="steelblue", point.size=3, horizontal=TRUE)
+hh <- hh + scale_x_continuous(expand=c(0,0), labels=percent,
+                              breaks=seq(0, 1, by=0.2), limits=c(0, .70))
+
+# text below points
+hh <- hh + geom_text(data=filter(officers_m1, DepartmentName=="East Hartford"),
+                     aes(x=`Estimated Driving Population`, y=DepartmentName, label="Est. driving population"),
+                     color="tomato", size=6, vjust=-2, fontface="bold", family="Calibri")
+hh <- hh + geom_text(data=filter(officers_m1, DepartmentName=="East Hartford"),
+                     aes(x=`Traffic stops`, y=DepartmentName, label="Traffic stops"),
+                     color="steelblue", size=6, vjust=-2, fontface="bold", family="Calibri")
+# text above points
+
+hh <- hh + geom_text(data=officers_m1, aes(x=`Estimated Driving Population`, y=DepartmentName, label=paste0(round(`Estimated Driving Population`*100,2), "%")),
+                     color="tomato", size=6, vjust=1.75, family="Calibri")
+
+hh <- hh + geom_text(data=officers_m1, color="steelblue", size=6, vjust=2.5, family="Calibri",
+                     aes(x=`Traffic stops`, y=DepartmentName, label=paste0(round(`Traffic stops`*100,2), "%")),
+                     color="tomato", size=6, vjust=1.75, family="Calibri")
+# difference column
+hh <- hh + geom_rect(data=officers_m1, aes(xmin=.665, xmax=.7, ymin=-Inf, ymax=Inf), fill="#efefe3")
+hh <- hh + geom_text(data=officers_m1, aes(label=round(Difference*100,2), y=DepartmentName, x=.68), fontface="bold", size=6, family="Calibri")
+hh <- hh + geom_text(data=filter(officers_m1, DepartmentName=="East Hartford"), aes(x=.68, y=DepartmentName, label="DIFF"),
+                     color="#7a7d7e", size=7, vjust=-2, fontface="bold", family="Calibri")
+#hh <- hh + scale_x_continuous(expand=c(0,0), limits=c(0, 1.175))
+hh <- hh + scale_y_discrete(expand=c(0.095,0))
+hh <- hh + labs(x=NULL, y=NULL, title="Blacks stopped compared to estimated driving population")
+hh <- hh + theme_bw(base_family="Calibri")
+hh <- hh + theme(text = element_text(size=24))
+
+hh <- hh + theme(panel.grid.major=element_blank())
+hh <- hh + theme(panel.grid.minor=element_blank())
+hh <- hh + theme(panel.border=element_blank())
+hh <- hh + theme(axis.ticks=element_blank())
+hh <- hh + theme(axis.text.x=element_blank())
+hh <- hh + theme(plot.title=element_text(face="bold", family="Lato Black", size=22))
+hh <- hh + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(b=12)))
+hh <- hh + theme(plot.caption=element_text(size=7, margin=margin(t=12), color="#7a7d7e"))
+hh
+ggsave(hh, file = "img/edp_b.png", width = 13, height = 8, type = "cairo-png", dpi=300)
+
+# Hispanic
+
+officers_m1 <- stops_race_sub %>%
+  filter(Ethnicity=="Hispanic") %>%
+#  filter(DepartmentName!="Connecticut") %>%
+  arrange(-Difference)
+  
+officers_m1$DepartmentName <- factor(officers_m1$DepartmentName, levels = officers_m1$DepartmentName[order(officers_m1$Difference)])
+
+officers_m1$Difference <- round(officers_m1$Difference/100,2)
+officers_m1$`Estimated Driving Population` <- round(officers_m1$`Estimated Driving Population`/100,2)
+officers_m1$`Traffic stops` <- round(officers_m1$`Traffic stops`/100,2)
+
+ii <- ggplot()
+
+ii <- ii + geom_segment(data=officers_m1, aes(y=DepartmentName, yend=DepartmentName, x=0, xend=.655), color="#b2b2b2", size=0.15)
+
+ii <- ii + geom_dumbbell(data=officers_m1, aes(y=DepartmentName, x=`Estimated Driving Population`, xend=`Traffic stops`),
+                         size=1.5, color="#b2b2b2", point.size.l=3, point.size.r=3,
+                         point.colour.l="tomato", point.colour.r="steelblue")
+
+#   point.colour.l="tomato", point.colour.r="steelblue"
+#ii <- ii + geom_lollipop(point.colour="steelblue", point.size=3, horizontal=TRUE)
+ii <- ii + scale_x_continuous(expand=c(0,0), labels=percent,
+                              breaks=seq(0, 1, by=0.2), limits=c(0, .70))
+
+# text below points
+ii <- ii + geom_text(data=filter(officers_m1, DepartmentName=="Wethersfield"),
+                     aes(x=`Estimated Driving Population`, y=DepartmentName, label="Est. driving population"),
+                     color="tomato", size=5, vjust=-2,  fontface="bold", family="Calibri")
+ii <- ii + geom_text(data=filter(officers_m1, DepartmentName=="Wethersfield"),
+                     aes(x=`Traffic stops`, y=DepartmentName, label="Traffic stops"),
+                     color="steelblue", size=5, vjust=-2,  fontface="bold", family="Calibri")
+# text above points
+
+ii <- ii + geom_text(data=officers_m1, aes(x=`Estimated Driving Population`, y=DepartmentName, label=paste0(round(`Estimated Driving Population`*100,2), "%")),
+                     color="tomato", size=6, vjust=1.75, family="Calibri")
+
+ii <- ii + geom_text(data=officers_m1, color="steelblue", size=6, vjust=2.5, family="Calibri",
+                     aes(x=`Traffic stops`, y=DepartmentName, label=paste0(round(`Traffic stops`*100,2), "%")),
+                     color="tomato", size=6, vjust=1.75, family="Calibri")
+# difference column
+ii <- ii + geom_rect(data=officers_m1, aes(xmin=.665, xmax=.7, ymin=-Inf, ymax=Inf), fill="#efefe3")
+ii <- ii + geom_text(data=officers_m1, aes(label=round(Difference*100,2), y=DepartmentName, x=.68), fontface="bold", size=6, family="Calibri")
+ii <- ii + geom_text(data=filter(officers_m1, DepartmentName=="Wethersfield"), aes(x=.68, y=DepartmentName, label="DIFF"),
+                     color="#7a7d7e", size=7, vjust=-2, fontface="bold", family="Calibri")
+#ii <- ii + scale_x_continuous(expand=c(0,0), limits=c(0, 1.175))
+#ii <- ii + scale_y_discrete(expand=c(0.075,0))
+ii <- ii + labs(x=NULL, y=NULL, title="Hispanics stopped compared to estimated driving population")
+ii <- ii + theme_bw(base_family="Calibri")
+ii <- ii + theme(text = element_text(size=24))
+
+ii <- ii + theme(panel.grid.major=element_blank())
+ii <- ii + theme(panel.grid.minor=element_blank())
+ii <- ii + theme(panel.border=element_blank())
+ii <- ii + theme(axis.ticks=element_blank())
+ii <- ii + theme(axis.text.x=element_blank())
+ii <- ii + theme(plot.title=element_text(face="bold", family="Lato Black", size=22))
+ii <- ii + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(b=12)))
+ii <- ii + theme(plot.caption=element_text(size=7, margin=margin(t=12), color="#7a7d7e"))
+ii
+
+ggsave(ii, file = "img/edp_h.png", width = 13, height = 5, type = "cairo-png", dpi=300)
+
+
+grid.arrange(gg, hh, ii, ncol=3)
+
+
+```
+
+# Residents
+
+```{r res, fig.width=9, fig.height=6}
+
+
+stops_race1 <- dept %>%
+  dplyr::select(DepartmentName, m_res, m_res_stops, res_diff_m, b_res, b_res_stops, res_diff_b, h_res, h_res_stops, res_diff_h) %>%
+  gather("Ethnicity", "Percent", 2:10)
+
+
+#-----------
+
+stops_race <- stops_race1
+
+stops_race$type<- ifelse(grepl("_res", stops_race$Ethnicity), "Resident population", stops_race$Ethnicity)
+stops_race$type<- ifelse(grepl("_res_stops", stops_race$Ethnicity), "Resident stops", stops_race$type)
+stops_race$type<- ifelse(grepl("_diff", stops_race$Ethnicity), "Difference", stops_race$type)
+
+
+stops_race$Ethnicity <- ifelse(grepl("b_", stops_race$Ethnicity), "Black", stops_race$Ethnicity)
+stops_race$Ethnicity <- ifelse(grepl("h_", stops_race$Ethnicity), "Hispanic", stops_race$Ethnicity)
+stops_race$Ethnicity <- ifelse(grepl("m_", stops_race$Ethnicity), "Minority", stops_race$Ethnicity)
+stops_race$Ethnicity <- ifelse(grepl("_b", stops_race$Ethnicity), "Black", stops_race$Ethnicity)
+stops_race$Ethnicity <- ifelse(grepl("_h", stops_race$Ethnicity), "Hispanic", stops_race$Ethnicity)
+stops_race$Ethnicity <- ifelse(grepl("_m", stops_race$Ethnicity), "Minority", stops_race$Ethnicity)
+
+
+stops_race <- stops_race %>%
+  spread(type, Percent)
+stops_race$type <- "blank"
+
+stops_race$DepartmentName <- as.character(stops_race$DepartmentName)
+
+stops_race <- subset(stops_race, !is.na(Difference))
+
+
+ggplot(stops_race, aes(`Resident stops`, `Resident population`, group = DepartmentName, color=DepartmentName)) +   
+  geom_point(size = 2, aes(colour = as.factor(Ethnicity))) +
+  #geom_line(colour="lightgray") +
+ # geom_text(data = stops_race,aes(x=traffic_stops,y=driving_population + 3, label=Ethnicity)) +
+  geom_abline(intercept = 0.1) +
+ ylim(0,100) + xlim(0,100) +
+#  expand_limits(x = 0, y = 0) +
+  theme_minimal()  +  labs(title="Resident population versus Resident stops")
+
+
+## Minorities dumbbell chart
+
+stops_race_sub <- subset(stops_race, Difference > 10)
+
+# officers_sub <- officers %>%
+#   select(ReportingOfficerIdentificationID, minorities_p)
+# officers_sub$minorities_p <- round(officers_sub$minorities_p/100,2)
+# officers_sub <- subset(officers_sub, !is.na(minorities_p))
+# 
+# officers_sub$ReportingOfficerIdentificationID <- gsub(".*--", "", officers_sub$ReportingOfficerIdentificationID)
+
+officers_m1 <- stops_race_sub %>%
+  filter(Ethnicity=="Minority") %>%
+#  filter(DepartmentName!="Connecticut") %>%
+  arrange(-Difference)
+  
+officers_m1$DepartmentName <- factor(officers_m1$DepartmentName, levels = officers_m1$DepartmentName[order(officers_m1$Difference)])
+
+officers_m1$Difference <- round(officers_m1$Difference/100,2)
+officers_m1$`Resident population` <- round(officers_m1$`Resident population`/100,2)
+officers_m1$`Resident stops` <- round(officers_m1$`Resident stops`/100,2)
+# gg <- ggplot(officers_m1, aes(y=reorder(DepartmentName, distance_between_stops_and_population), x= traffic_stops))
+
+# Minorities
+
+gg <- ggplot()
+
+gg <- gg + geom_segment(data=officers_m1, aes(y=DepartmentName, yend=DepartmentName, x=0, xend=.9), color="#b2b2b2", size=0.15)
+
+gg <- gg + geom_dumbbell(data=officers_m1, aes(y=DepartmentName, x=`Resident population`, xend=`Resident stops`),
+                         size=1.5, color="#b2b2b2", point.size.l=3, point.size.r=3,
+                         point.colour.l="tomato", point.colour.r="steelblue")
+
+#   point.colour.l="tomato", point.colour.r="steelblue"
+#gg <- gg + geom_lollipop(point.colour="steelblue", point.size=3, horizontal=TRUE)
+gg <- gg + scale_x_continuous(expand=c(0,0), labels=percent,
+                              breaks=seq(0, 1, by=0.2), limits=c(0, .9))
+
+# text below points
+gg <- gg + geom_text(data=filter(officers_m1, DepartmentName=="Meriden"),
+                     aes(x=`Resident population`, y=DepartmentName, label="Resident population"),
+                     color="tomato", size=5, vjust=-2, fontface="bold", family="Calibri")
+gg <- gg + geom_text(data=filter(officers_m1, DepartmentName=="Meriden"),
+                     aes(x=`Resident stops`, y=DepartmentName, label="Resident stops"),
+                     color="steelblue", size=5, vjust=-2, fontface="bold", family="Calibri")
+# text above points
+
+gg <- gg + geom_text(data=officers_m1, aes(x=`Resident population`, y=DepartmentName, label=paste0(round(`Resident population`*100,2), "%")),
+                     color="tomato", size=6, vjust=1.75, family="Calibri")
+
+gg <- gg + geom_text(data=officers_m1, color="steelblue", size=6, vjust=1.75, family="Calibri",
+                     aes(x=`Resident stops`, y=DepartmentName, label=paste0(round(`Resident stops`*100,2), "%")),
+                     color="tomato", size=6, vjust=1.75, family="Calibri")
+# difference column
+gg <- gg + geom_rect(data=officers_m1, aes(xmin=.85, xmax=.9, ymin=-Inf, ymax=Inf), fill="#efefe3")
+gg <- gg + geom_text(data=officers_m1, aes(label=round(Difference*100,2), y=DepartmentName, x=.875), fontface="bold", size=6, family="Calibri")
+gg <- gg + geom_text(data=filter(officers_m1, DepartmentName=="Meriden"), aes(x=.875, y=DepartmentName, label="DIFF"),
+                     color="#7a7d7e", size=7, vjust=-2, fontface="bold", family="Calibri")
+#gg <- gg + scale_x_continuous(expand=c(0,0), limits=c(0, 1.175))
+gg <- gg + scale_y_discrete(expand=c(0.085,0))
+gg <- gg + labs(x=NULL, y=NULL, title="Minorities stopped compared to resident population")
+gg <- gg + theme_bw(base_family="Calibri")
+gg <- gg + theme(text = element_text(size=24))
+gg <- gg + theme(panel.grid.major=element_blank())
+gg <- gg + theme(panel.grid.minor=element_blank())
+gg <- gg + theme(panel.border=element_blank())
+gg <- gg + theme(axis.ticks=element_blank())
+gg <- gg + theme(axis.text.x=element_blank())
+gg <- gg + theme(plot.title=element_text(face="bold", family="Lato Black", size=22))
+gg <- gg + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(b=12)))
+gg <- gg + theme(plot.caption=element_text(size=7, margin=margin(t=12), color="#7a7d7e"))
+gg
+ggsave(gg, file = "img/res_m.png", width = 13, height = 8, type = "cairo-png", dpi=300)
+
+# Black
+
+officers_m1 <- stops_race_sub %>%
+  filter(Ethnicity=="Black") %>%
+#  filter(DepartmentName!="Connecticut") %>%
+  arrange(-Difference)
+  
+officers_m1$DepartmentName <- factor(officers_m1$DepartmentName, levels = officers_m1$DepartmentName[order(officers_m1$Difference)])
+
+officers_m1$Difference <- round(officers_m1$Difference/100,2)
+officers_m1$`Resident population` <- round(officers_m1$`Resident population`/100,2)
+officers_m1$`Resident stops` <- round(officers_m1$`Resident stops`/100,2)
+hh <- ggplot()
+
+hh <- hh + geom_segment(data=officers_m1, aes(y=DepartmentName, yend=DepartmentName, x=0, xend=.9), color="#b2b2b2", size=0.15)
+
+hh <- hh + geom_dumbbell(data=officers_m1, aes(y=DepartmentName, x=`Resident population`, xend=`Resident stops`),
+                         size=1.5, color="#b2b2b2", point.size.l=3, point.size.r=3,
+                         point.colour.l="tomato", point.colour.r="steelblue")
+
+#   point.colour.l="tomato", point.colour.r="steelblue"
+#hh <- hh + geom_lollipop(point.colour="steelblue", point.size=3, horizontal=TRUE)
+hh <- hh + scale_x_continuous(expand=c(0,0), labels=percent,
+                              breaks=seq(0, 1, by=0.2), limits=c(0, .90))
+
+# text below points
+hh <- hh + geom_text(data=filter(officers_m1, DepartmentName=="New Haven"),
+                     aes(x=`Resident population`, y=DepartmentName, label="Est. driving population"),
+                     color="tomato", size=5, vjust=-2, fontface="bold", family="Calibri")
+hh <- hh + geom_text(data=filter(officers_m1, DepartmentName=="New Haven"),
+                     aes(x=`Resident stops`, y=DepartmentName, label="Resident stops"),
+                     color="steelblue", size=5, vjust=-2, fontface="bold", family="Calibri")
+# text above points
+
+hh <- hh + geom_text(data=officers_m1, aes(x=`Resident population`, y=DepartmentName, label=paste0(round(`Resident population`*100,2), "%")),
+                     color="tomato", size=6, vjust=1.75, family="Calibri")
+
+hh <- hh + geom_text(data=officers_m1, color="steelblue", size=6, vjust=1.75, family="Calibri",
+                     aes(x=`Resident stops`, y=DepartmentName, label=paste0(round(`Resident stops`*100,2), "%")),
+                     color="tomato", size=6, vjust=1.75, family="Calibri")
+# difference column
+hh <- hh + geom_rect(data=officers_m1, aes(xmin=.85, xmax=.9, ymin=-Inf, ymax=Inf), fill="#efefe3")
+hh <- hh + geom_text(data=officers_m1, aes(label=round(Difference*100,2), y=DepartmentName, x=.875), fontface="bold", size=6, family="Calibri")
+hh <- hh + geom_text(data=filter(officers_m1, DepartmentName=="New Haven"), aes(x=.875, y=DepartmentName, label="DIFF"),
+                     color="#7a7d7e", size=7, vjust=-2, fontface="bold", family="Calibri")
+#hh <- hh + scale_x_continuous(expand=c(0,0), limits=c(0, 1.175))
+hh <- hh + scale_y_discrete(expand=c(0.095,0))
+hh <- hh + labs(x=NULL, y=NULL, title="Blacks stopped compared to resident population")
+hh <- hh + theme_bw(base_family="Calibri")
+hh <- hh + theme(text = element_text(size=24))
+
+hh <- hh + theme(panel.grid.major=element_blank())
+hh <- hh + theme(panel.grid.minor=element_blank())
+hh <- hh + theme(panel.border=element_blank())
+hh <- hh + theme(axis.ticks=element_blank())
+hh <- hh + theme(axis.text.x=element_blank())
+hh <- hh + theme(plot.title=element_text(face="bold", family="Lato Black", size=22))
+hh <- hh + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(b=12)))
+hh <- hh + theme(plot.caption=element_text(size=7, margin=margin(t=12), color="#7a7d7e"))
+hh
+
+ggsave(hh, file = "img/res_b.png", width = 13, height = 8, type = "cairo-png", dpi=300)
+
+# Hispanic
+
+officers_m1 <- stops_race_sub %>%
+  filter(Ethnicity=="Hispanic") %>%
+#  filter(DepartmentName!="Connecticut") %>%
+  arrange(-Difference)
+  
+officers_m1$DepartmentName <- factor(officers_m1$DepartmentName, levels = officers_m1$DepartmentName[order(officers_m1$Difference)])
+
+officers_m1$Difference <- round(officers_m1$Difference/100,2)
+officers_m1$`Resident population` <- round(officers_m1$`Resident population`/100,2)
+officers_m1$`Resident stops` <- round(officers_m1$`Resident stops`/100,2)
+
+ii <- ggplot()
+
+ii <- ii + geom_segment(data=officers_m1, aes(y=DepartmentName, yend=DepartmentName, x=0, xend=.85), color="#b2b2b2", size=0.15)
+
+ii <- ii + geom_dumbbell(data=officers_m1, aes(y=DepartmentName, x=`Resident population`, xend=`Resident stops`),
+                         size=1.5, color="#b2b2b2", point.size.l=3, point.size.r=3,
+                         point.colour.l="tomato", point.colour.r="steelblue")
+
+#   point.colour.l="tomato", point.colour.r="steelblue"
+#ii <- ii + geom_lollipop(point.colour="steelblue", point.size=3, horizontal=TRUE)
+ii <- ii + scale_x_continuous(expand=c(0,0), labels=percent,
+                              breaks=seq(0, 1, by=0.2), limits=c(0, .90))
+
+# text below points
+ii <- ii + geom_text(data=filter(officers_m1, DepartmentName=="Meriden"),
+                     aes(x=`Resident population`, y=DepartmentName, label="Est. driving population"),
+                     color="tomato", size=5, vjust=-2,  fontface="bold", family="Calibri")
+ii <- ii + geom_text(data=filter(officers_m1, DepartmentName=="Meriden"),
+                     aes(x=`Resident stops`, y=DepartmentName, label="Resident stops"),
+                     color="steelblue", size=5, vjust=-2,  fontface="bold", family="Calibri")
+# text above points
+
+ii <- ii + geom_text(data=officers_m1, aes(x=`Resident population`, y=DepartmentName, label=paste0(round(`Resident population`*100,2), "%")),
+                     color="tomato", size=6, vjust=1.75, family="Calibri")
+
+ii <- ii + geom_text(data=officers_m1, color="steelblue", size=6, vjust=1.75, family="Calibri",
+                     aes(x=`Resident stops`, y=DepartmentName, label=paste0(round(`Resident stops`*100,2), "%")),
+                     color="tomato", size=3.75, vjust=2.5, family="Calibri")
+# difference column
+ii <- ii + geom_rect(data=officers_m1, aes(xmin=.85, xmax=.9, ymin=-Inf, ymax=Inf), fill="#efefe3")
+ii <- ii + geom_text(data=officers_m1, aes(label=round(Difference*100,2), y=DepartmentName, x=.875), fontface="bold", size=6, family="Calibri")
+ii <- ii + geom_text(data=filter(officers_m1, DepartmentName=="Meriden"), aes(x=.875, y=DepartmentName, label="DIFF"),
+                     color="#7a7d7e", size=7, vjust=-2, fontface="bold", family="Calibri")
+#ii <- ii + scale_x_continuous(expand=c(0,0), limits=c(0, 1.175))
+#ii <- ii + scale_y_discrete(expand=c(0.075,0))
+ii <- ii + labs(x=NULL, y=NULL, title="Hispanics stopped compared to Resident population")
+ii <- ii + theme_bw(base_family="Calibri")
+ii <- ii + theme(text = element_text(size=24))
+ii <- ii + theme(panel.grid.major=element_blank())
+ii <- ii + theme(panel.grid.minor=element_blank())
+ii <- ii + theme(panel.border=element_blank())
+ii <- ii + theme(axis.ticks=element_blank())
+ii <- ii + theme(axis.text.x=element_blank())
+ii <- ii + theme(plot.title=element_text(face="bold", family="Lato Black", size=22))
+ii <- ii + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(b=12)))
+ii <- ii + theme(plot.caption=element_text(size=7, margin=margin(t=12), color="#7a7d7e"))
+ii
+
+ggsave(ii, file = "img/res_h.png", width = 13, height = 5, type = "cairo-png", dpi=300)
+
+
+grid.arrange(gg, hh, ii, ncol=3)
+
+
+```
+
+```{r points_graph, fig.height=8, fig.width=8}
+pre_points <- read.csv("data/mega_df.csv")
+
+pre_points$points_sa_m <- 0
+pre_points$points_sa_b <- 0
+pre_points$points_sa_h <- 0
+pre_points$points_edp_m <- 0
+pre_points$points_edp_b <- 0
+pre_points$points_edp_h <- 0
+pre_points$points_res_m <- 0
+pre_points$points_res_b <- 0
+pre_points$points_res_h <- 0
+
+
+pre_points$points_sa_m <- ifelse(pre_points$m_distance>10, 1, 0)
+pre_points$points_sa_b <- ifelse(pre_points$b_distance>10, 1, 0)
+pre_points$points_sa_h <- ifelse(pre_points$h_distance>10, 1, 0)
+
+pre_points$points_edp_m <- ifelse(pre_points$edp_m_diff >10, 1,0)
+pre_points$points_edp_m <- ifelse(pre_points$edp_m_diff <10 & pre_points$edp_m_diff >5 & pre_points$edp_m_ratio > 1.75, .5,pre_points$points_edp_m)
+pre_points$points_edp_b <- ifelse(pre_points$edp_b_diff >10, 1,0)
+pre_points$points_edp_b <- ifelse(pre_points$edp_b_diff <10 & pre_points$edp_b_diff >5 & pre_points$edp_b_ratio > 1.75, .5,pre_points$points_edp_b)
+pre_points$points_edp_h <- ifelse(pre_points$edp_h_diff >10, 1,0)
+pre_points$points_edp_h <- ifelse(pre_points$edp_h_diff <10 & pre_points$edp_h_diff >5 & pre_points$edp_h_ratio > 1.75, .5,pre_points$points_edp_h)
+
+pre_points$points_res_m <- ifelse(pre_points$res_diff_m >10, 1,0)
+pre_points$points_res_m <- ifelse(pre_points$res_diff_m <10 & pre_points$res_diff_m >5 & pre_points$res_ratio_m > 1.75, .5,pre_points$points_res_m)
+pre_points$points_res_b <- ifelse(pre_points$res_diff_b >10, 1,0)
+pre_points$points_res_b <- ifelse(pre_points$res_diff_b <10 & pre_points$res_diff_b >5 & pre_points$res_ratio_b > 1.75, .5,pre_points$points_res_b)
+pre_points$points_res_h <- ifelse(pre_points$res_diff_h >10, 1,0)
+pre_points$points_res_h <- ifelse(pre_points$res_diff_h <10 & pre_points$res_diff_h >5 & pre_points$res_ratio_h > 1.75, .5,pre_points$points_res_h)
+
+subset_test <- subset(pre_points, is.na(ReportingOfficerIdentificationID))
+
+subset_test <- subset_test[c("DepartmentName", "points_sa_m", "points_sa_b", "points_sa_h", "points_edp_m", "points_edp_b", "points_edp_h", "points_res_m", "points_res_b", "points_res_h")]
+
+subset_test$points <- rowSums(subset_test[,c(2:10)], na.rm=TRUE)
+subset_test <- arrange(subset_test,-points)
+  
+subset_test$DepartmentName <- factor(subset_test$DepartmentName, levels = rev(subset_test$DepartmentName))
+
+
+subset_test <- subset(subset_test,points>0)
+
+subset_test_points <- subset_test[c("DepartmentName", "points")]
+subset_test$points <- NULL
+
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+
+subset_test_graph <- subset_test %>%
+  gather("Disparity", "Points", 2:10)
+
+subset_test_graph$Disparity <- gsub("points_edp_b", "Black - Estimated driving population", subset_test_graph$Disparity)
+subset_test_graph$Disparity <- gsub("points_edp_m", "Minorities - Estimated driving population", subset_test_graph$Disparity)
+subset_test_graph$Disparity <- gsub("points_edp_h", "Hispanic - Estimated driving population", subset_test_graph$Disparity)
+
+subset_test_graph$Disparity <- gsub("points_res_m", "Minorities - Resident population", subset_test_graph$Disparity)
+subset_test_graph$Disparity <- gsub("points_res_b", "Black - Resident population", subset_test_graph$Disparity)
+subset_test_graph$Disparity <- gsub("points_res_h", "Hispanic - Resident population", subset_test_graph$Disparity)
+
+subset_test_graph$Disparity <- gsub("points_sa_m", "Minorities - Statewide average", subset_test_graph$Disparity)
+subset_test_graph$Disparity <- gsub("points_sa_b", "Black - Statewide average", subset_test_graph$Disparity)
+subset_test_graph$Disparity <- gsub("points_sa_h", "Hispanic - Statewide average", subset_test_graph$Disparity)
+
+subset_test_graph <- left_join(subset_test_graph, subset_test_points)
+
+
+#subset_test <- arrange(subset_test,-points)
+  
+#officers_m1$DepartmentName <- factor(officers_m1$DepartmentName, levels = officers_m1$DepartmentName[order(-officers_m1$Difference)])
+
+
+cbPalette <- c("#006d2c", "#2ca25f", "#66c2a4", "#54278f", "#756bb1", "#9e9ac8", "#b30000", "#e34a33", "#fc8d59")
+
+jj <- ggplot(subset_test_graph, aes(x=DepartmentName, y=Points, fill=Disparity)) 
+jj <- jj + scale_fill_manual(values=cbPalette) 
+jj <- jj + geom_bar(stat="identity") 
+jj <- jj + geom_text(aes(x=DepartmentName, y=points, ymax=points, label=points, hjust=-1), fontface="bold", size=7, family="Calibri")
+jj <- jj + coord_flip() 
+jj <- jj + labs(x=NULL, y=NULL, title="Disparity points by Department")
+#jj <- jj + scale_y_discrete(expand=c(0.05,0))
+
+jj <- jj + theme_bw(base_family="Calibri")
+jj <- jj + theme(panel.grid.major=element_blank())
+jj <- jj + theme(panel.grid.minor=element_blank())
+jj <- jj + theme(panel.border=element_blank())
+jj <- jj + theme(axis.ticks=element_blank())
+jj <- jj + theme(axis.text.x=element_blank())
+jj <- jj + theme(text = element_text(size=24))
+
+jj <- jj + theme(plot.title=element_text(face="bold", family="Lato Bold", size=22))
+jj <- jj + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(b=12)))
+jj <- jj + theme(plot.caption=element_text(size=7, margin=margin(t=12), color="#7a7d7e"))
+jj
+
+ggsave(jj, file = "img/points_all.png", width = 13, height = 20, type = "cairo-png", dpi=300)
+
+
+for_hc <- spread(subset_test_graph, Disparity, Points)
+```
+# Disparity points
+
+```{r dt, fig.width=9, fig.height=6, echo=FALSE}
+dept_p <- subset(dept, points>0)
+
+dept_p <- dept_p %>%
+  select(DepartmentName, points, m_t_s_pop_diff, b_t_s_pop_diff, h_t_s_pop_diff, edp_m_diff, edp_b_diff, edp_h_diff, res_diff_m, res_diff_b, res_diff_h)
+
+datatable(dept_p)
+```

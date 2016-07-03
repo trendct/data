@@ -1,0 +1,2003 @@
+---
+title: "location_analysis"
+author: "Andrew Ba Tran"
+date: "June 8, 2016"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(cache=TRUE)
+require(scales)
+require(dplyr)
+require(gtools)
+require(ggplot2)
+require(rgdal)
+require(ggmap)
+require(Cairo)
+require(gpclib)
+require(maptools)
+require(reshape)
+library(devtools)
+library(stringr)
+library(raster)
+library(sp)
+library(lubridate)
+library(ggplot2)
+library(ggalt)
+## install_github("trendct/ctnamecleaner")
+##library(ctnamecleaner)
+library(leaflet)
+library(tidyr)
+library(extrafont)
+
+```
+
+```{r dataprep}
+stops <- read.csv("data/mega.csv", stringsAsFactors=FALSE)
+stops <- stops[!is.na(stops$InterventionLocationLatitude),]
+
+stops$timeofday <- as.POSIXct(as.Date(stops$InterventionTime, origin="1899-12-30"))
+
+
+stops$ethnicity <- ifelse(((stops$SubjectRaceCode ==  "W") & (stops$SubjectEthnicityCode =="N")), "White", "Minority")
+stops$RE <- paste0(stops$SubjectRaceCode, stops$SubjectEthnicityCode)
+stops$RE <- gsub("AH", "Hispanic", stops$RE)
+stops$RE <- gsub("AM", "Middle_eastern", stops$RE)
+stops$RE <- gsub("AN", "Asian", stops$RE)
+stops$RE <- gsub("BH", "Black", stops$RE)
+stops$RE <- gsub("BM", "Black", stops$RE)
+stops$RE <- gsub("BN", "Black", stops$RE)
+stops$RE <- gsub("IH", "Indian", stops$RE)
+stops$RE <- gsub("IM", "Middle_eastern", stops$RE)
+stops$RE <- gsub("IN", "Indian", stops$RE)
+stops$RE <- gsub("WH", "Hispanic", stops$RE)
+stops$RE <- gsub("WM", "Middle_eastern", stops$RE)
+stops$RE <- gsub("WN", "White", stops$RE)
+
+attr(stops$timeofday,"tzone") <- "EST"
+
+forcarto <- stops[c("RE", "ethnicity", "InterventionDate", "timeofday", "InterventionLocationLatitude", "InterventionLocationLongitude")]
+write.csv(forcarto, "data/forcarto.csv")
+
+y2013vy2014 <- stops %>%
+  group_by(DepartmentName, RE) %>%
+  summarise(total=n()) %>%
+  spread(RE, total) %>%
+  mutate(total=sum(White+Black,Hispanic,Middle_eastern,Asian,Indian, na.rm=TRUE), white_p=White/total, black_p=Black/total, asian_p=Asian/total, hispanic_p=Hispanic/total)
+
+y2013vy2014 <- y2013vy2014[c("DepartmentName", "white_p", "black_p", "asian_p", "hispanic_p")]
+
+y2013vy2014 <- gather(y2013vy2014, "DepartmentName", "percent")
+colnames(y2013vy2014) <- c("DepartmentName", "type", "percent2013")
+
+this_year <- read.csv("data/mega_df.csv", stringsAsFactors=FALSE)
+this_year <- subset(this_year, is.na(ReportingOfficerIdentificationID))
+
+this_year <- this_year[c("DepartmentName", "white_p", "black_p", "asian_p", "hispanic_p")]
+
+this_year <- gather(this_year, "DepartmentName", "percent2014")
+colnames(this_year) <- c("DepartmentName", "type", "percent2014")
+
+y2013vy2014 <- left_join(y2013vy2014, this_year)
+y2013vy2014$percent2014 <- y2013vy2014$percent2014/100
+y2013vy2014$type <- gsub("_p", "", y2013vy2014$type)
+
+department_list <- unique(y2013vy2014$DepartmentName)
+
+y2013vy2014$type <- gsub("white", "White", y2013vy2014$type)
+y2013vy2014$type <- gsub("black", "Black", y2013vy2014$type)
+y2013vy2014$type <- gsub("asian", "Asian", y2013vy2014$type)
+y2013vy2014$type <- gsub("hispanic", "Hispanic", y2013vy2014$type)
+
+percent_first <- function(x) {
+  x <- sprintf("%d%%", round(x*100))
+  x[2:length(x)] <- sub("%$", "", x[2:length(x)])
+  x
+}
+```
+
+```{r charts, fig.width=10, fig.height=6}
+for (i in 1:length(department_list)) {
+  dumbbell1 <- subset(y2013vy2014, DepartmentName==department_list[i])
+  
+dumbbell1$x_adjusted1 <- ifelse(((dumbbell1$percent2013-dumbbell1$percent2014<.02) & (dumbbell1$percent2013-dumbbell1$percent2014>0)), dumbbell1$percent2013+.02, dumbbell1$percent2013)
+dumbbell1$x_adjusted1 <- ifelse(((dumbbell1$percent2014-dumbbell1$percent2013<.02) & (dumbbell1$percent2014-dumbbell1$percent2013>0)), dumbbell1$percent2013-.02, dumbbell1$x_adjusted1)
+
+dumbbell1$x_adjusted2 <- ifelse(((dumbbell1$percent2013-dumbbell1$percent2014<.033) & (dumbbell1$percent2013-dumbbell1$percent2014>0)), dumbbell1$percent2014-.02, dumbbell1$percent2014)
+dumbbell1$x_adjusted2 <- ifelse(((dumbbell1$percent2014-dumbbell1$percent2013<.02) & (dumbbell1$percent2014-dumbbell1$percent2013>0)), dumbbell1$percent2014+.02, dumbbell1$x_adjusted2)
+
+gg <- ggplot()
+
+gg <- gg + geom_segment(data=dumbbell1, aes(y=type, yend=type, x=0, xend=1), color="#b2b2b2", size=0.15)
+
+gg <- gg + geom_dumbbell(data=dumbbell1, aes(y=type, x=percent2013, xend=percent2014),
+                         size=1.5, color="#b2b2b2", point.size.l=3, point.size.r=3,
+                         point.colour.l="tomato", point.colour.r="steelblue")
+
+#   point.colour.l="tomato", point.colour.r="steelblue"
+#gg <- gg + geom_lollipop(point.colour="steelblue", point.size=3, horizontal=TRUE)
+gg <- gg + scale_x_continuous(expand=c(0,0), limits=c(0, 1))
+
+
+# text below points
+# gg <- gg + annotate(data=filter(dumbbell1, type=="White"),
+#                      aes(x=x_adjusted1, y=type, label="2013"),
+#                      color="tomato", size=6, vjust=-1, hjust=-.05, fontface="bold", family="Calibri")
+# gg <- gg + geom_text(data=filter(dumbbell1, type=="White"),
+#                      aes(x=x_adjusted2, y=type, label="2014"),
+#                      color="steelblue", size=6, vjust=-1, hjust=.8, fontface="bold", family="Calibri")
+# text above points
+
+gg <- gg + geom_text(data=dumbbell1, aes(x=x_adjusted1, y=type, label=percent_first(percent2013)),
+                     color="tomato", size=5, vjust=1.75, family="Calibri")
+
+gg <- gg + geom_text(data=dumbbell1, color="steelblue", size=5, vjust=1.75, family="Calibri",
+                     aes(x=x_adjusted2, y=type, label=percent_first(percent2014)),
+                     color="tomato", size=5, vjust=1.75, family="Calibri")
+# difference column
+
+gg <- gg + scale_y_discrete(expand=c(.7,0))
+gg <- gg + labs(x=NULL, y=NULL, title=paste("Traffic stops in", department_list[i], "by race"),
+                caption="CCSU Institute for Municipal and Regional Policy Management")
+gg <- gg + theme_bw(base_family="Calibri")
+gg <- gg + theme(text = element_text(size=20))
+
+gg <- gg + theme(panel.grid.major=element_blank())
+gg <- gg + theme(panel.grid.minor=element_blank())
+gg <- gg + theme(panel.border=element_blank())
+gg <- gg + theme(text = element_text(size=20))
+gg <- gg + theme(axis.ticks=element_blank())
+gg <- gg + theme(axis.text.x=element_blank())
+gg <- gg + theme(plot.title=element_text(face="bold", family="Lato Black", size=22))
+gg <- gg + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(b=12)))
+gg <- gg + theme(plot.caption=element_text(size=12, margin=margin(t=12), color="#7a7d7e"))
+
+gg <- gg +   annotate("point", x = .7, y = 2.5, colour = "tomato", size = 2)  
+gg <- gg +   annotate("point", x = .7, y = 1.5, colour = "steelblue", size = 2) 
+gg <- gg +   annotate("text", x = .75, y = 2.5, label = "2013", size=5, colour="tomato") 
+gg <- gg +   annotate("text", x = .75, y = 1.5, label = "2014", size=5, colour="steelblue")
+  
+print(gg)
+
+hm <- gsub(" ", "", department_list[i])
+hm <- str_to_lower(hm)
+ggsave(gg, file = paste0("img/locations_", hm, ".png"), width = 8, height = 4, type = "cairo-png")
+
+
+}
+
+```
+
+```{r census_tracts, fig.height=6, fig.width=9}
+
+
+
+gpclibPermit()
+gpclibPermitStatus()
+towntracts <- readOGR(dsn="maps", layer="census_tracts")
+towntracts_only <- towntracts
+towntracts <- fortify(towntracts, region="GEOID10")
+
+
+tracts2towns <- read.csv("maps/tracts_to_towns.csv", stringsAsFactors=FALSE)
+colnames(tracts2towns) <- c("id", "town_name")
+tracts2towns$id <- as.character(tracts2towns$id)
+tracts2towns$id <- paste0("0", tracts2towns$id)
+tracts2towns$town_name <- str_trim(tracts2towns$town_name)
+
+#towntracts_only <- left_join(towntracts_only, tracts2towns)
+
+coords <- stops[c("InterventionLocationLongitude", "InterventionLocationLatitude")]
+coords <- coords[complete.cases(coords),]
+sp <- SpatialPoints(coords)
+
+proj4string(sp) <- "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
+proj4string(sp)
+
+plot(towntracts_only)
+plot(sp, col="red" , add=TRUE)
+
+
+by_tract <- over(sp, towntracts_only)
+
+by_tract <- by_tract %>%
+  group_by(GEOID10) %>%
+  summarise(total=n())
+
+by_tract <- by_tract[!is.na(by_tract$GEOID10),]
+colnames(by_tract) <- c("id", "total")
+by_tract$id <- as.character(by_tract$id)
+
+by_tract <- left_join(by_tract, tracts2towns)
+by_tract <- subset(by_tract, town_name!="Scotland")
+
+adjacent <- read.csv("data/adjacent_search.csv", stringsAsFactors = FALSE)
+
+by_tract <- left_join(by_tract, adjacent)
+
+total_map <- left_join(towntracts, by_tract)
+
+
+tm_ct <- ggplot() +
+  geom_polygon(data = total_map, aes(x=long, y=lat, group=group, fill=total), color = "black", size=0.2) +
+  geom_polygon(data = total_map, aes(x=long, y=lat, group=group, fill=total), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Where traffic stops occur", fill="")
+print(tm_ct)
+
+## Percent by town
+
+town_percent <- by_tract %>%
+  group_by(town_department) %>%
+  mutate(subtotal=sum(total)) %>%
+  mutate(percent=round(total/subtotal*100,2))
+
+percent_map <- left_join(towntracts, town_percent)
+
+
+
+pm_ct <- ggplot() +
+  geom_polygon(data = percent_map, aes(x=long, y=lat, group=group, fill=percent), color = "black", size=0.2) +
+  geom_polygon(data = percent_map, aes(x=long, y=lat, group=group, fill=percent), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Where traffic stops occur (percent by town)", fill="")
+print(pm_ct)
+
+```
+
+## Minorities and whites stopped by tract
+
+```{r minorities_by_tracts, fig.width=9, fig.height=6}
+
+
+gpclibPermit()
+gpclibPermitStatus()
+towntracts <- readOGR(dsn="maps", layer="census_tracts")
+towntracts_only <- towntracts
+towntracts <- fortify(towntracts, region="GEOID10")
+
+
+tracts2towns <- read.csv("maps/tracts_to_towns.csv", stringsAsFactors=FALSE)
+colnames(tracts2towns) <- c("id", "town_name")
+tracts2towns$id <- as.character(tracts2towns$id)
+tracts2towns$id <- paste0("0", tracts2towns$id)
+tracts2towns$town_name <- str_trim(tracts2towns$town_name)
+
+# Minority stops
+coords <- subset(stops, ethnicity=="Minority")
+coords <- coords[c("InterventionLocationLongitude", "InterventionLocationLatitude")]
+coords <- coords[complete.cases(coords),]
+sp <- SpatialPoints(coords)
+
+proj4string(sp) <- "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
+proj4string(sp)
+
+plot(towntracts_only)
+plot(sp, col="red" , add=TRUE)
+
+
+by_tract <- over(sp, towntracts_only)
+
+by_tract <- by_tract %>%
+  group_by(GEOID10) %>%
+  summarise(total=n())
+
+by_tract <- by_tract[!is.na(by_tract$GEOID10),]
+colnames(by_tract) <- c("id", "total")
+by_tract$id <- as.character(by_tract$id)
+
+by_tract <- left_join(by_tract, tracts2towns)
+by_tract <- subset(by_tract, town_name!="Scotland")
+
+adjacent <- read.csv("data/adjacent_search.csv", stringsAsFactors = FALSE)
+
+by_tract <- left_join(by_tract, adjacent)
+
+minority_tracts <- by_tract
+
+# White stops
+coords <- subset(stops, ethnicity=="White")
+coords <- coords[c("InterventionLocationLongitude", "InterventionLocationLatitude")]
+coords <- coords[complete.cases(coords),]
+sp <- SpatialPoints(coords)
+
+proj4string(sp) <- "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
+proj4string(sp)
+
+plot(towntracts_only)
+plot(sp, col="red" , add=TRUE)
+
+
+by_tract <- over(sp, towntracts_only)
+
+by_tract <- by_tract %>%
+  group_by(GEOID10) %>%
+  summarise(total=n())
+
+by_tract <- by_tract[!is.na(by_tract$GEOID10),]
+colnames(by_tract) <- c("id", "total")
+by_tract$id <- as.character(by_tract$id)
+
+by_tract <- left_join(by_tract, tracts2towns)
+by_tract <- subset(by_tract, town_name!="Scotland")
+
+adjacent <- read.csv("data/adjacent_search.csv", stringsAsFactors = FALSE)
+
+by_tract <- left_join(by_tract, adjacent)
+by_tract <- by_tract[c("id", "total")]
+colnames(by_tract) <- c("id", "white")
+
+mw_tract <- left_join(minority_tracts, by_tract)
+mw_tract$minority_p <- round(mw_tract$total/(mw_tract$total+mw_tract$white)*100,2)
+mw_tract$white_p <- round(mw_tract$white/(mw_tract$total+mw_tract$white)*100,2)
+
+total_map <- left_join(towntracts, mw_tract)
+
+
+# Black stops
+coords <- subset(stops, RE=="Black")
+coords <- coords[c("InterventionLocationLongitude", "InterventionLocationLatitude")]
+coords <- coords[complete.cases(coords),]
+sp <- SpatialPoints(coords)
+
+proj4string(sp) <- "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
+proj4string(sp)
+
+plot(towntracts_only)
+plot(sp, col="red" , add=TRUE)
+
+
+by_tract <- over(sp, towntracts_only)
+
+by_tract <- by_tract %>%
+  group_by(GEOID10) %>%
+  summarise(total=n())
+
+by_tract <- by_tract[!is.na(by_tract$GEOID10),]
+colnames(by_tract) <- c("id", "total")
+by_tract$id <- as.character(by_tract$id)
+
+by_tract <- left_join(by_tract, tracts2towns)
+by_tract <- subset(by_tract, town_name!="Scotland")
+
+adjacent <- read.csv("data/adjacent_search.csv", stringsAsFactors = FALSE)
+
+by_tract <- left_join(by_tract, adjacent)
+by_tract <- by_tract[c("id", "total")]
+colnames(by_tract) <- c("id", "black")
+
+mw_tract <- left_join(mw_tract, by_tract)
+mw_tract$black_p <- round(mw_tract$black/(mw_tract$total+mw_tract$white)*100,2)
+
+total_map <- left_join(towntracts, mw_tract)
+
+
+
+# Hispanic stops
+coords <- subset(stops, RE=="Hispanic")
+coords <- coords[c("InterventionLocationLongitude", "InterventionLocationLatitude")]
+coords <- coords[complete.cases(coords),]
+sp <- SpatialPoints(coords)
+
+proj4string(sp) <- "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
+proj4string(sp)
+
+plot(towntracts_only)
+plot(sp, col="red" , add=TRUE)
+
+
+by_tract <- over(sp, towntracts_only)
+
+by_tract <- by_tract %>%
+  group_by(GEOID10) %>%
+  summarise(total=n())
+
+by_tract <- by_tract[!is.na(by_tract$GEOID10),]
+colnames(by_tract) <- c("id", "total")
+by_tract$id <- as.character(by_tract$id)
+
+by_tract <- left_join(by_tract, tracts2towns)
+by_tract <- subset(by_tract, town_name!="Scotland")
+
+adjacent <- read.csv("data/adjacent_search.csv", stringsAsFactors = FALSE)
+
+by_tract <- left_join(by_tract, adjacent)
+by_tract <- by_tract[c("id", "total")]
+colnames(by_tract) <- c("id", "hispanic")
+
+mw_tract <- left_join(mw_tract, by_tract)
+mw_tract$hispanic_p <- round(mw_tract$hispanic/(mw_tract$total+mw_tract$white)*100,2)
+
+
+
+write.csv(mw_tract, "data/tracts_stops.csv")
+
+
+total_map <- left_join(towntracts, mw_tract)
+
+## Minorities
+
+tm_ct <- ggplot() +
+  geom_polygon(data = total_map, aes(x=long, y=lat, group=group, fill=total), color = "black", size=0.2) +
+  geom_polygon(data = total_map, aes(x=long, y=lat, group=group, fill=total), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Where minorities are pulled over", fill="")
+print(tm_ct)
+
+## Percent by town
+
+pm_ct <- ggplot() +
+  geom_polygon(data = total_map, aes(x=long, y=lat, group=group, fill=minority_p), color = "black", size=0.2) +
+  geom_polygon(data = total_map, aes(x=long, y=lat, group=group, fill=minority_p), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Where minorities are pulled over (percent by tract)", fill="")
+print(pm_ct)
+
+## White drivers
+
+tm_ct <- ggplot() +
+  geom_polygon(data = total_map, aes(x=long, y=lat, group=group, fill=white), color = "black", size=0.2) +
+  geom_polygon(data = total_map, aes(x=long, y=lat, group=group, fill=white), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Where White drivers are pulled over", fill="")
+print(tm_ct)
+
+## Percent by town
+
+pm_ct <- ggplot() +
+  geom_polygon(data = total_map, aes(x=long, y=lat, group=group, fill=white_p), color = "black", size=0.2) +
+  geom_polygon(data = total_map, aes(x=long, y=lat, group=group, fill=white_p), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Where White drivers are pulled over (percent by tract)", fill="")
+print(pm_ct)
+
+## Black drivers
+
+tm_ct <- ggplot() +
+  geom_polygon(data = total_map, aes(x=long, y=lat, group=group, fill=black), color = "black", size=0.2) +
+  geom_polygon(data = total_map, aes(x=long, y=lat, group=group, fill=black), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Where Black drivers are pulled over", fill="")
+print(tm_ct)
+
+## Percent by town
+
+pm_ct <- ggplot() +
+  geom_polygon(data = total_map, aes(x=long, y=lat, group=group, fill=black_p), color = "black", size=0.2) +
+  geom_polygon(data = total_map, aes(x=long, y=lat, group=group, fill=black_p), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Where Black drivers are pulled over (percent by tract)", fill="")
+print(pm_ct)
+
+## Hispanic drivers
+
+tm_ct <- ggplot() +
+  geom_polygon(data = total_map, aes(x=long, y=lat, group=group, fill=hispanic), color = "black", size=0.2) +
+  geom_polygon(data = total_map, aes(x=long, y=lat, group=group, fill=hispanic), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Where Hispanic drivers are pulled over", fill="")
+print(tm_ct)
+
+## Percent by town
+
+pm_ct <- ggplot() +
+  geom_polygon(data = total_map, aes(x=long, y=lat, group=group, fill=hispanic_p), color = "black", size=0.2) +
+  geom_polygon(data = total_map, aes(x=long, y=lat, group=group, fill=hispanic_p), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Where Hispanic drivers are pulled over (percent by tract)", fill="")
+print(pm_ct)
+
+
+
+gpclibPermit()
+gpclibPermitStatus()
+townborders <- readOGR(dsn="maps", layer="ctgeo")
+townborders_only <- townborders
+townborders<- fortify(townborders, region="NAME10")
+total_map <- subset(total_map, !is.na(town_name))
+```
+
+```{r east_hartford_focus, fig.height=8, fig.width=9}
+town_name <- "East Hartford"
+#test_map <- subset(total_map, town_department==town_name)
+test_map <- subset(total_map, town_department=="East Hartford")
+
+test_map <- subset(test_map, !is.na(white_p))
+
+test_borders <- subset(townborders, id==town_name)
+
+# Hispanic
+
+pm_ct <- ggplot() 
+pm_ct <- pm_ct + geom_polygon(data = test_map, aes(x=long, y=lat, group=group, fill=hispanic_p/100), color="white", size=.25)
+pm_ct <- pm_ct + geom_polygon(data = test_borders, aes(x=long, y=lat, group=group), fill=NA, color = "black", size=0.5)
+pm_ct <- pm_ct + coord_map() 
+pm_ct <- pm_ct + scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=9), labels=percent, name="Stops") 
+pm_ct <- pm_ct + theme_nothing(legend=TRUE) 
+pm_ct <- pm_ct + labs(x=NULL, y=NULL, title=paste("Where Hispanic drivers are pulled over by", town_name, "police"))
+
+#pm_ct <- pm_ct + theme_bw(base_family="Calibri")
+#pm_ct <- pm_ct + theme(panel.grid.major=element_blank())
+#pm_ct <- pm_ct + theme(panel.grid.minor=element_blank())
+#pm_ct <- pm_ct + theme(panel.border=element_blank())
+pm_ct <- pm_ct + theme(text = element_text(size=15))
+#pm_ct <- pm_ct + theme(axis.ticks=element_blank())
+#pm_ct <- pm_ct + theme(axis.text.x=element_blank())
+pm_ct <- pm_ct + theme(plot.title=element_text(face="bold", hjust=.4))
+pm_ct <- pm_ct + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(l=20)))
+pm_ct <- pm_ct + theme(plot.caption=element_text(size=12, margin=margin(t=12), color="#7a7d7e", hjust=0))
+#pm_ct <- pm_ct + scale_fill_gradient(low = "#b2b2b2", high = "tomato", labels = percent)
+pm_ct <- pm_ct + annotate("segment", x = -72.58, xend = -72.675, y = 41.815, yend = 41.815, colour = "lightblue", size=.5) 
+pm_ct <- pm_ct + annotate("point", x = -72.58, y = 41.815, colour = "lightblue", size = 2) 
+pm_ct <- pm_ct + annotate("text", x = -72.71, y = 41.815, label = "South Windsor", size=5, colour="gray30") 
+pm_ct <- pm_ct + annotate("segment", x = -72.5, xend = -72.55, y = 41.75, yend = 41.71, colour = "lightblue", size=.5) 
+pm_ct <- pm_ct + annotate("point", x = -72.5, y = 41.75, colour = "lightblue", size = 2) 
+pm_ct <- pm_ct + annotate("text", x = -72.578, y = 41.71, label = "Manchester", size=5, colour="gray30") 
+pm_ct <- pm_ct + annotate("point", x = -72.75, y = 41.71, colour="white", size=.2) 
+pm_ct <- pm_ct + theme(legend.key.size = unit(1, "cm"))
+pm_ct
+#  labs(title=" (percent by tract)", fill="")
+print(pm_ct)
+ggsave(pm_ct, file = "img/stops_easthartford_hispanic.png", width = 8, height = 6, type = "cairo-png")
+
+
+# Black
+
+pm_ct <- ggplot() 
+pm_ct <- pm_ct + geom_polygon(data = test_map, aes(x=long, y=lat, group=group, fill=black_p/100), color="white", size=.25)
+pm_ct <- pm_ct + geom_polygon(data = test_borders, aes(x=long, y=lat, group=group), fill=NA, color = "black", size=0.5)
+pm_ct <- pm_ct + coord_map() 
+pm_ct <- pm_ct + scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=9), labels=percent, name="Stops") 
+pm_ct <- pm_ct + theme_nothing(legend=TRUE) 
+pm_ct <- pm_ct + labs(x=NULL, y=NULL, title=paste("Where black drivers are pulled over by", town_name, "police"))
+
+#pm_ct <- pm_ct + theme_bw(base_family="Calibri")
+#pm_ct <- pm_ct + theme(panel.grid.major=element_blank())
+#pm_ct <- pm_ct + theme(panel.grid.minor=element_blank())
+#pm_ct <- pm_ct + theme(panel.border=element_blank())
+pm_ct <- pm_ct + theme(text = element_text(size=15))
+#pm_ct <- pm_ct + theme(axis.ticks=element_blank())
+#pm_ct <- pm_ct + theme(axis.text.x=element_blank())
+pm_ct <- pm_ct + theme(plot.title=element_text(face="bold", hjust=.4))
+pm_ct <- pm_ct + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(l=20)))
+pm_ct <- pm_ct + theme(plot.caption=element_text(size=12, margin=margin(t=12), color="#7a7d7e", hjust=0))
+#pm_ct <- pm_ct + scale_fill_gradient(low = "#b2b2b2", high = "tomato", labels = percent)
+pm_ct <- pm_ct + annotate("segment", x = -72.58, xend = -72.675, y = 41.815, yend = 41.815, colour = "lightblue", size=.5) 
+pm_ct <- pm_ct + annotate("point", x = -72.58, y = 41.815, colour = "lightblue", size = 2) 
+pm_ct <- pm_ct + annotate("text", x = -72.71, y = 41.815, label = "South Windsor", size=5, colour="gray30") 
+pm_ct <- pm_ct + annotate("segment", x = -72.5, xend = -72.55, y = 41.75, yend = 41.71, colour = "lightblue", size=.5) 
+pm_ct <- pm_ct + annotate("point", x = -72.5, y = 41.75, colour = "lightblue", size = 2) 
+pm_ct <- pm_ct + annotate("text", x = -72.578, y = 41.71, label = "Manchester", size=5, colour="gray30") 
+pm_ct <- pm_ct + annotate("point", x = -72.75, y = 41.71, colour="white", size=.2) 
+pm_ct <- pm_ct + theme(legend.key.size = unit(1, "cm"))
+pm_ct
+#  labs(title=" (percent by tract)", fill="")
+print(pm_ct)
+ggsave(pm_ct, file = "img/stops_easthartford_black.png", width = 8, height = 6, type = "cairo-png")
+
+
+
+# Minorities
+
+pm_ct <- ggplot() 
+pm_ct <- pm_ct + geom_polygon(data = test_map, aes(x=long, y=lat, group=group, fill=minority_p/100), color="white", size=.25)
+pm_ct <- pm_ct + geom_polygon(data = test_borders, aes(x=long, y=lat, group=group), fill=NA, color = "black", size=0.5)
+pm_ct <- pm_ct + coord_map() 
+pm_ct <- pm_ct + scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=9), labels=percent, name="Stops") 
+pm_ct <- pm_ct + theme_nothing(legend=TRUE) 
+pm_ct <- pm_ct + labs(x=NULL, y=NULL, title=paste("Where minority drivers are pulled over by", town_name, "police"))
+
+#pm_ct <- pm_ct + theme_bw(base_family="Calibri")
+#pm_ct <- pm_ct + theme(panel.grid.major=element_blank())
+#pm_ct <- pm_ct + theme(panel.grid.minor=element_blank())
+#pm_ct <- pm_ct + theme(panel.border=element_blank())
+pm_ct <- pm_ct + theme(text = element_text(size=15))
+#pm_ct <- pm_ct + theme(axis.ticks=element_blank())
+#pm_ct <- pm_ct + theme(axis.text.x=element_blank())
+pm_ct <- pm_ct + theme(plot.title=element_text(face="bold", hjust=.4))
+pm_ct <- pm_ct + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(l=20)))
+pm_ct <- pm_ct + theme(plot.caption=element_text(size=12, margin=margin(t=12), color="#7a7d7e", hjust=0))
+#pm_ct <- pm_ct + scale_fill_gradient(low = "#b2b2b2", high = "tomato", labels = percent)
+pm_ct <- pm_ct + annotate("segment", x = -72.58, xend = -72.675, y = 41.815, yend = 41.815, colour = "lightblue", size=.5) 
+pm_ct <- pm_ct + annotate("point", x = -72.58, y = 41.815, colour = "lightblue", size = 2) 
+pm_ct <- pm_ct + annotate("text", x = -72.71, y = 41.815, label = "South Windsor", size=5, colour="gray30") 
+pm_ct <- pm_ct + annotate("segment", x = -72.5, xend = -72.55, y = 41.75, yend = 41.71, colour = "lightblue", size=.5) 
+pm_ct <- pm_ct + annotate("point", x = -72.5, y = 41.75, colour = "lightblue", size = 2) 
+pm_ct <- pm_ct + annotate("text", x = -72.578, y = 41.71, label = "Manchester", size=5, colour="gray30") 
+pm_ct <- pm_ct + annotate("point", x = -72.75, y = 41.71, colour="white", size=.2) 
+pm_ct <- pm_ct + theme(legend.key.size = unit(1, "cm"))
+pm_ct
+#  labs(title=" (percent by tract)", fill="")
+print(pm_ct)
+ggsave(pm_ct, file = "img/stops_easthartford_minorities.png", width = 8, height = 6, type = "cairo-png")
+
+
+# White
+
+pm_ct <- ggplot() 
+pm_ct <- pm_ct + geom_polygon(data = test_map, aes(x=long, y=lat, group=group, fill=white_p/100), color="white", size=.25)
+pm_ct <- pm_ct + geom_polygon(data = test_borders, aes(x=long, y=lat, group=group), fill=NA, color = "black", size=0.5)
+pm_ct <- pm_ct + coord_map() 
+pm_ct <- pm_ct + scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=9), labels=percent, name="Stops") 
+pm_ct <- pm_ct + theme_nothing(legend=TRUE) 
+pm_ct <- pm_ct + labs(x=NULL, y=NULL, title=paste("Where white drivers are pulled over by", town_name, "police"))
+
+#pm_ct <- pm_ct + theme_bw(base_family="Calibri")
+#pm_ct <- pm_ct + theme(panel.grid.major=element_blank())
+#pm_ct <- pm_ct + theme(panel.grid.minor=element_blank())
+#pm_ct <- pm_ct + theme(panel.border=element_blank())
+pm_ct <- pm_ct + theme(text = element_text(size=15))
+#pm_ct <- pm_ct + theme(axis.ticks=element_blank())
+#pm_ct <- pm_ct + theme(axis.text.x=element_blank())
+pm_ct <- pm_ct + theme(plot.title=element_text(face="bold", hjust=.4))
+pm_ct <- pm_ct + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(l=20)))
+pm_ct <- pm_ct + theme(plot.caption=element_text(size=12, margin=margin(t=12), color="#7a7d7e", hjust=0))
+#pm_ct <- pm_ct + scale_fill_gradient(low = "#b2b2b2", high = "tomato", labels = percent)
+pm_ct <- pm_ct + annotate("segment", x = -72.58, xend = -72.675, y = 41.815, yend = 41.815, colour = "lightblue", size=.5) 
+pm_ct <- pm_ct + annotate("point", x = -72.58, y = 41.815, colour = "lightblue", size = 2) 
+pm_ct <- pm_ct + annotate("text", x = -72.71, y = 41.815, label = "South Windsor", size=5, colour="gray30") 
+pm_ct <- pm_ct + annotate("segment", x = -72.5, xend = -72.55, y = 41.75, yend = 41.71, colour = "lightblue", size=.5) 
+pm_ct <- pm_ct + annotate("point", x = -72.5, y = 41.75, colour = "lightblue", size = 2) 
+pm_ct <- pm_ct + annotate("text", x = -72.578, y = 41.71, label = "Manchester", size=5, colour="gray30") 
+pm_ct <- pm_ct + annotate("point", x = -72.75, y = 41.71, colour="white", size=.2) 
+pm_ct <- pm_ct + theme(legend.key.size = unit(1, "cm"))
+pm_ct
+#  labs(title=" (percent by tract)", fill="")
+print(pm_ct)
+ggsave(pm_ct, file = "img/stops_easthartford_white.png", width = 8, height = 6, type = "cairo-png")
+```
+
+
+```{r granby, fig.height=8, fig.width=9}
+town_name <- "Granby"
+#test_map <- subset(total_map, town_department==town_name)
+test_map <- subset(total_map, town_department=="Granby")
+
+test_map <- subset(test_map, !is.na(white_p))
+
+test_borders <- subset(townborders, id==town_name)
+
+# Hispanic
+
+pm_ct <- ggplot() 
+pm_ct <- pm_ct + geom_polygon(data = test_map, aes(x=long, y=lat, group=group, fill=hispanic_p/100), color="white", size=.25)
+pm_ct <- pm_ct + geom_polygon(data = test_borders, aes(x=long, y=lat, group=group), fill=NA, color = "black", size=0.5)
+pm_ct <- pm_ct + coord_map() 
+pm_ct <- pm_ct + scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=9), labels=percent, name="Stops") 
+pm_ct <- pm_ct + theme_nothing(legend=TRUE) 
+pm_ct <- pm_ct + labs(x=NULL, y=NULL, title=paste("Where Hispanic drivers are pulled over by", town_name, "police"))
+
+#pm_ct <- pm_ct + theme_bw(base_family="Calibri")
+#pm_ct <- pm_ct + theme(panel.grid.major=element_blank())
+#pm_ct <- pm_ct + theme(panel.grid.minor=element_blank())
+#pm_ct <- pm_ct + theme(panel.border=element_blank())
+pm_ct <- pm_ct + theme(text = element_text(size=15))
+#pm_ct <- pm_ct + theme(axis.ticks=element_blank())
+#pm_ct <- pm_ct + theme(axis.text.x=element_blank())
+pm_ct <- pm_ct + theme(plot.title=element_text(face="bold", hjust=.4))
+pm_ct <- pm_ct + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(l=20)))
+pm_ct <- pm_ct + theme(plot.caption=element_text(size=12, margin=margin(t=12), color="#7a7d7e", hjust=0))
+pm_ct
+#  labs(title=" (percent by tract)", fill="")
+print(pm_ct)
+ggsave(pm_ct, file = "img/stops_granby_hispanic.png", width = 8, height = 6, type = "cairo-png")
+
+
+# Black
+
+pm_ct <- ggplot() 
+pm_ct <- pm_ct + geom_polygon(data = test_map, aes(x=long, y=lat, group=group, fill=black_p/100), color="white", size=.25)
+pm_ct <- pm_ct + geom_polygon(data = test_borders, aes(x=long, y=lat, group=group), fill=NA, color = "black", size=0.5)
+pm_ct <- pm_ct + coord_map() 
+pm_ct <- pm_ct + scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=9), labels=percent, name="Stops") 
+pm_ct <- pm_ct + theme_nothing(legend=TRUE) 
+pm_ct <- pm_ct + labs(x=NULL, y=NULL, title=paste("Where black drivers are pulled over by", town_name, "police"))
+
+#pm_ct <- pm_ct + theme_bw(base_family="Calibri")
+#pm_ct <- pm_ct + theme(panel.grid.major=element_blank())
+#pm_ct <- pm_ct + theme(panel.grid.minor=element_blank())
+#pm_ct <- pm_ct + theme(panel.border=element_blank())
+pm_ct <- pm_ct + theme(text = element_text(size=15))
+#pm_ct <- pm_ct + theme(axis.ticks=element_blank())
+#pm_ct <- pm_ct + theme(axis.text.x=element_blank())
+pm_ct <- pm_ct + theme(plot.title=element_text(face="bold", hjust=.4))
+pm_ct <- pm_ct + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(l=20)))
+pm_ct <- pm_ct + theme(plot.caption=element_text(size=12, margin=margin(t=12), color="#7a7d7e", hjust=0))
+#pm_ct <- pm_ct + scale_fill_gradient(low = "#b2b2b2", high = "tomato", labels = percent)
+pm_ct
+#  labs(title=" (percent by tract)", fill="")
+print(pm_ct)
+ggsave(pm_ct, file = "img/stops_granby_black.png", width = 8, height = 6, type = "cairo-png")
+
+
+
+# Minorities
+
+pm_ct <- ggplot() 
+pm_ct <- pm_ct + geom_polygon(data = test_map, aes(x=long, y=lat, group=group, fill=minority_p/100), color="white", size=.25)
+pm_ct <- pm_ct + geom_polygon(data = test_borders, aes(x=long, y=lat, group=group), fill=NA, color = "black", size=0.5)
+pm_ct <- pm_ct + coord_map() 
+pm_ct <- pm_ct + scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=9), labels=percent, name="Stops") 
+pm_ct <- pm_ct + theme_nothing(legend=TRUE) 
+pm_ct <- pm_ct + labs(x=NULL, y=NULL, title=paste("Where minority drivers are pulled over by", town_name, "police"))
+
+#pm_ct <- pm_ct + theme_bw(base_family="Calibri")
+#pm_ct <- pm_ct + theme(panel.grid.major=element_blank())
+#pm_ct <- pm_ct + theme(panel.grid.minor=element_blank())
+#pm_ct <- pm_ct + theme(panel.border=element_blank())
+pm_ct <- pm_ct + theme(text = element_text(size=15))
+#pm_ct <- pm_ct + theme(axis.ticks=element_blank())
+#pm_ct <- pm_ct + theme(axis.text.x=element_blank())
+pm_ct <- pm_ct + theme(plot.title=element_text(face="bold", hjust=.4))
+pm_ct <- pm_ct + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(l=20)))
+pm_ct <- pm_ct + theme(plot.caption=element_text(size=12, margin=margin(t=12), color="#7a7d7e", hjust=0))
+#pm_ct <- pm_ct + scale_fill_gradient(low = "#b2b2b2", high = "tomato", labels = percent)
+pm_ct
+#  labs(title=" (percent by tract)", fill="")
+print(pm_ct)
+ggsave(pm_ct, file = "img/stops_granby_minorities.png", width = 8, height = 6, type = "cairo-png")
+
+
+# White
+
+pm_ct <- ggplot() 
+pm_ct <- pm_ct + geom_polygon(data = test_map, aes(x=long, y=lat, group=group, fill=white_p/100), color="white", size=.25)
+pm_ct <- pm_ct + geom_polygon(data = test_borders, aes(x=long, y=lat, group=group), fill=NA, color = "black", size=0.5)
+pm_ct <- pm_ct + coord_map() 
+pm_ct <- pm_ct + scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=9), labels=percent, name="Stops") 
+pm_ct <- pm_ct + theme_nothing(legend=TRUE) 
+pm_ct <- pm_ct + labs(x=NULL, y=NULL, title=paste("Where white drivers are pulled over by", town_name, "police"))
+
+#pm_ct <- pm_ct + theme_bw(base_family="Calibri")
+#pm_ct <- pm_ct + theme(panel.grid.major=element_blank())
+#pm_ct <- pm_ct + theme(panel.grid.minor=element_blank())
+#pm_ct <- pm_ct + theme(panel.border=element_blank())
+pm_ct <- pm_ct + theme(text = element_text(size=15))
+#pm_ct <- pm_ct + theme(axis.ticks=element_blank())
+#pm_ct <- pm_ct + theme(axis.text.x=element_blank())
+pm_ct <- pm_ct + theme(plot.title=element_text(face="bold", hjust=.4))
+pm_ct <- pm_ct + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(l=20)))
+pm_ct <- pm_ct + theme(plot.caption=element_text(size=12, margin=margin(t=12), color="#7a7d7e", hjust=0))
+#pm_ct <- pm_ct + scale_fill_gradient(low = "#b2b2b2", high = "tomato", labels = percent)
+pm_ct
+#  labs(title=" (percent by tract)", fill="")
+print(pm_ct)
+ggsave(pm_ct, file = "img/stops_granby_white.png", width = 8, height = 6, type = "cairo-png")
+
+
+
+```
+
+
+```{r groton_town, fig.height=8, fig.width=9}
+town_name <- "Groton Town"
+#test_map <- subset(total_map, town_department==town_name)
+test_map <- subset(total_map, town_department=="Groton Town")
+
+test_map <- subset(test_map, !is.na(white_p))
+
+test_borders <- subset(townborders, id=="Groton")
+
+# Hispanic
+
+pm_ct <- ggplot() 
+pm_ct <- pm_ct + geom_polygon(data = test_map, aes(x=long, y=lat, group=group, fill=hispanic_p/100), color="white", size=.25)
+#pm_ct <- pm_ct + geom_polygon(data = test_borders, aes(x=long, y=lat, group=group), fill=NA, color = "black", size=0.5)
+pm_ct <- pm_ct + coord_map() 
+pm_ct <- pm_ct + scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=9), labels=percent, name="Stops") 
+pm_ct <- pm_ct + theme_nothing(legend=TRUE) 
+pm_ct <- pm_ct + labs(x=NULL, y=NULL, title=paste("Where Hispanic drivers are pulled over by", town_name, "police"))
+
+#pm_ct <- pm_ct + theme_bw(base_family="Calibri")
+#pm_ct <- pm_ct + theme(panel.grid.major=element_blank())
+#pm_ct <- pm_ct + theme(panel.grid.minor=element_blank())
+#pm_ct <- pm_ct + theme(panel.border=element_blank())
+pm_ct <- pm_ct + theme(text = element_text(size=15))
+#pm_ct <- pm_ct + theme(axis.ticks=element_blank())
+#pm_ct <- pm_ct + theme(axis.text.x=element_blank())
+pm_ct <- pm_ct + theme(plot.title=element_text(face="bold", hjust=.4))
+pm_ct <- pm_ct + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(l=20)))
+pm_ct <- pm_ct + theme(plot.caption=element_text(size=12, margin=margin(t=12), color="#7a7d7e", hjust=0))
+#pm_ct <- pm_ct + scale_fill_gradient(low = "#b2b2b2", high = "tomato", labels = percent)
+pm_ct <- pm_ct + theme(legend.key.size = unit(1, "cm"))
+pm_ct
+#  labs(title=" (percent by tract)", fill="")
+print(pm_ct)
+ggsave(pm_ct, file = "img/stops_grotontown_hispanic.png", width = 8, height = 6, type = "cairo-png")
+
+
+# Black
+
+pm_ct <- ggplot() 
+pm_ct <- pm_ct + geom_polygon(data = test_map, aes(x=long, y=lat, group=group, fill=black_p/100), color="white", size=.25)
+#pm_ct <- pm_ct + geom_polygon(data = test_borders, aes(x=long, y=lat, group=group), fill=NA, color = "black", size=0.5)
+pm_ct <- pm_ct + coord_map() 
+pm_ct <- pm_ct + scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=9), labels=percent, name="Stops") 
+pm_ct <- pm_ct + theme_nothing(legend=TRUE) 
+pm_ct <- pm_ct + labs(x=NULL, y=NULL, title=paste("Where black drivers are pulled over by", town_name, "police"))
+
+#pm_ct <- pm_ct + theme_bw(base_family="Calibri")
+#pm_ct <- pm_ct + theme(panel.grid.major=element_blank())
+#pm_ct <- pm_ct + theme(panel.grid.minor=element_blank())
+#pm_ct <- pm_ct + theme(panel.border=element_blank())
+pm_ct <- pm_ct + theme(text = element_text(size=15))
+#pm_ct <- pm_ct + theme(axis.ticks=element_blank())
+#pm_ct <- pm_ct + theme(axis.text.x=element_blank())
+pm_ct <- pm_ct + theme(plot.title=element_text(face="bold", hjust=.4))
+pm_ct <- pm_ct + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(l=20)))
+pm_ct <- pm_ct + theme(plot.caption=element_text(size=12, margin=margin(t=12), color="#7a7d7e", hjust=0))
+#pm_ct <- pm_ct + scale_fill_gradient(low = "#b2b2b2", high = "tomato", labels = percent)
+
+pm_ct <- pm_ct + theme(legend.key.size = unit(1, "cm"))
+pm_ct
+#  labs(title=" (percent by tract)", fill="")
+print(pm_ct)
+ggsave(pm_ct, file = "img/stops_grotontown_black.png", width = 8, height = 6, type = "cairo-png")
+
+
+
+# Minorities
+
+pm_ct <- ggplot() 
+pm_ct <- pm_ct + geom_polygon(data = test_map, aes(x=long, y=lat, group=group, fill=minority_p/100), color="white", size=.25)
+#pm_ct <- pm_ct + geom_polygon(data = test_borders, aes(x=long, y=lat, group=group), fill=NA, color = "black", size=0.5)
+pm_ct <- pm_ct + coord_map() 
+pm_ct <- pm_ct + scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=9), labels=percent, name="Stops") 
+pm_ct <- pm_ct + theme_nothing(legend=TRUE) 
+pm_ct <- pm_ct + labs(x=NULL, y=NULL, title=paste("Where minority drivers are pulled over by", town_name, "police"))
+
+#pm_ct <- pm_ct + theme_bw(base_family="Calibri")
+#pm_ct <- pm_ct + theme(panel.grid.major=element_blank())
+#pm_ct <- pm_ct + theme(panel.grid.minor=element_blank())
+#pm_ct <- pm_ct + theme(panel.border=element_blank())
+pm_ct <- pm_ct + theme(text = element_text(size=15))
+#pm_ct <- pm_ct + theme(axis.ticks=element_blank())
+#pm_ct <- pm_ct + theme(axis.text.x=element_blank())
+pm_ct <- pm_ct + theme(plot.title=element_text(face="bold", hjust=.4))
+pm_ct <- pm_ct + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(l=20)))
+pm_ct <- pm_ct + theme(plot.caption=element_text(size=12, margin=margin(t=12), color="#7a7d7e", hjust=0))
+#pm_ct <- pm_ct + scale_fill_gradient(low = "#b2b2b2", high = "tomato", labels = percent)
+
+pm_ct <- pm_ct + theme(legend.key.size = unit(1, "cm"))
+pm_ct
+#  labs(title=" (percent by tract)", fill="")
+print(pm_ct)
+ggsave(pm_ct, file = "img/stops_grotontown_minorities.png", width = 8, height = 6, type = "cairo-png")
+
+
+# White
+
+pm_ct <- ggplot() 
+pm_ct <- pm_ct + geom_polygon(data = test_map, aes(x=long, y=lat, group=group, fill=white_p/100), color="white", size=.25)
+#pm_ct <- pm_ct + geom_polygon(data = test_borders, aes(x=long, y=lat, group=group), fill=NA, color = "black", size=0.5)
+pm_ct <- pm_ct + coord_map() 
+pm_ct <- pm_ct + scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=9), labels=percent, name="Stops") 
+pm_ct <- pm_ct + theme_nothing(legend=TRUE) 
+pm_ct <- pm_ct + labs(x=NULL, y=NULL, title=paste("Where white drivers are pulled over by", town_name, "police"))
+
+#pm_ct <- pm_ct + theme_bw(base_family="Calibri")
+#pm_ct <- pm_ct + theme(panel.grid.major=element_blank())
+#pm_ct <- pm_ct + theme(panel.grid.minor=element_blank())
+#pm_ct <- pm_ct + theme(panel.border=element_blank())
+pm_ct <- pm_ct + theme(text = element_text(size=15))
+#pm_ct <- pm_ct + theme(axis.ticks=element_blank())
+#pm_ct <- pm_ct + theme(axis.text.x=element_blank())
+pm_ct <- pm_ct + theme(plot.title=element_text(face="bold", hjust=.4))
+pm_ct <- pm_ct + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(l=20)))
+pm_ct <- pm_ct + theme(plot.caption=element_text(size=12, margin=margin(t=12), color="#7a7d7e", hjust=0))
+#pm_ct <- pm_ct + scale_fill_gradient(low = "#b2b2b2", high = "tomato", labels = percent)
+
+pm_ct <- pm_ct + theme(legend.key.size = unit(1, "cm"))
+pm_ct
+#  labs(title=" (percent by tract)", fill="")
+print(pm_ct)
+ggsave(pm_ct, file = "img/stops_grotontown_white.png", width = 8, height = 6, type = "cairo-png")
+```
+
+
+```{r hamden_focus, fig.height=8, fig.width=9}
+town_name <- "Hamden"
+#test_map <- subset(total_map, town_department==town_name)
+test_map <- subset(total_map, town_department=="Hamden")
+
+test_map <- subset(test_map, !is.na(white_p))
+
+test_borders <- subset(townborders, id==town_name)
+
+# Hispanic
+
+pm_ct <- ggplot() 
+pm_ct <- pm_ct + geom_polygon(data = test_map, aes(x=long, y=lat, group=group, fill=hispanic_p/100), color="white", size=.25)
+pm_ct <- pm_ct + geom_polygon(data = test_borders, aes(x=long, y=lat, group=group), fill=NA, color = "black", size=0.5)
+pm_ct <- pm_ct + coord_map() 
+pm_ct <- pm_ct + scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=9), labels=percent, name="Stops") 
+pm_ct <- pm_ct + theme_nothing(legend=TRUE) 
+pm_ct <- pm_ct + labs(x=NULL, y=NULL, title=paste("Where Hispanic drivers are pulled over by", town_name, "police"))
+
+#pm_ct <- pm_ct + theme_bw(base_family="Calibri")
+#pm_ct <- pm_ct + theme(panel.grid.major=element_blank())
+#pm_ct <- pm_ct + theme(panel.grid.minor=element_blank())
+#pm_ct <- pm_ct + theme(panel.border=element_blank())
+pm_ct <- pm_ct + theme(text = element_text(size=15))
+#pm_ct <- pm_ct + theme(axis.ticks=element_blank())
+#pm_ct <- pm_ct + theme(axis.text.x=element_blank())
+pm_ct <- pm_ct + theme(plot.title=element_text(face="bold", hjust=.4))
+pm_ct <- pm_ct + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(l=20)))
+pm_ct <- pm_ct + theme(plot.caption=element_text(size=12, margin=margin(t=12), color="#7a7d7e", hjust=0))
+#pm_ct <- pm_ct + scale_fill_gradient(low = "#b2b2b2", high = "tomato", labels = percent)
+pm_ct <- pm_ct + annotate("segment", x = -73.07, xend = -73.05, y = 41.375, yend = 41.4, colour = "lightblue", size=.5)
+pm_ct <- pm_ct + annotate("point", x = -73.07, y = 41.375, colour = "lightblue", size = 2) 
+pm_ct <- pm_ct + annotate("text", x = -73.033, y = 41.404, label = "Seymour", size=5, colour="gray30") 
+
+pm_ct <- pm_ct + annotate("segment", x = -72.93, xend = -72.87, y = 41.325, yend = 41.325, colour = "lightblue", size=.5) 
+pm_ct <- pm_ct + annotate("point", x = -72.93, y = 41.325, colour = "lightblue", size = 2) 
+pm_ct <- pm_ct + annotate("text", x = -72.85, y = 41.325, label = "New Haven", size=5, colour="gray30") 
+
+pm_ct <- pm_ct + annotate("segment", x = -72.89, xend = -72.86, y = 41.375, yend = 41.375, colour = "lightblue", size=.5) 
+pm_ct <- pm_ct + annotate("point", x = -72.89, y = 41.375, colour = "lightblue", size = 2) 
+pm_ct <- pm_ct + annotate("text", x = -72.845, y = 41.375, label = "Hamden", size=5, colour="gray30") 
+
+pm_ct <- pm_ct + annotate("point", x = -72.83, y = 41.375, colour="white", size=.2) 
+pm_ct <- pm_ct + theme(legend.key.size = unit(1, "cm"))
+pm_ct
+#  labs(title=" (percent by tract)", fill="")
+print(pm_ct)
+ggsave(pm_ct, file = "img/stops_hamden_hispanic.png", width = 8, height = 6, type = "cairo-png")
+
+
+# Black
+
+pm_ct <- ggplot() 
+pm_ct <- pm_ct + geom_polygon(data = test_map, aes(x=long, y=lat, group=group, fill=black_p/100), color="white", size=.25)
+pm_ct <- pm_ct + geom_polygon(data = test_borders, aes(x=long, y=lat, group=group), fill=NA, color = "black", size=0.5)
+pm_ct <- pm_ct + coord_map() 
+pm_ct <- pm_ct + scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=9), labels=percent, name="Stops") 
+pm_ct <- pm_ct + theme_nothing(legend=TRUE) 
+pm_ct <- pm_ct + labs(x=NULL, y=NULL, title=paste("Where black drivers are pulled over by", town_name, "police"))
+
+#pm_ct <- pm_ct + theme_bw(base_family="Calibri")
+#pm_ct <- pm_ct + theme(panel.grid.major=element_blank())
+#pm_ct <- pm_ct + theme(panel.grid.minor=element_blank())
+#pm_ct <- pm_ct + theme(panel.border=element_blank())
+pm_ct <- pm_ct + theme(text = element_text(size=15))
+#pm_ct <- pm_ct + theme(axis.ticks=element_blank())
+#pm_ct <- pm_ct + theme(axis.text.x=element_blank())
+pm_ct <- pm_ct + theme(plot.title=element_text(face="bold", hjust=.4))
+pm_ct <- pm_ct + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(l=20)))
+pm_ct <- pm_ct + theme(plot.caption=element_text(size=12, margin=margin(t=12), color="#7a7d7e", hjust=0))
+#pm_ct <- pm_ct + scale_fill_gradient(low = "#b2b2b2", high = "tomato", labels = percent)
+pm_ct <- pm_ct + annotate("segment", x = -73.07, xend = -73.05, y = 41.375, yend = 41.4, colour = "lightblue", size=.5)
+pm_ct <- pm_ct + annotate("point", x = -73.07, y = 41.375, colour = "lightblue", size = 2) 
+pm_ct <- pm_ct + annotate("text", x = -73.033, y = 41.404, label = "Seymour", size=5, colour="gray30") 
+
+pm_ct <- pm_ct + annotate("segment", x = -72.93, xend = -72.87, y = 41.325, yend = 41.325, colour = "lightblue", size=.5) 
+pm_ct <- pm_ct + annotate("point", x = -72.93, y = 41.325, colour = "lightblue", size = 2) 
+pm_ct <- pm_ct + annotate("text", x = -72.85, y = 41.325, label = "New Haven", size=5, colour="gray30") 
+
+pm_ct <- pm_ct + annotate("segment", x = -72.89, xend = -72.86, y = 41.375, yend = 41.375, colour = "lightblue", size=.5) 
+pm_ct <- pm_ct + annotate("point", x = -72.89, y = 41.375, colour = "lightblue", size = 2) 
+pm_ct <- pm_ct + annotate("text", x = -72.845, y = 41.375, label = "Hamden", size=5, colour="gray30") 
+
+pm_ct <- pm_ct + annotate("point", x = -72.83, y = 41.375, colour="white", size=.2) 
+pm_ct <- pm_ct + theme(legend.key.size = unit(1, "cm"))
+pm_ct
+#  labs(title=" (percent by tract)", fill="")
+print(pm_ct)
+ggsave(pm_ct, file = "img/stops_hamden_black.png", width = 8, height = 6, type = "cairo-png")
+
+
+
+# Minorities
+
+pm_ct <- ggplot() 
+pm_ct <- pm_ct + geom_polygon(data = test_map, aes(x=long, y=lat, group=group, fill=minority_p/100), color="white", size=.25)
+pm_ct <- pm_ct + geom_polygon(data = test_borders, aes(x=long, y=lat, group=group), fill=NA, color = "black", size=0.5)
+pm_ct <- pm_ct + coord_map() 
+pm_ct <- pm_ct + scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=9), labels=percent, name="Stops") 
+pm_ct <- pm_ct + theme_nothing(legend=TRUE) 
+pm_ct <- pm_ct + labs(x=NULL, y=NULL, title=paste("Where minority drivers are pulled over by", town_name, "police"))
+
+#pm_ct <- pm_ct + theme_bw(base_family="Calibri")
+#pm_ct <- pm_ct + theme(panel.grid.major=element_blank())
+#pm_ct <- pm_ct + theme(panel.grid.minor=element_blank())
+#pm_ct <- pm_ct + theme(panel.border=element_blank())
+pm_ct <- pm_ct + theme(text = element_text(size=15))
+#pm_ct <- pm_ct + theme(axis.ticks=element_blank())
+#pm_ct <- pm_ct + theme(axis.text.x=element_blank())
+pm_ct <- pm_ct + theme(plot.title=element_text(face="bold", hjust=.4))
+pm_ct <- pm_ct + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(l=20)))
+pm_ct <- pm_ct + theme(plot.caption=element_text(size=12, margin=margin(t=12), color="#7a7d7e", hjust=0))
+#pm_ct <- pm_ct + scale_fill_gradient(low = "#b2b2b2", high = "tomato", labels = percent)
+pm_ct <- pm_ct + annotate("segment", x = -73.07, xend = -73.05, y = 41.375, yend = 41.4, colour = "lightblue", size=.5)
+pm_ct <- pm_ct + annotate("point", x = -73.07, y = 41.375, colour = "lightblue", size = 2) 
+pm_ct <- pm_ct + annotate("text", x = -73.033, y = 41.404, label = "Seymour", size=5, colour="gray30") 
+
+pm_ct <- pm_ct + annotate("segment", x = -72.93, xend = -72.87, y = 41.325, yend = 41.325, colour = "lightblue", size=.5) 
+pm_ct <- pm_ct + annotate("point", x = -72.93, y = 41.325, colour = "lightblue", size = 2) 
+pm_ct <- pm_ct + annotate("text", x = -72.85, y = 41.325, label = "New Haven", size=5, colour="gray30") 
+
+pm_ct <- pm_ct + annotate("segment", x = -72.89, xend = -72.86, y = 41.375, yend = 41.375, colour = "lightblue", size=.5) 
+pm_ct <- pm_ct + annotate("point", x = -72.89, y = 41.375, colour = "lightblue", size = 2) 
+pm_ct <- pm_ct + annotate("text", x = -72.845, y = 41.375, label = "Hamden", size=5, colour="gray30") 
+
+pm_ct <- pm_ct + annotate("point", x = -72.83, y = 41.375, colour="white", size=.2) 
+pm_ct <- pm_ct + theme(legend.key.size = unit(1, "cm"))
+pm_ct
+#  labs(title=" (percent by tract)", fill="")
+print(pm_ct)
+ggsave(pm_ct, file = "img/stops_hamden_minorities.png", width = 8, height = 6, type = "cairo-png")
+
+
+# White
+
+pm_ct <- ggplot() 
+pm_ct <- pm_ct + geom_polygon(data = test_map, aes(x=long, y=lat, group=group, fill=white_p/100), color="white", size=.25)
+pm_ct <- pm_ct + geom_polygon(data = test_borders, aes(x=long, y=lat, group=group), fill=NA, color = "black", size=0.5)
+pm_ct <- pm_ct + coord_map() 
+pm_ct <- pm_ct + scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=9), labels=percent, name="Stops") 
+pm_ct <- pm_ct + theme_nothing(legend=TRUE) 
+pm_ct <- pm_ct + labs(x=NULL, y=NULL, title=paste("Where white drivers are pulled over by", town_name, "police"))
+
+#pm_ct <- pm_ct + theme_bw(base_family="Calibri")
+#pm_ct <- pm_ct + theme(panel.grid.major=element_blank())
+#pm_ct <- pm_ct + theme(panel.grid.minor=element_blank())
+#pm_ct <- pm_ct + theme(panel.border=element_blank())
+pm_ct <- pm_ct + theme(text = element_text(size=15))
+#pm_ct <- pm_ct + theme(axis.ticks=element_blank())
+#pm_ct <- pm_ct + theme(axis.text.x=element_blank())
+pm_ct <- pm_ct + theme(plot.title=element_text(face="bold", hjust=.4))
+pm_ct <- pm_ct + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(l=20)))
+pm_ct <- pm_ct + theme(plot.caption=element_text(size=12, margin=margin(t=12), color="#7a7d7e", hjust=0))
+#pm_ct <- pm_ct + scale_fill_gradient(low = "#b2b2b2", high = "tomato", labels = percent)
+pm_ct <- pm_ct + annotate("segment", x = -73.07, xend = -73.05, y = 41.375, yend = 41.4, colour = "lightblue", size=.5)
+pm_ct <- pm_ct + annotate("point", x = -73.07, y = 41.375, colour = "lightblue", size = 2) 
+pm_ct <- pm_ct + annotate("text", x = -73.033, y = 41.404, label = "Seymour", size=5, colour="gray30") 
+
+pm_ct <- pm_ct + annotate("segment", x = -72.93, xend = -72.87, y = 41.325, yend = 41.325, colour = "lightblue", size=.5) 
+pm_ct <- pm_ct + annotate("point", x = -72.93, y = 41.325, colour = "lightblue", size = 2) 
+pm_ct <- pm_ct + annotate("text", x = -72.85, y = 41.325, label = "New Haven", size=5, colour="gray30") 
+
+pm_ct <- pm_ct + annotate("segment", x = -72.89, xend = -72.86, y = 41.375, yend = 41.375, colour = "lightblue", size=.5) 
+pm_ct <- pm_ct + annotate("point", x = -72.89, y = 41.375, colour = "lightblue", size = 2) 
+pm_ct <- pm_ct + annotate("text", x = -72.845, y = 41.375, label = "Hamden", size=5, colour="gray30") 
+
+pm_ct <- pm_ct + annotate("point", x = -72.83, y = 41.375, colour="white", size=.2) 
+pm_ct <- pm_ct + theme(legend.key.size = unit(1, "cm"))
+pm_ct
+#  labs(title=" (percent by tract)", fill="")
+print(pm_ct)
+ggsave(pm_ct, file = "img/stops_hamden_white.png", width = 8, height = 6, type = "cairo-png")
+```
+
+
+```{r manchester_focus, fig.height=8, fig.width=9}
+town_name <- "Manchester"
+#test_map <- subset(total_map, town_department==town_name)
+test_map <- subset(total_map, town_department=="Manchester")
+
+test_map <- subset(test_map, !is.na(white_p))
+
+test_borders <- subset(townborders, id==town_name)
+
+# Hispanic
+
+pm_ct <- ggplot() 
+pm_ct <- pm_ct + geom_polygon(data = test_map, aes(x=long, y=lat, group=group, fill=hispanic_p/100), color="white", size=.25)
+pm_ct <- pm_ct + geom_polygon(data = test_borders, aes(x=long, y=lat, group=group), fill=NA, color = "black", size=0.5)
+pm_ct <- pm_ct + coord_map() 
+pm_ct <- pm_ct + scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=9), labels=percent, name="Stops") 
+pm_ct <- pm_ct + theme_nothing(legend=TRUE) 
+pm_ct <- pm_ct + labs(x=NULL, y=NULL, title=paste("Where Hispanic drivers are pulled over by", town_name, "police"))
+
+#pm_ct <- pm_ct + theme_bw(base_family="Calibri")
+#pm_ct <- pm_ct + theme(panel.grid.major=element_blank())
+#pm_ct <- pm_ct + theme(panel.grid.minor=element_blank())
+#pm_ct <- pm_ct + theme(panel.border=element_blank())
+pm_ct <- pm_ct + theme(text = element_text(size=15))
+#pm_ct <- pm_ct + theme(axis.ticks=element_blank())
+#pm_ct <- pm_ct + theme(axis.text.x=element_blank())
+pm_ct <- pm_ct + theme(plot.title=element_text(face="bold", hjust=.4))
+pm_ct <- pm_ct + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(l=20)))
+pm_ct <- pm_ct + theme(plot.caption=element_text(size=12, margin=margin(t=12), color="#7a7d7e", hjust=0))
+#pm_ct <- pm_ct + scale_fill_gradient(low = "#b2b2b2", high = "tomato", labels = percent)
+
+pm_ct <- pm_ct + theme(legend.key.size = unit(1, "cm"))
+pm_ct
+#  labs(title=" (percent by tract)", fill="")
+print(pm_ct)
+ggsave(pm_ct, file = "img/stops_manchester_hispanic.png", width = 8, height = 6, type = "cairo-png")
+
+
+# Black
+
+pm_ct <- ggplot() 
+pm_ct <- pm_ct + geom_polygon(data = test_map, aes(x=long, y=lat, group=group, fill=black_p/100), color="white", size=.25)
+pm_ct <- pm_ct + geom_polygon(data = test_borders, aes(x=long, y=lat, group=group), fill=NA, color = "black", size=0.5)
+pm_ct <- pm_ct + coord_map() 
+pm_ct <- pm_ct + scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=9), labels=percent, name="Stops") 
+pm_ct <- pm_ct + theme_nothing(legend=TRUE) 
+pm_ct <- pm_ct + labs(x=NULL, y=NULL, title=paste("Where black drivers are pulled over by", town_name, "police"))
+
+#pm_ct <- pm_ct + theme_bw(base_family="Calibri")
+#pm_ct <- pm_ct + theme(panel.grid.major=element_blank())
+#pm_ct <- pm_ct + theme(panel.grid.minor=element_blank())
+#pm_ct <- pm_ct + theme(panel.border=element_blank())
+pm_ct <- pm_ct + theme(text = element_text(size=15))
+#pm_ct <- pm_ct + theme(axis.ticks=element_blank())
+#pm_ct <- pm_ct + theme(axis.text.x=element_blank())
+pm_ct <- pm_ct + theme(plot.title=element_text(face="bold", hjust=.4))
+pm_ct <- pm_ct + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(l=20)))
+pm_ct <- pm_ct + theme(plot.caption=element_text(size=12, margin=margin(t=12), color="#7a7d7e", hjust=0))
+#pm_ct <- pm_ct + scale_fill_gradient(low = "#b2b2b2", high = "tomato", labels = percent)
+
+pm_ct <- pm_ct + theme(legend.key.size = unit(1, "cm"))
+pm_ct
+#  labs(title=" (percent by tract)", fill="")
+print(pm_ct)
+ggsave(pm_ct, file = "img/stops_manchester_black.png", width = 8, height = 6, type = "cairo-png")
+
+
+
+# Minorities
+
+pm_ct <- ggplot() 
+pm_ct <- pm_ct + geom_polygon(data = test_map, aes(x=long, y=lat, group=group, fill=minority_p/100), color="white", size=.25)
+pm_ct <- pm_ct + geom_polygon(data = test_borders, aes(x=long, y=lat, group=group), fill=NA, color = "black", size=0.5)
+pm_ct <- pm_ct + coord_map() 
+pm_ct <- pm_ct + scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=9), labels=percent, name="Stops") 
+pm_ct <- pm_ct + theme_nothing(legend=TRUE) 
+pm_ct <- pm_ct + labs(x=NULL, y=NULL, title=paste("Where minority drivers are pulled over by", town_name, "police"))
+
+#pm_ct <- pm_ct + theme_bw(base_family="Calibri")
+#pm_ct <- pm_ct + theme(panel.grid.major=element_blank())
+#pm_ct <- pm_ct + theme(panel.grid.minor=element_blank())
+#pm_ct <- pm_ct + theme(panel.border=element_blank())
+pm_ct <- pm_ct + theme(text = element_text(size=15))
+#pm_ct <- pm_ct + theme(axis.ticks=element_blank())
+#pm_ct <- pm_ct + theme(axis.text.x=element_blank())
+pm_ct <- pm_ct + theme(plot.title=element_text(face="bold", hjust=.4))
+pm_ct <- pm_ct + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(l=20)))
+pm_ct <- pm_ct + theme(plot.caption=element_text(size=12, margin=margin(t=12), color="#7a7d7e", hjust=0))
+#pm_ct <- pm_ct + scale_fill_gradient(low = "#b2b2b2", high = "tomato", labels = percent)
+
+pm_ct <- pm_ct + theme(legend.key.size = unit(1, "cm"))
+pm_ct
+#  labs(title=" (percent by tract)", fill="")
+print(pm_ct)
+ggsave(pm_ct, file = "img/stops_manchester_minorities.png", width = 8, height = 6, type = "cairo-png")
+
+
+# White
+
+pm_ct <- ggplot() 
+pm_ct <- pm_ct + geom_polygon(data = test_map, aes(x=long, y=lat, group=group, fill=white_p/100), color="white", size=.25)
+pm_ct <- pm_ct + geom_polygon(data = test_borders, aes(x=long, y=lat, group=group), fill=NA, color = "black", size=0.5)
+pm_ct <- pm_ct + coord_map() 
+pm_ct <- pm_ct + scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=9), labels=percent, name="Stops") 
+pm_ct <- pm_ct + theme_nothing(legend=TRUE) 
+pm_ct <- pm_ct + labs(x=NULL, y=NULL, title=paste("Where white drivers are pulled over by", town_name, "police"))
+
+#pm_ct <- pm_ct + theme_bw(base_family="Calibri")
+#pm_ct <- pm_ct + theme(panel.grid.major=element_blank())
+#pm_ct <- pm_ct + theme(panel.grid.minor=element_blank())
+#pm_ct <- pm_ct + theme(panel.border=element_blank())
+pm_ct <- pm_ct + theme(text = element_text(size=15))
+#pm_ct <- pm_ct + theme(axis.ticks=element_blank())
+#pm_ct <- pm_ct + theme(axis.text.x=element_blank())
+pm_ct <- pm_ct + theme(plot.title=element_text(face="bold", hjust=.4))
+pm_ct <- pm_ct + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(l=20)))
+pm_ct <- pm_ct + theme(plot.caption=element_text(size=12, margin=margin(t=12), color="#7a7d7e", hjust=0))
+#pm_ct <- pm_ct + scale_fill_gradient(low = "#b2b2b2", high = "tomato", labels = percent)
+
+pm_ct <- pm_ct + theme(legend.key.size = unit(1, "cm"))
+pm_ct
+#  labs(title=" (percent by tract)", fill="")
+print(pm_ct)
+ggsave(pm_ct, file = "img/stops_manchester_white.png", width = 8, height = 6, type = "cairo-png")
+```
+
+
+```{r newbritain_focus, fig.height=8, fig.width=9}
+town_name <- "New Britain"
+#test_map <- subset(total_map, town_department==town_name)
+test_map <- subset(total_map, town_department=="New Britain")
+
+test_map <- subset(test_map, !is.na(white_p))
+
+test_borders <- subset(townborders, id==town_name)
+
+# Hispanic
+
+pm_ct <- ggplot() 
+pm_ct <- pm_ct + geom_polygon(data = test_map, aes(x=long, y=lat, group=group, fill=hispanic_p/100), color="white", size=.25)
+pm_ct <- pm_ct + geom_polygon(data = test_borders, aes(x=long, y=lat, group=group), fill=NA, color = "black", size=0.5)
+pm_ct <- pm_ct + coord_map() 
+pm_ct <- pm_ct + scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=9), labels=percent, name="Stops") 
+pm_ct <- pm_ct + theme_nothing(legend=TRUE) 
+pm_ct <- pm_ct + labs(x=NULL, y=NULL, title=paste("Where Hispanic drivers are pulled over by", town_name, "police"))
+
+#pm_ct <- pm_ct + theme_bw(base_family="Calibri")
+#pm_ct <- pm_ct + theme(panel.grid.major=element_blank())
+#pm_ct <- pm_ct + theme(panel.grid.minor=element_blank())
+#pm_ct <- pm_ct + theme(panel.border=element_blank())
+pm_ct <- pm_ct + theme(text = element_text(size=15))
+#pm_ct <- pm_ct + theme(axis.ticks=element_blank())
+#pm_ct <- pm_ct + theme(axis.text.x=element_blank())
+pm_ct <- pm_ct + theme(plot.title=element_text(face="bold", hjust=.4))
+pm_ct <- pm_ct + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(l=20)))
+pm_ct <- pm_ct + theme(plot.caption=element_text(size=12, margin=margin(t=12), color="#7a7d7e", hjust=0))
+#pm_ct <- pm_ct + scale_fill_gradient(low = "#b2b2b2", high = "tomato", labels = percent)
+pm_ct <- pm_ct + annotate("segment", x = -72.82, xend = -72.785, y = 41.73, yend = 41.73, colour = "lightblue", size=.5) 
+pm_ct <- pm_ct + annotate("point", x = -72.82, y = 41.73, colour = "lightblue", size = 2) 
+pm_ct <- pm_ct + annotate("text", x = -72.768, y = 41.73, label = "Farmington", size=5, colour="gray30") 
+pm_ct <- pm_ct + theme(legend.key.size = unit(1, "cm"))
+pm_ct
+#  labs(title=" (percent by tract)", fill="")
+print(pm_ct)
+ggsave(pm_ct, file = "img/stops_newbritain_hispanic.png", width = 8, height = 6, type = "cairo-png")
+
+
+# Black
+
+pm_ct <- ggplot() 
+pm_ct <- pm_ct + geom_polygon(data = test_map, aes(x=long, y=lat, group=group, fill=black_p/100), color="white", size=.25)
+pm_ct <- pm_ct + geom_polygon(data = test_borders, aes(x=long, y=lat, group=group), fill=NA, color = "black", size=0.5)
+pm_ct <- pm_ct + coord_map() 
+pm_ct <- pm_ct + scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=9), labels=percent, name="Stops") 
+pm_ct <- pm_ct + theme_nothing(legend=TRUE) 
+pm_ct <- pm_ct + labs(x=NULL, y=NULL, title=paste("Where black drivers are pulled over by", town_name, "police"))
+
+#pm_ct <- pm_ct + theme_bw(base_family="Calibri")
+#pm_ct <- pm_ct + theme(panel.grid.major=element_blank())
+#pm_ct <- pm_ct + theme(panel.grid.minor=element_blank())
+#pm_ct <- pm_ct + theme(panel.border=element_blank())
+pm_ct <- pm_ct + theme(text = element_text(size=15))
+#pm_ct <- pm_ct + theme(axis.ticks=element_blank())
+#pm_ct <- pm_ct + theme(axis.text.x=element_blank())
+pm_ct <- pm_ct + theme(plot.title=element_text(face="bold", hjust=.4))
+pm_ct <- pm_ct + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(l=20)))
+pm_ct <- pm_ct + theme(plot.caption=element_text(size=12, margin=margin(t=12), color="#7a7d7e", hjust=0))
+#pm_ct <- pm_ct + scale_fill_gradient(low = "#b2b2b2", high = "tomato", labels = percent)
+pm_ct <- pm_ct + annotate("segment", x = -72.82, xend = -72.785, y = 41.73, yend = 41.73, colour = "lightblue", size=.5) 
+pm_ct <- pm_ct + annotate("point", x = -72.82, y = 41.73, colour = "lightblue", size = 2) 
+pm_ct <- pm_ct + annotate("text", x = -72.768, y = 41.73, label = "Farmington", size=5, colour="gray30") 
+pm_ct <- pm_ct + theme(legend.key.size = unit(1, "cm"))
+pm_ct
+#  labs(title=" (percent by tract)", fill="")
+print(pm_ct)
+ggsave(pm_ct, file = "img/stops_newbritain_black.png", width = 8, height = 6, type = "cairo-png")
+
+
+
+# Minorities
+
+pm_ct <- ggplot() 
+pm_ct <- pm_ct + geom_polygon(data = test_map, aes(x=long, y=lat, group=group, fill=minority_p/100), color="white", size=.25)
+pm_ct <- pm_ct + geom_polygon(data = test_borders, aes(x=long, y=lat, group=group), fill=NA, color = "black", size=0.5)
+pm_ct <- pm_ct + coord_map() 
+pm_ct <- pm_ct + scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=9), labels=percent, name="Stops") 
+pm_ct <- pm_ct + theme_nothing(legend=TRUE) 
+pm_ct <- pm_ct + labs(x=NULL, y=NULL, title=paste("Where minority drivers are pulled over by", town_name, "police"))
+
+#pm_ct <- pm_ct + theme_bw(base_family="Calibri")
+#pm_ct <- pm_ct + theme(panel.grid.major=element_blank())
+#pm_ct <- pm_ct + theme(panel.grid.minor=element_blank())
+#pm_ct <- pm_ct + theme(panel.border=element_blank())
+pm_ct <- pm_ct + theme(text = element_text(size=15))
+#pm_ct <- pm_ct + theme(axis.ticks=element_blank())
+#pm_ct <- pm_ct + theme(axis.text.x=element_blank())
+pm_ct <- pm_ct + theme(plot.title=element_text(face="bold", hjust=.4))
+pm_ct <- pm_ct + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(l=20)))
+pm_ct <- pm_ct + theme(plot.caption=element_text(size=12, margin=margin(t=12), color="#7a7d7e", hjust=0))
+#pm_ct <- pm_ct + scale_fill_gradient(low = "#b2b2b2", high = "tomato", labels = percent)
+pm_ct <- pm_ct + annotate("segment", x = -72.82, xend = -72.785, y = 41.73, yend = 41.73, colour = "lightblue", size=.5) 
+pm_ct <- pm_ct + annotate("point", x = -72.82, y = 41.73, colour = "lightblue", size = 2) 
+pm_ct <- pm_ct + annotate("text", x = -72.768, y = 41.73, label = "Farmington", size=5, colour="gray30") 
+pm_ct <- pm_ct + theme(legend.key.size = unit(1, "cm"))
+pm_ct
+#  labs(title=" (percent by tract)", fill="")
+print(pm_ct)
+ggsave(pm_ct, file = "img/stops_newbritain_minorities.png", width = 8, height = 6, type = "cairo-png")
+
+
+# White
+
+pm_ct <- ggplot() 
+pm_ct <- pm_ct + geom_polygon(data = test_map, aes(x=long, y=lat, group=group, fill=white_p/100), color="white", size=.25)
+pm_ct <- pm_ct + geom_polygon(data = test_borders, aes(x=long, y=lat, group=group), fill=NA, color = "black", size=0.5)
+pm_ct <- pm_ct + coord_map() 
+pm_ct <- pm_ct + scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=9), labels=percent, name="Stops") 
+pm_ct <- pm_ct + theme_nothing(legend=TRUE) 
+pm_ct <- pm_ct + labs(x=NULL, y=NULL, title=paste("Where white drivers are pulled over by", town_name, "police"))
+
+#pm_ct <- pm_ct + theme_bw(base_family="Calibri")
+#pm_ct <- pm_ct + theme(panel.grid.major=element_blank())
+#pm_ct <- pm_ct + theme(panel.grid.minor=element_blank())
+#pm_ct <- pm_ct + theme(panel.border=element_blank())
+pm_ct <- pm_ct + theme(text = element_text(size=15))
+#pm_ct <- pm_ct + theme(axis.ticks=element_blank())
+#pm_ct <- pm_ct + theme(axis.text.x=element_blank())
+pm_ct <- pm_ct + theme(plot.title=element_text(face="bold", hjust=.4))
+pm_ct <- pm_ct + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(l=20)))
+pm_ct <- pm_ct + theme(plot.caption=element_text(size=12, margin=margin(t=12), color="#7a7d7e", hjust=0))
+#pm_ct <- pm_ct + scale_fill_gradient(low = "#b2b2b2", high = "tomato", labels = percent)
+pm_ct <- pm_ct + annotate("segment", x = -72.82, xend = -72.785, y = 41.73, yend = 41.73, colour = "lightblue", size=.5) 
+pm_ct <- pm_ct + annotate("point", x = -72.82, y = 41.73, colour = "lightblue", size = 2) 
+pm_ct <- pm_ct + annotate("text", x = -72.768, y = 41.73, label = "Farmington", size=5, colour="gray30") 
+pm_ct <- pm_ct + theme(legend.key.size = unit(1, "cm"))
+pm_ct
+#  labs(title=" (percent by tract)", fill="")
+print(pm_ct)
+ggsave(pm_ct, file = "img/stops_newbritain_white.png", width = 8, height = 6, type = "cairo-png")
+```
+
+```{r stratford, fig.height=8, fig.width=9}
+town_name <- "Stratford"
+#test_map <- subset(total_map, town_department==town_name)
+test_map <- subset(total_map, town_department=="Stratford")
+
+test_map <- subset(test_map, !is.na(white_p))
+
+test_borders <- subset(townborders, id==town_name)
+
+# Hispanic
+
+pm_ct <- ggplot() 
+pm_ct <- pm_ct + geom_polygon(data = test_map, aes(x=long, y=lat, group=group, fill=hispanic_p/100), color="white", size=.25)
+pm_ct <- pm_ct + geom_polygon(data = test_borders, aes(x=long, y=lat, group=group), fill=NA, color = "black", size=0.5)
+pm_ct <- pm_ct + coord_map() 
+pm_ct <- pm_ct + scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=9), labels=percent, name="Stops") 
+pm_ct <- pm_ct + theme_nothing(legend=TRUE) 
+pm_ct <- pm_ct + labs(x=NULL, y=NULL, title=paste("Where Hispanic drivers are pulled over by", town_name, "police"))
+
+#pm_ct <- pm_ct + theme_bw(base_family="Calibri")
+#pm_ct <- pm_ct + theme(panel.grid.major=element_blank())
+#pm_ct <- pm_ct + theme(panel.grid.minor=element_blank())
+#pm_ct <- pm_ct + theme(panel.border=element_blank())
+pm_ct <- pm_ct + theme(text = element_text(size=15))
+#pm_ct <- pm_ct + theme(axis.ticks=element_blank())
+#pm_ct <- pm_ct + theme(axis.text.x=element_blank())
+pm_ct <- pm_ct + theme(plot.title=element_text(face="bold", hjust=.4))
+pm_ct <- pm_ct + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(l=20)))
+pm_ct <- pm_ct + theme(plot.caption=element_text(size=12, margin=margin(t=12), color="#7a7d7e", hjust=0))
+#pm_ct <- pm_ct + scale_fill_gradient(low = "#b2b2b2", high = "tomato", labels = percent)
+pm_ct <- pm_ct + annotate("segment", x = -73.17, xend = -73.20, y = 41.24, yend = 41.24, colour = "lightblue", size=.5) 
+pm_ct <- pm_ct + annotate("point", x = -73.17, y = 41.24, colour = "lightblue", size = 2) 
+pm_ct <- pm_ct + annotate("text", x = -73.215, y = 41.24, label = "  Trumbull", size=5, colour="gray30") 
+pm_ct <- pm_ct + annotate("segment", x = -73.16, xend = -73.19, y = 41.19, yend = 41.19, colour = "lightblue", size=.5) 
+pm_ct <- pm_ct + annotate("point", x = -73.16, y = 41.19, colour = "lightblue", size = 2) 
+pm_ct <- pm_ct + annotate("text", x = -73.205, y = 41.19, label = "Bridgeport", size=5, colour="gray30") 
+pm_ct <- pm_ct + annotate("point", x = -73.22, y = 41.19, colour="white", size=.2) 
+pm_ct <- pm_ct + theme(legend.key.size = unit(1, "cm"))
+pm_ct
+#  labs(title=" (percent by tract)", fill="")
+print(pm_ct)
+ggsave(pm_ct, file = "img/stops_stratford_hispanic.png", width = 8, height = 6, type = "cairo-png")
+
+
+# Black
+
+pm_ct <- ggplot() 
+pm_ct <- pm_ct + geom_polygon(data = test_map, aes(x=long, y=lat, group=group, fill=black_p/100), color="white", size=.25)
+pm_ct <- pm_ct + geom_polygon(data = test_borders, aes(x=long, y=lat, group=group), fill=NA, color = "black", size=0.5)
+pm_ct <- pm_ct + coord_map() 
+pm_ct <- pm_ct + scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=9), labels=percent, name="Stops") 
+pm_ct <- pm_ct + theme_nothing(legend=TRUE) 
+pm_ct <- pm_ct + labs(x=NULL, y=NULL, title=paste("Where black drivers are pulled over by", town_name, "police"))
+
+#pm_ct <- pm_ct + theme_bw(base_family="Calibri")
+#pm_ct <- pm_ct + theme(panel.grid.major=element_blank())
+#pm_ct <- pm_ct + theme(panel.grid.minor=element_blank())
+#pm_ct <- pm_ct + theme(panel.border=element_blank())
+pm_ct <- pm_ct + theme(text = element_text(size=15))
+#pm_ct <- pm_ct + theme(axis.ticks=element_blank())
+#pm_ct <- pm_ct + theme(axis.text.x=element_blank())
+pm_ct <- pm_ct + theme(plot.title=element_text(face="bold", hjust=.4))
+pm_ct <- pm_ct + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(l=20)))
+pm_ct <- pm_ct + theme(plot.caption=element_text(size=12, margin=margin(t=12), color="#7a7d7e", hjust=0))
+#pm_ct <- pm_ct + scale_fill_gradient(low = "#b2b2b2", high = "tomato", labels = percent)
+pm_ct <- pm_ct + annotate("segment", x = -73.17, xend = -73.20, y = 41.24, yend = 41.24, colour = "lightblue", size=.5) 
+pm_ct <- pm_ct + annotate("point", x = -73.17, y = 41.24, colour = "lightblue", size = 2) 
+pm_ct <- pm_ct + annotate("text", x = -73.215, y = 41.24, label = "  Trumbull", size=5, colour="gray30") 
+pm_ct <- pm_ct + annotate("segment", x = -73.16, xend = -73.19, y = 41.19, yend = 41.19, colour = "lightblue", size=.5) 
+pm_ct <- pm_ct + annotate("point", x = -73.16, y = 41.19, colour = "lightblue", size = 2) 
+pm_ct <- pm_ct + annotate("text", x = -73.205, y = 41.19, label = "Bridgeport", size=5, colour="gray30") 
+pm_ct <- pm_ct + annotate("point", x = -73.22, y = 41.19, colour="white", size=.2) 
+pm_ct <- pm_ct + theme(legend.key.size = unit(1, "cm"))
+pm_ct
+#  labs(title=" (percent by tract)", fill="")
+print(pm_ct)
+ggsave(pm_ct, file = "img/stops_stratford_black.png", width = 8, height = 6, type = "cairo-png")
+
+
+
+# Minorities
+
+pm_ct <- ggplot() 
+pm_ct <- pm_ct + geom_polygon(data = test_map, aes(x=long, y=lat, group=group, fill=minority_p/100), color="white", size=.25)
+pm_ct <- pm_ct + geom_polygon(data = test_borders, aes(x=long, y=lat, group=group), fill=NA, color = "black", size=0.5)
+pm_ct <- pm_ct + coord_map() 
+pm_ct <- pm_ct + scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=9), labels=percent, name="Stops") 
+pm_ct <- pm_ct + theme_nothing(legend=TRUE) 
+pm_ct <- pm_ct + labs(x=NULL, y=NULL, title=paste("Where minority drivers are pulled over by", town_name, "police"))
+
+#pm_ct <- pm_ct + theme_bw(base_family="Calibri")
+#pm_ct <- pm_ct + theme(panel.grid.major=element_blank())
+#pm_ct <- pm_ct + theme(panel.grid.minor=element_blank())
+#pm_ct <- pm_ct + theme(panel.border=element_blank())
+pm_ct <- pm_ct + theme(text = element_text(size=15))
+#pm_ct <- pm_ct + theme(axis.ticks=element_blank())
+#pm_ct <- pm_ct + theme(axis.text.x=element_blank())
+pm_ct <- pm_ct + theme(plot.title=element_text(face="bold", hjust=.4))
+pm_ct <- pm_ct + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(l=20)))
+pm_ct <- pm_ct + theme(plot.caption=element_text(size=12, margin=margin(t=12), color="#7a7d7e", hjust=0))
+#pm_ct <- pm_ct + scale_fill_gradient(low = "#b2b2b2", high = "tomato", labels = percent)
+pm_ct <- pm_ct + annotate("segment", x = -73.17, xend = -73.20, y = 41.24, yend = 41.24, colour = "lightblue", size=.5) 
+pm_ct <- pm_ct + annotate("point", x = -73.17, y = 41.24, colour = "lightblue", size = 2) 
+pm_ct <- pm_ct + annotate("text", x = -73.215, y = 41.24, label = "  Trumbull", size=5, colour="gray30") 
+pm_ct <- pm_ct + annotate("segment", x = -73.16, xend = -73.19, y = 41.19, yend = 41.19, colour = "lightblue", size=.5) 
+pm_ct <- pm_ct + annotate("point", x = -73.16, y = 41.19, colour = "lightblue", size = 2) 
+pm_ct <- pm_ct + annotate("text", x = -73.205, y = 41.19, label = "Bridgeport", size=5, colour="gray30") 
+pm_ct <- pm_ct + annotate("point", x = -73.22, y = 41.19, colour="white", size=.2) 
+pm_ct <- pm_ct + theme(legend.key.size = unit(1, "cm"))
+pm_ct
+#  labs(title=" (percent by tract)", fill="")
+print(pm_ct)
+ggsave(pm_ct, file = "img/stops_stratford_minorities.png", width = 8, height = 6, type = "cairo-png")
+
+
+# White
+
+pm_ct <- ggplot() 
+pm_ct <- pm_ct + geom_polygon(data = test_map, aes(x=long, y=lat, group=group, fill=white_p/100), color="white", size=.25)
+pm_ct <- pm_ct + geom_polygon(data = test_borders, aes(x=long, y=lat, group=group), fill=NA, color = "black", size=0.5)
+pm_ct <- pm_ct + coord_map() 
+pm_ct <- pm_ct + scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=9), labels=percent, name="Stops") 
+pm_ct <- pm_ct + theme_nothing(legend=TRUE) 
+pm_ct <- pm_ct + labs(x=NULL, y=NULL, title=paste("Where white drivers are pulled over by", town_name, "police"))
+
+#pm_ct <- pm_ct + theme_bw(base_family="Calibri")
+#pm_ct <- pm_ct + theme(panel.grid.major=element_blank())
+#pm_ct <- pm_ct + theme(panel.grid.minor=element_blank())
+#pm_ct <- pm_ct + theme(panel.border=element_blank())
+pm_ct <- pm_ct + theme(text = element_text(size=15))
+#pm_ct <- pm_ct + theme(axis.ticks=element_blank())
+#pm_ct <- pm_ct + theme(axis.text.x=element_blank())
+pm_ct <- pm_ct + theme(plot.title=element_text(face="bold", hjust=.4))
+pm_ct <- pm_ct + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(l=20)))
+pm_ct <- pm_ct + theme(plot.caption=element_text(size=12, margin=margin(t=12), color="#7a7d7e", hjust=0))
+#pm_ct <- pm_ct + scale_fill_gradient(low = "#b2b2b2", high = "tomato", labels = percent)
+pm_ct <- pm_ct + annotate("segment", x = -73.17, xend = -73.20, y = 41.24, yend = 41.24, colour = "lightblue", size=.5) 
+pm_ct <- pm_ct + annotate("point", x = -73.17, y = 41.24, colour = "lightblue", size = 2) 
+pm_ct <- pm_ct + annotate("text", x = -73.215, y = 41.24, label = "  Trumbull", size=5, colour="gray30") 
+pm_ct <- pm_ct + annotate("segment", x = -73.16, xend = -73.19, y = 41.19, yend = 41.19, colour = "lightblue", size=.5) 
+pm_ct <- pm_ct + annotate("point", x = -73.16, y = 41.19, colour = "lightblue", size = 2) 
+pm_ct <- pm_ct + annotate("text", x = -73.205, y = 41.19, label = "Bridgeport", size=5, colour="gray30") 
+pm_ct <- pm_ct + annotate("point", x = -73.22, y = 41.19, colour="white", size=.2) 
+pm_ct <- pm_ct + theme(legend.key.size = unit(1, "cm"))
+pm_ct
+#  labs(title=" (percent by tract)", fill="")
+print(pm_ct)
+ggsave(pm_ct, file = "img/stops_stratford_white.png", width = 8, height = 6, type = "cairo-png")
+
+
+
+```
+
+
+```{r waterbury, fig.height=8, fig.width=9}
+town_name <- "Waterbury"
+#test_map <- subset(total_map, town_department==town_name)
+test_map <- subset(total_map, town_department=="Waterbury")
+
+test_map <- subset(test_map, !is.na(white_p))
+
+test_borders <- subset(townborders, id==town_name)
+
+# Hispanic
+
+pm_ct <- ggplot() 
+pm_ct <- pm_ct + geom_polygon(data = test_map, aes(x=long, y=lat, group=group, fill=hispanic_p/100), color="white", size=.25)
+pm_ct <- pm_ct + geom_polygon(data = test_borders, aes(x=long, y=lat, group=group), fill=NA, color = "black", size=0.5)
+pm_ct <- pm_ct + coord_map() 
+pm_ct <- pm_ct + scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=9), labels=percent, name="Stops") 
+pm_ct <- pm_ct + theme_nothing(legend=TRUE) 
+pm_ct <- pm_ct + labs(x=NULL, y=NULL, title=paste("Where Hispanic drivers are pulled over by", town_name, "police"))
+
+#pm_ct <- pm_ct + theme_bw(base_family="Calibri")
+#pm_ct <- pm_ct + theme(panel.grid.major=element_blank())
+#pm_ct <- pm_ct + theme(panel.grid.minor=element_blank())
+#pm_ct <- pm_ct + theme(panel.border=element_blank())
+pm_ct <- pm_ct + theme(text = element_text(size=15))
+#pm_ct <- pm_ct + theme(axis.ticks=element_blank())
+#pm_ct <- pm_ct + theme(axis.text.x=element_blank())
+pm_ct <- pm_ct + theme(plot.title=element_text(face="bold", hjust=.4))
+pm_ct <- pm_ct + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(l=20)))
+pm_ct <- pm_ct + theme(plot.caption=element_text(size=12, margin=margin(t=12), color="#7a7d7e", hjust=0))
+#pm_ct <- pm_ct + scale_fill_gradient(low = "#b2b2b2", high = "tomato", labels = percent)
+pm_ct <- pm_ct + annotate("segment", x = -73.1, xend = -73.06, y = 41.64, yend = 41.64, colour = "lightblue", size=.5)
+pm_ct <- pm_ct + annotate("point", x = -73.1, y = 41.64, colour = "lightblue", size = 2) 
+pm_ct <- pm_ct + annotate("text", x = -73.04, y = 41.64, label = "Watertown", size=5, colour="gray30") 
+
+
+pm_ct <- pm_ct + annotate("segment", x = -72.97, xend = -72.93, y = 41.57, yend = 41.57, colour = "lightblue", size=.5) 
+pm_ct <- pm_ct + annotate("point", x = -72.97, y = 41.57, colour = "lightblue", size = 2) 
+pm_ct <- pm_ct + annotate("text", x = -72.915, y = 41.57, label = "Wolcott", size=5, colour="gray30") 
+
+
+pm_ct <- pm_ct + annotate("point", x = -72.9, y = 41.57, colour="white", size=.2) 
+pm_ct <- pm_ct + theme(legend.key.size = unit(1, "cm"))
+pm_ct
+#  labs(title=" (percent by tract)", fill="")
+print(pm_ct)
+ggsave(pm_ct, file = "img/stops_waterbury_hispanic.png", width = 8, height = 6, type = "cairo-png")
+
+
+# Black
+
+pm_ct <- ggplot() 
+pm_ct <- pm_ct + geom_polygon(data = test_map, aes(x=long, y=lat, group=group, fill=black_p/100), color="white", size=.25)
+pm_ct <- pm_ct + geom_polygon(data = test_borders, aes(x=long, y=lat, group=group), fill=NA, color = "black", size=0.5)
+pm_ct <- pm_ct + coord_map() 
+pm_ct <- pm_ct + scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=9), labels=percent, name="Stops") 
+pm_ct <- pm_ct + theme_nothing(legend=TRUE) 
+pm_ct <- pm_ct + labs(x=NULL, y=NULL, title=paste("Where black drivers are pulled over by", town_name, "police"))
+
+#pm_ct <- pm_ct + theme_bw(base_family="Calibri")
+#pm_ct <- pm_ct + theme(panel.grid.major=element_blank())
+#pm_ct <- pm_ct + theme(panel.grid.minor=element_blank())
+#pm_ct <- pm_ct + theme(panel.border=element_blank())
+pm_ct <- pm_ct + theme(text = element_text(size=15))
+#pm_ct <- pm_ct + theme(axis.ticks=element_blank())
+#pm_ct <- pm_ct + theme(axis.text.x=element_blank())
+pm_ct <- pm_ct + theme(plot.title=element_text(face="bold", hjust=.4))
+pm_ct <- pm_ct + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(l=20)))
+pm_ct <- pm_ct + theme(plot.caption=element_text(size=12, margin=margin(t=12), color="#7a7d7e", hjust=0))
+#pm_ct <- pm_ct + scale_fill_gradient(low = "#b2b2b2", high = "tomato", labels = percent)
+pm_ct <- pm_ct + annotate("segment", x = -73.1, xend = -73.06, y = 41.64, yend = 41.64, colour = "lightblue", size=.5)
+pm_ct <- pm_ct + annotate("point", x = -73.1, y = 41.64, colour = "lightblue", size = 2) 
+pm_ct <- pm_ct + annotate("text", x = -73.04, y = 41.64, label = "Watertown", size=5, colour="gray30") 
+
+
+pm_ct <- pm_ct + annotate("segment", x = -72.97, xend = -72.93, y = 41.57, yend = 41.57, colour = "lightblue", size=.5) 
+pm_ct <- pm_ct + annotate("point", x = -72.97, y = 41.57, colour = "lightblue", size = 2) 
+pm_ct <- pm_ct + annotate("text", x = -72.915, y = 41.57, label = "Wolcott", size=5, colour="gray30") 
+
+
+pm_ct <- pm_ct + annotate("point", x = -72.9, y = 41.57, colour="white", size=.2) 
+pm_ct <- pm_ct + theme(legend.key.size = unit(1, "cm"))
+pm_ct
+#  labs(title=" (percent by tract)", fill="")
+print(pm_ct)
+ggsave(pm_ct, file = "img/stops_waterbury_black.png", width = 8, height = 6, type = "cairo-png")
+
+
+
+# Minorities
+
+pm_ct <- ggplot() 
+pm_ct <- pm_ct + geom_polygon(data = test_map, aes(x=long, y=lat, group=group, fill=minority_p/100), color="white", size=.25)
+pm_ct <- pm_ct + geom_polygon(data = test_borders, aes(x=long, y=lat, group=group), fill=NA, color = "black", size=0.5)
+pm_ct <- pm_ct + coord_map() 
+pm_ct <- pm_ct + scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=9), labels=percent, name="Stops") 
+pm_ct <- pm_ct + theme_nothing(legend=TRUE) 
+pm_ct <- pm_ct + labs(x=NULL, y=NULL, title=paste("Where minority drivers are pulled over by", town_name, "police"))
+
+#pm_ct <- pm_ct + theme_bw(base_family="Calibri")
+#pm_ct <- pm_ct + theme(panel.grid.major=element_blank())
+#pm_ct <- pm_ct + theme(panel.grid.minor=element_blank())
+#pm_ct <- pm_ct + theme(panel.border=element_blank())
+pm_ct <- pm_ct + theme(text = element_text(size=15))
+#pm_ct <- pm_ct + theme(axis.ticks=element_blank())
+#pm_ct <- pm_ct + theme(axis.text.x=element_blank())
+pm_ct <- pm_ct + theme(plot.title=element_text(face="bold", hjust=.4))
+pm_ct <- pm_ct + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(l=20)))
+pm_ct <- pm_ct + theme(plot.caption=element_text(size=12, margin=margin(t=12), color="#7a7d7e", hjust=0))
+#pm_ct <- pm_ct + scale_fill_gradient(low = "#b2b2b2", high = "tomato", labels = percent)
+pm_ct <- pm_ct + annotate("segment", x = -73.1, xend = -73.06, y = 41.64, yend = 41.64, colour = "lightblue", size=.5)
+pm_ct <- pm_ct + annotate("point", x = -73.1, y = 41.64, colour = "lightblue", size = 2) 
+pm_ct <- pm_ct + annotate("text", x = -73.04, y = 41.64, label = "Watertown", size=5, colour="gray30") 
+
+
+pm_ct <- pm_ct + annotate("segment", x = -72.97, xend = -72.93, y = 41.57, yend = 41.57, colour = "lightblue", size=.5) 
+pm_ct <- pm_ct + annotate("point", x = -72.97, y = 41.57, colour = "lightblue", size = 2) 
+pm_ct <- pm_ct + annotate("text", x = -72.915, y = 41.57, label = "Wolcott", size=5, colour="gray30") 
+
+
+pm_ct <- pm_ct + annotate("point", x = -72.9, y = 41.57, colour="white", size=.2) 
+pm_ct <- pm_ct + theme(legend.key.size = unit(1, "cm"))
+pm_ct
+#  labs(title=" (percent by tract)", fill="")
+print(pm_ct)
+ggsave(pm_ct, file = "img/stops_waterbury_minorities.png", width = 8, height = 6, type = "cairo-png")
+
+
+# White
+
+pm_ct <- ggplot() 
+pm_ct <- pm_ct + geom_polygon(data = test_map, aes(x=long, y=lat, group=group, fill=white_p/100), color="white", size=.25)
+pm_ct <- pm_ct + geom_polygon(data = test_borders, aes(x=long, y=lat, group=group), fill=NA, color = "black", size=0.5)
+pm_ct <- pm_ct + coord_map() 
+pm_ct <- pm_ct + scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=9), labels=percent, name="Stops") 
+pm_ct <- pm_ct + theme_nothing(legend=TRUE) 
+pm_ct <- pm_ct + labs(x=NULL, y=NULL, title=paste("Where white drivers are pulled over by", town_name, "police"))
+
+#pm_ct <- pm_ct + theme_bw(base_family="Calibri")
+#pm_ct <- pm_ct + theme(panel.grid.major=element_blank())
+#pm_ct <- pm_ct + theme(panel.grid.minor=element_blank())
+#pm_ct <- pm_ct + theme(panel.border=element_blank())
+pm_ct <- pm_ct + theme(text = element_text(size=15))
+#pm_ct <- pm_ct + theme(axis.ticks=element_blank())
+#pm_ct <- pm_ct + theme(axis.text.x=element_blank())
+pm_ct <- pm_ct + theme(plot.title=element_text(face="bold", hjust=.4))
+pm_ct <- pm_ct + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(l=20)))
+pm_ct <- pm_ct + theme(plot.caption=element_text(size=12, margin=margin(t=12), color="#7a7d7e", hjust=0))
+#pm_ct <- pm_ct + scale_fill_gradient(low = "#b2b2b2", high = "tomato", labels = percent)
+pm_ct <- pm_ct + annotate("segment", x = -73.1, xend = -73.06, y = 41.64, yend = 41.64, colour = "lightblue", size=.5)
+pm_ct <- pm_ct + annotate("point", x = -73.1, y = 41.64, colour = "lightblue", size = 2) 
+pm_ct <- pm_ct + annotate("text", x = -73.04, y = 41.64, label = "Watertown", size=5, colour="gray30") 
+
+
+pm_ct <- pm_ct + annotate("segment", x = -72.97, xend = -72.93, y = 41.57, yend = 41.57, colour = "lightblue", size=.5) 
+pm_ct <- pm_ct + annotate("point", x = -72.97, y = 41.57, colour = "lightblue", size = 2) 
+pm_ct <- pm_ct + annotate("text", x = -72.915, y = 41.57, label = "Wolcott", size=5, colour="gray30") 
+
+
+pm_ct <- pm_ct + annotate("point", x = -72.9, y = 41.57, colour="white", size=.2) 
+pm_ct <- pm_ct + theme(legend.key.size = unit(1, "cm"))
+pm_ct
+#  labs(title=" (percent by tract)", fill="")
+print(pm_ct)
+ggsave(pm_ct, file = "img/stops_waterbury_white.png", width = 8, height = 6, type = "cairo-png")
+```
+
+
+# HEY FLAT MAP ABOVE!
+
+```{r population_checker, fig.width=9, fig.height=6}
+source("keys.R")
+#install.packages("devtools")
+#devtools::install_github("hrecht/censusapi")
+library("censusapi")
+
+# apis <- listCensusApis()
+# View(apis)
+# geos2014 <- listCensusMetadata(name="acs5", vintage=2014, "g")
+# View(geos2014)
+# # tracts = 140
+# vars2014 <- listCensusMetadata(name="acs5", vintage=2014, "v")
+# View(vars2014)
+
+
+# B02001_001E - Total
+# B02001_002E - White alone
+# B02001_003E - Black alone
+# B03001_001E - Hispanic total
+# 
+# race_tracts <- getCensus(name="acs5", 
+#     vintage=2014,
+#     key=census_key, 
+#     vars=c("NAME", "B02001_001E", "B02001_002E", "B02001_003E", "B03001_001E"), 
+#     region="tract:*", regionin="state:09")
+# 
+# race_tracts$NAME <- NULL
+# race_tracts$id <- paste0(race_tracts$state, race_tracts$county, race_tracts$tract)
+# colnames(race_tracts) <- c("state_code", "county_code", "tract_code", "total_pop", "white_pop", "black_pop", "hispanic_pop", "id")
+# race_tracts$minority_pop <- race_tracts$total_pop - race_tracts$white_pop
+# race_tracts$white_pop_p <- round(race_tracts$white_pop/race_tracts$total_pop*100,2)
+# race_tracts$minority_pop_p <- round(race_tracts$minority_pop/race_tracts$total_pop*100,2)
+# race_tracts$black_pop_p <- round(race_tracts$black_pop/race_tracts$total_pop*100,2)
+# race_tracts$hispanic_pop_p <- round(race_tracts$black_pop/race_tracts$hispanic_pop*100,2)
+
+race_tracts <- read.csv("data/race_tracts.csv", stringsAsFactors=FALSE)
+race_tracts$id <- paste0("0", as.character(race_tracts$id))
+mw_tract <- left_join(mw_tract, race_tracts)
+write.csv(mw_tract, "data/tracts_population.csv")
+total_map <- left_join(towntracts, mw_tract)
+
+
+## Percent white population
+pm_ct <- ggplot() +
+  geom_polygon(data = total_map, aes(x=long, y=lat, group=group, fill=white_pop_p), color = "black", size=0.2) +
+  geom_polygon(data = total_map, aes(x=long, y=lat, group=group, fill=white_pop_p), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="White population by tract", fill="")
+print(pm_ct)
+
+## Percent Minority population
+pm_ct <- ggplot() +
+  geom_polygon(data = total_map, aes(x=long, y=lat, group=group, fill=minority_pop_p), color = "black", size=0.2) +
+  geom_polygon(data = total_map, aes(x=long, y=lat, group=group, fill=minority_pop_p), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Minority population by tract", fill="")
+print(pm_ct)
+
+## Percent Black population
+pm_ct <- ggplot() +
+  geom_polygon(data = total_map, aes(x=long, y=lat, group=group, fill=black_pop_p), color = "black", size=0.2) +
+  geom_polygon(data = total_map, aes(x=long, y=lat, group=group, fill=black_pop_p), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Black population by tract", fill="")
+print(pm_ct)
+
+## Percent Hispanic population
+pm_ct <- ggplot() +
+  geom_polygon(data = total_map, aes(x=long, y=lat, group=group, fill=hispanic_pop_p), color = "black", size=0.2) +
+  geom_polygon(data = total_map, aes(x=long, y=lat, group=group, fill=hispanic_pop_p), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Hispanic population by tract", fill="")
+print(pm_ct)
+
+```
+
+## Disparity
+
+```{r disparity_map, fig.height=6, fig.width=9}
+mw_tract$white_disp <- mw_tract$white_p - mw_tract$white_pop_p
+mw_tract$min_disp <- mw_tract$minority_p - mw_tract$minority_pop_p
+mw_tract$black_disp <- mw_tract$black_p - mw_tract$black_pop_p
+mw_tract$hispanic_disp <- mw_tract$hispanic_p - mw_tract$hispanic_pop_p
+corr_df <- mw_tract
+
+write.csv(mw_tract, "data/tracts_disparity.csv")
+total_map <- left_join(towntracts, mw_tract)
+
+
+## Minority disparity
+pm_ct <- ggplot() +
+  geom_polygon(data = total_map, aes(x=long, y=lat, group=group, fill=min_disp), color = "black", size=0.2) +
+  geom_polygon(data = total_map, aes(x=long, y=lat, group=group, fill=min_disp), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Spectral", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Disparity between Minority drivers stopped and census tract population", fill="")
+print(pm_ct)
+
+
+## Black disparity
+pm_ct <- ggplot() +
+  geom_polygon(data = total_map, aes(x=long, y=lat, group=group, fill=black_disp), color = "black", size=0.2) +
+  geom_polygon(data = total_map, aes(x=long, y=lat, group=group, fill=black_disp), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Spectral", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Disparity between Minority drivers stopped and census tract population", fill="")
+print(pm_ct)
+
+## Hispanic disparity
+pm_ct <- ggplot() +
+  geom_polygon(data = total_map, aes(x=long, y=lat, group=group, fill=hispanic_disp), color = "black", size=0.2) +
+  geom_polygon(data = total_map, aes(x=long, y=lat, group=group, fill=hispanic_disp), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Spectral", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Disparity between Hispanic drivers stopped and census tract population", fill="")
+print(pm_ct)
+```
+
+# Post-stop activity
+```{r post_stops, fig.width=10, fig.height=8} 
+
+searches <- stops %>%
+  group_by(DepartmentName, RE, VehicleSearchedIndicator) %>%
+  summarise(searched=n()) %>%
+  spread(VehicleSearchedIndicator, searched) %>%
+  mutate(searched = round(`TRUE`/(sum(`TRUE`,`FALSE`, na.rm=TRUE))*100,2)) 
+  
+searches <- searches[c("DepartmentName", "RE","searched")]  
+
+ contra <- stops %>%
+  group_by(DepartmentName, RE, ContrabandIndicator) %>%
+  filter(VehicleSearchedIndicator=="TRUE") %>%
+  summarise(searched=n()) %>%
+  spread(ContrabandIndicator, searched) %>%
+  mutate(total=(sum(`TRUE`,`FALSE`, na.rm=TRUE))) 
+ 
+ contra <- data.frame(contra)
+ 
+ contra <- contra  %>%
+  mutate(contra = round(TRUE./total*100,2)) 
+contra <- contra[c("DepartmentName", "RE", "contra")]
+
+searchhitrate <- left_join(contra, searches)
+
+
+searchhitrate <- gather(searchhitrate, "type", "percent", 3:4)
+
+searchhitrate <- subset(searchhitrate, (RE!="Asian" & RE!="Indian" & RE!="Middle_eastern"))
+searchhitrate$type <- gsub("contra", "of vehicles stopped, contraband found", searchhitrate$type)
+searchhitrate$type <- gsub("searched", "departments stopped and searched vehicles", searchhitrate$type)
+
+
+
+#searchhitrate$type <- factor(searchhitrate$type, levels = rev(levels(searchhitrate$type)))
+
+ggplot(searchhitrate, aes(x=RE, y=percent, fill=type)) + geom_bar(stat="identity", position="dodge") +
+  facet_wrap(~ DepartmentName) + geom_text(aes(label = percent, y = percent+1), size = 3) + labs(title="Search and hit rate")
+
+write.csv(searchhitrate, "data/searchhitrate.csv")
+# fortrend <- searchhitrate %>%
+#   spread(RE, percent)
+
+```
+
+
+```{r east_hartford_disparity, fig.height=8, fig.width=9}
+town_name <- "East Hartford"
+#test_map <- subset(total_map, town_department==town_name)
+test_map <- subset(total_map, town_department=="East Hartford")
+
+test_map <- subset(test_map, !is.na(white_p))
+
+test_borders <- subset(townborders, id==town_name)
+
+# Hispanic
+
+pm_ct <- ggplot() 
+pm_ct <- pm_ct + geom_polygon(data = test_map, aes(x=long, y=lat, group=group, fill=hispanic_disp/100), color="white", size=.25)
+pm_ct <- pm_ct + geom_polygon(data = test_borders, aes(x=long, y=lat, group=group), fill=NA, color = "black", size=0.5)
+pm_ct <- pm_ct + coord_map() 
+pm_ct <- pm_ct + scale_fill_distiller(type="seq", limits=c(-.50, .50), palette = "Spectral", trans="reverse", breaks=pretty_breaks(n=9), labels=percent, name="Gap"  ) 
+pm_ct <- pm_ct + theme_nothing(legend=TRUE) 
+pm_ct <- pm_ct + labs(x=NULL, y=NULL, title=paste("Where Hispanic drivers are pulled over by", town_name, "police"))
+
+#pm_ct <- pm_ct + theme_bw(base_family="Calibri")
+#pm_ct <- pm_ct + theme(panel.grid.major=element_blank())
+#pm_ct <- pm_ct + theme(panel.grid.minor=element_blank())
+#pm_ct <- pm_ct + theme(panel.border=element_blank())
+pm_ct <- pm_ct + theme(text = element_text(size=15))
+#pm_ct <- pm_ct + theme(axis.ticks=element_blank())
+#pm_ct <- pm_ct + theme(axis.text.x=element_blank())
+pm_ct <- pm_ct + theme(plot.title=element_text(face="bold", hjust=.4))
+pm_ct <- pm_ct + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(l=20)))
+pm_ct <- pm_ct + theme(plot.caption=element_text(size=12, margin=margin(t=12), color="#7a7d7e", hjust=0))
+#pm_ct <- pm_ct + scale_fill_gradient(low = "#b2b2b2", high = "tomato", labels = percent)
+pm_ct <- pm_ct + annotate("segment", x = -72.58, xend = -72.675, y = 41.815, yend = 41.815, colour = "lightblue", size=.5) 
+pm_ct <- pm_ct + annotate("point", x = -72.58, y = 41.815, colour = "lightblue", size = 2) 
+pm_ct <- pm_ct + annotate("text", x = -72.71, y = 41.815, label = "South Windsor", size=5, colour="gray30") 
+pm_ct <- pm_ct + annotate("segment", x = -72.5, xend = -72.55, y = 41.75, yend = 41.71, colour = "lightblue", size=.5) 
+pm_ct <- pm_ct + annotate("point", x = -72.5, y = 41.75, colour = "lightblue", size = 2) 
+pm_ct <- pm_ct + annotate("text", x = -72.578, y = 41.71, label = "Manchester", size=5, colour="gray30") 
+pm_ct <- pm_ct + annotate("point", x = -72.75, y = 41.71, colour="white", size=.2) 
+pm_ct <- pm_ct + theme(legend.key.size = unit(1, "cm"))
+pm_ct
+#  labs(title=" (percent by tract)", fill="")
+print(pm_ct)
+ggsave(pm_ct, file = "img/disp_easthartford_hispanic.png", width = 8, height = 6, type = "cairo-png")
+
+
+# Black
+
+pm_ct <- ggplot() 
+pm_ct <- pm_ct + geom_polygon(data = test_map, aes(x=long, y=lat, group=group, fill=black_disp/100), color="white", size=.25)
+pm_ct <- pm_ct + geom_polygon(data = test_borders, aes(x=long, y=lat, group=group), fill=NA, color = "black", size=0.5)
+pm_ct <- pm_ct + coord_map() 
+pm_ct <- pm_ct + scale_fill_distiller(type="seq", trans="reverse", palette = "Spectral", breaks=pretty_breaks(n=9), labels=percent, name="Gap",  limits=c(-.50, .50)) 
+pm_ct <- pm_ct + theme_nothing(legend=TRUE) 
+pm_ct <- pm_ct + labs(x=NULL, y=NULL, title=paste("Where black drivers are pulled over by", town_name, "police"))
+
+#pm_ct <- pm_ct + theme_bw(base_family="Calibri")
+#pm_ct <- pm_ct + theme(panel.grid.major=element_blank())
+#pm_ct <- pm_ct + theme(panel.grid.minor=element_blank())
+#pm_ct <- pm_ct + theme(panel.border=element_blank())
+pm_ct <- pm_ct + theme(text = element_text(size=15))
+#pm_ct <- pm_ct + theme(axis.ticks=element_blank())
+#pm_ct <- pm_ct + theme(axis.text.x=element_blank())
+pm_ct <- pm_ct + theme(plot.title=element_text(face="bold", hjust=.4))
+pm_ct <- pm_ct + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(l=20)))
+pm_ct <- pm_ct + theme(plot.caption=element_text(size=12, margin=margin(t=12), color="#7a7d7e", hjust=0))
+#pm_ct <- pm_ct + scale_fill_gradient(low = "#b2b2b2", high = "tomato", labels = percent)
+pm_ct <- pm_ct + annotate("segment", x = -72.58, xend = -72.675, y = 41.815, yend = 41.815, colour = "lightblue", size=.5) 
+pm_ct <- pm_ct + annotate("point", x = -72.58, y = 41.815, colour = "lightblue", size = 2) 
+pm_ct <- pm_ct + annotate("text", x = -72.71, y = 41.815, label = "South Windsor", size=5, colour="gray30") 
+pm_ct <- pm_ct + annotate("segment", x = -72.5, xend = -72.55, y = 41.75, yend = 41.71, colour = "lightblue", size=.5) 
+pm_ct <- pm_ct + annotate("point", x = -72.5, y = 41.75, colour = "lightblue", size = 2) 
+pm_ct <- pm_ct + annotate("text", x = -72.578, y = 41.71, label = "Manchester", size=5, colour="gray30") 
+pm_ct <- pm_ct + annotate("point", x = -72.75, y = 41.71, colour="white", size=.2) 
+pm_ct <- pm_ct + theme(legend.key.size = unit(1, "cm"))
+pm_ct
+#  labs(title=" (percent by tract)", fill="")
+print(pm_ct)
+ggsave(pm_ct, file = "img/disp_easthartford_black.png", width = 8, height = 6, type = "cairo-png")
+
+
+
+# Minorities
+
+pm_ct <- ggplot() 
+pm_ct <- pm_ct + geom_polygon(data = test_map, aes(x=long, y=lat, group=group, fill=min_disp/100), color="white", size=.25)
+pm_ct <- pm_ct + geom_polygon(data = test_borders, aes(x=long, y=lat, group=group), fill=NA, color = "black", size=0.5)
+pm_ct <- pm_ct + coord_map() 
+pm_ct <- pm_ct + scale_fill_distiller(type="seq", trans="reverse", palette = "Spectral", breaks=pretty_breaks(n=9), labels=percent,name="Gap",  limits=c(-.50, .50)) 
+pm_ct <- pm_ct + theme_nothing(legend=TRUE) 
+pm_ct <- pm_ct + labs(x=NULL, y=NULL, title=paste("Where minority drivers are pulled over by", town_name, "police"))
+
+#pm_ct <- pm_ct + theme_bw(base_family="Calibri")
+#pm_ct <- pm_ct + theme(panel.grid.major=element_blank())
+#pm_ct <- pm_ct + theme(panel.grid.minor=element_blank())
+#pm_ct <- pm_ct + theme(panel.border=element_blank())
+pm_ct <- pm_ct + theme(text = element_text(size=15))
+#pm_ct <- pm_ct + theme(axis.ticks=element_blank())
+#pm_ct <- pm_ct + theme(axis.text.x=element_blank())
+pm_ct <- pm_ct + theme(plot.title=element_text(face="bold", hjust=.4))
+pm_ct <- pm_ct + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(l=20)))
+pm_ct <- pm_ct + theme(plot.caption=element_text(size=12, margin=margin(t=12), color="#7a7d7e", hjust=0))
+#pm_ct <- pm_ct + scale_fill_gradient(low = "#b2b2b2", high = "tomato", labels = percent)
+pm_ct <- pm_ct + annotate("segment", x = -72.58, xend = -72.675, y = 41.815, yend = 41.815, colour = "lightblue", size=.5) 
+pm_ct <- pm_ct + annotate("point", x = -72.58, y = 41.815, colour = "lightblue", size = 2) 
+pm_ct <- pm_ct + annotate("text", x = -72.71, y = 41.815, label = "South Windsor", size=5, colour="gray30") 
+pm_ct <- pm_ct + annotate("segment", x = -72.5, xend = -72.55, y = 41.75, yend = 41.71, colour = "lightblue", size=.5) 
+pm_ct <- pm_ct + annotate("point", x = -72.5, y = 41.75, colour = "lightblue", size = 2) 
+pm_ct <- pm_ct + annotate("text", x = -72.578, y = 41.71, label = "Manchester", size=5, colour="gray30") 
+pm_ct <- pm_ct + annotate("point", x = -72.75, y = 41.71, colour="white", size=.2) 
+pm_ct <- pm_ct + theme(legend.key.size = unit(1, "cm"))
+pm_ct
+#  labs(title=" (percent by tract)", fill="")
+print(pm_ct)
+ggsave(pm_ct, file = "img/disp_easthartford_minorities.png", width = 8, height = 6, type = "cairo-png")
+
+
+# White
+
+pm_ct <- ggplot() 
+pm_ct <- pm_ct + geom_polygon(data = test_map, aes(x=long, y=lat, group=group, fill=white_disp/100), color="white", size=.25)
+pm_ct <- pm_ct + geom_polygon(data = test_borders, aes(x=long, y=lat, group=group), fill=NA, color = "black", size=0.5)
+pm_ct <- pm_ct + coord_map() 
+pm_ct <- pm_ct + scale_fill_distiller(type="seq", trans="reverse", palette = "Spectral", breaks=pretty_breaks(n=9), labels=percent, name="Gap",  limits=c(-.50, .50)) 
+pm_ct <- pm_ct + theme_nothing(legend=TRUE) 
+pm_ct <- pm_ct + labs(x=NULL, y=NULL, title=paste("Where white drivers are pulled over by", town_name, "police"))
+
+#pm_ct <- pm_ct + theme_bw(base_family="Calibri")
+#pm_ct <- pm_ct + theme(panel.grid.major=element_blank())
+#pm_ct <- pm_ct + theme(panel.grid.minor=element_blank())
+#pm_ct <- pm_ct + theme(panel.border=element_blank())
+pm_ct <- pm_ct + theme(text = element_text(size=15))
+#pm_ct <- pm_ct + theme(axis.ticks=element_blank())
+#pm_ct <- pm_ct + theme(axis.text.x=element_blank())
+pm_ct <- pm_ct + theme(plot.title=element_text(face="bold", hjust=.4))
+pm_ct <- pm_ct + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(l=20)))
+pm_ct <- pm_ct + theme(plot.caption=element_text(size=12, margin=margin(t=12), color="#7a7d7e", hjust=0))
+#pm_ct <- pm_ct + scale_fill_gradient(low = "#b2b2b2", high = "tomato", labels = percent)
+pm_ct <- pm_ct + annotate("segment", x = -72.58, xend = -72.675, y = 41.815, yend = 41.815, colour = "lightblue", size=.5) 
+pm_ct <- pm_ct + annotate("point", x = -72.58, y = 41.815, colour = "lightblue", size = 2) 
+pm_ct <- pm_ct + annotate("text", x = -72.71, y = 41.815, label = "South Windsor", size=5, colour="gray30") 
+pm_ct <- pm_ct + annotate("segment", x = -72.5, xend = -72.55, y = 41.75, yend = 41.71, colour = "lightblue", size=.5) 
+pm_ct <- pm_ct + annotate("point", x = -72.5, y = 41.75, colour = "lightblue", size = 2) 
+pm_ct <- pm_ct + annotate("text", x = -72.578, y = 41.71, label = "Manchester", size=5, colour="gray30") 
+pm_ct <- pm_ct + annotate("point", x = -72.75, y = 41.71, colour="white", size=.2) 
+pm_ct <- pm_ct + theme(legend.key.size = unit(1, "cm"))
+pm_ct
+#  labs(title=" (percent by tract)", fill="")
+print(pm_ct)
+ggsave(pm_ct, file = "img/disp_easthartford_white.png", width = 8, height = 6, type = "cairo-png")
+```
+
