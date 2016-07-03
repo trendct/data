@@ -1,0 +1,927 @@
+---
+title: "options"
+author: "Andrew Ba Tran"
+date: "May 20, 2016"
+output: html_document
+---
+
+```{r setup, include=FALSE, echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#Exploring different ways to visualize traffic data.
+
+```{r cars, echo=FALSE, message=FALSE, warning=FALSE}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(ggalt)
+library(scales)
+explore <- read.csv("data/mega_df.csv")
+```
+
+---
+
+```{r pressure, fig.width=8, fig.height=5, echo=FALSE}
+single_dept <- subset(explore, DepartmentName=="Wethersfield" & is.na(ReportingOfficerIdentificationID))
+single_all <- subset(explore, DepartmentName=="Connecticut average"  & is.na(ReportingOfficerIdentificationID))
+
+dept_name <- paste0(single_dept$DepartmentName[1], " Police | Traffic Stops")
+```
+
+## `r paste0(single_dept$DepartmentName[1], " Police | Traffic Stops")`
+
+### `r paste0(single_dept$min_p[1], "  percent of drivers stopped by ", single_dept$DepartmentName[1], " officers were non-white, compared with ", single_all$min_p[1], " percent statewide.")`
+
+```{r section1, fig.width=8, fig.height=4, echo=FALSE}
+
+stops_race1 <- single_dept %>%
+  select(DepartmentName, asian_p, black_p, hispanic_p, indian_p, mid_e_p, white_p) %>%
+  gather("Ethnicity", "Percent", 2:7) %>%
+  mutate(pos=cumsum(Percent) - (0.5 * Percent))
+
+stops_race2 <- single_all %>%
+  select(DepartmentName, asian_p, black_p, hispanic_p, indian_p, mid_e_p, white_p) %>%
+  gather("Ethnicity", "Percent", 2:7)  %>%
+  mutate(pos=cumsum(Percent) - (0.5 * Percent))
+
+stops_race2$DepartmentName <- gsub("Connecticut average", "Connecticut", stops_race2$DepartmentName)
+
+stops_race <- rbind(stops_race1, stops_race2)
+stops_race$Ethnicity <- gsub("asian_p", "Asian", stops_race$Ethnicity)
+stops_race$Ethnicity <- gsub("black_p", "Black", stops_race$Ethnicity)
+stops_race$Ethnicity <- gsub("hispanic_p", "Hispanic", stops_race$Ethnicity)
+stops_race$Ethnicity <- gsub("indian_p", "Indian", stops_race$Ethnicity)
+stops_race$Ethnicity <- gsub("mid_e_p", "Middle-Eastern", stops_race$Ethnicity)
+stops_race$Ethnicity <- gsub("white_p", "White", stops_race$Ethnicity)
+
+ggplot(stops_race, aes(Ethnicity, Percent, fill = DepartmentName, label = Percent)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  geom_text(position = position_dodge(0.9), vjust = -0.5, size=3) + labs(title="Traffic stops in 2014 by race percent")
+
+#ggplot(stops_race, aes(x=DepartmentName, y=Percent)) + geom_bar(aes(fill=Ethnicity), stat="identity") +
+#  geom_text(aes(label=Percent, y=pos), size=3) + coord_flip() + labs(title="Traffic stops in 2014")
+
+```
+
+### `r paste0(single_dept$minorities_p[1], " % NON-WHITE")`
+
+The driving-age population is `r single_dept$minorities_p[1]` percent minority in `r single_dept$DepartmentName[1]` and `r single_all$minorities_p[1]` minority statewide.
+
+---
+
+## Gender
+
+In `r single_dept$DepartmentName[1]`
+
+* **`r single_dept$male_p[1]`** percent were men
+* **`r single_dept$female_p[1]`** were women
+
+Statewide
+
+* **`r single_all$male_p[1]`** percent were men
+* **`r single_all$female_p[1]`** were women
+
+---
+
+### The median age for drivers stopped by officers in `r single_dept$DepartmentName[1]` was `r single_dept$median_age[1]`; statewide, the median age was `r single_all$median_age[1]` years old.
+
+```{r section2, fig.width=8, fig.height=4, echo=FALSE}
+
+stops_age1 <- single_dept %>%
+  select(DepartmentName, y16_21_p, y22_27_p, y28_31_p, y32_37_p, y38_41_p, y42_47_p, y48_51_p, y52_57_p, y58_61_p, y62_67_p, y68_71_p, y72_77_p, y78_81_p, y82_p) %>%
+  gather("Age", "Percent", 2:15)  
+
+stops_age2 <- single_all %>%
+  select(DepartmentName, y16_21_p, y22_27_p, y28_31_p, y32_37_p, y38_41_p, y42_47_p, y48_51_p, y52_57_p, y58_61_p, y62_67_p, y68_71_p, y72_77_p, y78_81_p, y82_p) %>%
+  gather("Age", "Percent", 2:15) 
+
+stops_age2$DepartmentName <- gsub("Connecticut average", "Connecticut", stops_age2$DepartmentName)
+
+stops_age <- rbind(stops_age1, stops_age2)
+stops_age$Age <- gsub("y", "", stops_age$Age)
+stops_age$Age <- gsub("_", "-", stops_age$Age)
+stops_age$Age <- gsub("-p", "", stops_age$Age)
+stops_age$Age <- gsub("82", "82+", stops_age$Age)
+
+ggplot(stops_age, aes(Age, Percent, fill = DepartmentName, label = Percent)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  geom_text(position = position_dodge(0.9), vjust = -0.5, size=3) + labs(title="Traffic stops in 2014 by age group percent")
+
+```
+
+
+---
+
+### When
+
+```{r section5, fig.width=8, fig.height=4, echo=FALSE}
+
+stops_day1 <- single_dept %>%
+  select(DepartmentName, Sun, Mon, Tues, Wed, Thurs, Fri, Sat) %>%
+  gather("Day", "Percent", 2:8)  
+
+
+# stops_day2 <- single_all %>%
+#   select(DepartmentName, Sun, Mon, Tues, Wed, Thurs, Fri, Sat) %>%
+#   gather("Day", "Percent", 2:8)  
+
+# stops_day2$DepartmentName <- gsub("Connecticut average", "Connecticut", stops_day2$DepartmentName)
+
+# stops_day <- rbind(stops_day1, stops_day2)
+
+stops_day <- stops_day1
+stops_day$Day <- factor(stops_day$Day, levels= c("Sun", "Mon", 
+    "Tues", "Wed", "Thurs", "Fri", "Sat"))
+
+ggplot(stops_day, aes(Day, Percent, fill = DepartmentName, label = Percent)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  geom_text(position = position_dodge(0.9), vjust = -0.5, size=3) + labs(title="Days when drivers were stopped") 
+
+```
+
+```{r section3, fig.width=6, fig.height=7, echo=FALSE}
+
+stops_reason1 <- single_dept %>%
+  select(DepartmentName, DefectiveLights_p, DisplayofPlates_p, EquipmentViolation_p, MovingViolation_p, Other_p, Registration_p, Seatbelt_p, SpeedRelated_p, StopSign_p, SuspendedLicense_p,TrafficControlSignal_p,
+WindowTint_p) %>%
+  gather("Reason", "Percent", 2:13)  
+
+stops_reason2 <- single_all %>%  
+  select(DepartmentName, DefectiveLights_p, DisplayofPlates_p, EquipmentViolation_p, MovingViolation_p, Other_p, Registration_p, Seatbelt_p, SpeedRelated_p, StopSign_p, SuspendedLicense_p,TrafficControlSignal_p,
+WindowTint_p) %>%
+  gather("Reason", "Percent", 2:13)  
+
+stops_reason2$DepartmentName <- gsub("Connecticut average", "Connecticut", stops_reason2$DepartmentName)
+
+stops_reason <- rbind(stops_reason1, stops_reason2)
+stops_reason$Reason <- gsub("_p", "", stops_reason$Reason)
+
+ggplot(stops_reason, aes(Reason, Percent, fill = DepartmentName, label = Percent)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  geom_text(position = position_dodge(0.9), hjust = -0.2, size=3) + labs(title="Reasons for traffic stops") + coord_flip()
+
+```
+
+
+---
+
+### After traffic stops
+
+```{r section6, fig.width=8, fig.height=4, echo=FALSE}
+
+stops_result1 <- single_dept %>%
+  select(DepartmentName, infraction_ticket_p, misdemeanor_summons_p, no_disposition_p, uniform_arrest_p, verbal_warning_p, written_warning_p) %>%
+  gather("Result", "Percent", 2:7)  
+
+
+stops_result2 <- single_all %>%
+  select(DepartmentName, infraction_ticket_p, misdemeanor_summons_p, no_disposition_p, uniform_arrest_p, verbal_warning_p, written_warning_p) %>%
+  gather("Result", "Percent", 2:7)  
+
+stops_result2$DepartmentName <- gsub("Connecticut average", "Connecticut", stops_result2$DepartmentName)
+
+stops_result <- rbind(stops_result1, stops_result2)
+stops_result$Result <- gsub("_p", "", stops_result$Result)
+
+
+ggplot(stops_result, aes(Result, Percent, fill = DepartmentName, label = Percent)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  geom_text(position = position_dodge(0.9), vjust = -0.5, size=3) + labs(title="Result after traffic stops") 
+
+```
+
+---
+
+### Searches
+
+`r single_dept$DepartmentName[1]` officers searched `r single_dept$searched_p[1]` percent of drivers they stopped. This chart shows the percentage of all stops involving searches of cars driven by white or non-white drivers.
+
+```{r section4, fig.width=8, fig.height=4, echo=FALSE}
+
+stops_search1 <- single_dept %>%
+  select(DepartmentName, Minority.x, White.y) %>%
+  gather("Searched", "Percent", 2:3)  
+
+
+stops_search2 <- single_all %>%
+  select(DepartmentName, Minority.x, White.y) %>%
+  gather("Searched", "Percent", 2:3)  
+
+
+stops_search2$DepartmentName <- gsub("Connecticut average", "Connecticut", stops_search2$DepartmentName)
+
+stops_search <- rbind(stops_search1, stops_search2)
+stops_search$Searched <- gsub(".x", "", stops_search$Searched)
+stops_search$Searched <- gsub(".y", "", stops_search$Searched)
+
+ggplot(stops_search, aes(Searched, Percent, fill = DepartmentName, label = Percent)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  geom_text(position = position_dodge(0.9), vjust = -0.5, size=3) + labs(title="Who was searched") 
+
+```
+
+---
+
+## Residential stops
+
+In `r single_dept$DepartmentName[1]`
+
+* **`r single_dept$resident_p[1]`** percent were residents
+* **`r single_dept$not.resident_p[1]`** were non-residents
+
+Statewide
+
+* **`r single_all$resident_p[1]`** percent were men
+* **`r single_all$not.resident_p[1]`** were women
+
+---
+
+## Black drivers: Of those stopped, how many were residents or non-residents?
+
+```{r section7, fig.width=8, fig.height=4, echo=FALSE}
+
+stops_res_min1 <- single_dept %>%
+  select(DepartmentName, not.resident_b_p, resident_b_p) %>%
+  gather("Status", "Percent", 2:3)  
+
+
+stops_res_min2 <- single_all %>%
+  select(DepartmentName, not.resident_b_p, resident_b_p) %>%
+  gather("Status", "Percent", 2:3)  
+
+
+stops_res_min2$DepartmentName <- gsub("Connecticut average", "Connecticut", stops_res_min2$DepartmentName)
+
+stops_res_min <- rbind(stops_res_min1, stops_res_min2)
+stops_res_min$Status <- gsub("_p", "", stops_res_min$Status)
+
+ggplot(stops_res_min, aes(Status, Percent, fill = DepartmentName, label = Percent)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  geom_text(position = position_dodge(0.9), vjust = -0.5, size=3) + labs(title="Black residents pulled over") 
+
+```
+
+---
+
+## Hispanic drivers: Of those stopped, how many were residents or non-residents?
+
+```{r section8, fig.width=8, fig.height=4, echo=FALSE}
+
+stops_res_min1 <- single_dept %>%
+  select(DepartmentName, not.resident_h_p, resident_h_p) %>%
+  gather("Status", "Percent", 2:3)  
+
+
+stops_res_min2 <- single_all %>%
+  select(DepartmentName, not.resident_h_p, resident_h_p) %>%
+  gather("Status", "Percent", 2:3)  
+
+
+stops_res_min2$DepartmentName <- gsub("Connecticut average", "Connecticut", stops_res_min2$DepartmentName)
+
+stops_res_min <- rbind(stops_res_min1, stops_res_min2)
+stops_res_min$Status <- gsub("_p", "", stops_res_min$Status)
+
+ggplot(stops_res_min, aes(Status, Percent, fill = DepartmentName, label = Percent)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  geom_text(position = position_dodge(0.9), vjust = -0.5, size=3) + labs(title="Hispanic residents pulled over") 
+
+```
+
+---
+
+## Non-white drivers: Of those stopped, how many were residents or non-residents?
+
+```{r section9, fig.width=8, fig.height=4, echo=FALSE}
+
+stops_res_min1 <- single_dept %>%
+  select(DepartmentName, not.resident_m_p, resident_m_p) %>%
+  gather("Status", "Percent", 2:3)  
+
+
+stops_res_min2 <- single_all %>%
+  select(DepartmentName, not.resident_m_p, resident_m_p) %>%
+  gather("Status", "Percent", 2:3)  
+
+
+stops_res_min2$DepartmentName <- gsub("Connecticut average", "Connecticut", stops_res_min2$DepartmentName)
+
+stops_res_min <- rbind(stops_res_min1, stops_res_min2)
+stops_res_min$Status <- gsub("_p", "", stops_res_min$Status)
+
+ggplot(stops_res_min, aes(Status, Percent, fill = DepartmentName, label = Percent)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  geom_text(position = position_dodge(0.9), vjust = -0.5, size=3) + labs(title="Non-white residents pulled over") 
+
+```
+
+---
+
+## Type of stops
+
+```{r section10, fig.width=8, fig.height=4, echo=FALSE}
+
+stops_ser_min1 <- single_dept %>%
+  select(DepartmentName, general.enforcement_p, blind.enforcement_p, spot.check_p) %>%
+  gather("Stops", "Percent", 2:4)  
+
+
+stops_ser_min2 <- single_all %>%
+  select(DepartmentName, general.enforcement_p, blind.enforcement_p, spot.check_p) %>%
+  gather("Stops", "Percent", 2:4)  
+
+
+stops_ser_min2$DepartmentName <- gsub("Connecticut average", "Connecticut", stops_ser_min2$DepartmentName)
+
+stops_ser_min <- rbind(stops_ser_min1, stops_ser_min2)
+stops_ser_min$Stops <- gsub("_p", "", stops_ser_min$Stops)
+
+ggplot(stops_ser_min, aes(Stops, Percent, fill = DepartmentName, label = Percent)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  geom_text(position = position_dodge(0.9), vjust = -0.5, size=3) + labs(title="Percent of type of stops out of all stops") 
+
+```
+
+## Spot checks
+
+```{r section11, fig.width=8, fig.height=4, echo=FALSE}
+
+stops_ser_min1 <- single_dept %>%
+  select(DepartmentName, Minority.y, White.x.1) %>%
+  gather("Stops", "Percent", 2:3)  
+
+
+stops_ser_min2 <- single_all %>%
+  select(DepartmentName, Minority.y, White.x.1) %>%
+  gather("Stops", "Percent", 2:3)  
+
+
+
+stops_ser_min2$DepartmentName <- gsub("Connecticut average", "Connecticut", stops_ser_min2$DepartmentName)
+
+stops_ser_min <- rbind(stops_ser_min1, stops_ser_min2)
+stops_ser_min$Stops <- gsub("_p", "", stops_ser_min$Stops)
+
+ggplot(stops_ser_min, aes(Stops, Percent, fill = DepartmentName, label = Percent)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  geom_text(position = position_dodge(0.9), vjust = -0.5, size=3) + labs(title="Percent of spot checks for minorities out of total stops") 
+
+```
+
+
+## Blind enforcement
+
+```{r section12, fig.width=8, fig.height=4, echo=FALSE}
+
+stops_ser_min1 <- single_dept %>%
+  select(DepartmentName, Minority, White.y.1) %>%
+  gather("Stops", "Percent", 2:3)  
+
+
+stops_ser_min2 <- single_all %>%
+  select(DepartmentName, Minority, White.y.1) %>%
+  gather("Stops", "Percent", 2:3)  
+
+
+
+stops_ser_min2$DepartmentName <- gsub("Connecticut average", "Connecticut", stops_ser_min2$DepartmentName)
+
+stops_ser_min <- rbind(stops_ser_min1, stops_ser_min2)
+stops_ser_min$Stops <- gsub("_p", "", stops_ser_min$Stops)
+
+ggplot(stops_ser_min, aes(Stops, Percent, fill = DepartmentName, label = Percent)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  geom_text(position = position_dodge(0.9), vjust = -0.5, size=3) + labs(title="Percent of blind enforcement for minorities out of total stops") 
+
+```
+
+## About `r single_dept$DepartmentName[1]`
+
+* Number of employees in department: **`r single_dept$total_leo[1]`** (`r single_dept$leo_per_capita[1]` per 10,000 residents)
+* Number of officers: **`r single_dept$total_officers[1]`** (`r single_dept$officers_per_capita[1]` per 10,000 residents)
+* Number of civilian workers: **`r single_dept$total_civilians[1]`** (`r single_dept$civ_per_capita[1]` per 10,000 residents)
+
+```{r section13, fig.width=8, fig.height=8, echo=FALSE}
+
+stops_reason1 <- single_dept %>%
+  select(DepartmentName, violent_crime_pc, murder_manslaughter_pc, rape_pc, robbery_pc, aggravated_robbery_pc, property_crime_pc, burglary_pc, larceny_theft_pc, motor_vehicle_theft_pc, arson_pc) %>%
+  gather("Crime", "Percent", 2:11)  
+
+stops_reason2 <- single_all %>%  
+  select(DepartmentName, violent_crime_pc, murder_manslaughter_pc, rape_pc, robbery_pc, aggravated_robbery_pc, property_crime_pc, burglary_pc, larceny_theft_pc, motor_vehicle_theft_pc, arson_pc) %>%
+  gather("Crime", "Percent", 2:11)  
+
+stops_reason2$DepartmentName <- gsub("Connecticut average", "Connecticut", stops_reason2$DepartmentName)
+
+stops_reason <- rbind(stops_reason1, stops_reason2)
+stops_reason$Crime <- gsub("_pc", "", stops_reason$Crime)
+
+ggplot(stops_reason, aes(Crime, Percent, fill = DepartmentName, label = Percent)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  geom_text(position = position_dodge(0.9), hjust = -0.2, size=3) + labs(title="Crime per 10,000 residents") + coord_flip()
+```
+  
+---
+
+# Points
+
+## Statewide average
+
+```{r section14, fig.width=8, fig.height=4, echo=FALSE}
+
+stops_race1 <- single_dept %>%
+  select(DepartmentName, black_p, hispanic_p, minorities_p, black_16, hispanic_16, minorities_16) %>%
+  gather("Ethnicity", "Percent", 2:7)
+
+stops_race2 <- single_all %>%
+  select(DepartmentName, black_p, hispanic_p, minorities_p, black_16, hispanic_16, minorities_16) %>%
+  gather("Ethnicity", "Percent", 2:7)
+
+stops_race2$DepartmentName <- gsub("Connecticut average", "Connecticut", stops_race2$DepartmentName)
+ 
+stops_race <- rbind(stops_race1, stops_race2)
+stops_race$Ethnicity <- gsub("black_16", "Black driving population", stops_race$Ethnicity)
+stops_race$Ethnicity <- gsub("black_p", "Black traffic stops", stops_race$Ethnicity)
+stops_race$Ethnicity <- gsub("hispanic_p", "Hispanic traffic stops", stops_race$Ethnicity)
+stops_race$Ethnicity <- gsub("hispanic_16", "Hispanic driving population", stops_race$Ethnicity)
+stops_race$Ethnicity <- gsub("minorities_p", "Non-White traffic stops", stops_race$Ethnicity)
+stops_race$Ethnicity <- gsub("minorities_16", "Non-White driving population", stops_race$Ethnicity)
+
+ggplot(stops_race, aes(Ethnicity, Percent, fill = DepartmentName, label = Percent)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  geom_text(position = position_dodge(0.9), hjust = -0.5, size=3) + labs(title="Driving population versus traffic stops") + coord_flip()
+```
+
+```{r exploratory1, fig.width=5, fig.height=5, echo=FALSE}
+## Statewaide average
+stops_race$type <- gsub("Black ", "", stops_race$Ethnicity)
+stops_race$type <- gsub("Hispanic ", "", stops_race$type)
+stops_race$type <- gsub("Non-White ", "", stops_race$type)
+stops_race$type <- gsub(" ", "_", stops_race$type)
+
+stops_race$Ethnicity<- gsub(" traffic stops", "", stops_race$Ethnicity)
+stops_race$Ethnicity<- gsub(" driving population", "", stops_race$Ethnicity)
+stops_race$Ethnicity<- gsub("Non-White", "Minority", stops_race$Ethnicity)
+
+stops_race <- stops_race %>%
+  spread(type, Percent)
+
+ggplot(stops_race, aes(traffic_stops, driving_population, group = DepartmentName)) +   
+  geom_point(size = 2, colour = "purple") +
+  geom_line(colour="lightgray") +
+  geom_text(data = stops_race,aes(x=traffic_stops,y=driving_population + 3, label=paste(DepartmentName, Ethnicity, sep="\n"))) +
+  geom_abline(intercept = 0) +
+  ylim(0,60) + xlim(0,60) +
+#  expand_limits(x = 0, y = 0) +
+  theme_minimal()  +  labs(title="Percent of driving population versus traffic stops")
+```
+
+```{r exploratory2, fig.width=7, fig.height=5, echo=FALSE}
+ggplot(stops_race, aes(traffic_stops, driving_population, group = DepartmentName, color=DepartmentName)) +   
+  geom_point(size = 2, colour = "purple") +
+  #geom_line(colour="lightgray") +
+  geom_text(data = stops_race,aes(x=traffic_stops,y=driving_population + 3, label=Ethnicity)) +
+  geom_abline(intercept = 0) +
+ ylim(0,60) + xlim(0,60) +
+#  expand_limits(x = 0, y = 0) +
+  theme_minimal()  +  labs(title="Percent of driving population versus traffic stops")
+
+stops_race$d_e <- paste(stops_race$DepartmentName, stops_race$Ethnicity)
+
+stops_race <- stops_race[order(stops_race$Ethnicity),]
+
+stops_race$d_e <- factor(stops_race$d_e, levels = stops_race$d_e)
+
+
+gg <- ggplot(stops_race, aes(x=traffic_stops, xend=driving_population, y=d_e, group=d_e))
+gg <- gg + geom_dumbbell(color="#a3c4dc", size=1, point.colour.l="#0e668b")
+# gg <- gg + scale_x_continuous(label=percent)
+gg <- gg + labs(x=NULL, y=NULL)
+gg <- gg + theme_bw()
+gg <- gg+ theme(axis.title = element_text(family = "Trebuchet MS", color="#666666", face="bold", size=6)) 
+gg <- gg + theme(plot.background=element_rect(fill="#f7f7f7"))
+gg <- gg + theme(panel.background=element_rect(fill="#f7f7f7"))
+gg <- gg + theme(panel.grid.minor=element_blank())
+gg <- gg + theme(panel.grid.major.y=element_blank())
+gg <- gg + theme(panel.grid.major.x=element_line())
+#gg <- gg+ geom_vline(xintercept = 50)
+gg <- gg + theme(axis.ticks=element_blank())
+gg <- gg + theme(axis.text = element_text(size = 12))
+gg <- gg + labs(title = "Driving population versus traffic stops")
+gg <- gg + annotate("text", x = 39, y = 1.5, label = "Driving population", size=3, colour="gray30")
+gg <- gg + annotate("text", x = 42, y = 1.8, label = "Traffic stops", size=3, colour="gray30")
+gg <- gg + annotate("point", x = 47, y = 1.5, colour = "#a3c4dc", size = 3) 
+gg <- gg + annotate("point", x = 47, y = 1.8, colour = "#0e668b", size = 3)
+gg <- gg + theme(legend.position="top")
+gg <- gg + theme(panel.border=element_blank())
+gg
+
+
+write.csv(stops_race, "data/stops_race1.csv")
+```
+
+1. town's percent of non-white driving age population minus state's percent of non-white driving age population
+
+* **Black**: `r single_dept$b_t_s_diff[1]`
+
+* **Hispanic**: `r single_dept$h_t_s_diff[1]`
+
+* **Minorities**: `r single_dept$m_t_s_diff[1]`
+
+
+2. town's percent of non-white traffic stops minus state's percent of non-white traffic stops
+
+* **Black**: `r single_dept$b_t_s_pop_diff[1]`
+
+* **Hispanic**: `r single_dept$h_t_s_pop_diff[1]`
+
+* **Minorities**: `r single_dept$m_t_s_pop_diff[1]`
+
+**3. The distance between the two differences of 1. and 2.**
+
+* **Black**: `r single_dept$b_distance[1]`
+
+* **Hispanic**: `r single_dept$h_distance[1]`
+
+* **Minorities**: `r single_dept$m_distance[1]`
+
+```{r section16, fig.width=8, fig.height=4, echo=FALSE}
+
+stops_race1 <- single_dept %>%
+  select(DepartmentName, b_distance, h_distance, m_distance) %>%
+  gather("Ethnicity", "Percent", 2:4)
+
+stops_race <- stops_race1
+stops_race$Ethnicity <- gsub("b_distance", "Black stop gap and Black population gap", stops_race$Ethnicity)
+stops_race$Ethnicity <- gsub("h_distance", "Hispanic stop gap and Hispanic population gap", stops_race$Ethnicity)
+stops_race$Ethnicity <- gsub("m_distance", "Non-white stop gap and Non-white population gap", stops_race$Ethnicity)
+
+ggplot(stops_race, aes(Ethnicity, Percent, fill = DepartmentName, label = Percent)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  geom_text(position = position_dodge(0.9), hjust = -0.5, size=3) + labs(title="Statewide average: Distance between two differences") + coord_flip()
+write.csv(stops_race, "data/stops_race2.csv")
+
+
+```
+
+
+## Estimated driving population
+
+```{r section17, fig.width=8, fig.height=4, echo=FALSE}
+
+stops_race1 <- single_dept %>%
+  select(DepartmentName, edp_b_s, edp_h_s, edp_m_s, edp_b, edp_h, edp_m) %>%
+  gather("Ethnicity", "Percent", 2:7)
+
+
+stops_race <- stops_race1
+stops_race$Ethnicity <- gsub("edp_b_s", "Black stops", stops_race$Ethnicity)
+stops_race$Ethnicity <- gsub("edp_h_s", "Hispanic stops", stops_race$Ethnicity)
+stops_race$Ethnicity <- gsub("edp_m_s", "Non-white stops", stops_race$Ethnicity)
+stops_race$Ethnicity <- gsub("edp_b", "Black estimated driving pop", stops_race$Ethnicity)
+stops_race$Ethnicity <- gsub("edp_h", "Hispanic estimated driving pop", stops_race$Ethnicity)
+stops_race$Ethnicity <- gsub("edp_m", "Non-white estimated driving pop", stops_race$Ethnicity)
+
+ggplot(stops_race, aes(Ethnicity, Percent, fill = DepartmentName, label = Percent)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  geom_text(position = position_dodge(0.9), hjust = -0.5, size=3) + labs(title="Driving population versus traffic stops") + coord_flip()
+write.csv(stops_race, "data/stops_race3.csv")
+
+```
+
+
+```{r exploratory4, fig.width=5, fig.height=5, echo=FALSE}
+
+stops_race$type <- gsub("Black ", "", stops_race$Ethnicity)
+stops_race$type <- gsub("Hispanic ", "", stops_race$type)
+stops_race$type <- gsub("Non-white ", "", stops_race$type)
+stops_race$type <- gsub(" ", "_", stops_race$type)
+
+stops_race$Ethnicity<- gsub(" stops", "", stops_race$Ethnicity)
+stops_race$Ethnicity<- gsub("Non-white", "Minority", stops_race$Ethnicity)
+stops_race$Ethnicity<- gsub(" estimated driving pop", "", stops_race$Ethnicity)
+
+
+stops_race <- stops_race %>%
+  spread(type, Percent)
+
+ggplot(stops_race, aes(stops, estimated_driving_pop, group = DepartmentName)) +   
+  geom_point(size = 2, colour = "purple") +
+#  geom_line(colour="lightgray") +
+  geom_text(data = stops_race,aes(x=stops,y=estimated_driving_pop + 3, label=Ethnicity)) +
+  geom_abline(intercept = 0) +
+#  ylim(0,70) + xlim(0,70) +
+  expand_limits(x = 0, y = 0) +
+  theme_minimal()  +  labs(title="Percent of driving population versus traffic stops")
+
+
+
+gg <- ggplot(stops_race, aes(x=stops, xend=estimated_driving_pop, y=Ethnicity, group=Ethnicity))
+gg <- gg + geom_dumbbell(color="#a3c4dc", size=1, point.colour.l="#0e668b")
+# gg <- gg + scale_x_continuous(label=percent)
+gg <- gg + labs(x=NULL, y=NULL)
+gg <- gg + theme_bw()
+gg <- gg+ theme(axis.title = element_text(family = "Trebuchet MS", color="#666666", face="bold", size=6)) 
+gg <- gg + theme(plot.background=element_rect(fill="#f7f7f7"))
+gg <- gg + theme(panel.background=element_rect(fill="#f7f7f7"))
+gg <- gg + theme(panel.grid.minor=element_blank())
+gg <- gg + theme(panel.grid.major.y=element_blank())
+gg <- gg + theme(panel.grid.major.x=element_line())
+#gg <- gg+ geom_vline(xintercept = 50)
+gg <- gg + theme(axis.ticks=element_blank())
+gg <- gg + theme(axis.text = element_text(size = 12))
+gg <- gg + labs(title = "Driving population versus resident traffic stops")
+gg <- gg + annotate("text", x = 39, y = 1.5, label = "Estimated driving population", size=3, colour="gray30")
+gg <- gg + annotate("text", x = 42, y = 1.8, label = "Traffic stops", size=3, colour="gray30")
+gg <- gg + annotate("point", x = 47, y = 1.5, colour = "#a3c4dc", size = 3) 
+gg <- gg + annotate("point", x = 47, y = 1.8, colour = "#0e668b", size = 3)
+gg <- gg + theme(legend.position="top")
+gg <- gg + theme(panel.border=element_blank())
+gg
+
+```
+
+1. Percent of department's traffic stops that were
+
+* **Black**: `r single_dept$edp_b_s[1]`
+
+* **Hispanic**: `r single_dept$edp_h_s[1]`
+
+* **Minorities**: `r single_dept$edp_m_s[1]`
+
+
+2. Percent of town's population estimated driving population
+
+* **Black**: `r single_dept$edp_b[1]`
+
+* **Hispanic**: `r single_dept$edp_h[1]`
+
+* **Minorities**: `r single_dept$edp_m[1]`
+
+
+**3. Difference between percent of stops and percent of estimated driving population**
+
+* **Black**: `r single_dept$edp_b_diff[1]`
+
+* **Hispanic**: `r single_dept$edp_h_diff[1]`
+
+* **Minorities**: `r single_dept$edp_m_diff[1]`
+
+## Resident population
+
+```{r section18, fig.width=8, fig.height=4, echo=FALSE}
+
+stops_race1 <- single_dept %>%
+  select(DepartmentName, resident_b_p_r, resident_h_p_r, resident_m_p_r, black_16, hispanic_16, minorities_16) %>%
+  gather("Ethnicity", "Percent", 2:7)
+
+
+stops_race <- stops_race1
+stops_race$Ethnicity <- gsub("resident_b_p_r", "Black residents stopped", stops_race$Ethnicity)
+stops_race$Ethnicity <- gsub("resident_h_p_r", "Hispanic residents stopped", stops_race$Ethnicity)
+stops_race$Ethnicity <- gsub("resident_m_p_r", "Non-white residents stopped", stops_race$Ethnicity)
+stops_race$Ethnicity <- gsub("black_16", "Black driving-age population", stops_race$Ethnicity)
+stops_race$Ethnicity <- gsub("hispanic_16", "Hispanic driving-age population", stops_race$Ethnicity)
+stops_race$Ethnicity <- gsub("minorities_16", "Non-white driving-age population", stops_race$Ethnicity)
+
+ggplot(stops_race, aes(Ethnicity, Percent, fill = DepartmentName, label = Percent)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  geom_text(position = position_dodge(0.9), hjust = -0.5, size=3) + labs(title="Driving population versus resident traffic stops") + coord_flip()
+write.csv(stops_race, "data/stops_race4.csv")
+
+```
+
+```{r exploratory3, fig.width=5, fig.height=5, echo=FALSE}
+
+stops_race$type <- gsub("Black ", "", stops_race$Ethnicity)
+stops_race$type <- gsub("Hispanic ", "", stops_race$type)
+stops_race$type <- gsub("Non-white ", "", stops_race$type)
+# 
+# stops_race$type <- gsub("black_p", "traffic stops", stops_race$type)
+# stops_race$type <- gsub("hispanic_p", "traffic stops", stops_race$type)
+# stops_race$type <- gsub("minorities_p", "traffic stops", stops_race$type)
+stops_race$type <- gsub(" ", "_", stops_race$type)
+stops_race$type <- gsub("-", "_", stops_race$type)
+stops_race$Ethnicity<- gsub(" driving-age population", "", stops_race$Ethnicity)
+stops_race$Ethnicity<- gsub("Non-white", "Minority", stops_race$Ethnicity)
+stops_race$Ethnicity<- gsub(" residents stopped", "", stops_race$Ethnicity)
+
+
+stops_race <- stops_race %>%
+  spread(type, Percent)
+
+ggplot(stops_race, aes(residents_stopped, driving_age_population, group = DepartmentName)) +   
+  geom_point(size = 2, colour = "purple") +
+#  geom_line(colour="lightgray") +
+  geom_text(data = stops_race,aes(x=residents_stopped,y=driving_age_population + 3, label=Ethnicity)) +
+  geom_abline(intercept = 0) +
+#  ylim(0,70) + xlim(0,70) +
+  expand_limits(x = 0, y = 0) +
+  theme_minimal()  +  labs(title="Percent of driving population versus resident traffic stops")
+
+
+gg <- ggplot(stops_race, aes(x=residents_stopped, xend=driving_age_population, y=Ethnicity, group=Ethnicity))
+gg <- gg + geom_dumbbell(color="#a3c4dc", size=1, point.colour.l="#0e668b")
+# gg <- gg + scale_x_continuous(label=percent)
+gg <- gg + labs(x=NULL, y=NULL)
+gg <- gg + theme_bw()
+gg <- gg+ theme(axis.title = element_text(family = "Trebuchet MS", color="#666666", face="bold", size=6)) 
+gg <- gg + theme(plot.background=element_rect(fill="#f7f7f7"))
+gg <- gg + theme(panel.background=element_rect(fill="#f7f7f7"))
+gg <- gg + theme(panel.grid.minor=element_blank())
+gg <- gg + theme(panel.grid.major.y=element_blank())
+gg <- gg + theme(panel.grid.major.x=element_line())
+#gg <- gg+ geom_vline(xintercept = 50)
+gg <- gg + theme(axis.ticks=element_blank())
+gg <- gg + theme(axis.text = element_text(size = 12))
+gg <- gg + labs(title = "Driving population versus resident traffic stops")
+gg <- gg + annotate("text", x = 39, y = 1.5, label = "Driving population", size=3, colour="gray30")
+gg <- gg + annotate("text", x = 42, y = 1.8, label = "Resident stops", size=3, colour="gray30")
+gg <- gg + annotate("point", x = 47, y = 1.5, colour = "#a3c4dc", size = 3) 
+gg <- gg + annotate("point", x = 47, y = 1.8, colour = "#0e668b", size = 3)
+gg <- gg + theme(legend.position="top")
+gg <- gg + theme(panel.border=element_blank())
+gg
+```
+
+
+1. Percent of residents who were pulled over
+
+* **Black**: `r single_dept$resident_b_p_r[1]`
+
+* **Hispanic**: `r single_dept$resident_h_p_r[1]`
+
+* **Minorities**: `r single_dept$resident_m_p_r[1]`
+
+2. Percent of driving-age town population
+
+* **Black**: `r single_dept$black_16[1]`
+
+* **Hispanic**: `r single_dept$hispanic_16[1]`
+
+* **Minorities**: `r single_dept$minorities_16[1]`
+
+**3. Difference between resident stops and population makeup**
+
+* **Black**: `r single_dept$res_diff_b[1]`
+
+* **Hispanic**: `r single_dept$res_diff_h[1]`
+
+* **Minorities**: `r single_dept$res_diff_m[1]`
+
+## Points
+
+**Disparity points ranged between 0 and 7.**
+
+**Points are based on weights given to each of the differences in the three factors listed above.**
+
+**Differences of more than 10 were given 1 point.**
+
+**Differences of more than 5 but less than 10 and with a ratio greater than 1.75 were given .5 points**
+
+###`r single_dept$DepartmentName[1]` had a point score of `r single_dept$points[1]`
+
+# Exploratory charts
+
+```{r exploratory_more, fig.width=7, fig.height=11, echo=FALSE}
+
+officers <- subset(explore, DepartmentName=="Waterbury" & !is.na(ReportingOfficerIdentificationID))
+officers <- subset(officers, total>2)
+
+officers_sub <- officers %>%
+  select(ReportingOfficerIdentificationID, asian_p, black_p, hispanic_p, indian_p, mid_e_p, white_p) %>%
+    gather("Ethnicity", "Percent", 2:7)
+
+stops_race1 <- single_dept %>%
+  select(DepartmentName, asian_p, black_p, hispanic_p, indian_p, mid_e_p, white_p) %>%
+  gather("Ethnicity", "Percent", 2:7) 
+
+stops_race2 <- single_all %>%
+  select(DepartmentName, asian_p, black_p, hispanic_p, indian_p, mid_e_p, white_p) %>%
+  gather("Ethnicity", "Percent", 2:7) 
+
+stops_race2$DepartmentName <- gsub("Connecticut average", "Connecticut", stops_race2$DepartmentName)
+
+
+stops_race <- rbind(stops_race1, stops_race2)
+
+names(stops_race)[names(stops_race) == 'DepartmentName'] <- 'ReportingOfficerIdentificationID'
+
+stops_race <- rbind(officers_sub, stops_race)
+
+names(stops_race)[names(stops_race) == 'ReportingOfficerIdentificationID'] <- 'ID'
+stops_race$ID <- gsub(".*--", "", stops_race$ID)
+
+stops_race$Ethnicity <- gsub("asian_p", "Asian", stops_race$Ethnicity)
+stops_race$Ethnicity <- gsub("black_p", "Black", stops_race$Ethnicity)
+stops_race$Ethnicity <- gsub("hispanic_p", "Hispanic", stops_race$Ethnicity)
+stops_race$Ethnicity <- gsub("indian_p", "Indian", stops_race$Ethnicity)
+stops_race$Ethnicity <- gsub("mid_e_p", "Middle-Eastern", stops_race$Ethnicity)
+stops_race$Ethnicity <- gsub("white_p", "White", stops_race$Ethnicity)
+
+ggplot(stops_race, aes(ID, y=Percent, fill=Ethnicity)) + geom_bar(stat="identity") + coord_flip()
+
+
+```
+
+
+```{r lolly, fig.width=7, fig.height=11, echo=FALSE}
+
+officers_sub <- officers %>%
+  select(ReportingOfficerIdentificationID, minorities_p)
+officers_sub$minorities_p <- round(officers_sub$minorities_p/100,2)
+officers_sub <- subset(officers_sub, !is.na(minorities_p))
+
+officers_sub$ReportingOfficerIdentificationID <- gsub(".*--", "", officers_sub$ReportingOfficerIdentificationID)
+
+gg <- ggplot(officers_sub, aes(y=reorder(ReportingOfficerIdentificationID, minorities_p), x= minorities_p))
+gg <- gg + geom_lollipop(point.colour="steelblue", point.size=3, horizontal=TRUE)
+gg <- gg + scale_x_continuous(expand=c(0,0), labels=percent,
+                              breaks=seq(0, 1, by=0.2), limits=c(0, 1))
+#gg <- gg + coord_flip()
+gg <- gg + labs(x=NULL, y=NULL, 
+                title="Percent of minority drivers pulled over in Waterbury",
+                subtitle="",
+                caption="CCSU")
+gg <- gg + theme_minimal(base_family="Arial Narrow")
+gg <- gg + theme(panel.grid.major.y=element_blank())
+gg <- gg + theme(panel.grid.minor=element_blank())
+gg <- gg + geom_vline(xintercept = single_dept$minorities_p[1]/100)
+gg <- gg + geom_vline(xintercept = single_all$minorities_p[1]/100)
+
+
+gg <- gg + theme(axis.line.y=element_line(color="#2b2b2b", size=0.15))
+gg <- gg + theme(axis.text.y=element_text(margin=margin(r=-5, l=0)))
+gg <- gg + theme(plot.margin=unit(rep(30, 4), "pt"))
+gg <- gg + theme(plot.title=element_text(face="bold"))
+gg <- gg + theme(plot.subtitle=element_text(margin=margin(b=10)))
+gg <- gg + theme(plot.caption=element_text(size=8, margin=margin(t=10)))
+gg <- gg + annotate("text", x = (single_dept$minorities_p[1]/100)+.1, y = 11.5, label = "Department percent", size=3, colour="gray30")
+gg <- gg + annotate("text", x= (single_all$minorities_p[1]/100)+.07, y = 8.50, label = "State percent", size=3, colour="gray30")
+gg
+
+```
+
+```{r scatter_test1, fig.width=7, fig.height=5, echo=FALSE}
+
+officers_sub <- officers %>%
+  select(ReportingOfficerIdentificationID, white_p, minorities_p)
+
+officers_sub$ReportingOfficerIdentificationID <- gsub(".*--", "", officers_sub$ReportingOfficerIdentificationID)
+
+officers_sub$type <- "Officer"
+
+stops_race1 <- single_dept %>%
+  select(DepartmentName, white_p, minorities_p) 
+stops_race1$type <- "Department"
+#%>%
+#  gather("Ethnicity", "Percent", 2:7) 
+
+stops_race2 <- single_all %>%
+  select(DepartmentName, white_p, minorities_p) 
+stops_race2$DepartmentName <- gsub(" average", "", stops_race2$DepartmentName)
+stops_race2$type <- "State"
+stops_race <- rbind(stops_race1, stops_race2)
+names(stops_race)[names(stops_race) == 'DepartmentName'] <- 'ReportingOfficerIdentificationID'
+
+officers_sub <- rbind(officers_sub, stops_race)
+
+#%>%
+#  gather("Ethnicity", "Percent", 2:7) 
+
+p <- ggplot(officers_sub, aes(white_p, minorities_p))
+p + geom_point(aes(colour = type))
+
+```
+
+```{r scatter_test2, fig.width=7, fig.height=5, echo=FALSE}
+
+officers_sub <- officers %>%
+  select(ReportingOfficerIdentificationID, Minority.x, minorities_p)
+
+officers_sub$ReportingOfficerIdentificationID <- gsub(".*--", "", officers_sub$ReportingOfficerIdentificationID)
+
+officers_sub$type <- "Officer"
+
+stops_race1 <- single_dept %>%
+  select(DepartmentName, Minority.x, minorities_p) 
+stops_race1$type <- "Department"
+#%>%
+#  gather("Ethnicity", "Percent", 2:7) 
+
+stops_race2 <- single_all %>%
+  select(DepartmentName, Minority.x, minorities_p) 
+stops_race2$DepartmentName <- gsub(" average", "", stops_race2$DepartmentName)
+stops_race2$type <- "State"
+stops_race <- rbind(stops_race1, stops_race2)
+names(stops_race)[names(stops_race) == 'DepartmentName'] <- 'ReportingOfficerIdentificationID'
+
+officers_sub <- rbind(officers_sub, stops_race)
+
+#%>%
+#  gather("Ethnicity", "Percent", 2:7) 
+
+p <- ggplot(officers_sub, aes(Minority.x, minorities_p))
+p + geom_point(aes(colour = type)) + ggtitle("Minorities stopped versus minorities searched")
+```

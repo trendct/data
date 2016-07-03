@@ -1,0 +1,379 @@
+---
+title: "map"
+author: "Andrew Ba Tran"
+date: "April 21, 2016"
+output: html_document
+---
+
+```{r setup, message=FALSE, warning=FALSE, fig.width=12, fig.height=7}
+require(scales)
+require(dplyr)
+require(gtools)
+require(ggplot2)
+require(rgdal)
+require(ggmap)
+require(Cairo)
+require(gpclib)
+require(maptools)
+require(reshape)
+library(devtools)
+library(stringr)
+library(raster)
+library(sp)
+library(lubridate)
+## install_github("trendct/ctnamecleaner")
+library(ctnamecleaner)
+library(leaflet)
+library(tidyr)
+## Quickly mapping the locations
+mega <- read.csv("data/mega.csv", stringsAsFactors=FALSE)
+mega_no_na <- mega[!is.na(mega$InterventionLocationLatitude),]
+m <- leaflet(mega_no_na) %>% addTiles('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', 
+                              attribution='Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>') 
+m %>% setView(-72.690940, 41.651426, zoom = 8)
+m %>% addCircles(~InterventionLocationLongitude, ~InterventionLocationLatitude, popup=mega$DepartmentName, weight = 3, radius=40, 
+                 color="#ffa500", stroke = TRUE, fillOpacity = 0.8) 
+
+## Stops within town
+
+gpclibPermit()
+gpclibPermitStatus()
+towntracts40 <- readOGR(dsn="maps", layer="buffer60")
+towntracts_only40 <- towntracts40
+towntracts40 <- fortify(towntracts40, region="NAME10")
+
+coords <- mega_no_na[c("InterventionLocationLongitude", "InterventionLocationLatitude")]
+coords <- coords[complete.cases(coords),]
+sp <- SpatialPoints(coords)
+
+proj4string(sp) <- "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
+proj4string(sp)
+
+plot(towntracts_only40)
+plot(sp, col="red" , add=TRUE)
+
+res40 <- over(sp, towntracts_only40)
+
+sixty <- res40 %>%
+  group_by(NAME10) %>%
+  summarise(sixty=n())
+sixty <- sixty[!is.na(sixty$NAME10),]
+colnames(sixty) <- c("id", "sixty")
+
+## Stops by town border
+
+gpclibPermit()
+gpclibPermitStatus()
+towntracts60 <- readOGR(dsn="maps", layer="cut60")
+towntracts_only60 <- towntracts60
+towntracts60 <- fortify(towntracts60, region="NAME10")
+
+
+coords <- mega_no_na[c("InterventionLocationLongitude", "InterventionLocationLatitude")]
+coords <- coords[complete.cases(coords),]
+sp <- SpatialPoints(coords)
+
+proj4string(sp) <- "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
+proj4string(sp)
+
+plot(towntracts_only60)
+plot(sp, col="red" , add=TRUE)
+
+res60 <- over(sp, towntracts_only60)
+
+forty <- res60 %>%
+  group_by(NAME10) %>%
+  summarise(forty=n())
+forty <- forty[!is.na(forty$NAME10),]
+colnames(forty) <- c("id", "forty")
+
+
+forty_map <- left_join(towntracts60, forty)
+sixty_map <- left_join(towntracts40, sixty)
+
+## Choropleth totals
+
+dtm12 <- ggplot() +
+  geom_polygon(data = forty_map, aes(x=long, y=lat, group=group, fill=forty), color = "black", size=0.2) +
+  geom_polygon(data = sixty_map, aes(x=long, y=lat, group=group, fill=sixty), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Where traffic stops occur", fill="")
+dtm12
+
+
+## Choropleths by percent
+
+town_total <- mega_no_na %>%
+  group_by(DepartmentName) %>%
+  summarise(total=n())
+
+town_total$DepartmentName <- gsub(" Town", "", town_total$DepartmentName)
+
+sixty2 <- sixty
+colnames(sixty2) <- c("DepartmentName", "sixty")
+sixty2$DepartmentName <- as.character(sixty2$DepartmentName)
+town_total <- left_join(town_total, sixty2)
+
+town_total$forty <- town_total$total - town_total$sixty
+
+town_total$sixty_per <- round((town_total$sixty/town_total$total)*100,2)
+town_total$forty_per <- round((town_total$forty/town_total$total)*100,2)
+
+names(town_total)[names(town_total) == 'DepartmentName'] <- 'id'
+
+forty_map <- left_join(towntracts60, town_total)
+sixty_map <- left_join(towntracts40, town_total)
+
+dtm12 <- ggplot() +
+  geom_polygon(data = forty_map, aes(x=long, y=lat, group=group, fill=forty), color = "black", size=0.2) +
+  geom_polygon(data = sixty_map, aes(x=long, y=lat, group=group, fill=sixty), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Where traffic stops occur", fill="")
+dtm12
+
+dtm12 <- ggplot() +
+  geom_polygon(data = forty_map, aes(x=long, y=lat, group=group, fill=forty_per), color = "black", size=0.2) +
+  geom_polygon(data = sixty_map, aes(x=long, y=lat, group=group, fill=sixty_per), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Where traffic stops occur (percent by town)", fill="")
+dtm12
+
+
+### White analysis
+
+gpclibPermit()
+gpclibPermitStatus()
+towntracts40 <- readOGR(dsn="maps", layer="buffer60")
+towntracts_only40 <- towntracts40
+towntracts40 <- fortify(towntracts40, region="NAME10")
+
+coords_white <- subset(mega_no_na, SubjectRaceCode=="W")
+coords_white <- coords_white[c("InterventionLocationLongitude", "InterventionLocationLatitude")]
+coords_white <- coords_white[complete.cases(coords_white),]
+
+sp <- SpatialPoints(coords_white)
+
+proj4string(sp) <- "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
+proj4string(sp)
+
+plot(towntracts_only40)
+plot(sp, col="red" , add=TRUE)
+
+res40 <- over(sp, towntracts_only40)
+
+sixty <- res40 %>%
+  group_by(NAME10) %>%
+  summarise(sixty=n())
+sixty <- sixty[!is.na(sixty$NAME10),]
+colnames(sixty) <- c("id", "sixty")
+
+
+## White stops by town border
+
+gpclibPermit()
+gpclibPermitStatus()
+towntracts60 <- readOGR(dsn="maps", layer="cut60")
+towntracts_only60 <- towntracts60
+towntracts60 <- fortify(towntracts60, region="NAME10")
+
+
+coords_white <- subset(mega_no_na, SubjectRaceCode=="W")
+coords_white <- coords_white[c("InterventionLocationLongitude", "InterventionLocationLatitude")]
+coords_white <- coords_white[complete.cases(coords_white),]
+sp <- SpatialPoints(coords_white)
+
+proj4string(sp) <- "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
+proj4string(sp)
+
+plot(towntracts_only60)
+plot(sp, col="red" , add=TRUE)
+
+res60 <- over(sp, towntracts_only60)
+
+forty <- res60 %>%
+  group_by(NAME10) %>%
+  summarise(forty=n())
+forty <- forty[!is.na(forty$NAME10),]
+colnames(forty) <- c("id", "forty")
+
+
+forty_map <- left_join(towntracts60, forty)
+sixty_map <- left_join(towntracts40, sixty)
+
+## Choropleth totals (White)
+
+dtm12 <- ggplot() +
+  geom_polygon(data = forty_map, aes(x=long, y=lat, group=group, fill=forty), color = "black", size=0.2) +
+  geom_polygon(data = sixty_map, aes(x=long, y=lat, group=group, fill=sixty), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Where traffic stops occur (White drivers)", fill="")
+dtm12
+
+
+## Choropleths by percent (White)
+
+town_total <- mega_no_na %>%
+  group_by(DepartmentName, SubjectRaceCode) %>%
+  summarise(total=n()) %>%
+  spread(SubjectRaceCode, total) %>%
+  mutate(total=sum(A,B,I,W, na.rm=TRUE))
+
+town_total$DepartmentName <- gsub(" Town", "", town_total$DepartmentName)
+
+sixty2 <- sixty
+colnames(sixty2) <- c("DepartmentName", "sixty")
+sixty2$DepartmentName <- as.character(sixty2$DepartmentName)
+town_total <- left_join(town_total, sixty2)
+
+town_total$forty <- town_total$W - town_total$sixty
+
+town_total$sixty_per <- round((town_total$sixty/town_total$W)*100,2)
+town_total$forty_per <- round((town_total$forty/town_total$W)*100,2)
+
+names(town_total)[names(town_total) == 'DepartmentName'] <- 'id'
+
+forty_map <- left_join(towntracts60, town_total)
+sixty_map <- left_join(towntracts40, town_total)
+
+dtm12 <- ggplot() +
+  geom_polygon(data = forty_map, aes(x=long, y=lat, group=group, fill=forty), color = "black", size=0.2) +
+  geom_polygon(data = sixty_map, aes(x=long, y=lat, group=group, fill=sixty), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Where traffic stops occur (White drivers)", fill="")
+dtm12
+
+dtm12 <- ggplot() +
+  geom_polygon(data = forty_map, aes(x=long, y=lat, group=group, fill=forty_per), color = "black", size=0.2) +
+  geom_polygon(data = sixty_map, aes(x=long, y=lat, group=group, fill=sixty_per), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Where traffic stops occur (White drivers - percent by town)", fill="")
+dtm12
+
+### Black analysis
+
+gpclibPermit()
+gpclibPermitStatus()
+towntracts40 <- readOGR(dsn="maps", layer="buffer60")
+towntracts_only40 <- towntracts40
+towntracts40 <- fortify(towntracts40, region="NAME10")
+
+coords_black <- subset(mega_no_na, SubjectRaceCode=="B")
+coords_black <- coords_black[c("InterventionLocationLongitude", "InterventionLocationLatitude")]
+coords_black <- coords_black[complete.cases(coords_black),]
+
+sp <- SpatialPoints(coords_black)
+
+proj4string(sp) <- "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
+proj4string(sp)
+
+plot(towntracts_only40)
+plot(sp, col="red" , add=TRUE)
+
+res40 <- over(sp, towntracts_only40)
+
+sixty <- res40 %>%
+  group_by(NAME10) %>%
+  summarise(sixty=n())
+sixty <- sixty[!is.na(sixty$NAME10),]
+colnames(sixty) <- c("id", "sixty")
+
+
+## Black stops by town border
+
+gpclibPermit()
+gpclibPermitStatus()
+towntracts60 <- readOGR(dsn="maps", layer="cut60")
+towntracts_only60 <- towntracts60
+towntracts60 <- fortify(towntracts60, region="NAME10")
+
+
+coords_black <- subset(mega_no_na, SubjectRaceCode=="B")
+coords_black <- coords_black[c("InterventionLocationLongitude", "InterventionLocationLatitude")]
+coords_black <- coords_black[complete.cases(coords_black),]
+sp <- SpatialPoints(coords_black)
+
+proj4string(sp) <- "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
+proj4string(sp)
+
+plot(towntracts_only60)
+plot(sp, col="red" , add=TRUE)
+
+res60 <- over(sp, towntracts_only60)
+
+forty <- res60 %>%
+  group_by(NAME10) %>%
+  summarise(forty=n())
+forty <- forty[!is.na(forty$NAME10),]
+colnames(forty) <- c("id", "forty")
+
+
+forty_map <- left_join(towntracts60, forty)
+sixty_map <- left_join(towntracts40, sixty)
+
+## Choropleth totals (Black)
+
+dtm12 <- ggplot() +
+  geom_polygon(data = forty_map, aes(x=long, y=lat, group=group, fill=forty), color = "black", size=0.2) +
+  geom_polygon(data = sixty_map, aes(x=long, y=lat, group=group, fill=sixty), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Where traffic stops occur (Black drivers)", fill="")
+dtm12
+
+
+## Choropleths by percent (Black)
+
+town_total <- mega_no_na %>%
+  group_by(DepartmentName, SubjectRaceCode) %>%
+  summarise(total=n()) %>%
+  spread(SubjectRaceCode, total) %>%
+  mutate(total=sum(A,B,I,W, na.rm=TRUE))
+
+town_total$DepartmentName <- gsub(" Town", "", town_total$DepartmentName)
+
+sixty2 <- sixty
+colnames(sixty2) <- c("DepartmentName", "sixty")
+sixty2$DepartmentName <- as.character(sixty2$DepartmentName)
+town_total <- left_join(town_total, sixty2)
+
+town_total$forty <- town_total$B - town_total$sixty
+
+town_total$sixty_per <- round((town_total$sixty/town_total$B)*100,2)
+town_total$forty_per <- round((town_total$forty/town_total$B)*100,2)
+
+names(town_total)[names(town_total) == 'DepartmentName'] <- 'id'
+
+forty_map <- left_join(towntracts60, town_total)
+sixty_map <- left_join(towntracts40, town_total)
+
+dtm12 <- ggplot() +
+  geom_polygon(data = forty_map, aes(x=long, y=lat, group=group, fill=forty), color = "black", size=0.2) +
+  geom_polygon(data = sixty_map, aes(x=long, y=lat, group=group, fill=sixty), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Where traffic stops occur (Black drivers)", fill="")
+dtm12
+
+dtm12 <- ggplot() +
+  geom_polygon(data = forty_map, aes(x=long, y=lat, group=group, fill=forty_per), color = "black", size=0.2) +
+  geom_polygon(data = sixty_map, aes(x=long, y=lat, group=group, fill=sixty_per), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Where traffic stops occur (Black drivers - percent by town)", fill="")
+dtm12
+```

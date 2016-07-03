@@ -1,0 +1,319 @@
+---
+title: "search and contraband"
+author: "Andrew Ba Tran"
+date: "June 21, 2016"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r libraries, message=FALSE, warning=FALSE}
+library(dplyr)
+library(readxl)
+library(stringr)
+library(tidyr)
+library(data.table)
+library(knitr)
+
+```
+
+```{r preparing_data, message=FALSE, warning=FALSE}
+
+stops <- read_excel("ignore/RP-2014-2015-Data-3-9-16.xlsx", sheet=1)
+names(stops)[names(stops) == 'Department Name'] <- 'DepartmentName'
+
+
+stops$ethnicity <- ifelse(((stops$SubjectRaceCode ==  "W") & (stops$SubjectEthnicityCode =="N")), "White", "Minority")
+stops$RE <- paste0(stops$SubjectRaceCode, stops$SubjectEthnicityCode)
+stops$RE <- gsub("AH", "Hispanic", stops$RE)
+stops$RE <- gsub("AM", "Middle-eastern", stops$RE)
+stops$RE <- gsub("AN", "Asian", stops$RE)
+stops$RE <- gsub("BH", "Black", stops$RE)
+stops$RE <- gsub("BM", "Black", stops$RE)
+stops$RE <- gsub("BN", "Black", stops$RE)
+stops$RE <- gsub("IH", "Indian", stops$RE)
+stops$RE <- gsub("IM", "Middle-eastern", stops$RE)
+stops$RE <- gsub("IN", "Indian", stops$RE)
+stops$RE <- gsub("WH", "Hispanic", stops$RE)
+stops$RE <- gsub("WM", "Middle-eastern", stops$RE)
+stops$RE <- gsub("WN", "White", stops$RE)
+
+# Adjusting for state police troops
+
+stops$DepartmentName <- ifelse(stops$OrganizationIdentificationID=="CTCSP0000", "State Police: Headquarters", stops$DepartmentName)
+stops$DepartmentName <- ifelse(stops$OrganizationIdentificationID=="CTCSP0023", "State Police: Headquarters", stops$DepartmentName)
+stops$DepartmentName <- ifelse(stops$OrganizationIdentificationID=="CTCSP0029", "State Police: Headquarters", stops$DepartmentName)
+stops$DepartmentName <- ifelse(stops$OrganizationIdentificationID=="CTCSP1900", "State Police: Headquarters", stops$DepartmentName)
+stops$DepartmentName <- ifelse(stops$OrganizationIdentificationID=="CTCSP2900", "State Police: Headquarters", stops$DepartmentName)
+stops$DepartmentName <- ifelse(stops$OrganizationIdentificationID=="CTCSP3800", "State Police: Headquarters", stops$DepartmentName)
+stops$DepartmentName <- ifelse(stops$OrganizationIdentificationID=="CTCSP0200", "State Police: Troop A", stops$DepartmentName)
+stops$DepartmentName <- ifelse(stops$OrganizationIdentificationID=="CTCSP0300", "State Police: Troop B", stops$DepartmentName)
+stops$DepartmentName <- ifelse(stops$OrganizationIdentificationID=="CTCSP0400", "State Police: Troop C", stops$DepartmentName)
+stops$DepartmentName <- ifelse(stops$OrganizationIdentificationID=="CTCSP0500", "State Police: Troop D", stops$DepartmentName)
+stops$DepartmentName <- ifelse(stops$OrganizationIdentificationID=="CTCSP0600", "State Police: Troop E", stops$DepartmentName)
+stops$DepartmentName <- ifelse(stops$OrganizationIdentificationID=="CTCSP0700", "State Police: Troop F", stops$DepartmentName)
+stops$DepartmentName <- ifelse(stops$OrganizationIdentificationID=="CTCSP0800", "State Police: Troop G", stops$DepartmentName)
+stops$DepartmentName <- ifelse(stops$OrganizationIdentificationID=="CTCSP0900", "State Police: Troop H", stops$DepartmentName)
+stops$DepartmentName <- ifelse(stops$OrganizationIdentificationID=="CTCSP1000", "State Police: Troop I", stops$DepartmentName)
+stops$DepartmentName <- ifelse(stops$OrganizationIdentificationID=="CTCSP1100", "State Police: Troop J", stops$DepartmentName)
+stops$DepartmentName <- ifelse(stops$OrganizationIdentificationID=="CTCSP1200", "State Police: Troop K", stops$DepartmentName)
+
+officer_departments <- stops %>%
+  dplyr::select(DepartmentName, ReportingOfficerIdentificationID) %>%
+  unique()
+
+officer_departments$ReportingOfficerIdentificationID <- paste0(officer_departments$DepartmentName, "--", officer_departments$ReportingOfficerIdentificationID)
+stops$ReportingOfficerIdentificationID <- paste0(stops$DepartmentName, "--", stops$ReportingOfficerIdentificationID)
+
+stops$VehicleSearchedIndicator <- gsub("0", "No", as.character(stops$VehicleSearchedIndicator))
+stops$VehicleSearchedIndicator <- gsub("1", "Yes", as.character(stops$VehicleSearchedIndicator))
+
+stops$ContrabandIndicator <- gsub("0", "No", as.character(stops$ContrabandIndicator))
+stops$ContrabandIndicator <- gsub("1", "Yes", as.character(stops$ContrabandIndicator))
+
+stops$CustodialArrestIndicator <- gsub("0", "No", as.character(stops$CustodialArrestIndicator))
+stops$CustodialArrestIndicator <- gsub("1", "Yes", as.character(stops$CustodialArrestIndicator))
+
+
+```
+
+# What's the overall rate for searches from traffic stops?
+* overall
+* by race
+
+# What's the overall contraband discovery rate from those searches?
+* overall
+* by race
+
+```{r state_rate}
+
+state_search <- stops %>%
+  group_by(VehicleSearchedIndicator) %>%
+  summarise(total=n()) %>%
+  spread(VehicleSearchedIndicator, total) %>%
+  mutate(not_searched_p = round(No/(No+Yes)*100,2), searched_p = round(Yes/(No+Yes)*100,2) )
+
+names(state_search)[names(state_search) == 'No'] <- 'not_searched'
+names(state_search)[names(state_search) == 'Yes'] <- 'searched'
+state_search$RE <- "State average"
+state_search <- state_search[c("RE", "searched", "not_searched", "searched_p", "not_searched_p")]  
+  
+state_search_race <- stops %>%
+  group_by(RE, VehicleSearchedIndicator) %>%
+  summarise(total=n()) %>%
+  spread(VehicleSearchedIndicator, total) %>%
+  mutate(not_searched_p = round(No/(No+Yes)*100,2), searched_p = round(Yes/(No+Yes)*100,2) )
+
+
+names(state_search_race)[names(state_search_race) == 'No'] <- 'not_searched'
+names(state_search_race)[names(state_search_race) == 'Yes'] <- 'searched'
+
+searches_all <- rbind(state_search, state_search_race)
+
+names(searches_all)[names(searches_all) == 'RE'] <- 'Category'
+
+# Contraband found out of all stops
+
+state_contra <- stops %>%
+  group_by(ContrabandIndicator) %>%
+  summarise(total=n()) %>%
+  spread(ContrabandIndicator, total) %>%
+  mutate(no_contra_p = round(No/(No+Yes)*100,2), contra_p = round(Yes/(No+Yes)*100,2) )
+
+names(state_contra)[names(state_contra) == 'No'] <- 'no_contra'
+names(state_contra)[names(state_contra) == 'Yes'] <- 'contra'
+state_contra$RE <- "State average"
+state_contra <- state_contra[c("RE", "contra", "no_contra", "contra_p", "no_contra_p")]  
+  
+state_contra_race <- stops %>%
+  group_by(RE, ContrabandIndicator) %>%
+  summarise(total=n()) %>%
+  spread(ContrabandIndicator, total) %>%
+  mutate(no_contra_p = round(No/(No+Yes)*100,2), contra_p = round(Yes/(No+Yes)*100,2) )
+
+
+names(state_contra_race)[names(state_contra_race) == 'No'] <- 'no_contra'
+names(state_contra_race)[names(state_contra_race) == 'Yes'] <- 'contra'
+
+contra_all <- rbind(state_contra, state_contra_race)
+
+names(contra_all)[names(contra_all) == 'RE'] <- 'Category'
+
+
+# Contraband found out out of those searched
+
+state_contra2 <- stops %>%
+  filter(VehicleSearchedIndicator=="Yes") %>%
+  group_by(ContrabandIndicator) %>%
+  summarise(total=n()) %>%
+  spread(ContrabandIndicator, total) %>%
+  mutate(no_contra_p = round(No/(No+Yes)*100,2), contra_p = round(Yes/(No+Yes)*100,2) )
+
+names(state_contra2)[names(state_contra2) == 'No'] <- 'no_contra'
+names(state_contra2)[names(state_contra2) == 'Yes'] <- 'contra'
+state_contra2$RE <- "State average"
+state_contra2 <- state_contra2[c("RE", "contra", "no_contra", "contra_p", "no_contra_p")]  
+  
+state_contra_race2 <- stops %>%
+  filter(VehicleSearchedIndicator=="Yes") %>%
+  group_by(RE, ContrabandIndicator) %>%
+  summarise(total=n()) %>%
+  spread(ContrabandIndicator, total) %>%
+  mutate(no_contra_p = round(No/(No+Yes)*100,2), contra_p = round(Yes/(No+Yes)*100,2) )
+
+
+names(state_contra_race2)[names(state_contra_race2) == 'No'] <- 'no_contra'
+names(state_contra_race2)[names(state_contra_race2) == 'Yes'] <- 'contra'
+
+contra_all2 <- rbind(state_contra2, state_contra_race2)
+
+names(contra_all2)[names(contra_all2) == 'RE'] <- 'Category'
+
+colnames(contra_all2) <- c("Category", "contra_only", "no_contra_only", "contra_p_only", "no_contra_p_only")
+
+mega_contra <- left_join(contra_all, contra_all2)
+
+# Arrests out of all stops
+
+state_arrests <- stops %>%
+  group_by(CustodialArrestIndicator) %>%
+  summarise(total=n()) %>%
+  spread(CustodialArrestIndicator, total) %>%
+  mutate(no_arrests_p = round(No/(No+Yes)*100,2), arrests_p = round(Yes/(No+Yes)*100,2) )
+
+names(state_arrests)[names(state_arrests) == 'No'] <- 'no_arrests'
+names(state_arrests)[names(state_arrests) == 'Yes'] <- 'arrests'
+state_arrests$RE <- "State average"
+state_arrests <- state_arrests[c("RE", "arrests", "no_arrests", "arrests_p", "no_arrests_p")]  
+  
+state_arrests_race <- stops %>%
+  group_by(RE, CustodialArrestIndicator) %>%
+  summarise(total=n()) %>%
+  spread(CustodialArrestIndicator, total) %>%
+  mutate(no_arrests_p = round(No/(No+Yes)*100,2), arrests_p = round(Yes/(No+Yes)*100,2) )
+
+
+names(state_arrests_race)[names(state_arrests_race) == 'No'] <- 'no_arrests'
+names(state_arrests_race)[names(state_arrests_race) == 'Yes'] <- 'arrests'
+
+arrests_all <- rbind(state_arrests, state_arrests_race)
+
+names(arrests_all)[names(arrests_all) == 'RE'] <- 'Category'
+
+
+# Arrests out of those searched
+
+state_arrests2 <- stops %>%
+  filter(VehicleSearchedIndicator=="Yes") %>%
+  group_by(CustodialArrestIndicator) %>%
+  summarise(total=n()) %>%
+  spread(CustodialArrestIndicator, total) %>%
+  mutate(no_arrests_p = round(No/(No+Yes)*100,2), arrests_p = round(Yes/(No+Yes)*100,2) )
+
+names(state_arrests2)[names(state_arrests2) == 'No'] <- 'no_arrests'
+names(state_arrests2)[names(state_arrests2) == 'Yes'] <- 'arrests'
+state_arrests2$RE <- "State average"
+state_arrests2 <- state_arrests2[c("RE", "arrests", "no_arrests", "arrests_p", "no_arrests_p")]  
+  
+state_arrests_race2 <- stops %>%
+  filter(VehicleSearchedIndicator=="Yes") %>%
+  group_by(RE, CustodialArrestIndicator) %>%
+  summarise(total=n()) %>%
+  spread(CustodialArrestIndicator, total) %>%
+  mutate(no_arrests_p = round(No/(No+Yes)*100,2), arrests_p = round(Yes/(No+Yes)*100,2) )
+
+
+names(state_arrests_race2)[names(state_arrests_race2) == 'No'] <- 'no_arrests'
+names(state_arrests_race2)[names(state_arrests_race2) == 'Yes'] <- 'arrests'
+
+arrests_all2 <- rbind(state_arrests2, state_arrests_race2)
+
+names(arrests_all2)[names(contra_all2) == 'RE'] <- 'Category'
+
+colnames(arrests_all2) <- c("Category", "arrests_only", "no_arrests_only", "arrests_p_only", "no_arrests_p_only")
+
+mega_arrests <- left_join(arrests_all, arrests_all2)
+
+
+sca_state <- left_join(searches_all, mega_contra)
+sca_state <- left_join(sca_state , mega_arrests)
+
+sca_table <- sca_state[c("Category", "searched_p", "contra_p_only", "arrests_p_only")]
+colnames(sca_table) <- c("Category", "searched", "contrabound found", "arrested")
+kable(sca_table)
+```
+
+
+# What's the overall rate for searches from traffic stops by town?
+* overall
+* by race
+
+#What's the overall contraband discovery rate from those searches by town?
+* overall
+* by race
+
+```{r town_departments, fig.width=9, fig.height=6}
+
+town_search <- stops %>%
+  group_by(DepartmentName, VehicleSearchedIndicator) %>%
+  summarise(total=n()) %>%
+  spread(VehicleSearchedIndicator, total) %>%
+  mutate(not_searched_p = round(No/(No+Yes)*100,2), searched_p = round(Yes/(No+Yes)*100,2) )
+
+
+names(town_search)[names(town_search) == 'No'] <- 'not_searched'
+names(town_search)[names(town_search) == 'Yes'] <- 'searched'
+town_search$RE <- "State average"
+town_search <- town_search[c("RE", "searched", "not_searched", "searched_p", "not_searched_p")]  
+  
+town_search_race <- stops %>%
+  group_by(DepartmentName, RE, VehicleSearchedIndicator) %>%
+  summarise(total=n()) %>%
+  spread(VehicleSearchedIndicator, total) %>%
+  mutate(not_searched_p = round(No/(No+Yes)*100,2), searched_p = round(Yes/(No+Yes)*100,2) ) %>%
+  dplyr::select(DepartmentName, RE, searched_p) %>%
+  spread(RE, searched_p)
+
+colnames(town_search_race) <- c("DepartmentName", "asian_s", "black_s", "hispanic_s", "indian_s", "middle_eastern_s", "white_s")
+
+# Contraband found?
+
+town_contra <- stops %>%
+  filter(VehicleSearchedIndicator=="Yes") %>%
+  group_by(DepartmentName) %>%
+  summarise(searches=n())
+
+town_contra_race2 <- stops %>%
+  filter(VehicleSearchedIndicator=="Yes") %>%
+  group_by(DepartmentName, RE, ContrabandIndicator) %>%
+  summarise(total=n()) %>%
+  spread(ContrabandIndicator, total) %>%
+  mutate(no_contra_p = round(No/(No+Yes)*100,2), contra_p = round(Yes/(No+Yes)*100,2) ) %>%
+  dplyr::select(DepartmentName, RE, contra_p) %>%
+  spread(RE, contra_p)
+
+colnames(town_contra_race2) <- c("DepartmentName", "asian_c", "black_c", "hispanic_c", "indian_c", "middle_eastern_c", "white_c")
+
+town_all <- left_join(town_contra, town_search_race)
+town_all <- left_join(town_all, town_contra_race2)
+
+# Arrested?
+
+
+town_arrests_race2 <- stops %>%
+  filter(VehicleSearchedIndicator=="Yes") %>%
+  group_by(DepartmentName, RE, CustodialArrestIndicator) %>%
+  summarise(total=n()) %>%
+  spread(CustodialArrestIndicator, total) %>%
+  mutate(no_contra_p = round(No/(No+Yes)*100,2), contra_p = round(Yes/(No+Yes)*100,2) ) %>%
+  dplyr::select(DepartmentName, RE, contra_p) %>%
+  spread(RE, contra_p)
+
+colnames(town_arrests_race2) <- c("DepartmentName", "asian_a", "black_a", "hispanic_a", "indian_a", "middle_eastern_a", "white_a")
+
+town_all <- left_join(town_all, town_arrests_race2)
+
+```
