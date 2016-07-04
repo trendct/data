@@ -29,23 +29,23 @@
 
 ## Scripts
 
-* `[bubble_chart_maker.R](https://github.com/trendct/data/blob/master/2016/06/traffic-stops-2016/bubble_chart_maker.R)` - Converts department-level summaries into a json array for a highcharts connected-scatterplot visualization
-* `[location_prep.R](https://github.com/trendct/data/blob/master/2016/06/traffic-stops-2016/location_prep.R)` - Brings in data from an Excel sheet that includes latitude and longitude data for traffic stops from 8 departments. Creates `mega.csv` 
-* `[town_borders_location_analysis.R](https://github.com/trendct/data/blob/master/2016/06/traffic-stops-2016/town_borders_location_analysis.R)` - Some exploratory maps looking at location-specific traffic stops along borders of towns
-* `[officers.R](https://github.com/trendct/data/blob/master/2016/06/traffic-stops-2016/officers.R)` - Run after `towns.R`. Adds officer-level analysis and adds it to the department-level summary to create `mega_df.csv`.
-* `[official_data_merging.R](https://github.com/trendct/data/blob/master/2016/06/traffic-stops-2016/official_data_merging.R)` - Creates `ccsu_data.csv` from various spreadsheets of figures calculated by CCSU's Institute for Municipal and Regional Policy, such as coefficients and k means values.
-* `[overall_analysis.R](https://github.com/trendct/data/blob/master/2016/06/traffic-stops-2016/overall_analysis.R)` - Script that creates a couple bar charts exploring overall stops by day of week and hour of the day
-* `[points.R](https://github.com/trendct/data/blob/master/2016/06/traffic-stops-2016/points.R)` - Generates [exploratory chart](http://trendct.org/wp-content/blogs.dir/60/files/2016/05/disp_points2-copy-771x411.png) of disparity points based on `mega_df.csv` 
-* `[scatter_maker.R](https://github.com/trendct/data/blob/master/2016/06/traffic-stops-2016/scatter_maker.R)` - Writes three javascript arrays that created scatter plots used in [this story](http://trafficstops.trendct.org/story/digging-deeper-into-racial-disparities-in-ct-traffic-stops/)
-* `[time.R](https://github.com/trendct/data/blob/master/2016/06/traffic-stops-2016/time.R)` - Testing chart visualization of Veil of Darkness data using Hamden locations
-* `[time_all.R](https://github.com/trendct/data/blob/master/2016/06/traffic-stops-2016/time_all.R)` - Adds columns determining if a stop happened in sunlight or darkness, adds time of sunrise, sunset, dusk, dawn, and adds other date-specific info to help chart later on
-* `[time_version_a.R](https://github.com/trendct/data/blob/master/2016/06/traffic-stops-2016/time_version_a.R)` - Same as above but for 2013-2014 data instead of 2014-2015.
-* `[towns.R](https://github.com/trendct/data/blob/master/2016/06/traffic-stops-2016/towns.R)` - Run before `officers.R`. Create a town-level analysis dataframe (`mega_town_df11.csv`), brings in `ccsu_data.csv` to replace calculations with CCSU's "official" figures.
+* `bubble_chart_maker.R` - Converts department-level summaries into a json array for a highcharts connected-scatterplot visualization
+* `location_prep.R` - Brings in data from an Excel sheet that includes latitude and longitude data for traffic stops from 8 departments. Creates `mega.csv` 
+* `town_borders_location_analysis.R` - Some exploratory maps looking at location-specific traffic stops along borders of towns
+* `officers.R` - Run after `towns.R`. Adds officer-level analysis and adds it to the department-level summary to create `mega_df.csv`.
+* `official_data_merging.R` - Creates `ccsu_data.csv` from various spreadsheets of figures calculated by CCSU's Institute for Municipal and Regional Policy, such as coefficients and k means values.
+* `overall_analysis.R` - Script that creates a couple bar charts exploring overall stops by day of week and hour of the day
+* `points.R` - Generates [exploratory chart](http://trendct.org/wp-content/blogs.dir/60/files/2016/05/disp_points2-copy-771x411.png) of disparity points based on `mega_df.csv` 
+* `scatter_maker.R` - Writes three javascript arrays that created scatter plots used in [this story](http://trafficstops.trendct.org/story/digging-deeper-into-racial-disparities-in-ct-traffic-stops/)
+* `time.R` - Testing chart visualization of Veil of Darkness data using Hamden locations
+* `time_all.R` - Adds columns determining if a stop happened in sunlight or darkness, adds time of sunrise, sunset, dusk, dawn, and adds other date-specific info to help chart later on
+* `time_version_a.R` - Same as above but for 2013-2014 data instead of 2014-2015.
+* `towns.R` - Run before `officers.R`. Create a town-level analysis dataframe (`mega_town_df11.csv`), brings in `ccsu_data.csv` to replace calculations with CCSU's "official" figures.
 
 ### Images
 
-* `[img](https://github.com/trendct/data/tree/master/2016/06/traffic-stops-2016/img)` folder inlcudes many generated exploratory charts, some of which was used in final stories
+* `img` folder inlcudes many generated exploratory charts, some of which was used in final stories
 
 ### Maps
 
-* `[maps](https://github.com/trendct/data/tree/master/2016/06/traffic-stops-2016/maps)` folder includes shape files used to generate choropleths in the walkthroughs and scriopts
+* `maps` folder includes shape files used to generate choropleths in the walkthroughs and scriopts
