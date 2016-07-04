@@ -1,8 +1,8 @@
 # Analyzing racial profiling from Connecticut's traffic stop data
 
-### This repository contains source data and analysis code for the Trend CT stories and database:
+### This repository contains source data and analysis code for the Trend CT stories and database [Cops, Stops & Race](http://trafficstops.trendct.org/):
 
-* [Explore: Trafic stops across Connecticut](http://trafficstops.trendct.org/data/)
+* [Explore: Traffic stops across Connecticut](http://trafficstops.trendct.org/data/)
 * [Where and why drivers are pulled over in Connecticut](http://trafficstops.trendct.org/story/where-and-why-drivers-are-pulled-over-in-connecticut/)
 * [Digging deeper into racial disparities in Connecticut traffic stops](http://trafficstops.trendct.org/story/digging-deeper-into-racial-disparities-in-ct-traffic-stops/)
 * [How the 'Veil of Darkness' sheds light on racial profiling](http://trafficstops.trendct.org/story/how-veil-of-darkness-sheds-light-on-racial-profiling/)
