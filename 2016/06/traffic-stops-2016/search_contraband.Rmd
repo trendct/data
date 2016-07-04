@@ -114,9 +114,12 @@ names(state_search_race)[names(state_search_race) == 'Yes'] <- 'searched'
 searches_all <- rbind(state_search, state_search_race)
 
 names(searches_all)[names(searches_all) == 'RE'] <- 'Category'
+kable(searches_all)
+```
 
 # Contraband found out of all stops
 
+```{r contra_stops}
 state_contra <- stops %>%
   group_by(ContrabandIndicator) %>%
   summarise(total=n()) %>%
@@ -141,10 +144,12 @@ names(state_contra_race)[names(state_contra_race) == 'Yes'] <- 'contra'
 contra_all <- rbind(state_contra, state_contra_race)
 
 names(contra_all)[names(contra_all) == 'RE'] <- 'Category'
-
+kable(contra_all)
+```
 
 # Contraband found out out of those searched
 
+```{r contra_searched}
 state_contra2 <- stops %>%
   filter(VehicleSearchedIndicator=="Yes") %>%
   group_by(ContrabandIndicator) %>%
@@ -175,7 +180,10 @@ names(contra_all2)[names(contra_all2) == 'RE'] <- 'Category'
 colnames(contra_all2) <- c("Category", "contra_only", "no_contra_only", "contra_p_only", "no_contra_p_only")
 
 mega_contra <- left_join(contra_all, contra_all2)
+kable(mega_contra)
+```
 
+```{r arrests_stops}
 # Arrests out of all stops
 
 state_arrests <- stops %>%
@@ -202,10 +210,12 @@ names(state_arrests_race)[names(state_arrests_race) == 'Yes'] <- 'arrests'
 arrests_all <- rbind(state_arrests, state_arrests_race)
 
 names(arrests_all)[names(arrests_all) == 'RE'] <- 'Category'
-
+kable(arrests_all)
+```
 
 # Arrests out of those searched
 
+```{r arrests_searched}
 state_arrests2 <- stops %>%
   filter(VehicleSearchedIndicator=="Yes") %>%
   group_by(CustodialArrestIndicator) %>%
@@ -278,9 +288,11 @@ town_search_race <- stops %>%
   spread(RE, searched_p)
 
 colnames(town_search_race) <- c("DepartmentName", "asian_s", "black_s", "hispanic_s", "indian_s", "middle_eastern_s", "white_s")
+```
 
 # Contraband found?
 
+```{r contraband}
 town_contra <- stops %>%
   filter(VehicleSearchedIndicator=="Yes") %>%
   group_by(DepartmentName) %>%
@@ -299,10 +311,13 @@ colnames(town_contra_race2) <- c("DepartmentName", "asian_c", "black_c", "hispan
 
 town_all <- left_join(town_contra, town_search_race)
 town_all <- left_join(town_all, town_contra_race2)
+kable(town_all)
+
+```
 
 # Arrested?
 
-
+```{r arrested}
 town_arrests_race2 <- stops %>%
   filter(VehicleSearchedIndicator=="Yes") %>%
   group_by(DepartmentName, RE, CustodialArrestIndicator) %>%
@@ -315,5 +330,5 @@ town_arrests_race2 <- stops %>%
 colnames(town_arrests_race2) <- c("DepartmentName", "asian_a", "black_a", "hispanic_a", "indian_a", "middle_eastern_a", "white_a")
 
 town_all <- left_join(town_all, town_arrests_race2)
-
+kable(town_all)
 ```
