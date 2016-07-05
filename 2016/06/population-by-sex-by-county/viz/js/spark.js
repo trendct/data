@@ -2,7 +2,7 @@
 $(function () {
     $(document).ready(function () {
 	console.log("Document ready");
-	$.getJSON("js/all_year_data.json", function (data, error){
+	$.getJSON("js/all_year_data_totals.json", function (data, error){
 	    all_data = data;
 	    make_selector();
 	    make_sparks();

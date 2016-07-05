@@ -3,12 +3,14 @@
 // http://www.census.gov/popest/data/counties/asrh/2015/files/CC-EST2015-ALLDATA.pdf
 
 var all_data = false;
+var totals_data = false;
 
 var county_categories = ['Fairfield County', 'Hartford County', 'Litchfield County',
 			 'Middlesex County', 'New Haven County', 'New London County',
 			 'Tolland County', 'Windham County'];
 
 var age_categories = [
+    'Total',
     '0-4',
     '5-9',
     '10-14',
@@ -131,7 +133,7 @@ function spark(data, div){
 				  tooltipClassname:"spark-tooltip",
 				  numberFormatter:function(tip){
 				      console.log(tip);
-				      fmt_tip = Math.round(Math.abs(tip * 10)) / 10 + "%";
+				      fmt_tip = Math.abs(tip).toLocaleString();
 				      $(".hover-label").html("");
 				      $("#" + div + "-label").html(fmt_tip);
 				      return "";
@@ -166,14 +168,13 @@ function make_spark_data(county){
 
 function make_sparks(){
 
-    
     var county = $("#county-selector option:selected").val();
     var gender = $("#gender-selector option:selected").val();
     var data = make_spark_data(county);
 
     $("#spark_body").html("");
 
-    for (i = 1 ; i < age_categories.length; i++){
+    for (i = 0 ; i < age_categories.length; i++){
 	age_label = age_categories[i];
 
 	console.log(gender);
