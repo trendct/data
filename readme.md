@@ -1,4 +1,33 @@
-# Data
+# What is this
+
+**This repository contains the data and data-processing scripts used in TrendCT.org stories.**
+
+---
+
+### Our philosophy
+We at [Trend CT](http://www.trendct.org) believe in open data. Our scripts may be too technical for the average reader, but we make it accessible because we believe it is important to be as transparent as possible about our methodology so our work can be checked or expanded upon.
+
+We strive to achieve a few things with our repos:
+Downloading and running the code as instructed will produce the data and exploratory charts used in our stories
+The data itself will be an easily found location in the repos for those who don't care about the transformation or analysis process
+Our scripts will be clearly documented and can serve as a way for readers to learn advanced data analysis techniques
+
+We encourage visitors look over our calculations and expand upon our analysis or inspire you to create new visualizations. 
+
+The stories we write are usually Connecticut focused but since we use national data it's not difficult to tweak a line in our scripts to generate an analysis for a different state.
+
+### Usage
+
+The data is available under the Creative Commons Attribution 4.0 International License and the code is available under the MIT License. If you do find it useful, please let us know.
+
+If you use our data or methodology, please give us a shout out in your story. It'd also be nice if you gave the author of the story a heads up.
+
+Check us out on Twitter [@TrendCT](http://www.twitter.com/trendct) and on [Facebook/TrendCT](https://www.facebook.com/trendct/).
+
+---
+
+# Story data repos
+
 
 *Data repos from previous stories will eventually be migrated into this folder*
 
