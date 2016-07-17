@@ -1,6 +1,6 @@
 library(readxl)
 library(openxlsx)
-stuns <- read_excel("2015 Reported Taser Data.xlsx", sheet=1)
+stuns <- read_excel("data/2015 Reported Taser Data.xlsx", sheet=1)
 
 stuns[1,] <- ifelse(is.na(stuns[1,]), colnames(stuns), stuns[1,])
 colnames(stuns) <- stuns[1,]
@@ -268,7 +268,28 @@ stuns$Age <- as.numeric(stuns$Age)
 ggplot(stuns, aes(Age)) + geom_histogram(binwidth=1)
 ggplot(stuns, aes(Age)) + geom_histogram(binwidth=10)
 
-ggplot(stuns, aes(Age)) + geom_histogram(binwidth=5) + facet_grid(race_ethnicity ~ .)
+stuns3 <- subset(stuns, Age < 100)
+stuns3 <- subset(stuns3, race_ethnicity!="Asian")
+stuns3 <- subset(stuns3, race_ethnicity!="Unknown")
+
+gg <- ggplot(stuns3, aes(Age)) + geom_histogram(fill="#bf6151", binwidth=2) + facet_grid(race_ethnicity ~ .)
+gg <- gg + labs(x="Age", y="Stuns deployed", title="Distribution of stuns by age",
+                subtitle="",
+                caption="SOURCE: CCSU Institute for Municipal and Regional Policy Management \nAndrew Ba Tran/TrendCT.org")
+gg <- gg + theme_bw(base_family="Calibri")
+gg <- gg + theme(text = element_text(size=20))
+#gg <- gg + theme(panel.grid.major=element_blank())
+#gg <- gg + theme(panel.grid.minor=element_blank())
+gg <- gg + theme(panel.border=element_blank())
+gg <- gg + theme(text = element_text(size=20))
+#gg <- gg + theme(axis.ticks=element_blank())
+gg <- gg +  theme(legend.position = "none")
+#gg <- gg + theme(axis.text.x=element_blank())
+gg <- gg + theme(plot.title=element_text(face="bold", family="Lato Black", size=22))
+gg <- gg + theme(plot.subtitle=element_text(face="italic", size=15, margin=margin(b=12)))
+gg <- gg + theme(plot.caption=element_text(size=12, margin=margin(t=12), color="#7a7d7e"))
+gg
+
 
 # Where does this happen?
 
@@ -279,7 +300,24 @@ locations <- stuns %>%
 
 kable(locations)
 
-ggplot(stuns, aes(Location.Environment)) + facet_grid(race_ethnicity ~.) + geom_bar() + coord_flip()
+gg <- ggplot(stuns3, aes(Location.Environment)) + facet_grid(race_ethnicity ~.) + geom_bar(fill="#bf6151") + coord_flip()
+gg <- gg + labs(x=NULL, y="Stuns deployed", title="Distribution of stuns by location",
+                subtitle="",
+                caption="SOURCE: CCSU Institute for Municipal and Regional Policy Management \nAndrew Ba Tran/TrendCT.org")
+gg <- gg + theme_bw(base_family="Calibri")
+gg <- gg + theme(text = element_text(size=20))
+#gg <- gg + theme(panel.grid.major=element_blank())
+#gg <- gg + theme(panel.grid.minor=element_blank())
+gg <- gg + theme(panel.border=element_blank())
+gg <- gg + theme(text = element_text(size=20))
+#gg <- gg + theme(axis.ticks=element_blank())
+gg <- gg +  theme(legend.position = "none")
+#gg <- gg + theme(axis.text.x=element_blank())
+gg <- gg + theme(plot.title=element_text(face="bold", family="Lato Black", size=22, hjust=-1.1))
+gg <- gg + theme(plot.subtitle=element_text(face="italic", size=15, margin=margin(b=12)))
+gg <- gg + theme(plot.caption=element_text(size=12, margin=margin(t=12), color="#7a7d7e"))
+gg
+
 
 # What is the subject holding
 
@@ -318,3 +356,82 @@ deployed <- deployed %>%
   spread(deployment, percent)
 
 kable(deployed)
+
+
+# weight and number of times deployed
+library(extrafont)
+library(ggalt)
+
+stuns$Weight <- as.numeric(stuns$Weight)
+stuns2 <- subset(stuns, !is.na(Number.of.Deployments))
+
+gg <- ggplot(stuns2, aes(factor(Number.of.Deployments), Weight)) 
+gg <- gg + geom_boxplot((aes(fill=factor(Number.of.Deployments)))) 
+gg <- gg + labs(x="Stuns deployed", y="Pounds", title="Distribution of number of stuns by suspect's weight",
+                subtitle="The median number of times a person is stunned by police tends to trend with heaviness of suspect.\nNote: Sample size for 5-10 deployments is between 1 and 4 each— too small to draw conclusions.",
+                caption="SOURCE: CCSU Institute for Municipal and Regional Policy Management \nAndrew Ba Tran/TrendCT.org")
+gg <- gg + theme_bw(base_family="Calibri")
+gg <- gg + theme(text = element_text(size=20))
+#gg <- gg + theme(panel.grid.major=element_blank())
+#gg <- gg + theme(panel.grid.minor=element_blank())
+gg <- gg + theme(panel.border=element_blank())
+gg <- gg + theme(text = element_text(size=20))
+gg <- gg + theme(axis.ticks=element_blank())
+gg <- gg +  theme(legend.position = "none")
+#gg <- gg + theme(axis.text.x=element_blank())
+gg <- gg + theme(plot.title=element_text(face="bold", family="Lato Black", size=22))
+gg <- gg + theme(plot.subtitle=element_text(face="italic", size=15, margin=margin(b=12)))
+gg <- gg + theme(plot.caption=element_text(size=12, margin=margin(t=12), color="#7a7d7e"))
+gg
+
+b2<-ggplot(stuns, aes(factor(Number.of.Deployments), Weight)) + 
+  geom_jitter(alpha=I(1/4), aes(color=Number.of.Deployments)) +
+  theme(legend.position = "none")
+
+
+p <- ggplot(stuns, aes(Number.of.Deployments, Weight))
+p + geom_point()
+
+# emotionally disturbed?
+
+table(stuns$Emotionally.Disturbed.Person)
+
+# under influence
+
+table(stuns$Under.Influence)
+
+# possibly intoxicated
+
+table(stuns$Possibly.Intoxicated)
+
+# height
+stuns$Height <- ifelse(stuns$Height=="6'", "6'0\"", stuns$Height)
+stuns$Height <- ifelse(stuns$Height=="5'", "5'0\"", stuns$Height)
+
+stuns$Height.inches <- sapply(strsplit(as.character(stuns$Height),"'|\""),
+       function(x){12*as.numeric(x[1]) + as.numeric(x[2])})
+
+
+p <- ggplot(stuns, aes(factor(Number.of.Deployments), Height.inches)) 
+
+p + geom_boxplot()
+
+
+gg <- ggplot(stuns2, aes(factor(Number.of.Deployments), Height.inches)) 
+gg <- gg + geom_boxplot((aes(fill=factor(Number.of.Deployments)))) 
+gg <- gg + labs(x="Stuns deployed", y="Inches", title="Distribution of number of stuns by suspect's height",
+                subtitle="The median number of times a person is stunned by police tends to trend with heaviness of suspect.\nNote: Sample size for 5-10 deployments is between 1 and 4 each— too small to draw conclusions.",
+                caption="SOURCE: CCSU Institute for Municipal and Regional Policy Management \nAndrew Ba Tran/TrendCT.org")
+gg <- gg + theme_bw(base_family="Calibri")
+gg <- gg + theme(text = element_text(size=20))
+#gg <- gg + theme(panel.grid.major=element_blank())
+#gg <- gg + theme(panel.grid.minor=element_blank())
+gg <- gg + theme(panel.border=element_blank())
+gg <- gg + theme(text = element_text(size=20))
+gg <- gg + theme(axis.ticks=element_blank())
+gg <- gg +  theme(legend.position = "none")
+#gg <- gg + theme(axis.text.x=element_blank())
+gg <- gg + theme(plot.title=element_text(face="bold", family="Lato Black", size=22))
+gg <- gg + theme(plot.subtitle=element_text(face="italic", size=15, margin=margin(b=12)))
+gg <- gg + theme(plot.caption=element_text(size=12, margin=margin(t=12), color="#7a7d7e"))
+gg
