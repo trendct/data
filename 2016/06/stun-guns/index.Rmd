@@ -5,16 +5,35 @@ date: "July 1, 2016"
 output: html_document
 ---
 
+This is the methodology used for the [Trend CT](http://www.trendct.org) story: [Who, where and how often people are stunned by police in Connecticut](http://trendct.org/2016/07/19/who-where-and-how-often-people-are-stunned-by-police-in-connecticut/)
+
+Visit the [repo](https://github.com/trendct/data/tree/master/2016/06/stun-guns) for the [data](https://github.com/trendct/data/tree/master/2016/06/stun-guns/data) used in this analysis. (Also, check out the reproducible scripts and data behind many of our other stories in our [central repo](https://github.com/trendct/data))
+
+Data for this analysis was provided by CCSU's [Institute for Municipal and Regional Policy](http://www.ccsu.edu/imrp/projects/taser.html), compiled from reports gathered by individual police departments as mandated by Connecticut law. However, this is a new form of data collection so quality of data varies department to department.
+
+**What’s in this script**
+
+Several visualizations and tables exploring the data
+
+-----
+
+*Bonus:* As an interesting exercise, my colleague Jake Kara, also worked did a data analysis for story but [with Python](https://github.com/trendct/data/tree/master/2016/06/taser-incidents).
+
+We livestreamed our process. Jake with Python [[video](https://www.livecoding.tv/jakekara/videos/aEEG3-ct-stun-gun-analysis-3)]. Me with R (Sorry, I didn't realize I was on mute for the first part) [[video](https://www.livecoding.tv/abtran/videos/BMMN3-analyzing-stun-gun-use-data-with-r/)].
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ### Preparing the data
 
-```{r setup2, warning=F}
+```{r setup2, warning=F, message=FALSE}
 library(readxl)
 library(openxlsx)
 stuns <- read_excel("data/2015 Reported Taser Data.xlsx", sheet=1)
+
+# You can also download the data here http://www.ccsu.edu/imrp/projects/files/2015%20Reported%20Taser%20Data.xlsx
+
 
 stuns[1,] <- ifelse(is.na(stuns[1,]), colnames(stuns), stuns[1,])
 colnames(stuns) <- stuns[1,]
