@@ -1,0 +1,396 @@
+---
+title: "Pre-trial jail inmates in Connecticut"
+author: "Andrew Ba Tran"
+date: "July 18, 2016"
+output: html_document
+---
+
+This is the methodology used for the [Trend CT](http://www.trendct.org) story: [Who’s sitting in pretrial detention in Connecticut](http://trendct.org/2016/07/19/who-where-and-how-often-people-are-stunned-by-police-in-connecticut/). These are exploratory tables and charts— some of which I did not include in the final story for various reasons.
+
+Visit the [repo](https://github.com/trendct/data/tree/master/2016/07/pre-trial-inmates-ct) for the [data](https://github.com/trendct/data/tree/master/2016/07/pre-trial-inmates-ct/data) used in this analysis. (Also, check out the reproducible scripts and data behind many of our other stories in our [central repo](https://github.com/trendct/data))
+
+Data for this analysis was provided by Department of Corrections via the  [Connecticut Open Data Portal](https://data.ct.gov/Public-Safety/Accused-Pre-Trial-Inmates-in-Correctional-Faciltie/b674-jy6w?category=Public-Safety), which is updated nightly.
+
+**What’s in this walkthrough**
+
+Several visualizations and tables exploring the data
+
+```{r libraries, warning=F, message=F}
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(lubridate)
+library(knitr)
+library(ggalt)
+library(extrafont)
+library(grid)
+library(gridExtra)
+library(stringr)
+library(DT)
+```
+
+```{r data_ingesting, warning=FALSE}
+update <- read.csv("https://data.ct.gov/api/views/b674-jy6w/rows.csv")
+```
+
+
+```{r race_date_total, fig.width=9, fig.height=6}
+# by date, race total
+race_total_date <- update %>%
+  group_by(DOWNLOAD.DATE, RACE) %>%
+  summarise(total=n()) %>%
+  filter(RACE=="BLACK" | RACE=="HISPANIC" | RACE=="WHITE")
+
+race_total_date$DOWNLOAD.DATE <- mdy(race_total_date$DOWNLOAD.DATE)
+
+gg <- ggplot(race_total_date, aes(x=DOWNLOAD.DATE, y=total, group=RACE, color=RACE)) + geom_line()
+gg <- gg + labs(x=NULL, y="Inmates", title=paste("Accused pre-trial inmates in Connecticut jails"),
+                caption="SOURCE: Department of Corrections\nAndrew Ba Tran/TrendCT.org")
+gg <- gg + theme_bw(base_family="Calibri")
+#gg <- gg + theme(panel.grid.major=element_blank())
+#gg <- gg + theme(panel.grid.minor=element_blank())
+gg <- gg + theme(panel.border=element_blank())
+gg <- gg + theme(text = element_text(size=10))
+#gg <- gg + theme(axis.ticks=element_blank())
+#gg <- gg + theme(axis.text.x=element_blank())
+gg <- gg + theme(plot.title=element_text(face="bold", family="Lato Black", size=22))
+gg <- gg + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(b=12)))
+gg <- gg + theme(plot.caption=element_text(size=12, margin=margin(t=10, r=80), color="#7a7d7e"))
+gg <- gg + geom_label(data=race_total_date, aes(x=ymd("2016-7-19"), y=1336, label="Black (1,336)", hjust=0),
+                      family="Helvetica", lineheight=0.95,
+                      size=4.5, label.size=0, color="black")
+gg <- gg + geom_label(data=race_total_date, aes(x=ymd("2016-7-19"), y=849, label="Hispanic (849)", hjust=0),
+                      family="Helvetica", lineheight=0.95,
+                      size=4.5, label.size=0, color="black")
+gg <- gg + geom_label(data=race_total_date, aes(x=ymd("2016-7-19"), y=1126, label="White (1,126)", hjust=0),
+                      family="Helvetica", lineheight=0.95,
+                      size=4.5, label.size=0, color="black")
+gg <- gg + theme(legend.position="none")
+gg <- gg + theme(plot.margin = unit(c(1, 5, 1, 1), "lines"))
+gg
+
+gb <- ggplot_build(gg)
+gt <- ggplot_gtable(gb)
+
+gt$layout$clip[gt$layout$name=="panel"] <- "off"
+grid.draw(gt)
+ggsave(gt, file = "race_totals_time.png", width = 8, height = 6, type = "cairo-png")
+
+race_total_date$RACE <- gsub(" ", ".", race_total_date$RACE)
+
+race_total_date <- update %>%
+  group_by(DOWNLOAD.DATE, RACE) %>%
+  summarise(total=n()) %>%
+  spread(RACE, total) %>%
+  mutate(total = `AMER IND` + ASIAN + BLACK + HISPANIC + WHITE) %>%
+  mutate(American.Indian.per = round(`AMER IND`/total*100,2), Asian.per = round(ASIAN/total*100,2), Black.per = round(BLACK/total*100,2), Hispanic.per = round(HISPANIC/total*100,2), White.per = round(WHITE/total*100,2)) %>%
+  select(DOWNLOAD.DATE, American.Indian.per, Asian.per, Black.per, Hispanic.per, White.per) %>%
+  gather(Race, Percent, 2:6)
+
+race_total_date$Race <- gsub(".per", "", race_total_date$Race)
+
+gg <- ggplot(race_total_date, aes(x=mdy(DOWNLOAD.DATE), y=Percent)) + geom_bar(stat="identity") + facet_grid(.~Race)
+gg <- gg + labs(x=NULL, y="Percent", title=paste("Racial makeup of accused pre-trial inmates"),
+                caption="SOURCE: Department of Corrections\nAndrew Ba Tran/TrendCT.org")
+gg <- gg + theme_bw(base_family="Calibri")
+gg <- gg + theme(text = element_text(size=16))
+#gg <- gg + theme(panel.grid.major=element_blank())
+#gg <- gg + theme(panel.grid.minor=element_blank())
+gg <- gg + theme(panel.border=element_blank())
+#gg <- gg + theme(axis.ticks=element_blank())
+#gg <- gg + theme(axis.text.x=element_blank())
+gg <- gg + theme(plot.title=element_text(face="bold", family="Lato Black", size=22))
+gg <- gg + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(b=12)))
+gg <- gg + theme(plot.caption=element_text(size=12, margin=margin(t=10, r=80), color="#7a7d7e"))
+gg <- gg + theme(plot.margin = unit(c(1, 1, 1, 1), "lines"))
+
+gg
+ggsave(gg, file = "race_percent_time.png", width = 8, height = 6, type = "cairo-png")
+
+```
+
+```{r gender}
+female_total <- update %>%
+  group_by(DOWNLOAD.DATE, GENDER) %>%
+  summarise(total=n()) %>%
+  spread(GENDER, total) 
+
+avg_females <- round(mean(female_total$F),0)
+avg_males <- round(mean(female_total$M),0)
+
+#round(avg_females/(avg_females+avg_males)*100)
+
+median_females <- round(median(female_total$F),0)
+median_males <- round(median(female_total$M),0)
+```
+
+### Men and women in jail awaiting trial
+
+**Average number of women:** `r avg_females`
+
+**Average number of men:** `r avg_males`
+
+**Median number of women:** `r median_females`
+
+**Median number of men:** `r median_males`
+
+```{r females_race, fig.width=9, fig.height=6}
+female_total <- update %>%
+  filter(GENDER=="F") %>%
+  group_by(DOWNLOAD.DATE, RACE) %>%
+  summarise(total=n()) %>%
+  group_by(RACE) %>%
+  summarise(avg=mean(total))
+
+gg <- ggplot(female_total, aes(x=RACE, y=avg)) + geom_bar(stat="identity") 
+gg <- gg + labs(x=NULL, y="Average", title=paste("Racial makeup of female accused pre-trial inmates"),
+                caption="SOURCE: Department of Correction\nAndrew Ba Tran/TrendCT.org")
+gg <- gg + theme_bw(base_family="Calibri")
+gg <- gg + theme(text = element_text(size=16))
+#gg <- gg + theme(panel.grid.major=element_blank())
+#gg <- gg + theme(panel.grid.minor=element_blank())
+gg <- gg + theme(panel.border=element_blank())
+#gg <- gg + theme(axis.ticks=element_blank())
+#gg <- gg + theme(axis.text.x=element_blank())
+gg <- gg + theme(plot.title=element_text(face="bold", family="Lato Black", size=22))
+gg <- gg + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(b=12)))
+gg <- gg + theme(plot.caption=element_text(size=12, margin=margin(t=10, r=80), color="#7a7d7e"))
+gg <- gg + theme(plot.margin = unit(c(1, 1, 1, 1), "lines"))
+
+gg
+```
+
+```{r males_race, fig.height=6, fig.width=9}
+male_total <- update %>%
+  filter(GENDER=="M") %>%
+  group_by(DOWNLOAD.DATE, RACE) %>%
+  summarise(total=n()) %>%
+  group_by(RACE) %>%
+  summarise(avg=mean(total))
+
+gg <- ggplot(male_total, aes(x=RACE, y=avg)) + geom_bar(stat="identity") 
+gg <- gg + labs(x=NULL, y="Average", title=paste("Racial makeup of male accused pre-trial inmates"),
+                caption="SOURCE: Department of Correction\nAndrew Ba Tran/TrendCT.org")
+gg <- gg + theme_bw(base_family="Calibri")
+gg <- gg + theme(text = element_text(size=16))
+#gg <- gg + theme(panel.grid.major=element_blank())
+#gg <- gg + theme(panel.grid.minor=element_blank())
+gg <- gg + theme(panel.border=element_blank())
+#gg <- gg + theme(axis.ticks=element_blank())
+#gg <- gg + theme(axis.text.x=element_blank())
+gg <- gg + theme(plot.title=element_text(face="bold", family="Lato Black", size=22))
+gg <- gg + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(b=12)))
+gg <- gg + theme(plot.caption=element_text(size=12, margin=margin(t=10, r=80), color="#7a7d7e"))
+gg <- gg + theme(plot.margin = unit(c(1, 1, 1, 1), "lines"))
+
+gg
+```
+
+```{r avg_age}
+
+avg_age <- update %>%
+  group_by(RACE) %>%
+  summarise(avg_age=round(mean(AGE),0), median_age=round(median(AGE),0))
+```
+
+### Average age by race
+
+```{r avg_table}
+kable(avg_age)
+```
+
+```{r facilities_total}
+facilities <- update %>%
+  group_by(DOWNLOAD.DATE, FACILITY) %>%
+  summarise(total=n()) %>%
+  group_by(FACILITY) %>%
+  summarise(average=round(mean(total),0), median=round(median(total),0)) %>%
+  arrange(-average)
+```
+
+### Average number of inmates by facility
+
+```{r facilities_table}
+kable(facilities)
+```
+
+```{r bonds_race}
+# Bond amount total by race
+
+bonds <- update %>%
+  group_by(RACE) %>%
+  summarise(avg_bond=mean(BOND.AMOUNT), median_bond=median(BOND.AMOUNT))
+```
+
+### Bond amount by race
+
+```{r bonds_table}
+kable(bonds)
+```
+
+```{r female_offense_list}
+update$offense_pre <- gsub(", .*", "", update$OFFENSE)
+update$offense_degree <- gsub(".*, ", "", update$OFFENSE)
+
+update$offense_degree <- ifelse(update$offense_pre==update$offense_degree, "", update$offense_degree)
+
+fem_offense_list <- update %>%
+  filter(GENDER=="F") %>%
+  group_by(DOWNLOAD.DATE, offense_pre) %>%
+  summarise(count=n()) %>%
+  group_by(offense_pre) %>%
+  summarise(avg=round(mean(count),0)) %>%
+  arrange(-avg) 
+```
+
+## Female offense list
+
+```{r fem_of_table}
+datatable(fem_offense_list)
+```
+
+```{r male_offense_list}
+mal_offense_list <- update %>%
+  filter(GENDER=="M") %>%
+  group_by(DOWNLOAD.DATE, offense_pre) %>%
+  summarise(count=n()) %>%
+  group_by(offense_pre) %>%
+  summarise(avg=round(mean(count),0)) %>%
+  arrange(-avg) 
+```
+
+## Male offense list
+
+```{r male_of_table}
+datatable(mal_offense_list)
+```
+
+```{r male_offense_race}
+
+mal_offense_race <- update %>%
+  filter(GENDER=="M") %>%
+  group_by(DOWNLOAD.DATE, offense_pre, RACE) %>%
+  summarise(count=n()) %>%
+  spread(RACE, count) %>%
+  group_by(offense_pre) %>%
+  summarise(amer.ind.avg=round(mean(`AMER IND`),0), asian.avg=round(mean(ASIAN),0), black.avg=round(mean(BLACK),0), hispanic.avg=round(mean(HISPANIC),0), white.avg=round(mean(WHITE),0)) %>%
+  arrange(-white.avg) 
+```
+
+## Male offense list by race
+
+```{r mor_table}
+datatable(mal_offense_race)
+```
+
+```{r female_offense_race}
+
+fem_offense_race <- update %>%
+  filter(GENDER=="F") %>%
+  group_by(DOWNLOAD.DATE, offense_pre, RACE) %>%
+  summarise(count=n()) %>%
+  spread(RACE, count) %>%
+  group_by(offense_pre) %>%
+  summarise(amer.ind.avg=round(mean(`AMER IND`),0), asian.avg=round(mean(ASIAN),0), black.avg=round(mean(BLACK),0), hispanic.avg=round(mean(HISPANIC),0), white.avg=round(mean(WHITE),0)) %>%
+  arrange(-white.avg) 
+```
+
+## Female offense list by race
+
+```{r fem_table}
+datatable(fem_offense_race)
+```
+
+```{r percent_offense_table, warning=F, message=F, fig.height=11, fig.width=9}
+
+mal_offense_race_percent <- update %>%
+  filter(GENDER=="M") %>%
+  group_by(DOWNLOAD.DATE, offense_pre, RACE) %>%
+  summarise(count=n()) %>%
+  spread(RACE, count) %>%
+  group_by(offense_pre) %>%
+  summarise(amer.ind.avg=round(mean(`AMER IND`),2), asian.avg=round(mean(ASIAN),0), black.avg=round(mean(BLACK),0), hispanic.avg=round(mean(HISPANIC),0), white.avg=round(mean(WHITE),0)) %>%
+  arrange(-white.avg) %>%
+  group_by(offense_pre) %>%
+  mutate(total=sum(amer.ind.avg,asian.avg,black.avg,hispanic.avg,white.avg, na.rm=T)) %>%
+  filter(total>20) %>%
+  arrange(-total) %>%
+  mutate(American.Indian.avg.per = round((amer.ind.avg/total)*100,0), Asian.avg.per = round(asian.avg/total*100,0),
+Black.avg.per = round(black.avg/total*100,0), Hispanic.avg.per = round(hispanic.avg/total*100,0), White.avg.per = round(white.avg/total*100,0)) %>%
+  select(offense_pre, total, American.Indian.avg.per, Asian.avg.per, Black.avg.per, Hispanic.avg.per, White.avg.per) %>%
+  gather(Race, Percent, 3:7)
+
+mal_offense_race_percent$Race <- gsub(".avg.per", "", mal_offense_race_percent$Race)
+mal_offense_race_percent$Race <- gsub("\\.", " ", mal_offense_race_percent$Race)
+
+#plotting it
+
+library(plyr)
+cbPalette <- c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+
+cbbPalette <- c("#000000", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+
+Data <- mal_offense_race_percent
+Data[is.na(Data)] <- 0
+Data <- ddply(Data, .(offense_pre), transform, pos=cumsum(Percent)-(0.5*Percent))
+
+
+Data$offense_pre <- gsub(" AM", "", Data$offense_pre)
+Data$offense_pre <- gsub(" DF", "", Data$offense_pre)
+Data$offense_pre <- gsub(" AF", "", Data$offense_pre)
+Data$offense_pre <- gsub(" CF", "", Data$offense_pre)
+Data$offense_pre <- gsub("  F", "", Data$offense_pre)
+Data$offense_pre <- str_trim(Data$offense_pre)
+
+Data[Data == 0] <- NA
+Data <- Data[ order(-Data$total), ]
+
+Data$offense_pre <- factor(Data$offense_pre, levels = Data$offense_pre[order(Data$total)])
+
+gg <- ggplot(Data, aes(x = offense_pre, y = Percent)) 
+gg <- gg + geom_bar(aes(fill = Race), stat="identity") 
+gg <- gg + geom_text(aes(label = Percent, y = pos), size = 4) 
+gg <- gg + scale_fill_manual(values=cbPalette)
+gg <- gg + coord_flip() 
+gg <- gg + geom_rect(data=Data, aes(ymin=102, ymax=114, xmin=-Inf, xmax=Inf), fill="#efefe3")
+gg <- gg + geom_text(data=Data, aes(label=round(total,0), x=offense_pre, y=108), fontface="bold", size=4, family="Calibri")
+gg <- gg + labs(x=NULL, y="Percent", title="Offenses that accused pre-trial inmates face by race",
+                subtitle="Percent of race and total facing offenses. Based on rolling average of inmates per day.",
+                caption="Department of Correction\nAndrew Ba Tran/TrendCT.org")
+gg <- gg + theme_bw(base_family="Calibri")
+gg <- gg + theme(panel.grid.major=element_blank())
+gg <- gg + theme(panel.grid.minor=element_blank())
+gg <- gg + theme(panel.border=element_blank())
+gg <- gg + theme(axis.ticks=element_blank())
+gg <- gg + theme(axis.text.x=element_blank())
+#gg <- gg + theme(text = element_text(size=20))
+gg <- gg + theme(plot.title=element_text(face="bold", family="Lato Black", size=16))
+gg <- gg + theme(plot.subtitle=element_text(face="italic", size=10,margin=margin(b=12)))
+gg <- gg + theme(plot.caption=element_text(size=10, margin=margin(t=16), color="#7a7d7e"))
+gg
+```
+
+
+```{r bond_avg_race, warning=F, message=F}
+detach("package:plyr", unload=TRUE)
+
+mal_offense_race_bond <- update %>%
+  filter(GENDER=="M") %>%
+  group_by(DOWNLOAD.DATE, OFFENSE, RACE) %>%
+  summarise(total=n(),avg.bond=mean(BOND.AMOUNT)) %>%
+  select(DOWNLOAD.DATE, OFFENSE, total, RACE, avg.bond) %>%
+  spread(RACE, avg.bond) %>%
+  group_by(OFFENSE) %>%
+  summarise(total = sum(total), amer.ind.avg=round(mean(`AMER IND`, na.rm=T),2), asian.avg=round(mean(ASIAN, na.rm=T),0), black.avg=round(mean(BLACK, na.rm=T),0), hispanic.avg=round(mean(HISPANIC, na.rm=T),0), white.avg=round(mean(WHITE, na.rm=T),0)) %>%
+  arrange(-white.avg) %>%
+  filter(total>20)
+
+mal_offense_race_bond$what <- ifelse(((mal_offense_race_bond$white.avg < mal_offense_race_bond$black.avg) & (mal_offense_race_bond$white.avg < mal_offense_race_bond$hispanic.avg)), "white", "minority")
+
+```
+
+## Bond amount
+
+```{r bond_amount_table}
+datatable(mal_offense_race_bond)
+```
