@@ -3,7 +3,7 @@
 
 This repository contains source data and analysis code for the Trend CT story:
 
-* [Who’s sitting in pretrial detention in Connecticut](http://trendct.org/2016/07/19/who-where-and-how-often-people-are-stunned-by-police-in-connecticut/). 
+* [Who’s sitting in pretrial detention in Connecticut](http://trendct.org/2016/07/20/pre-trial-inmates/). 
 
 # Walkthroughs
 
