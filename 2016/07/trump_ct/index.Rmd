@@ -1,0 +1,111 @@
+---
+title: "What it would take for Trump to win Connecticut"
+author: "Andrew Ba Tran"
+date: "July 21, 2016"
+output: html_document
+---
+
+Donald Trump's campaign is under the impression that a majority of Connecticut could be persuaded to vote for him as President in November's general electon.
+
+Based on a state poll last month from Quinnipiac University, 45 percent of voters would choose Clinton compared to 38 percent for Trump. That single digit lead coupled with Governor Dannel Malloy's low approval rating based on another Quinnipiac poll leads many to believe there is an opportunity for Trump.
+
+"It’s in play because the citizens of Connecticut are tired of the same things the people of the country, the United States, are tired of, which is bad leadership." said Paul Manafort, Trump's campaign manager and New Britain native, during a breakfast for the state's delegation at the Republican National Convention on Tuesday.
+
+## President-Elect Donald Trump
+
+What would it take for Trump to win in Connecticut? 
+
+Trend CT sought to envision scenarios based on voting patterns and demographics. Consider this a thought exercise.
+
+## If Bernie voters switched to Trump
+
+This year's presidential primaries saw a [historic turn out](http://trendct.org/2016/06/07/official-numbers-show-historic-turnout-for-ct-presidential-primaries/) among Republicans.
+
+Nearly half of all registered Republicans in Connecticut participated in the primary election. The next-highest participation rate was 43 percent in 1980, when President Ronald Reagan ran.
+
+In all, that's about 213,000 Republican primary voters— of which 123,000 voted for Trump.
+
+**Thought exercise: Let's assume that the general election was limited to voters who participated in the primary election**
+
+Based on raw primary votes, Trump would have won 99 towns in Connecticut while Clinton would have won just 70. 
+
+[MAP]
+
+But those towns are the most-populous ones because Clinton received 170,000 votes in the Democratic primary— almost 50,000 more than Trump.
+
+So based on primary votes, what would it take for Trump to beat Clinton?
+
+A couple things: If all Republican primary voters (213,000) voted for Trump or if all voters who chose Bernie Sanders picked Trump, his votes would be boosted to 276,000. 
+
+## If unaffiliated voters went to Trump
+
+But that would never be the case. 
+
+Plus, primary election participation pales in comparison to general election participation.
+
+About 1.6 million votes were cast in Connecticut during the presidential election between Barack Obama and John McCain. That's nearly 3 times the number of votes in this previous primary election.
+
+Also, primaries in Connecticut are limited to those registered to parties, which excludes a huge number of voters.
+
+There are about 803,000 voters registered as unaffiliated. 
+
+That's more than the 730,000 registered as Democrats and 426,000 registered as Republicans.
+
+If Trump could reach those large numbers of unaffiliated voters to make up for the Democrats outnumbering the Republicans in Connecticut, he's got a shot. Just 38 percent of the unaffiliated voters would make up the the difference between the number of registered Democrats and Republicans.
+
+[Map of where unaffiliated voters are]
+
+[Scatterplot of unemployment percent to percent of unaffiliated voters]
+[Scatterplot of unemployment percent to Clinton win percent?]
+
+In towns with high unemployment rates, ....
+In towns with low minority population...
+
+## Based on polling...
+
+According to the latest Quinnipiac poll, Clinton is leading Trump but only by a single digit. That's smaller than expected for a state like Connecticut, according to researchers. Plus, her negative favorability rating is almost at the same level as Trump's.
+
+[TABLE]
+
+**Thought exercise: Let's take these numbers at face value and apply them to registered voters and assume that all who have registered will vote**
+
+If we take the 9 percent of Republicans polled who said they would vote for Clinton and applied that to the number of registered Republican voters, that would be about 38,000 voters. Plus 85 percent of registered Democrats as well as 36 percent of unregistered equals; Clinton would have more than 950,000 votes.
+
+Trump, meanwhile, would end up with just 702,000 if we assume 79 percent of registered Republicans, 5 percent of democrats, and 41 percent of independents voted for him.
+
+Even with Libertarian candidate Gary Johnson and Green party candidate Jill Stein in the mix, Clinton would still theoretically have 870,000 votes to Trump's 670,000. 
+
+## If women stayed home
+
+Trump has support from more men than women—— 55 percent compared to 35 percent. 
+
+So if female voters were excluded from the voting population, Trump could be elcted.
+
+## If minorities did not vote
+
+Clinton has an overwhelming 70 percent support rate according to the poll. 
+
+Among whites who were polled, 44 percent were for Trump, ahead of 39 percent for Clinton.
+
+## Especially if Hispanics did not vote
+
+Connecticut ranks 10th among states of eligible Hispanic voters at 10.8 percent of the population. It's one of 16 states where more than half of the Hispanic population is eligble to vote.
+
+The Republican nominee for President has alienated many Hispanic voters with promises to build a wall along the southern border and attacking a judge with Mexican heritage.
+
+According to a recent poll from the [Latino Victory Fund/Latino Decisions/Fusion](http://thehill.com/blogs/ballot-box/presidential-races/288413-poll-most-hispanics-see-trump-unfavorably) poll, 79 percent of Hispanic voters view Trump negatively.
+
+## If he has a time machine
+
+Connecticut had a streak of voting for Republican candidates for President starting in 1972 through 1988, with the election of George Bush and Dan Quayle. 
+
+Then in 1992, Connecticut flipped to a Clinton, Bill. The state has voted for a Democratic presidential candidate each general election since.
+
+[CHART TIMELINE OR TABLE]
+
+## If part of the state collapses into the ocean
+
+These are the towns that voted for John McCain and Sarah Palin in 2008.
+
+If they remained and the towns that voted for President Obama disappeared, then Trump definitely has a strong chance to win.
+
