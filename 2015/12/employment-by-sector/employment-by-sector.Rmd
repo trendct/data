@@ -1,0 +1,46 @@
+---
+title: "Employment by sector in Connecticut"
+author: "Andrew Ba Tran"
+date: "June 23, 2015"
+output: html_document
+---
+
+This analysis accompanies the TrendCT.org story: [Employment in Connecticut: The long-term trend in 10 business sectors](http://trendct.org/2015/06/23/employment-in-connecticut-11-business-sector-trend-charts/).
+
+Here's [the data](https://github.com/trendct/employment-by-sector/blob/master/data/employmentbysector.csv) we pulled and cleaned from [The Connecticut Department of Labor](http://www1.ctdol.state.ct.us/lmi/SecEmp.asp)
+
+### How it all looks plotted together
+```{r fig.width=7, fig.height=6, out.width=800,out.height=600}
+library(dygraphs)
+library(xts)
+library(dplyr)
+employment <- read.csv("data/employmentbysector.csv", stringsAsFactors=FALSE)
+employment$Month <- strptime(employment$Month, "%m/%d/%y")
+employment_time <- xts(employment[,-1], order.by=employment[,1]) 
+e <- dygraph(employment_time, main="Employment by sector in Connecticut", ylab = "Employees") %>% 
+  dyRangeSelector() %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 2)) %>%
+  dyLegend(show="onmouseover", hideOnMouseOut=TRUE)
+e
+```
+
+This is good for context on how one sector compares to another but it's hard to distinguish each because of the similar colors.
+
+Let's break it out by individual category
+
+
+```{r fig.width=7, fig.height=6, out.width=800,out.height=300}
+dygraph(employment_time$Construction, main = "Construction", group = "sectors") %>% dyOptions(includeZero = TRUE)
+dygraph(employment_time$Manufacturing, main = "Manufacturing", group="sectors")  %>% dyOptions(includeZero = TRUE)
+dygraph(employment_time$Trade..Transportation..Utilities, main = "Trade, Transportation, Utilities", group="sectors") %>%  dyOptions(includeZero = TRUE)
+dygraph(employment_time$Information, main = "Information", group="sectors") %>%  dyOptions(includeZero = TRUE)
+dygraph(employment_time$Financial, main = "Financial Activities", group="sectors") %>%  dyOptions(includeZero = TRUE)
+dygraph(employment_time$Professional.Business, main = "Professional Business", group="sectors") %>%  dyOptions(includeZero = TRUE)
+dygraph(employment_time$Educational.and.Health.Services, main = "Educational and Health Services", group="sectors") %>%  dyOptions(includeZero = TRUE)
+dygraph(employment_time$Leisure.Hospitality, main = "Leisure and Hospitality", group="sectors") %>%  dyOptions(includeZero = TRUE)
+dygraph(employment_time$Other.Services, main = "Other Services", group="sectors") %>%  dyOptions(includeZero = TRUE)
+dygraph(employment_time$Government, main = "Government", group = "sectors") %>%  dyOptions(includeZero = TRUE)
+
+```alright, looks like i’m responsible for the Peas in Guacamole post today. I’M SORRY.
+
+Interesting. Read the [story](http://trendct.org/2015/06/23/employment-in-connecticut-11-business-sector-trend-charts/) for more.

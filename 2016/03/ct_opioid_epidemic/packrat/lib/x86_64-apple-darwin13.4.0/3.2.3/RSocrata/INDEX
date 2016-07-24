@@ -1,0 +1,12 @@
+fieldName               Convert Socrata human-readable column name to
+                        field name
+isFourByFour            Checks the validity of the syntax for a
+                        potential Socrata dataset Unique Identifier,
+                        also known as a 4x4.
+ls.socrata              List datasets available from a Socrata domain
+posixify                Convert Socrata calendar_date string to POSIX
+read.socrata            Get a full Socrata data set as an R data frame
+validateUrl             Convert, if necessary, URL to valid REST API
+                        URL supported by Socrata.
+write.socrata           Write to a Socrata dataset (full replace or
+                        upsert)

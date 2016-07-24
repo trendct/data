@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+<meta name="date" content="2015-08-31" />
+
+<title>Data frames</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<link href="data:text/css,body%20%7B%0A%20%20background%2Dcolor%3A%20%23fff%3B%0A%20%20margin%3A%201em%20auto%3B%0A%20%20max%2Dwidth%3A%20700px%3B%0A%20%20overflow%3A%20visible%3B%0A%20%20padding%2Dleft%3A%202em%3B%0A%20%20padding%2Dright%3A%202em%3B%0A%20%20font%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0A%20%20font%2Dsize%3A%2014px%3B%0A%20%20line%2Dheight%3A%201%2E35%3B%0A%7D%0A%0A%23header%20%7B%0A%20%20text%2Dalign%3A%20center%3B%0A%7D%0A%0A%23TOC%20%7B%0A%20%20clear%3A%20both%3B%0A%20%20margin%3A%200%200%2010px%2010px%3B%0A%20%20padding%3A%204px%3B%0A%20%20width%3A%20400px%3B%0A%20%20border%3A%201px%20solid%20%23CCCCCC%3B%0A%20%20border%2Dradius%3A%205px%3B%0A%0A%20%20background%2Dcolor%3A%20%23f6f6f6%3B%0A%20%20font%2Dsize%3A%2013px%3B%0A%20%20line%2Dheight%3A%201%2E3%3B%0A%7D%0A%20%20%23TOC%20%2Etoctitle%20%7B%0A%20%20%20%20font%2Dweight%3A%20bold%3B%0A%20%20%20%20font%2Dsize%3A%2015px%3B%0A%20%20%20%20margin%2Dleft%3A%205px%3B%0A%20%20%7D%0A%0A%20%20%23TOC%20ul%20%7B%0A%20%20%20%20padding%2Dleft%3A%2040px%3B%0A%20%20%20%20margin%2Dleft%3A%20%2D1%2E5em%3B%0A%20%20%20%20margin%2Dtop%3A%205px%3B%0A%20%20%20%20margin%2Dbottom%3A%205px%3B%0A%20%20%7D%0A%20%20%23TOC%20ul%20ul%20%7B%0A%20%20%20%20margin%2Dleft%3A%20%2D2em%3B%0A%20%20%7D%0A%20%20%23TOC%20li%20%7B%0A%20%20%20%20line%2Dheight%3A%2016px%3B%0A%20%20%7D%0A%0Atable%20%7B%0A%20%20margin%3A%201em%20auto%3B%0A%20%20border%2Dwidth%3A%201px%3B%0A%20%20border%2Dcolor%3A%20%23DDDDDD%3B%0A%20%20border%2Dstyle%3A%20outset%3B%0A%20%20border%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0A%20%20border%2Dwidth%3A%202px%3B%0A%20%20padding%3A%205px%3B%0A%20%20border%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0A%20%20border%2Dwidth%3A%201px%3B%0A%20%20border%2Dstyle%3A%20inset%3B%0A%20%20line%2Dheight%3A%2018px%3B%0A%20%20padding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0A%20%20border%2Dleft%2Dstyle%3A%20none%3B%0A%20%20border%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0A%0Ap%20%7B%0A%20%20margin%3A%200%2E5em%200%3B%0A%7D%0A%0Ablockquote%20%7B%0A%20%20background%2Dcolor%3A%20%23f6f6f6%3B%0A%20%20padding%3A%200%2E25em%200%2E75em%3B%0A%7D%0A%0Ahr%20%7B%0A%20%20border%2Dstyle%3A%20solid%3B%0A%20%20border%3A%20none%3B%0A%20%20border%2Dtop%3A%201px%20solid%20%23777%3B%0A%20%20margin%3A%2028px%200%3B%0A%7D%0A%0Adl%20%7B%0A%20%20margin%2Dleft%3A%200%3B%0A%7D%0A%20%20dl%20dd%20%7B%0A%20%20%20%20margin%2Dbottom%3A%2013px%3B%0A%20%20%20%20margin%2Dleft%3A%2013px%3B%0A%20%20%7D%0A%20%20dl%20dt%20%7B%0A%20%20%20%20font%2Dweight%3A%20bold%3B%0A%20%20%7D%0A%0Aul%20%7B%0A%20%20margin%2Dtop%3A%200%3B%0A%7D%0A%20%20ul%20li%20%7B%0A%20%20%20%20list%2Dstyle%3A%20circle%20outside%3B%0A%20%20%7D%0A%20%20ul%20ul%20%7B%0A%20%20%20%20margin%2Dbottom%3A%200%3B%0A%20%20%7D%0A%0Apre%2C%20code%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20color%3A%20%23333%3B%0A%7D%0Apre%20%7B%0A%20%20white%2Dspace%3A%20pre%2Dwrap%3B%20%20%20%20%2F%2A%20Wrap%20long%20lines%20%2A%2F%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20margin%3A%205px%200px%2010px%200px%3B%0A%20%20padding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0A%0Acode%20%7B%0A%20%20font%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0A%20%20font%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0A%20%20padding%3A%202px%200px%3B%0A%7D%0A%0Adiv%2Efigure%20%7B%0A%20%20text%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0A%20%20background%2Dcolor%3A%20%23FFFFFF%3B%0A%20%20padding%3A%202px%3B%0A%20%20border%3A%201px%20solid%20%23DDDDDD%3B%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20border%3A%201px%20solid%20%23CCCCCC%3B%0A%20%20margin%3A%200%205px%3B%0A%7D%0A%0Ah1%20%7B%0A%20%20margin%2Dtop%3A%200%3B%0A%20%20font%2Dsize%3A%2035px%3B%0A%20%20line%2Dheight%3A%2040px%3B%0A%7D%0A%0Ah2%20%7B%0A%20%20border%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0A%20%20padding%2Dtop%3A%2010px%3B%0A%20%20padding%2Dbottom%3A%202px%3B%0A%20%20font%2Dsize%3A%20145%25%3B%0A%7D%0A%0Ah3%20%7B%0A%20%20border%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0A%20%20padding%2Dtop%3A%2010px%3B%0A%20%20font%2Dsize%3A%20120%25%3B%0A%7D%0A%0Ah4%20%7B%0A%20%20border%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0A%20%20margin%2Dleft%3A%208px%3B%0A%20%20font%2Dsize%3A%20105%25%3B%0A%7D%0A%0Ah5%2C%20h6%20%7B%0A%20%20border%2Dbottom%3A%201px%20solid%20%23ccc%3B%0A%20%20font%2Dsize%3A%20105%25%3B%0A%7D%0A%0Aa%20%7B%0A%20%20color%3A%20%230033dd%3B%0A%20%20text%2Ddecoration%3A%20none%3B%0A%7D%0A%20%20a%3Ahover%20%7B%0A%20%20%20%20color%3A%20%236666ff%3B%20%7D%0A%20%20a%3Avisited%20%7B%0A%20%20%20%20color%3A%20%23800080%3B%20%7D%0A%20%20a%3Avisited%3Ahover%20%7B%0A%20%20%20%20color%3A%20%23BB00BB%3B%20%7D%0A%20%20a%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0A%20%20%20%20text%2Ddecoration%3A%20underline%3B%20%7D%0A%20%20a%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0A%20%20%20%20text%2Ddecoration%3A%20underline%3B%20%7D%0A%0A%2F%2A%20Class%20described%20in%20https%3A%2F%2Fbenjeffrey%2Ecom%2Fposts%2Fpandoc%2Dsyntax%2Dhighlighting%2Dcss%0A%20%20%20Colours%20from%20https%3A%2F%2Fgist%2Egithub%2Ecom%2Frobsimmons%2F1172277%20%2A%2F%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20Keyword%20%2A%2F%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%2F%2A%20DataType%20%2A%2F%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%2F%2A%20DecVal%20%28decimal%20values%29%20%2A%2F%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20BaseN%20%2A%2F%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20Float%20%2A%2F%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20Char%20%2A%2F%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20String%20%2A%2F%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%2F%2A%20Comment%20%2A%2F%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%2F%2A%20OtherToken%20%2A%2F%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20AlertToken%20%2A%2F%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20Function%20calls%20%2A%2F%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%2F%2A%20ErrorTok%20%2A%2F%0A%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+<div id="header">
+<h1 class="title">Data frames</h1>
+<h4 class="date"><em>2015-08-31</em></h4>
+</div>
+
+
+<div id="creating" class="section level2">
+<h2>Creating</h2>
+<p><code>data_frame()</code> is a nice way to create data frames. It encapsulates best practices for data frames:</p>
+<ul>
+<li><p>It never changes an input’s type (i.e., no more <code>stringsAsFactors = FALSE</code>!).</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data.frame</span>(<span class="dt">x =</span> letters) %&gt;%<span class="st"> </span><span class="kw">sapply</span>(class)
+<span class="co">#&gt;        x </span>
+<span class="co">#&gt; &quot;factor&quot;</span>
+<span class="kw">data_frame</span>(<span class="dt">x =</span> letters) %&gt;%<span class="st"> </span><span class="kw">sapply</span>(class)
+<span class="co">#&gt;           x </span>
+<span class="co">#&gt; &quot;character&quot;</span></code></pre>
+<p>This makes it easier to use with list-columns:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data_frame</span>(<span class="dt">x =</span> <span class="dv">1</span>:<span class="dv">3</span>, <span class="dt">y =</span> <span class="kw">list</span>(<span class="dv">1</span>:<span class="dv">5</span>, <span class="dv">1</span>:<span class="dv">10</span>, <span class="dv">1</span>:<span class="dv">20</span>))
+<span class="co">#&gt; Source: local data frame [3 x 2]</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;       x         y</span>
+<span class="co">#&gt;   (int)     (chr)</span>
+<span class="co">#&gt; 1     1  &lt;int[5]&gt;</span>
+<span class="co">#&gt; 2     2 &lt;int[10]&gt;</span>
+<span class="co">#&gt; 3     3 &lt;int[20]&gt;</span></code></pre>
+<p>List-columns are most commonly created by <code>do()</code>, but they can be useful to create by hand.</p></li>
+<li><p>It never adjusts the names of variables:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data.frame</span>(<span class="st">`</span><span class="dt">crazy name</span><span class="st">`</span> =<span class="st"> </span><span class="dv">1</span>) %&gt;%<span class="st"> </span><span class="kw">names</span>()
+<span class="co">#&gt; [1] &quot;crazy.name&quot;</span>
+<span class="kw">data_frame</span>(<span class="st">`</span><span class="dt">crazy name</span><span class="st">`</span> =<span class="st"> </span><span class="dv">1</span>) %&gt;%<span class="st"> </span><span class="kw">names</span>()
+<span class="co">#&gt; [1] &quot;crazy name&quot;</span></code></pre></li>
+<li><p>It evaluates its arguments lazily and sequentially:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data_frame</span>(<span class="dt">x =</span> <span class="dv">1</span>:<span class="dv">5</span>, <span class="dt">y =</span> x ^<span class="st"> </span><span class="dv">2</span>)
+<span class="co">#&gt; Source: local data frame [5 x 2]</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;        x     y</span>
+<span class="co">#&gt;    (int) (dbl)</span>
+<span class="co">#&gt; 1      1     1</span>
+<span class="co">#&gt; 2      2     4</span>
+<span class="co">#&gt; 3      3     9</span>
+<span class="co">#&gt; 4      4    16</span>
+<span class="co">#&gt; ..   ...   ...</span></code></pre></li>
+<li><p>It adds the <code>tbl_df()</code> class to the output so that if you accidentally print a large data frame you only get the first few rows.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data_frame</span>(<span class="dt">x =</span> <span class="dv">1</span>:<span class="dv">5</span>) %&gt;%<span class="st"> </span><span class="kw">class</span>()
+<span class="co">#&gt; [1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</span></code></pre></li>
+<li><p>It changes the behaviour of <code>[</code> to always return the same type of object: subsetting using <code>[</code> always returns a <code>tbl_df()</code> object; subsetting using <code>[[</code> always returns a column.</p>
+<p>You should be aware of one case where subsetting a <code>tbl_df()</code> object<br />will produce a different result than a <code>data.frame()</code> object:</p>
+<pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">a =</span> <span class="dv">1</span>:<span class="dv">2</span>, <span class="dt">b =</span> <span class="dv">1</span>:<span class="dv">2</span>)
+<span class="kw">str</span>(df[, <span class="st">&quot;a&quot;</span>])
+<span class="co">#&gt;  int [1:2] 1 2</span>
+
+tbldf &lt;-<span class="st"> </span><span class="kw">tbl_df</span>(df)
+<span class="kw">str</span>(tbldf[, <span class="st">&quot;a&quot;</span>])
+<span class="co">#&gt; Classes 'tbl_df' and 'data.frame':   2 obs. of  1 variable:</span>
+<span class="co">#&gt;  $ a: int  1 2</span></code></pre></li>
+<li><p>It never uses <code>row.names()</code>. The whole point of tidy data is to store variables in a consistent way. So it never stores a variable as special attribute.</p></li>
+<li><p>It only recycles vectors of length 1. This is because recycling vectors of greater lengths is a frequent source of bugs.</p></li>
+</ul>
+</div>
+<div id="coercion" class="section level2">
+<h2>Coercion</h2>
+<p>To complement <code>data_frame()</code>, dplyr provides <code>as_data_frame()</code> to coerce lists into data frames. It does two things:</p>
+<ul>
+<li><p>It checks that the input list is valid for a data frame, i.e. that each element is named, is a 1d atomic vector or list, and all elements have the same length.</p></li>
+<li><p>It sets the class and attributes of the list to make it behave like a data frame. This modification does not require a deep copy of the input list, so it’s very fast.</p></li>
+</ul>
+<p>This is much simpler than <code>as.data.frame()</code>. It’s hard to explain precisely what <code>as.data.frame()</code> does, but it’s similar to <code>do.call(cbind, lapply(x, data.frame))</code> - i.e. it coerces each component to a data frame and then <code>cbinds()</code> them all together. Consequently <code>as_data_frame()</code> is much faster than <code>as.data.frame()</code>:</p>
+<pre class="sourceCode r"><code class="sourceCode r">l2 &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span class="dv">26</span>, <span class="kw">sample</span>(<span class="dv">100</span>), <span class="dt">simplify =</span> <span class="ot">FALSE</span>)
+<span class="kw">names</span>(l2) &lt;-<span class="st"> </span>letters
+microbenchmark::<span class="kw">microbenchmark</span>(
+  <span class="kw">as_data_frame</span>(l2),
+  <span class="kw">as.data.frame</span>(l2)
+)
+<span class="co">#&gt; Unit: microseconds</span>
+<span class="co">#&gt;               expr      min        lq      mean   median        uq</span>
+<span class="co">#&gt;  as_data_frame(l2)  102.631  113.7605  135.0108  121.490  142.8445</span>
+<span class="co">#&gt;  as.data.frame(l2) 1524.588 1619.3670 1901.9522 1739.363 2063.0425</span>
+<span class="co">#&gt;       max neval cld</span>
+<span class="co">#&gt;   318.934   100  a </span>
+<span class="co">#&gt;  3705.862   100   b</span></code></pre>
+<p>The speed of <code>as.data.frame()</code> is not usually a bottleneck when used interactively, but can be a problem when combining thousands of messy inputs into one tidy data frame.</p>
+</div>
+<div id="memory" class="section level2">
+<h2>Memory</h2>
+<p>One of the reasons that dplyr is fast is that it is very careful about when it makes copies. This section describes how this works, and gives you some useful tools for understanding the memory usage of data frames in R.</p>
+<p>The first tool we’ll use is <code>dplyr::location()</code>. It tells us the memory location of three components of a data frame object:</p>
+<ul>
+<li>the data frame itself</li>
+<li>each column</li>
+<li>each attribute</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">location</span>(iris)
+<span class="co">#&gt; &lt;0x7fc5ad268b40&gt;</span>
+<span class="co">#&gt; Variables:</span>
+<span class="co">#&gt;  * Sepal.Length: &lt;0x7fc5ad1f8a00&gt;</span>
+<span class="co">#&gt;  * Sepal.Width:  &lt;0x7fc5ad258a00&gt;</span>
+<span class="co">#&gt;  * Petal.Length: &lt;0x7fc5ad274000&gt;</span>
+<span class="co">#&gt;  * Petal.Width:  &lt;0x7fc5ad273200&gt;</span>
+<span class="co">#&gt;  * Species:      &lt;0x7fc5ae8364e0&gt;</span>
+<span class="co">#&gt; Attributes:</span>
+<span class="co">#&gt;  * names:        &lt;0x7fc5ad268ba8&gt;</span>
+<span class="co">#&gt;  * row.names:    &lt;0x7fc5ae817410&gt;</span>
+<span class="co">#&gt;  * class:        &lt;0x7fc5ad294798&gt;</span></code></pre>
+<p>It’s useful to know the memory address, because if the address changes, then you’ll know that R has made a copy. Copies are bad because they take time to create. This isn’t usually a bottleneck if you have a few thousand values, but if you have millions or tens of millions of values it starts to take significant amounts of time. Unnecessary copies are also bad because they take up memory.</p>
+<p>R tries to avoid making copies where possible. For example, if you just assign <code>iris</code> to another variable, it continues to the point same location:</p>
+<pre class="sourceCode r"><code class="sourceCode r">iris2 &lt;-<span class="st"> </span>iris
+<span class="kw">location</span>(iris2)
+<span class="co">#&gt; &lt;0x7fc5ad268b40&gt;</span>
+<span class="co">#&gt; Variables:</span>
+<span class="co">#&gt;  * Sepal.Length: &lt;0x7fc5ad1f8a00&gt;</span>
+<span class="co">#&gt;  * Sepal.Width:  &lt;0x7fc5ad258a00&gt;</span>
+<span class="co">#&gt;  * Petal.Length: &lt;0x7fc5ad274000&gt;</span>
+<span class="co">#&gt;  * Petal.Width:  &lt;0x7fc5ad273200&gt;</span>
+<span class="co">#&gt;  * Species:      &lt;0x7fc5ae8364e0&gt;</span>
+<span class="co">#&gt; Attributes:</span>
+<span class="co">#&gt;  * names:        &lt;0x7fc5ad268ba8&gt;</span>
+<span class="co">#&gt;  * row.names:    &lt;0x7fc5aafd30c0&gt;</span>
+<span class="co">#&gt;  * class:        &lt;0x7fc5ad294798&gt;</span></code></pre>
+<p>Rather than having to compare hard to read memory locations, we can instead use the <code>dplyr::changes()</code> function to highlights changes between two versions of a data frame. The code below shows us that <code>iris</code> and <code>iris2</code> are identical: both names point to the same location in memory.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">changes</span>(iris2, iris)
+<span class="co">#&gt; &lt;identical&gt;</span></code></pre>
+<p>What do you think happens if you modify a single column of <code>iris2</code>? In R 3.1.0 and above, R knows to modify only that one column and to leave the others pointing to their existing locations:</p>
+<pre class="sourceCode r"><code class="sourceCode r">iris2$Sepal.Length &lt;-<span class="st"> </span>iris2$Sepal.Length *<span class="st"> </span><span class="dv">2</span>
+<span class="kw">changes</span>(iris, iris2)
+<span class="co">#&gt; Changed variables:</span>
+<span class="co">#&gt;              old            new           </span>
+<span class="co">#&gt; Sepal.Length 0x7fc5ad1f8a00 0x7fc5af730c00</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Changed attributes:</span>
+<span class="co">#&gt;              old            new           </span>
+<span class="co">#&gt; row.names    0x7fc5aac62ab0 0x7fc5aac96a40</span></code></pre>
+<p>(This was not the case prior to version 3.1.0, where R created a deep copy of the entire data frame.)</p>
+<p>dplyr is equally smart:</p>
+<pre class="sourceCode r"><code class="sourceCode r">iris3 &lt;-<span class="st"> </span><span class="kw">mutate</span>(iris, <span class="dt">Sepal.Length =</span> Sepal.Length *<span class="st"> </span><span class="dv">2</span>)
+<span class="kw">changes</span>(iris3, iris)
+<span class="co">#&gt; Changed variables:</span>
+<span class="co">#&gt;              old            new           </span>
+<span class="co">#&gt; Sepal.Length 0x7fc5b008a400 0x7fc5ad1f8a00</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Changed attributes:</span>
+<span class="co">#&gt;              old            new           </span>
+<span class="co">#&gt; class        0x7fc5ae76c138 0x7fc5ad294798</span>
+<span class="co">#&gt; names        0x7fc5af732a70 0x7fc5ad268ba8</span>
+<span class="co">#&gt; row.names    0x7fc5aaca8ae0 0x7fc5aaca8d60</span></code></pre>
+<p>It creates only one new column while all the other columns continue to point at their original locations. You might notice that the attributes are still copied. However, this has little impact on performance. Because attributes are usually short vectors, the internal dplyr code needed to copy them is also considerably simpler.</p>
+<p>dplyr never makes copies unless it has to:</p>
+<ul>
+<li><p><code>tbl_df()</code> and <code>group_by()</code> don’t copy columns</p></li>
+<li><p><code>select()</code> never copies columns, even when you rename them</p></li>
+<li><p><code>mutate()</code> never copies columns, except when you modify an existing column</p></li>
+<li><p><code>arrange()</code> must always copy all columns because you’re changing the order of every one. This is an expensive operation for big data, but you can generally avoid it using the order argument to <a href="window-functions.html">window functions</a></p></li>
+<li><p><code>summarise()</code> creates new data, but it’s usually at least an order of magnitude smaller than the original data.</p></li>
+</ul>
+<p>In short, dplyr lets you work with data frames with very little memory overhead.</p>
+<p>data.table takes this idea one step further: it provides functions that modify a data table in place. This avoids the need to make copies of pointers to existing columns and attributes, and speeds up operations when you have many columns. dplyr doesn’t do this with data frames (although it could) because I think it’s safer to keep data immutable: even if the resulting data frame shares practically all the data of the original data frame, all dplyr data frame methods return a new data frame.</p>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

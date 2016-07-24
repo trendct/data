@@ -1,0 +1,495 @@
+---
+title: "geospatial analysis"
+author: "Andrew Ba Tran"
+date: "March 15, 2016"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Geospatial analysis
+
+Just different approaches to analyzing drug overdoses in Connecticut.
+
+```{r packages, include=FALSE}
+
+require(scales)
+require(dplyr)
+require(gtools)
+require(ggplot2)
+require(rgdal)
+require(ggmap)
+require(Cairo)
+require(gpclib)
+require(maptools)
+require(reshape)
+library(devtools)
+library(stringr)
+library(raster)
+library(sp)
+library(ctnamecleaner)
+library(lubridate)
+```
+
+```{r maps, echo = TRUE}
+
+source("prepping_data.R")
+
+drugs_total <- raw_ct %>%
+  group_by(Residence.City) %>%
+  dplyr::summarize(Total=n())
+
+colnames(drugs_total) <- c("id", "Total")
+
+drugs_total <- ctpopulator(id, drugs_total)
+drugs_total$percapita <- round((drugs_total$Total/drugs_total$pop2013)*10000,2)
+drugs_total$id <- str_to_title(drugs_total$id)
+
+gpclibPermit()
+gpclibPermitStatus()
+towntracts <- readOGR(dsn="maps", layer="ctgeo")
+towntracts_only <- towntracts
+towntracts <- fortify(towntracts, region="NAME10")
+
+drugs_total_map <- left_join(towntracts, drugs_total)
+
+# Towns overall (total)
+
+dtm <- ggplot() +
+  geom_polygon(data = drugs_total_map, aes(x=long, y=lat, group=group, fill=Total), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Total overdose deaths by town since 2012", fill="")
+dtm
+
+# Towns in 2014 (total)
+
+y2012 <- raw_ct %>%
+  filter(Year==2012)
+
+drugs_total_2012 <- y2012 %>%
+  group_by(Residence.City) %>%
+  dplyr::summarize(Total=n())
+
+colnames(drugs_total_2012) <- c("id", "Total")
+
+drugs_total_2012 <- ctpopulator(id, drugs_total_2012)
+drugs_total_2012$percapita <- round((drugs_total_2012$Total/drugs_total_2012$pop2013)*10000,2)
+drugs_total_2012$id <- str_to_title(drugs_total_2012$id)
+
+drugs_total_map12 <- left_join(towntracts, drugs_total_2012)
+
+dtm12 <- ggplot() +
+  geom_polygon(data = drugs_total_map12, aes(x=long, y=lat, group=group, fill=Total), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Total overdose deaths by town in 2012", fill="")
+dtm12
+
+# Totals over time by town
+
+y2013 <- raw_ct %>%
+  filter(Year==2013)
+
+drugs_total_2013 <- y2013 %>%
+  group_by(Residence.City) %>%
+  dplyr::summarize(Total=n())
+
+colnames(drugs_total_2013) <- c("id", "Total")
+drugs_total_2013 <- ctpopulator(id, drugs_total_2013)
+drugs_total_2013$percapita <- round((drugs_total_2013$Total/drugs_total_2013$pop2013)*10000,2)
+drugs_total_2013$id <- str_to_title(drugs_total_2013$id)
+
+
+drugs_total_map13 <- left_join(towntracts, drugs_total_2013)
+
+dtm13 <- ggplot() +
+  geom_polygon(data = drugs_total_map13, aes(x=long, y=lat, group=group, fill=Total), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Total overdose deaths by town in 2013", fill="")
+dtm13
+
+
+y2014 <- raw_ct %>%
+  filter(Year==2014)
+
+drugs_total_2014 <- y2014 %>%
+  group_by(Residence.City) %>%
+  dplyr::summarize(Total=n())
+
+colnames(drugs_total_2014) <- c("id", "Total")
+drugs_total_2014 <- ctpopulator(id, drugs_total_2014)
+drugs_total_2014$percapita <- round((drugs_total_2014$Total/drugs_total_2014$pop2013)*10000,2)
+drugs_total_2014$id <- str_to_title(drugs_total_2014$id)
+
+
+drugs_total_map14 <- left_join(towntracts, drugs_total_2014)
+
+dtm14 <- ggplot() +
+  geom_polygon(data = drugs_total_map14, aes(x=long, y=lat, group=group, fill=Total), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Total overdose deaths by town in 2014", fill="")
+dtm14
+
+y2015 <- raw_ct %>%
+  filter(Year==2015)
+
+drugs_total_2015 <- y2015 %>%
+  group_by(Residence.City) %>%
+  dplyr::summarize(Total=n())
+
+colnames(drugs_total_2015) <- c("id", "Total")
+drugs_total_2015 <- ctpopulator(id, drugs_total_2015)
+drugs_total_2015$percapita <- round((drugs_total_2015$Total/drugs_total_2015$pop2013)*10000,2)
+drugs_total_2015$id <- str_to_title(drugs_total_2015$id)
+
+drugs_total_map15 <- left_join(towntracts, drugs_total_2015)
+
+dtm15 <- ggplot() +
+  geom_polygon(data = drugs_total_map15, aes(x=long, y=lat, group=group, fill=Total), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Total overdose deaths by town in 2015", fill="")
+dtm15
+
+
+# Towns overall (rate)
+
+dtm <- ggplot() +
+  geom_polygon(data = drugs_total_map, aes(x=long, y=lat, group=group, fill=percapita), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Overdose deaths rate by town since 2012", fill="")
+dtm
+
+
+# Towns over time (rate)
+
+dtm <- ggplot() +
+  geom_polygon(data = drugs_total_map12, aes(x=long, y=lat, group=group, fill=percapita), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Overdose deaths rate by town in 2012", fill="")
+dtm
+
+dtm <- ggplot() +
+  geom_polygon(data = drugs_total_map13, aes(x=long, y=lat, group=group, fill=percapita), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Overdose deaths rate by town in 2013", fill="")
+dtm
+
+dtm <- ggplot() +
+  geom_polygon(data = drugs_total_map14, aes(x=long, y=lat, group=group, fill=percapita), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Overdose deaths rate by town in 2014", fill="")
+dtm
+
+dtm <- ggplot() +
+  geom_polygon(data = drugs_total_map15, aes(x=long, y=lat, group=group, fill=percapita), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Overdose deaths rate by town in 2015", fill="")
+dtm
+
+# Where people come from if they dont come from CT
+
+not_ct <- raw_not_ct %>%
+  group_by(Residence.State) %>%
+  summarise(Total=n())
+
+ggplot(not_ct, aes(x=Residence.State, y=Total)) + geom_bar(stat="identity") + labs(title="Out of state visitors who died in Connecticut")
+
+# points on a polygon for towns
+
+## This location-specific data was taken from the state website. Names were stripped from the dataset before uploading.
+
+test <- read.csv("data/raw_data_2014.csv", stringsAsFactors=FALSE)
+
+coords <- cbind(test$X, test$Y)
+sp <- SpatialPoints(coords)
+
+proj4string(sp) <- "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
+proj4string(sp)
+
+plot(towntracts_only)
+plot(sp, col="red" , add=TRUE)
+
+res <- over(sp, towntracts_only)
+
+# points on a polygon for census tracts
+
+censustracts <- readOGR(dsn="maps/census_tracts/wgs84", layer="tractct_37800_0000_2010_s100_census_1_shp_wgs84")
+plot(censustracts)
+plot(sp, col="red" , add=TRUE)
+res <- over(sp, censustracts)
+
+census_tracts <- res %>%
+  group_by(NAME10) %>%
+  summarise(Total=n())
+
+censustracts <- fortify(censustracts, region="NAME10")
+colnames(census_tracts) <- c("id", "total")
+drugs_total_tracts <- left_join(censustracts, census_tracts)
+
+# Towns overall (total)
+
+dtm <- ggplot() +
+  geom_polygon(data = drugs_total_tracts, aes(x=long, y=lat, group=group, fill=total), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Total overdose deaths by census tract in 2014", fill="")
+dtm
+
+
+# points on a polygon for blocks
+
+censusblocks <- readOGR(dsn="maps/census_blocks/wgs84", layer="blockct_37800_0000_2010_s100_census_1_shp_wgs84")
+plot(censusblocks)
+plot(sp, col="red" , add=TRUE)
+res <- over(sp, censusblocks)
+
+census_blocks <- res %>%
+  group_by(GEOID10) %>%
+  summarise(Total=n())
+
+censusblocks <- fortify(censusblocks, region="GEOID10")
+colnames(census_blocks) <- c("id", "total")
+drugs_total_blocks <- left_join(censusblocks, census_blocks)
+
+# Towns overall (total)
+
+dtm <- ggplot() +
+  geom_polygon(data = drugs_total_blocks, aes(x=long, y=lat, group=group, fill=total), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Total overdose deaths by census block in 2014", fill="")
+dtm
+
+# points on a polygon for block groups
+
+censusblockgroups <- readOGR(dsn="maps/census_block_groups/wgs84", layer="blockgroupct_37800_0000_2010_s100_census_1_shp_wgs84")
+plot(censusblockgroups)
+plot(sp, col="red" , add=TRUE)
+res <- over(sp, censusblockgroups)
+
+census_block_groups <- res %>%
+  group_by(GEOID10) %>%
+  summarise(Total=n())
+
+censusblockgroups <- fortify(censusblockgroups, region="GEOID10")
+colnames(census_block_groups) <- c("id", "total")
+drugs_total_block_groups <- left_join(censusblockgroups, census_block_groups)
+
+# Towns overall (total)
+
+dtm <- ggplot() +
+  geom_polygon(data = drugs_total_block_groups, aes(x=long, y=lat, group=group, fill=total), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Total overdose deaths by census block group in 2014", fill="")
+dtm
+
+
+
+residence_towns <- raw_ct %>%
+  group_by(Residence.City) %>%
+  summarise(total=n())
+
+# heatmap and points of reference (hospitals, pharmacies with narcan, methadone clinics?)
+
+ct_map <- get_map(location = "connecticut", maptype = "satellite", zoom = 9)
+
+ct_gg <- read.csv("data/raw_data_2014.csv", stringsAsFactors=FALSE)
+
+# overall points on the map
+ggmap(ct_map, extent = "device") + geom_point(aes(x = X, y = Y), colour = "red", 
+                                                 alpha = 0.1, size = 2, data = ct_gg)
+
+## SUB CODE??
+
+
+stat_density_2d <- function(mapping = NULL, data = NULL, geom = "density_2d",
+                            position = "identity", contour = TRUE,
+                            n = 100, h = NULL, na.rm = FALSE,bins=0,
+                            show.legend = NA, inherit.aes = TRUE, ...) {
+  layer(
+    data = data,
+    mapping = mapping,
+    stat = StatDensity2d,
+    geom = geom,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      na.rm = na.rm,
+      contour = contour,
+      n = n,
+      bins=bins,
+      ...
+    )
+  )
+}
+
+stat_density2d <- stat_density_2d
+
+StatDensity2d <- 
+  ggproto("StatDensity2d", Stat,
+          default_aes = aes(colour = "#3366FF", size = 0.5),
+          
+          required_aes = c("x", "y"),
+          
+          compute_group = function(data, scales, na.rm = FALSE, h = NULL,
+                                   contour = TRUE, n = 100,bins=0) {
+            if (is.null(h)) {
+              h <- c(MASS::bandwidth.nrd(data$x), MASS::bandwidth.nrd(data$y))
+            }
+            
+            dens <- MASS::kde2d(
+              data$x, data$y, h = h, n = n,
+              lims = c(scales$x$dimension(), scales$y$dimension())
+            )
+            df <- data.frame(expand.grid(x = dens$x, y = dens$y), z = as.vector(dens$z))
+            df$group <- data$group[1]
+            
+            if (contour) {
+              #  StatContour$compute_panel(df, scales,bins=bins,...) # bad dots...
+              if (bins>0){
+                StatContour$compute_panel(df, scales,bins)
+              } else {
+                StatContour$compute_panel(df, scales)
+              }
+            } else {
+              names(df) <- c("x", "y", "density", "group")
+              df$level <- 1
+              df$piece <- 1
+              df
+            }
+          }
+  )
+
+
+
+# heatmap
+ggmap(ct_map, extent = "device") + geom_density2d(data = ct_gg, 
+         aes(x = X, y = Y), size = 0.3) + stat_density2d(data = ct_gg, 
+          aes(x = X, y = Y, fill = ..level.., alpha = ..level..), size = 0.01, 
+          bins=16, geom = "polygon") + scale_fill_gradient(low = "green", high = "red") + 
+          scale_alpha(range = c(0, 0.3), guide = FALSE)
+
+# getting pharmacies that prescribe naloxone
+library(RSocrata)
+pharmacies <- read.socrata("https://data.ct.gov/resource/qjtc-pbhi.csv")
+
+
+pharmacies <- pharmacies[c("Pharmacy", "Location")]
+
+pharmacies$lat <- sub(".*\\(", "", pharmacies$Location)
+pharmacies$lat <- sub(",.*", "", pharmacies$lat)
+
+pharmacies$lon <- sub(".*,", "", pharmacies$Location)
+pharmacies$lon <- sub("\\)", "", pharmacies$lon)
+
+pharmacies$lon <- as.numeric(pharmacies$lon)
+pharmacies$lat <- as.numeric(pharmacies$lat)
+
+pharmacies <- na.omit(pharmacies)
+
+pharmacies$category <- "pharmacy"
+pharmacies <- pharmacies[c("Pharmacy", "category", "lon", "lat")]
+colnames(pharmacies) <-c("Name", "category", "lon", "lat")
+
+# hospitals
+hospitals <- read.socrata("https://data.ct.gov/resource/pg64-zncr.csv")
+
+hospitals$address <- paste(hospitals$Address, hospitals$City, hospitals$State, sep=", ")
+# This is going to geocode the addresses
+geo <- geocode(location = hospitals$address, output="latlon")
+hospitals <- cbind(hospitals, geo)
+
+hospitals <- hospitals[c("Name", "lon", "lat")]
+hospitals$category <- "hospital"
+
+# clinics
+
+clinics <- read.socrata("https://data.ct.gov/resource/6wh6-dmxt.csv")
+
+
+clinics$address <- paste(clinics$Address, clinics$City, clinics$State, sep=", ")
+# This is going to geocode the addresses
+geo2 <- geocode(location = clinics$address, output="latlon")
+clinics <- cbind(clinics, geo2)
+
+clinics <- clinics[c("Name", "lon", "lat")]
+clinics$category <- "outpatient"
+
+# Treatment centers
+
+treat <- read.csv("data/treatmentcenters.csv", stringsAsFactors=FALSE)
+treat$Address <- gsub("\\\xca", " ", treat$Address)
+# This is going to geocode the addresses
+geo3 <- geocode(location = treat$Address, output="latlon")
+treat<- cbind(treat, geo3)
+
+treat <- treat[c("Name", "lon", "lat")]
+treat$category <- "treatment center"
+treat <- na.omit(treat)
+
+# mapping out all these locations
+
+the_list <- rbind(treat, clinics, hospitals, pharmacies)
+
+
+map_lat <- c(42.107156, 40.919869)
+map_lon <- c(-73.824298, -71.478997)
+map <- get_map(c(lon = mean(map_lon), lat = mean(map_lat)), zoom = 8, maptype = 'toner')
+ggmap(map) + 
+  stat_density2d(aes(x = X, y = Y, fill = ..level.., alpha = ..level..), 
+                 size = 2, bins = 4, data = ct_gg, geom = "polygon") + 
+  geom_point(data = the_list, aes(x = lon, y = lat, color = category), size=1)
+
+# densitymap & dots
+
+#ggplot(choropleth, aes(long, lat, group = group)) +
+#  geom_polygon(aes(fill = rate_d), colour = alpha("white", 1/2), size = 0.2) + 
+#  geom_polygon(data = state_df, colour = "white", fill = NA) +
+#  scale_fill_brewer(palette = "PuRd")
+
+# choropleth & dots
+
+dtm <- ggmap(map) +
+  geom_polygon(data = drugs_total_map, aes(x=long, y=lat, group=group, fill=Total), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=10)) +
+  geom_point(data = the_list, aes(x = lon, y = lat, color = category), size=1) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Total overdose deaths by town since 2012", fill="")
+dtm
+
+dtm <- ggmap(map) +
+  geom_polygon(data = drugs_total_map, aes(x=long, y=lat, group=group, fill=percapita), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=10)) +
+  geom_point(data = the_list, aes(x = lon, y = lat, color = category), size=1) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Total overdose deaths by town since 2012", fill="")
+dtm
+```

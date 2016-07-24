@@ -1,0 +1,360 @@
+---
+title: "Analysis of school drug zone arrests in Connecticut"
+author: "Andrew Ba Tran"
+date: "June 5, 2015"
+output: html_document
+---
+
+```{r, echo=FALSE, results='hide', warning=FALSE, message=FALSE}
+require(lubridate)
+require(stringi)
+require(gridExtra)
+require(gtools)
+require(ggplot2)
+require(rgdal)
+require(scales)
+require(ggmap)
+require(dplyr)
+require(Cairo)
+require(gpclib)
+require(maptools)
+require(reshape)
+require(knitr)
+
+gpclibPermit()
+gpclibPermitStatus()
+```
+
+#### Before we begin: our data has `r I(nrow(arrests))` rows and `r I(ncol(arrests))` columns.
+
+#### How many drug arrests have there been for 21a-267 (c),  21a-278 (b), 21a-279 (d) since 1999?
+
+```{r results='asis', out.width='910px', fig.width=10, fig.height=5, warning=FALSE, message=FALSE, dpi=50}
+arrests <- read.csv("original3.csv")
+arrests <- arrests[,1:5]
+# Clean up the dates
+arrests$Date <- mdy(arrests$ARREST.DATE)
+arrests$Year <- year(arrests$Date)
+arrests$Year[arrests$Year==2099] <- 1999
+
+# Plot out year
+plot(table(arrests$Year))
+
+
+arrests$RaceOf <- paste(arrests$RACE, arrests$DEF_HISPANIC_IND, sep="")
+
+index <- c("Asian", "AsianY", "Black", "BlackY", "HY", "Native American", 
+          "Not Identified", "White", "WhiteY")
+
+
+values <- c("Asian", "Hispanic", "Black", "Hispanic", "Hispanic", "Native American", 
+            "Not Identified", "White", "Hispanic")
+arrests$Def_Race <- values[match(arrests$RaceOf, index)]
+
+library(ctnamecleaner)
+arrests <- ctnamecleaner(TOWN, arrests, case="Title")
+
+```
+
+#### What's the racial breakdown for thoses arrests?
+
+```{r results='asis', out.width='910px', fig.width=10, fig.height=5, warning=FALSE, message=FALSE, dpi=50}
+
+# Racial breakdown of arrests by year
+race_year <- data.frame(table(arrests$Year,arrests$Def_Race))
+colnames(race_year) <- c("Year", "Race", "Arrests")
+ggplot(race_year, aes(Year, Arrests, group=Race, colour=Race)) +
+  geom_path(alpha=0.5) +
+  ggtitle("Race of those arrested since 1999") +
+  theme_minimal()
+
+# And by percent
+ggplot(race_year, aes(Year, Arrests, group=Race, fill=Race)) + geom_area(position="fill") +
+  ggtitle("Race of those arrested since 1999 by percent")
+```
+
+####  Which towns have the most arrests?
+
+```{r results='asis'}
+town_arrests <- data.frame(table(arrests$real.town.name))
+colnames(town_arrests) <- c("id", "Total.Arrests")
+town_arrests$id <- as.character(town_arrests$id)
+town_arrests <- town_arrests[order(-town_arrests$Total.Arrests),]
+kable(head(town_arrests, 10))
+
+```
+
+#### Let's adjust for town population
+
+```{r results='asis', out.width='910px', fig.width=10, fig.height=5, warning=FALSE, message=FALSE, dpi=50}
+
+# Bring in town population
+library(stringr)
+townpop <- read.csv("townsmap/townpopulation.csv")
+colnames(townpop) <- c("id","Population")
+townpop$id <- str_to_title(townpop$id)
+
+# Have to make adjustments to neighborhood names to match town names
+
+towns_arrests_pop <- left_join(townpop, town_arrests)
+#write.csv(towns_arrests_pop, "deletethis.csv")
+towns_arrests_pop$id <- stri_trans_general(towns_arrests_pop$id, id="Title")
+towns_arrests_pop$Per10kResidents <- (towns_arrests_pop$Total.Arrests/towns_arrests_pop$Population)*10000
+towns_arrests_pop$Per10kResidents <- round(towns_arrests_pop$Per10kResidents, digits=2)
+towns_arrests_pop <- towns_arrests_pop[order(-towns_arrests_pop$Per10kResidents),]
+
+kable(head(towns_arrests_pop, 10))
+
+```
+
+#### Ansonia? Really? Ok let's map it out
+
+```{r results='asis', out.width='910px', fig.width=10, fig.height=5, warning=FALSE, message=FALSE, dpi=50}
+towntracts <- readOGR(dsn="townsmap", layer="towns")
+towntracts <- fortify(towntracts, region="NAME10")
+
+town_arr_Data <- left_join(towntracts, towns_arrests_pop)
+
+p2 <- ggplot() +
+  geom_polygon(data = town_arr_Data, aes(x=long, y=lat, group=group, 
+                                    fill=Per10kResidents), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", palette = "Greens", breaks=pretty_breaks(n=5)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Arrests between 1999 and 2014 per 10,000 residents", fill="")
+p2
+
+```
+
+#### Break out the arrests by charge
+
+```{r results='asis', out.width='910px', fig.width=10, fig.height=5, warning=FALSE, message=FALSE, dpi=50}
+charge_year <- data.frame(table(arrests$Year,arrests$ORIGINAL_STATUTE))
+colnames(charge_year) <- c("Year", "Charge", "Arrests")
+ggplot(charge_year, aes(Year, Arrests, group=Charge, colour=Charge)) +
+  geom_path(alpha=0.5) +
+  ggtitle("Types of charges since 1999") +
+  theme_minimal()
+
+# Percent of arrests by year
+ggplot(charge_year, aes(Year, Arrests, group=Charge, fill=Charge)) + geom_area(position="fill")
+
+# OK, all of the above but specifically at D
+
+just_d <- subset(arrests, ORIGINAL_STATUTE=="21a-279(d)")
+plot(table(just_d$Year))
+
+race_year_d <- data.frame(table(just_d$Year,just_d$Def_Race))
+colnames(race_year_d) <- c("Year", "Race", "Arrests")
+ggplot(race_year_d, aes(Year, Arrests, group=Race, colour=Race)) +
+  geom_path(alpha=0.5) +
+  ggtitle("Race of those arrested for Possession since 1999") +
+  theme_minimal()
+
+# And by percent
+ggplot(race_year_d, aes(Year, Arrests, group=Race, fill=Race)) + geom_area(position="fill")
+```
+
+# Which towns have the most arrests for Possession?
+
+
+```{r results='asis'}
+
+# Which towns have the most arrests?
+town_arrests_d <- data.frame(table(just_d$real.town.name))
+colnames(town_arrests_d) <- c("id", "Total.Arrests")
+town_arrests_d$id <- as.character(town_arrests_d$id)
+town_arrests_d <- town_arrests_d[order(-town_arrests_d$Total.Arrests),]
+kable(head(town_arrests_d, 10))
+
+```
+
+# Which towns have the most arrests for Possession (after adjusting for population)?
+
+
+```{r results='asis'}
+
+
+towns_arrests_pop_d <- left_join(townpop, town_arrests_d)
+towns_arrests_pop_d$Total.Arrests[is.na(towns_arrests_pop_d$Total.Arrests)] <-0
+towns_arrests_pop_d$id <- stri_trans_general(towns_arrests_pop_d$id, id="Title")
+towns_arrests_pop_d$Per10kResidents <- (towns_arrests_pop_d$Total.Arrests/towns_arrests_pop_d$Population)*10000
+towns_arrests_pop_d$Per10kResidents <- round(towns_arrests_pop_d$Per10kResidents, digits=2)
+towns_arrests_pop_d <- towns_arrests_pop_d[order(-towns_arrests_pop_d$Per10kResidents),]
+
+kable(head(towns_arrests_pop_d, 10))
+
+town_arr_Data_d <- left_join(towntracts, towns_arrests_pop_d)
+
+p3 <- ggplot() +
+  geom_polygon(data = town_arr_Data_d, aes(x=long, y=lat, group=group, 
+                                         fill=Per10kResidents), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", palette = "Greens", breaks=pretty_breaks(n=5)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Possession arrests between 1999 and 2014 per 10,000 residents", fill="")
+p3
+```
+
+### What’s the racial breakdown in towns with the most Possession convictions?
+
+```{r results='asis', out.width='910px', fig.width=10, fig.height=10, warning=FALSE, message=FALSE, dpi=50}
+# New Haven
+arrests_d_New.Haven <- filter(arrests, real.town.name=="New Haven")
+arrests_d_New.Haven.year <- data.frame(table(arrests_d_New.Haven$Year, arrests_d_New.Haven$Def_Race))
+colnames(arrests_d_New.Haven.year) <- c("Year", "Race", "Arrests")
+
+nh1a <- ggplot(arrests_d_New.Haven.year, aes(Year, Arrests, group=Race, colour=Race)) +
+  geom_path(alpha=0.5) +
+ggtitle("Total") +
+  theme(legend.position="top")
+
+nh2a <- ggplot(arrests_d_New.Haven.year, aes(Year, Arrests, group=Race, fill=Race)) + geom_area(position="fill") + 
+  ggtitle("Percent")  +
+  theme(legend.position="top")
+
+grid.arrange(nh1a, nh2a, ncol=1, main="Race of those arrested for Possession in New Haven")
+
+# Hartford
+arrests_d_Hartford <- filter(arrests, real.town.name=="Hartford")
+arrests_d_Hartford.year <- data.frame(table(arrests_d_Hartford$Year, arrests_d_Hartford$Def_Race))
+colnames(arrests_d_Hartford.year) <- c("Year", "Race", "Arrests")
+
+h1a <- ggplot(arrests_d_Hartford.year, aes(Year, Arrests, group=Race, colour=Race)) +
+  geom_path(alpha=0.5) +
+ggtitle("Total") +
+  theme(legend.position="top")
+
+h2a <- ggplot(arrests_d_Hartford.year, aes(Year, Arrests, group=Race, fill=Race)) + geom_area(position="fill") + 
+  ggtitle("Percent")  +
+  theme(legend.position="top")
+
+grid.arrange(h1a, nh2a, ncol=1, main="Race of those arrested for Possession in Hartford")
+
+# Waterbury
+arrests_d_Waterbury <- filter(arrests, real.town.name=="Waterbury")
+arrests_d_Waterbury.year <- data.frame(table(arrests_d_Waterbury$Year, arrests_d_Waterbury$Def_Race))
+colnames(arrests_d_Waterbury.year) <- c("Year", "Race", "Arrests")
+
+h1a <- ggplot(arrests_d_Waterbury.year, aes(Year, Arrests, group=Race, colour=Race)) +
+  geom_path(alpha=0.5) +
+ggtitle("Total") +
+  theme(legend.position="top")
+
+h2a <- ggplot(arrests_d_Waterbury.year, aes(Year, Arrests, group=Race, fill=Race)) + geom_area(position="fill") + 
+  ggtitle("Percent")  +
+  theme(legend.position="top")
+
+grid.arrange(h1a, nh2a, ncol=1, main="Race of those arrested for Possession in Waterbury")
+
+# Ansonia
+arrests_d_Ansonia <- filter(arrests, TOWN=="Ansonia")
+arrests_d_Ansonia.year <- data.frame(table(arrests_d_Ansonia$Year, arrests_d_Ansonia$Def_Race))
+colnames(arrests_d_Ansonia.year) <- c("Year", "Race", "Arrests")
+
+h1a <- ggplot(arrests_d_Ansonia.year, aes(Year, Arrests, group=Race, colour=Race)) +
+  geom_path(alpha=0.5) +
+ggtitle("Total") +
+  theme(legend.position="top")
+
+h2a <- ggplot(arrests_d_Ansonia.year, aes(Year, Arrests, group=Race, fill=Race)) + geom_area(position="fill") + 
+  ggtitle("Percent")  +
+  theme(legend.position="top")
+
+grid.arrange(h1a, nh2a, ncol=1, main="Race of those arrested for Possession in Ansonia")
+
+# Norwalk
+arrests_d_Norwalk <- subset(arrests, TOWN=="Norwalk")
+arrests_d_Norwalk.year <- data.frame(table(arrests_d_Norwalk$Year, arrests_d_Norwalk$Def_Race))
+colnames(arrests_d_Norwalk.year) <- c("Year", "Race", "Arrests")
+
+h1a <- ggplot(arrests_d_Norwalk.year, aes(Year, Arrests, group=Race, colour=Race)) +
+  geom_path(alpha=0.5) +
+ggtitle("Total") +
+  theme(legend.position="top")
+
+h2a <- ggplot(arrests_d_Norwalk.year, aes(Year, Arrests, group=Race, fill=Race)) + geom_area(position="fill") + 
+  ggtitle("Percent")  +
+  theme(legend.position="top")
+
+grid.arrange(h1a, nh2a, ncol=1, main="Race of those arrested for Possession in Norwalk")
+
+arrests_urban <- filter(arrests, (TOWN=="Bridgeport" | TOWN=="Hartford" | TOWN=="New Haven" |
+                               TOWN=="New Britain" | TOWN=="West Haven" | TOWN=="New London" |
+                               TOWN=="Waterbury" | TOWN=="Norwalk" | TOWN=="Waterbury" |
+                               TOWN=="Norwalk" | TOWN=="Ansonia" | TOWN=="Stamford"))
+
+arrests_urban.year <- data.frame(table(arrests_urban$Year, arrests_urban$Def_Race))
+colnames(arrests_urban.year) <- c("Year", "Race", "Arrests")
+
+adu1 <- ggplot(arrests_urban.year, aes(Year, Arrests, group=Race, colour=Race)) +
+  geom_path(alpha=0.5) +
+ggtitle("Total") +
+  theme(legend.position="top")
+
+adu2 <- ggplot(arrests_urban.year, aes(Year, Arrests, group=Race, fill=Race)) + geom_area(position="fill") + 
+  ggtitle("Percent")  +
+  theme(legend.position="top")
+
+grid.arrange(adu1, adu2, ncol=1, main="Race of those arrested in Urban towns")
+
+
+
+arrests_suburban <- subset(arrests, !(TOWN=="Bridgeport" | TOWN=="Hartford" | TOWN=="New Haven" |
+                               TOWN=="New Britain" | TOWN=="West Haven" | TOWN=="New London" |
+                               TOWN=="Waterbury" | TOWN=="Norwalk" | TOWN=="Waterbury" |
+                               TOWN=="Norwalk" | TOWN=="Ansonia" | TOWN=="Stamford"))
+
+arrests_suburban.year <- data.frame(table(arrests_suburban$Year, arrests_suburban$Def_Race))
+colnames(arrests_suburban.year) <- c("Year", "Race", "Arrests")
+
+ads1 <- ggplot(arrests_suburban.year, aes(Year, Arrests, group=Race, colour=Race)) +
+  geom_path(alpha=0.5) +
+ggtitle("Total") +
+  theme(legend.position="top")
+
+ads2 <- ggplot(arrests_suburban.year, aes(Year, Arrests, group=Race, fill=Race)) + geom_area(position="fill") + 
+  ggtitle("Percent")  +
+  theme(legend.position="top")
+
+grid.arrange(ads1, ads2, ncol=1, main="Race of those arrested in Suburban towns")
+
+
+arrests_d_urban <- subset(just_d, (TOWN=="Bridgeport" | TOWN=="Hartford" | TOWN=="New Haven" |
+                               TOWN=="New Britain" | TOWN=="West Haven" | TOWN=="New London" |
+                               TOWN=="Waterbury" | TOWN=="Norwalk" | TOWN=="Waterbury" |
+                               TOWN=="Norwalk" | TOWN=="Ansonia" | TOWN=="Stamford"))
+
+arrests_d_urban.year <- data.frame(table(arrests_d_urban$Year, arrests_d_urban$Def_Race))
+colnames(arrests_d_urban.year) <- c("Year", "Race", "Arrests")
+
+ady1 <- ggplot(arrests_d_urban.year, aes(Year, Arrests, group=Race, colour=Race)) +
+  geom_path(alpha=0.5) +
+ggtitle("Total") +
+  theme(legend.position="top")
+
+ady2 <- ggplot(arrests_d_urban.year, aes(Year, Arrests, group=Race, fill=Race)) + geom_area(position="fill") + 
+  ggtitle("Percent")  +
+  theme(legend.position="top")
+
+grid.arrange(ady1, ady2, ncol=1, main="Race of those arrested for Possession in Urban towns")
+
+arrests_d_suburban <- subset(just_d, !(TOWN=="Bridgeport" | TOWN=="Hartford" | TOWN=="New Haven" |
+                               TOWN=="New Britain" | TOWN=="West Haven" | TOWN=="New London" |
+                               TOWN=="Waterbury" | TOWN=="Norwalk" | TOWN=="Waterbury" |
+                               TOWN=="Norwalk" | TOWN=="Ansonia" | TOWN=="Stamford"))
+
+arrests_d_suburban.year <- data.frame(table(arrests_d_suburban$Year, arrests_d_suburban$Def_Race))
+colnames(arrests_d_suburban.year) <- c("Year", "Race", "Arrests")
+
+ady1 <- ggplot(arrests_d_suburban.year, aes(Year, Arrests, group=Race, colour=Race)) +
+  geom_path(alpha=0.5) +
+ggtitle("Total") +
+  theme(legend.position="top")
+
+ady2 <- ggplot(arrests_d_suburban.year, aes(Year, Arrests, group=Race, fill=Race)) + geom_area(position="fill") + 
+  ggtitle("Percent")  +
+  theme(legend.position="top")
+
+grid.arrange(ady1, ady2, ncol=1, main="Race of those arrested for Possession in Suburban towns")
+```

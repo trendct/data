@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report Version="2.0" Name="Family Run Day Cares" Layer="True" TOCField="" DatasetMode="0" StartingPageNumber="1">
+	<DataSource Name="Family Run Day Cares" BrowseName="Geocoding_Result" Type="5" FullName="">
+		<Workspace WorkspaceType="0" PathName="C:\Users\bobulak\Desktop\MAP DATA\Day Cares and Schools Maps and Data\roads for schools\all lines shapefiles">
+			<Property Name="DATABASE" Value="C:\Users\bobulak\Desktop\MAP DATA\Day Cares and Schools Maps and Data\roads for schools\all lines shapefiles" />
+		</Workspace>
+	</DataSource>
+	<SourceFields>
+		<Field Name="FID" SafeName="FID" Type="6" SortAsc="True" />
+		<Field Name="Status" SafeName="Status" Type="4" SortAsc="True" />
+		<Field Name="Score" SafeName="Score" Type="3" SortAsc="True" />
+		<Field Name="Match_type" SafeName="Match_type" Type="4" SortAsc="True" />
+		<Field Name="Match_addr" SafeName="Match_addr" Type="4" SortAsc="True" />
+		<Field Name="Side" SafeName="Side" Type="4" SortAsc="True" />
+		<Field Name="Ref_ID" SafeName="Ref_ID" Type="1" SortAsc="True" />
+		<Field Name="User_fld" SafeName="User_fld" Type="4" SortAsc="True" />
+		<Field Name="Addr_type" SafeName="Addr_type" Type="4" SortAsc="True" />
+		<Field Name="ARC_Street" SafeName="ARC_Street" Type="4" SortAsc="True" />
+		<Field Name="ARC_ZIP" SafeName="ARC_ZIP" Type="4" SortAsc="True" />
+		<Field Name="Last_Name" SafeName="Last_Name" Type="4" SortAsc="True" />
+		<Field Name="Address" SafeName="Address" Type="4" SortAsc="True" />
+		<Field Name="City" SafeName="City" Type="4" SortAsc="True" />
+		<Field Name="Zip" SafeName="Zip" Type="4" SortAsc="True" />
+	</SourceFields>
+	<ReportFields>
+		<Field Name="Last_Name" />
+		<Field Name="ARC_Street" />
+		<Field Name="City" />
+		<Field Name="ARC_ZIP" />
+	</ReportFields>
+	<ReportStyle Name="Havelock" UserStyle="False">
+		<SectionStyle Type="0">
+			<Font Size="20.25" Style="Bold" Color="#575F6D">Century Schoolbook</Font>
+		</SectionStyle>
+		<SectionStyle Type="1" Lines="1" LinesColor="#FF7D26">
+			<Font Size="9" Style="Regular" Color="#000000">Century Schoolbook</Font>
+		</SectionStyle>
+		<SectionStyle Type="2" Lines="1" LinesColor="#000001">
+			<Font Size="9" Style="Bold" Color="#FF7D26">Century Schoolbook</Font>
+		</SectionStyle>
+		<DetailSectionStyle Type="3" BackColor="LemonChiffon" AlternateColor="PapayaWhip">
+			<Font Size="9" Style="Regular" Color="#000000">Century Schoolbook</Font>
+		</DetailSectionStyle>
+		<SectionStyle Type="4">
+			<Font Size="8.25" Style="Bold" Color="DarkOrange">Century Schoolbook</Font>
+		</SectionStyle>
+		<SectionStyle Type="5">
+			<Font Size="8" Style="Regular" Color="Gray">Century Schoolbook</Font>
+		</SectionStyle>
+		<SectionStyle Type="6">
+			<Font Size="8" Style="Regular" Color="Gray">Century Schoolbook</Font>
+		</SectionStyle>
+	</ReportStyle>
+	<ActiveReportsLayout Version="3.1" PrintWidth="9360" DocumentName="ARNet Document" ScriptLang="C#" MasterReport="0">
+		<StyleSheet>
+			<Style Name="Normal" Value="font-family: Arial; font-style: normal; text-decoration: none; font-weight: normal; font-size: 10pt; color: Black; " />
+			<Style Name="Heading1" Value="font-size: 16pt; font-weight: bold; " />
+			<Style Name="Heading2" Value="font-family: Times New Roman; font-size: 14pt; font-weight: bold; font-style: italic; " />
+			<Style Name="Heading3" Value="font-size: 13pt; font-weight: bold; " />
+		</StyleSheet>
+		<Sections>
+			<Section Type="ReportHeader" Name="ReportHeader" Height="782" BackColor="16777215">
+				<Control Type="AR.Label" Name="lblReportTitle" Left="0" Top="72" Width="6740" Height="640" Caption="Family Run Day Cares" Style="color: #575F6D; font-weight: bold; font-size: 20.25pt; font-family: Century Schoolbook; vertical-align: middle; " />
+			</Section>
+			<Section Type="PageHeader" Name="pageHeader" Height="333" BackColor="16777215">
+				<Control Type="AR.Label" Name="lblLast_Name" Left="0" Top="14.4" Width="2080" Height="320" Caption="Last_Name" Style="color: #000000; font-size: 9pt; font-family: Century Schoolbook; white-space: nowrap; " />
+				<Control Type="AR.Label" Name="lblARC_Street" Left="2081.44" Top="14.4" Width="2080" Height="320" Caption="ARC_Street" Style="color: #000000; font-size: 9pt; font-family: Century Schoolbook; white-space: nowrap; " />
+				<Control Type="AR.Label" Name="lblCity" Left="4162.88" Top="14.4" Width="2080" Height="320" Caption="City" Style="color: #000000; font-size: 9pt; font-family: Century Schoolbook; white-space: nowrap; " />
+				<Control Type="AR.Label" Name="lblARC_ZIP" Left="6244.32" Top="14.4" Width="1760" Height="320" Caption="ARC_ZIP" Style="color: #000000; font-size: 9pt; font-family: Century Schoolbook; white-space: nowrap; " />
+				<Control Type="AR.Line" Name="styleLine1" X1="0" Y1="0" X2="9360" Y2="0" LineColor="2522623" />
+			</Section>
+			<Section Type="Detail" Name="detail" Height="320" BackStyle="1" BackColor="13499135">
+				<Control Type="AR.Field" Name="txtLast_Name" DataField="Last_Name" Left="0" Top="0" Width="2080" Height="320" Text="Last_Name" Style="color: #000000; background-color: LemonChiffon; font-size: 9pt; font-family: Century Schoolbook; " />
+				<Control Type="AR.Field" Name="txtARC_Street" DataField="ARC_Street" Left="2081.44" Top="0" Width="2080" Height="320" Text="ARC_Street" Style="color: #000000; background-color: LemonChiffon; font-size: 9pt; font-family: Century Schoolbook; " />
+				<Control Type="AR.Field" Name="txtCity" DataField="City" Left="4162.88" Top="0" Width="2080" Height="320" Text="City" Style="color: #000000; background-color: LemonChiffon; font-size: 9pt; font-family: Century Schoolbook; " />
+				<Control Type="AR.Field" Name="txtARC_ZIP" DataField="ARC_ZIP" Left="6244.32" Top="0" Width="1760" Height="320" Text="ARC_ZIP" Style="color: #000000; background-color: LemonChiffon; font-size: 9pt; font-family: Century Schoolbook; " />
+			</Section>
+			<Section Type="PageFooter" Name="pageFooter" Height="299" BackColor="16777215">
+				<Control Type="AR.ReportInfo" Name="rptInfoPgNo" Left="1980" Top="0" Width="5400" Height="288" FormatString="Page {PageNumber} of {PageCount}" Style="color: Gray; text-align: center; font-size: 8pt; font-family: Century Schoolbook; " />
+			</Section>
+			<Section Type="ReportFooter" Name="ReportFooter" Height="0" BackColor="16777215" />
+		</Sections>
+		<PageSettings TopMargin="720" Orientation="1" />
+		<Parameters />
+	</ActiveReportsLayout>
+</Report>

@@ -1,0 +1,93 @@
+<html>
+<head>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.6/css/jquery.dataTables.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/1.0.5/css/dataTables.responsive.css">
+<link rel="stylesheet" href="http://projects.ctmirror.org/libs/universal.css" type="text/css">
+<style>
+table th {
+  font-size: 11px !important;
+  font-weight: bold !important;
+  text-transform: uppercase !important;
+}
+table tr {
+  font-size: 13px !important;
+}
+</style>
+
+</head>
+
+<body>
+
+
+    <div id="table" style="text-decoration: none; padding-bottom: .2em; font-size:.8em; font-family: lato, Arial, sans-serif;"></div>
+
+
+        <div class='sourceline' id='headersource'><span><a href="http://projects.ctmirror.org/download/FederalSentencingCT-US.xlsx">DATA</a>: United States Sentencing Commission, U.S. Census</div>
+        <div class='smallByLine' id='headerbyline'>ANDREW BA TRAN/CTMIRROR.ORG</div>
+
+</body>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src='https://cdn.datatables.net/1.10.6/js/jquery.dataTables.min.js'></script>
+<script src='https://cdn.datatables.net/responsive/1.0.5/js/dataTables.responsive.js'></script>
+<script>
+
+var thousand =[
+  ["Hartford",0,3,301,242,236,362],
+  ["Bridgeport",2,0,185,100,11,6],
+  ["New Haven",73,60,598,242,483,285],
+  ["West Haven",1,1,68,41,33,26],
+  ["Waterbury",3,3,27,30,193,192],
+  ["Norwalk",30,32,100,60,117,93],
+  ["Ansonia",8,9,30,12,32,26],
+  ["Stamford",1,0,30,12,18,14],
+  ["New Britain",0,2,27,83,3,3],
+  ["TOTAL",118,110,1366,822,1126,1027],
+  ["TOTAL CONNECTICUT",183,286,1649,1270,1372,1553],
+  ["OTHER 86 TOWNS COMBINED",65,176,283,448,246,526]
+]
+;
+
+
+$(document).ready(function() {
+    $('#table').html( '<table cellpadding="0" cellspacing="0" border="0" class="display compact" id="adjusted" width="100%"></table>' );
+ 
+    $('#adjusted').dataTable( {
+        "data": thousand,
+        dom: '<"insertHeader">frtip',
+
+        responsive: true,
+        
+        scrollY:"350px",
+        scrollCollapse:true,
+        
+        paging: false,
+        
+        <!--  Change the "Show XX entries" options. The  array on the left is the number, the array on the right is the text. -->
+        <!-- If 99 is all the options, then you can say "All" - If there's 60 total, change 99 to total, etc '-->
+        aLengthMenu: [[10, 25, 50], [10, 25, 50]],
+        
+        iDisplayLength: 15,
+        
+
+        order: [[0, "asc"]],
+
+        "columns": [
+ 			{ "title": "Town"  },
+            { "title": "Delivering (Non-White)",},
+       		{ "title": "Delivering (White)"},
+            { "title": "Selling (Non-White)"},
+            { "title": "Selling (White)" },
+            { "title": "Possession (Non-White)"},
+            { "title": "Possession (White)" }
+        ],
+    } );   
+    
+ 	$("div.insertHeader").html("<div class='graphicHeader'>Total sentencing between 1995 and 2014 ranked</div><br /><div class='explainer' id='headersub'>By crime type. Click to sort.</div>");
+
+} );
+
+</script>
+</html>
