@@ -1,0 +1,1730 @@
+VariableName,Featured Downloads Datafiles
+UNITID,IPEDS 2013 data collection year
+OPEID,IPEDS 2013 data collection year
+opeid6,IPEDS 2013 data collection year
+INSTNM,IPEDS 2013 data collection year
+CITY,IPEDS 2013 data collection year
+STABBR,IPEDS 2013 data collection year
+ZIP,IPEDS 2013 data collection year
+AccredAgency,IPEDS 2013 data collection year
+INSTURL,IPEDS 2013 data collection year
+NPCURL,IPEDS 2013 data collection year
+sch_deg,IPEDS 2012 data collection year
+HCM2,CY2015
+main,IPEDS 2013 data collection year
+NUMBRANCH,IPEDS 2013 data collection year
+PREDDEG,IPEDS 2013 data collection year
+HIGHDEG,IPEDS 2013 data collection year
+CONTROL,IPEDS 2013 data collection year
+st_fips,IPEDS 2013 data collection year
+region,IPEDS 2013 data collection year
+LOCALE,IPEDS 2013 data collection year
+locale2,NULL
+LATITUDE,IPEDS 2013 data collection year
+LONGITUDE,IPEDS 2013 data collection year
+CCBASIC,IPEDS 2013 data collection year
+CCUGPROF,IPEDS 2013 data collection year
+CCSIZSET,IPEDS 2013 data collection year
+HBCU,CY2015
+PBI,CY2015
+ANNHI,CY2015
+TRIBAL,CY2015
+AANAPII,CY2015
+HSI,CY2015
+NANTI,CY2015
+MENONLY,IPEDS 2013 data collection year
+WOMENONLY,IPEDS 2013 data collection year
+RELAFFIL,IPEDS 2013 data collection year
+ADM_RATE,IPEDS 2013 data collection year
+ADM_RATE_ALL,IPEDS 2013 data collection year
+SATVR25,IPEDS 2013 data collection year
+SATVR75,IPEDS 2013 data collection year
+SATMT25,IPEDS 2013 data collection year
+SATMT75,IPEDS 2013 data collection year
+SATWR25,IPEDS 2013 data collection year
+SATWR75,IPEDS 2013 data collection year
+SATVRMID,IPEDS 2013 data collection year
+SATMTMID,IPEDS 2013 data collection year
+SATWRMID,IPEDS 2013 data collection year
+ACTCM25,IPEDS 2013 data collection year
+ACTCM75,IPEDS 2013 data collection year
+ACTEN25,IPEDS 2013 data collection year
+ACTEN75,IPEDS 2013 data collection year
+ACTMT25,IPEDS 2013 data collection year
+ACTMT75,IPEDS 2013 data collection year
+ACTWR25,IPEDS 2013 data collection year
+ACTWR75,IPEDS 2013 data collection year
+ACTCMMID,IPEDS 2013 data collection year
+ACTENMID,IPEDS 2013 data collection year
+ACTMTMID,IPEDS 2013 data collection year
+ACTWRMID,IPEDS 2013 data collection year
+SAT_AVG,IPEDS 2013 data collection year
+SAT_AVG_ALL,IPEDS 2013 data collection year
+PCIP01,IPEDS 2013 data collection year
+PCIP03,IPEDS 2013 data collection year
+PCIP04,IPEDS 2013 data collection year
+PCIP05,IPEDS 2013 data collection year
+PCIP09,IPEDS 2013 data collection year
+PCIP10,IPEDS 2013 data collection year
+PCIP11,IPEDS 2013 data collection year
+PCIP12,IPEDS 2013 data collection year
+PCIP13,IPEDS 2013 data collection year
+PCIP14,IPEDS 2013 data collection year
+PCIP15,IPEDS 2013 data collection year
+PCIP16,IPEDS 2013 data collection year
+PCIP19,IPEDS 2013 data collection year
+PCIP22,IPEDS 2013 data collection year
+PCIP23,IPEDS 2013 data collection year
+PCIP24,IPEDS 2013 data collection year
+PCIP25,IPEDS 2013 data collection year
+PCIP26,IPEDS 2013 data collection year
+PCIP27,IPEDS 2013 data collection year
+PCIP29,IPEDS 2013 data collection year
+PCIP30,IPEDS 2013 data collection year
+PCIP31,IPEDS 2013 data collection year
+PCIP38,IPEDS 2013 data collection year
+PCIP39,IPEDS 2013 data collection year
+PCIP40,IPEDS 2013 data collection year
+PCIP41,IPEDS 2013 data collection year
+PCIP42,IPEDS 2013 data collection year
+PCIP43,IPEDS 2013 data collection year
+PCIP44,IPEDS 2013 data collection year
+PCIP45,IPEDS 2013 data collection year
+PCIP46,IPEDS 2013 data collection year
+PCIP47,IPEDS 2013 data collection year
+PCIP48,IPEDS 2013 data collection year
+PCIP49,IPEDS 2013 data collection year
+PCIP50,IPEDS 2013 data collection year
+PCIP51,IPEDS 2013 data collection year
+PCIP52,IPEDS 2013 data collection year
+PCIP54,IPEDS 2013 data collection year
+CIP01CERT1,IPEDS 2013 data collection year
+CIP01CERT2,IPEDS 2013 data collection year
+CIP01ASSOC,IPEDS 2013 data collection year
+CIP01CERT4,IPEDS 2013 data collection year
+CIP01BACHL,IPEDS 2013 data collection year
+CIP03CERT1,IPEDS 2013 data collection year
+CIP03CERT2,IPEDS 2013 data collection year
+CIP03ASSOC,IPEDS 2013 data collection year
+CIP03CERT4,IPEDS 2013 data collection year
+CIP03BACHL,IPEDS 2013 data collection year
+CIP04CERT1,IPEDS 2013 data collection year
+CIP04CERT2,IPEDS 2013 data collection year
+CIP04ASSOC,IPEDS 2013 data collection year
+CIP04CERT4,IPEDS 2013 data collection year
+CIP04BACHL,IPEDS 2013 data collection year
+CIP05CERT1,IPEDS 2013 data collection year
+CIP05CERT2,IPEDS 2013 data collection year
+CIP05ASSOC,IPEDS 2013 data collection year
+CIP05CERT4,IPEDS 2013 data collection year
+CIP05BACHL,IPEDS 2013 data collection year
+CIP09CERT1,IPEDS 2013 data collection year
+CIP09CERT2,IPEDS 2013 data collection year
+CIP09ASSOC,IPEDS 2013 data collection year
+CIP09CERT4,IPEDS 2013 data collection year
+CIP09BACHL,IPEDS 2013 data collection year
+CIP10CERT1,IPEDS 2013 data collection year
+CIP10CERT2,IPEDS 2013 data collection year
+CIP10ASSOC,IPEDS 2013 data collection year
+CIP10CERT4,IPEDS 2013 data collection year
+CIP10BACHL,IPEDS 2013 data collection year
+CIP11CERT1,IPEDS 2013 data collection year
+CIP11CERT2,IPEDS 2013 data collection year
+CIP11ASSOC,IPEDS 2013 data collection year
+CIP11CERT4,IPEDS 2013 data collection year
+CIP11BACHL,IPEDS 2013 data collection year
+CIP12CERT1,IPEDS 2013 data collection year
+CIP12CERT2,IPEDS 2013 data collection year
+CIP12ASSOC,IPEDS 2013 data collection year
+CIP12CERT4,IPEDS 2013 data collection year
+CIP12BACHL,IPEDS 2013 data collection year
+CIP13CERT1,IPEDS 2013 data collection year
+CIP13CERT2,IPEDS 2013 data collection year
+CIP13ASSOC,IPEDS 2013 data collection year
+CIP13CERT4,IPEDS 2013 data collection year
+CIP13BACHL,IPEDS 2013 data collection year
+CIP14CERT1,IPEDS 2013 data collection year
+CIP14CERT2,IPEDS 2013 data collection year
+CIP14ASSOC,IPEDS 2013 data collection year
+CIP14CERT4,IPEDS 2013 data collection year
+CIP14BACHL,IPEDS 2013 data collection year
+CIP15CERT1,IPEDS 2013 data collection year
+CIP15CERT2,IPEDS 2013 data collection year
+CIP15ASSOC,IPEDS 2013 data collection year
+CIP15CERT4,IPEDS 2013 data collection year
+CIP15BACHL,IPEDS 2013 data collection year
+CIP16CERT1,IPEDS 2013 data collection year
+CIP16CERT2,IPEDS 2013 data collection year
+CIP16ASSOC,IPEDS 2013 data collection year
+CIP16CERT4,IPEDS 2013 data collection year
+CIP16BACHL,IPEDS 2013 data collection year
+CIP19CERT1,IPEDS 2013 data collection year
+CIP19CERT2,IPEDS 2013 data collection year
+CIP19ASSOC,IPEDS 2013 data collection year
+CIP19CERT4,IPEDS 2013 data collection year
+CIP19BACHL,IPEDS 2013 data collection year
+CIP22CERT1,IPEDS 2013 data collection year
+CIP22CERT2,IPEDS 2013 data collection year
+CIP22ASSOC,IPEDS 2013 data collection year
+CIP22CERT4,IPEDS 2013 data collection year
+CIP22BACHL,IPEDS 2013 data collection year
+CIP23CERT1,IPEDS 2013 data collection year
+CIP23CERT2,IPEDS 2013 data collection year
+CIP23ASSOC,IPEDS 2013 data collection year
+CIP23CERT4,IPEDS 2013 data collection year
+CIP23BACHL,IPEDS 2013 data collection year
+CIP24CERT1,IPEDS 2013 data collection year
+CIP24CERT2,IPEDS 2013 data collection year
+CIP24ASSOC,IPEDS 2013 data collection year
+CIP24CERT4,IPEDS 2013 data collection year
+CIP24BACHL,IPEDS 2013 data collection year
+CIP25CERT1,IPEDS 2013 data collection year
+CIP25CERT2,IPEDS 2013 data collection year
+CIP25ASSOC,IPEDS 2013 data collection year
+CIP25CERT4,IPEDS 2013 data collection year
+CIP25BACHL,IPEDS 2013 data collection year
+CIP26CERT1,IPEDS 2013 data collection year
+CIP26CERT2,IPEDS 2013 data collection year
+CIP26ASSOC,IPEDS 2013 data collection year
+CIP26CERT4,IPEDS 2013 data collection year
+CIP26BACHL,IPEDS 2013 data collection year
+CIP27CERT1,IPEDS 2013 data collection year
+CIP27CERT2,IPEDS 2013 data collection year
+CIP27ASSOC,IPEDS 2013 data collection year
+CIP27CERT4,IPEDS 2013 data collection year
+CIP27BACHL,IPEDS 2013 data collection year
+CIP29CERT1,IPEDS 2013 data collection year
+CIP29CERT2,IPEDS 2013 data collection year
+CIP29ASSOC,IPEDS 2013 data collection year
+CIP29CERT4,IPEDS 2013 data collection year
+CIP29BACHL,IPEDS 2013 data collection year
+CIP30CERT1,IPEDS 2013 data collection year
+CIP30CERT2,IPEDS 2013 data collection year
+CIP30ASSOC,IPEDS 2013 data collection year
+CIP30CERT4,IPEDS 2013 data collection year
+CIP30BACHL,IPEDS 2013 data collection year
+CIP31CERT1,IPEDS 2013 data collection year
+CIP31CERT2,IPEDS 2013 data collection year
+CIP31ASSOC,IPEDS 2013 data collection year
+CIP31CERT4,IPEDS 2013 data collection year
+CIP31BACHL,IPEDS 2013 data collection year
+CIP38CERT1,IPEDS 2013 data collection year
+CIP38CERT2,IPEDS 2013 data collection year
+CIP38ASSOC,IPEDS 2013 data collection year
+CIP38CERT4,IPEDS 2013 data collection year
+CIP38BACHL,IPEDS 2013 data collection year
+CIP39CERT1,IPEDS 2013 data collection year
+CIP39CERT2,IPEDS 2013 data collection year
+CIP39ASSOC,IPEDS 2013 data collection year
+CIP39CERT4,IPEDS 2013 data collection year
+CIP39BACHL,IPEDS 2013 data collection year
+CIP40CERT1,IPEDS 2013 data collection year
+CIP40CERT2,IPEDS 2013 data collection year
+CIP40ASSOC,IPEDS 2013 data collection year
+CIP40CERT4,IPEDS 2013 data collection year
+CIP40BACHL,IPEDS 2013 data collection year
+CIP41CERT1,IPEDS 2013 data collection year
+CIP41CERT2,IPEDS 2013 data collection year
+CIP41ASSOC,IPEDS 2013 data collection year
+CIP41CERT4,IPEDS 2013 data collection year
+CIP41BACHL,IPEDS 2013 data collection year
+CIP42CERT1,IPEDS 2013 data collection year
+CIP42CERT2,IPEDS 2013 data collection year
+CIP42ASSOC,IPEDS 2013 data collection year
+CIP42CERT4,IPEDS 2013 data collection year
+CIP42BACHL,IPEDS 2013 data collection year
+CIP43CERT1,IPEDS 2013 data collection year
+CIP43CERT2,IPEDS 2013 data collection year
+CIP43ASSOC,IPEDS 2013 data collection year
+CIP43CERT4,IPEDS 2013 data collection year
+CIP43BACHL,IPEDS 2013 data collection year
+CIP44CERT1,IPEDS 2013 data collection year
+CIP44CERT2,IPEDS 2013 data collection year
+CIP44ASSOC,IPEDS 2013 data collection year
+CIP44CERT4,IPEDS 2013 data collection year
+CIP44BACHL,IPEDS 2013 data collection year
+CIP45CERT1,IPEDS 2013 data collection year
+CIP45CERT2,IPEDS 2013 data collection year
+CIP45ASSOC,IPEDS 2013 data collection year
+CIP45CERT4,IPEDS 2013 data collection year
+CIP45BACHL,IPEDS 2013 data collection year
+CIP46CERT1,IPEDS 2013 data collection year
+CIP46CERT2,IPEDS 2013 data collection year
+CIP46ASSOC,IPEDS 2013 data collection year
+CIP46CERT4,IPEDS 2013 data collection year
+CIP46BACHL,IPEDS 2013 data collection year
+CIP47CERT1,IPEDS 2013 data collection year
+CIP47CERT2,IPEDS 2013 data collection year
+CIP47ASSOC,IPEDS 2013 data collection year
+CIP47CERT4,IPEDS 2013 data collection year
+CIP47BACHL,IPEDS 2013 data collection year
+CIP48CERT1,IPEDS 2013 data collection year
+CIP48CERT2,IPEDS 2013 data collection year
+CIP48ASSOC,IPEDS 2013 data collection year
+CIP48CERT4,IPEDS 2013 data collection year
+CIP48BACHL,IPEDS 2013 data collection year
+CIP49CERT1,IPEDS 2013 data collection year
+CIP49CERT2,IPEDS 2013 data collection year
+CIP49ASSOC,IPEDS 2013 data collection year
+CIP49CERT4,IPEDS 2013 data collection year
+CIP49BACHL,IPEDS 2013 data collection year
+CIP50CERT1,IPEDS 2013 data collection year
+CIP50CERT2,IPEDS 2013 data collection year
+CIP50ASSOC,IPEDS 2013 data collection year
+CIP50CERT4,IPEDS 2013 data collection year
+CIP50BACHL,IPEDS 2013 data collection year
+CIP51CERT1,IPEDS 2013 data collection year
+CIP51CERT2,IPEDS 2013 data collection year
+CIP51ASSOC,IPEDS 2013 data collection year
+CIP51CERT4,IPEDS 2013 data collection year
+CIP51BACHL,IPEDS 2013 data collection year
+CIP52CERT1,IPEDS 2013 data collection year
+CIP52CERT2,IPEDS 2013 data collection year
+CIP52ASSOC,IPEDS 2013 data collection year
+CIP52CERT4,IPEDS 2013 data collection year
+CIP52BACHL,IPEDS 2013 data collection year
+CIP54CERT1,IPEDS 2013 data collection year
+CIP54CERT2,IPEDS 2013 data collection year
+CIP54ASSOC,IPEDS 2013 data collection year
+CIP54CERT4,IPEDS 2013 data collection year
+CIP54BACHL,IPEDS 2013 data collection year
+DISTANCEONLY,IPEDS 2013 data collection year
+UGDS,IPEDS 2013 data collection year
+UG,IPEDS 2000 data collection year
+UGDS_WHITE,IPEDS 2013 data collection year
+UGDS_BLACK,IPEDS 2013 data collection year
+UGDS_HISP,IPEDS 2013 data collection year
+UGDS_ASIAN,IPEDS 2013 data collection year
+UGDS_AIAN,IPEDS 2013 data collection year
+UGDS_NHPI,IPEDS 2013 data collection year
+UGDS_2MOR,IPEDS 2013 data collection year
+UGDS_NRA,IPEDS 2013 data collection year
+UGDS_UNKN,IPEDS 2013 data collection year
+UGDS_WHITENH,IPEDS 2009 data collection year
+UGDS_BLACKNH,IPEDS 2009 data collection year
+UGDS_API,IPEDS 2009 data collection year
+UGDS_AIANOld,IPEDS 2009 data collection year
+UGDS_HISPOld,IPEDS 2009 data collection year
+UG_NRA,IPEDS 2000 data collection year
+UG_UNKN,IPEDS 2000 data collection year
+UG_WHITENH,IPEDS 2000 data collection year
+UG_BLACKNH,IPEDS 2000 data collection year
+UG_API,IPEDS 2000 data collection year
+UG_AIANOld,IPEDS 2000 data collection year
+UG_HISPOld,IPEDS 2000 data collection year
+PPTUG_EF,IPEDS 2013 data collection year
+PPTUG_EF2,IPEDS 2000 data collection year
+CURROPER,CY2015
+NPT4_PUB,IPEDS 2013 data collection year
+NPT4_PRIV,IPEDS 2013 data collection year
+NPT4_PROG,IPEDS 2010 data collection year
+NPT4_OTHER,IPEDS 2010 data collection year
+NPT41_PUB,IPEDS 2013 data collection year
+NPT42_PUB,IPEDS 2013 data collection year
+NPT43_PUB,IPEDS 2013 data collection year
+NPT44_PUB,IPEDS 2013 data collection year
+NPT45_PUB,IPEDS 2013 data collection year
+NPT41_PRIV,IPEDS 2013 data collection year
+NPT42_PRIV,IPEDS 2013 data collection year
+NPT43_PRIV,IPEDS 2013 data collection year
+NPT44_PRIV,IPEDS 2013 data collection year
+NPT45_PRIV,IPEDS 2013 data collection year
+NPT41_PROG,IPEDS 2010 data collection year
+NPT42_PROG,IPEDS 2010 data collection year
+NPT43_PROG,IPEDS 2010 data collection year
+NPT44_PROG,IPEDS 2010 data collection year
+NPT45_PROG,IPEDS 2010 data collection year
+NPT41_OTHER,IPEDS 2010 data collection year
+NPT42_OTHER,IPEDS 2010 data collection year
+NPT43_OTHER,IPEDS 2010 data collection year
+NPT44_OTHER,IPEDS 2010 data collection year
+NPT45_OTHER,IPEDS 2010 data collection year
+NPT4_048_PUB,IPEDS 2013 data collection year
+NPT4_048_PRIV,IPEDS 2013 data collection year
+NPT4_048_PROG,IPEDS 2010 data collection year
+NPT4_048_OTHER,IPEDS 2010 data collection year
+NPT4_3075_PUB,IPEDS 2013 data collection year
+NPT4_3075_PRIV,IPEDS 2013 data collection year
+NPT4_75UP_PUB,IPEDS 2013 data collection year
+NPT4_75UP_PRIV,IPEDS 2013 data collection year
+NPT4_3075_PROG,IPEDS 2010 data collection year
+NPT4_3075_OTHER,IPEDS 2010 data collection year
+NPT4_75UP_PROG,IPEDS 2010 data collection year
+NPT4_75UP_OTHER,IPEDS 2010 data collection year
+NUM4_PUB,IPEDS 2013 data collection year
+NUM4_PRIV,IPEDS 2013 data collection year
+NUM4_PROG,IPEDS 2010 data collection year
+NUM4_OTHER,IPEDS 2010 data collection year
+NUM41_PUB,IPEDS 2013 data collection year
+NUM42_PUB,IPEDS 2013 data collection year
+NUM43_PUB,IPEDS 2013 data collection year
+NUM44_PUB,IPEDS 2013 data collection year
+NUM45_PUB,IPEDS 2013 data collection year
+NUM41_PRIV,IPEDS 2013 data collection year
+NUM42_PRIV,IPEDS 2013 data collection year
+NUM43_PRIV,IPEDS 2013 data collection year
+NUM44_PRIV,IPEDS 2013 data collection year
+NUM45_PRIV,IPEDS 2013 data collection year
+NUM41_PROG,IPEDS 2010 data collection year
+NUM42_PROG,IPEDS 2010 data collection year
+NUM43_PROG,IPEDS 2010 data collection year
+NUM44_PROG,IPEDS 2010 data collection year
+NUM45_PROG,IPEDS 2010 data collection year
+NUM41_OTHER,IPEDS 2010 data collection year
+NUM42_OTHER,IPEDS 2010 data collection year
+NUM43_OTHER,IPEDS 2010 data collection year
+NUM44_OTHER,IPEDS 2010 data collection year
+NUM45_OTHER,IPEDS 2010 data collection year
+COSTT4_A,IPEDS 2013 data collection year
+COSTT4_P,IPEDS 2013 data collection year
+TUITIONFEE_IN,IPEDS 2013 data collection year
+TUITIONFEE_OUT,IPEDS 2013 data collection year
+TUITIONFEE_PROG,IPEDS 2013 data collection year
+TUITFTE,IPEDS 2013 data collection year
+INEXPFTE,IPEDS 2013 data collection year
+AVGFACSAL,IPEDS 2013 data collection year
+PFTFAC,IPEDS 2013 data collection year
+PCTPELL,IPEDS 2013 data collection year
+C150_4,IPEDS 2013 data collection year
+C150_L4,IPEDS 2013 data collection year
+C150_4_POOLED,IPEDS 2013 data collection year pooled with previous years (# of total pooled years in poolyrs)
+C150_L4_POOLED,IPEDS 2013 data collection year pooled with previous years (# of total pooled years in poolyrs)
+poolyrs,N/A
+PFTFTUG1_EF,IPEDS 2013 data collection year
+D150_4,IPEDS 2013 data collection year
+D150_L4,IPEDS 2013 data collection year
+D150_4_POOLED,IPEDS 2013 data collection year pooled with previous years (# of total pooled years in poolyrs)
+D150_L4_POOLED,IPEDS 2013 data collection year pooled with previous years (# of total pooled years in poolyrs)
+C150_4_WHITE,IPEDS 2013 data collection year
+C150_4_BLACK,IPEDS 2013 data collection year
+C150_4_HISP,IPEDS 2013 data collection year
+C150_4_ASIAN,IPEDS 2013 data collection year
+C150_4_AIAN,IPEDS 2013 data collection year
+C150_4_NHPI,IPEDS 2013 data collection year
+C150_4_2MOR,IPEDS 2013 data collection year
+C150_4_NRA,IPEDS 2013 data collection year
+C150_4_UNKN,IPEDS 2013 data collection year
+C150_4_WHITENH,IPEDS 2010 data collection year
+C150_4_BLACKNH,IPEDS 2010 data collection year
+C150_4_API,IPEDS 2010 data collection year
+C150_4_AIANOld,IPEDS 2010 data collection year
+C150_4_HISPOld,IPEDS 2010 data collection year
+C150_L4_WHITE,IPEDS 2013 data collection year
+C150_L4_BLACK,IPEDS 2013 data collection year
+C150_L4_HISP,IPEDS 2013 data collection year
+C150_L4_ASIAN,IPEDS 2013 data collection year
+C150_L4_AIAN,IPEDS 2013 data collection year
+C150_L4_NHPI,IPEDS 2013 data collection year
+C150_L4_2MOR,IPEDS 2013 data collection year
+C150_L4_NRA,IPEDS 2013 data collection year
+C150_L4_UNKN,IPEDS 2013 data collection year
+C150_L4_WHITENH,IPEDS 2010 data collection year
+C150_L4_BLACKNH,IPEDS 2010 data collection year
+C150_L4_API,IPEDS 2010 data collection year
+C150_L4_AIANOld,IPEDS 2010 data collection year
+C150_L4_HISPOld,IPEDS 2010 data collection year
+C200_4,IPEDS 2013 data collection year
+C200_L4,IPEDS 2013 data collection year
+D200_4,IPEDS 2013 data collection year
+D200_L4,IPEDS 2013 data collection year
+RET_FT4,IPEDS 2013 data collection year
+RET_FTL4,IPEDS 2013 data collection year
+RET_PT4,IPEDS 2013 data collection year
+RET_PTL4,IPEDS 2013 data collection year
+C200_4_POOLED,IPEDS 2013 data collection year pooled with previous years (# of total pooled years in poolyrs200)
+C200_L4_POOLED,IPEDS 2013 data collection year pooled with previous years (# of total pooled years in poolyrs200)
+poolyrs200,N/A
+D200_4_POOLED,IPEDS 2013 data collection year pooled with previous years (# of total pooled years in poolyrs200)
+D200_L4_POOLED,IPEDS 2013 data collection year pooled with previous years (# of total pooled years in poolyrs200)
+PCTFLOAN,IPEDS 2013 data collection year
+UG25abv,IPEDS 2013 data collection year
+CDR2,FY2011 cohort measured in FY2012
+CDR3,FY2011 cohort measured in FY2013
+DEATH_YR2_RT,AY2011 cohort measured in AY2013
+COMP_ORIG_YR2_RT,AY2011 cohort measured in AY2013
+COMP_4YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+COMP_2YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+WDRAW_ORIG_YR2_RT,AY2011 cohort measured in AY2013
+WDRAW_4YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+WDRAW_2YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+ENRL_ORIG_YR2_RT,AY2011 cohort measured in AY2013
+ENRL_4YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+ENRL_2YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+UNKN_ORIG_YR2_RT,AY2011 cohort measured in AY2013
+UNKN_4YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+UNKN_2YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+LO_INC_DEATH_YR2_RT,AY2011 cohort measured in AY2013
+LO_INC_COMP_ORIG_YR2_RT,AY2011 cohort measured in AY2013
+LO_INC_COMP_4YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+LO_INC_COMP_2YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+LO_INC_WDRAW_ORIG_YR2_RT,AY2011 cohort measured in AY2013
+LO_INC_WDRAW_4YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+LO_INC_WDRAW_2YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+LO_INC_ENRL_ORIG_YR2_RT,AY2011 cohort measured in AY2013
+LO_INC_ENRL_4YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+LO_INC_ENRL_2YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+LO_INC_UNKN_ORIG_YR2_RT,AY2011 cohort measured in AY2013
+LO_INC_UNKN_4YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+LO_INC_UNKN_2YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+MD_INC_DEATH_YR2_RT,AY2011 cohort measured in AY2013
+MD_INC_COMP_ORIG_YR2_RT,AY2011 cohort measured in AY2013
+MD_INC_COMP_4YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+MD_INC_COMP_2YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+MD_INC_WDRAW_ORIG_YR2_RT,AY2011 cohort measured in AY2013
+MD_INC_WDRAW_4YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+MD_INC_WDRAW_2YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+MD_INC_ENRL_ORIG_YR2_RT,AY2011 cohort measured in AY2013
+MD_INC_ENRL_4YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+MD_INC_ENRL_2YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+MD_INC_UNKN_ORIG_YR2_RT,AY2011 cohort measured in AY2013
+MD_INC_UNKN_4YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+MD_INC_UNKN_2YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+HI_INC_DEATH_YR2_RT,AY2011 cohort measured in AY2013
+HI_INC_COMP_ORIG_YR2_RT,AY2011 cohort measured in AY2013
+HI_INC_COMP_4YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+HI_INC_COMP_2YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+HI_INC_WDRAW_ORIG_YR2_RT,AY2011 cohort measured in AY2013
+HI_INC_WDRAW_4YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+HI_INC_WDRAW_2YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+HI_INC_ENRL_ORIG_YR2_RT,AY2011 cohort measured in AY2013
+HI_INC_ENRL_4YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+HI_INC_ENRL_2YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+HI_INC_UNKN_ORIG_YR2_RT,AY2011 cohort measured in AY2013
+HI_INC_UNKN_4YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+HI_INC_UNKN_2YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+DEP_DEATH_YR2_RT,AY2011 cohort measured in AY2013
+DEP_COMP_ORIG_YR2_RT,AY2011 cohort measured in AY2013
+DEP_COMP_4YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+DEP_COMP_2YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+DEP_WDRAW_ORIG_YR2_RT,AY2011 cohort measured in AY2013
+DEP_WDRAW_4YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+DEP_WDRAW_2YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+DEP_ENRL_ORIG_YR2_RT,AY2011 cohort measured in AY2013
+DEP_ENRL_4YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+DEP_ENRL_2YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+DEP_UNKN_ORIG_YR2_RT,AY2011 cohort measured in AY2013
+DEP_UNKN_4YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+DEP_UNKN_2YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+IND_DEATH_YR2_RT,AY2011 cohort measured in AY2013
+IND_COMP_ORIG_YR2_RT,AY2011 cohort measured in AY2013
+IND_COMP_4YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+IND_COMP_2YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+IND_WDRAW_ORIG_YR2_RT,AY2011 cohort measured in AY2013
+IND_WDRAW_4YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+IND_WDRAW_2YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+IND_ENRL_ORIG_YR2_RT,AY2011 cohort measured in AY2013
+IND_ENRL_4YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+IND_ENRL_2YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+IND_UNKN_ORIG_YR2_RT,AY2011 cohort measured in AY2013
+IND_UNKN_4YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+IND_UNKN_2YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+FEMALE_DEATH_YR2_RT,AY2011 cohort measured in AY2013
+FEMALE_COMP_ORIG_YR2_RT,AY2011 cohort measured in AY2013
+FEMALE_COMP_4YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+FEMALE_COMP_2YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+FEMALE_WDRAW_ORIG_YR2_RT,AY2011 cohort measured in AY2013
+FEMALE_WDRAW_4YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+FEMALE_WDRAW_2YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+FEMALE_ENRL_ORIG_YR2_RT,AY2011 cohort measured in AY2013
+FEMALE_ENRL_4YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+FEMALE_ENRL_2YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+FEMALE_UNKN_ORIG_YR2_RT,AY2011 cohort measured in AY2013
+FEMALE_UNKN_4YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+FEMALE_UNKN_2YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+MALE_DEATH_YR2_RT,AY2011 cohort measured in AY2013
+MALE_COMP_ORIG_YR2_RT,AY2011 cohort measured in AY2013
+MALE_COMP_4YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+MALE_COMP_2YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+MALE_WDRAW_ORIG_YR2_RT,AY2011 cohort measured in AY2013
+MALE_WDRAW_4YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+MALE_WDRAW_2YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+MALE_ENRL_ORIG_YR2_RT,AY2011 cohort measured in AY2013
+MALE_ENRL_4YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+MALE_ENRL_2YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+MALE_UNKN_ORIG_YR2_RT,AY2011 cohort measured in AY2013
+MALE_UNKN_4YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+MALE_UNKN_2YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+PELL_DEATH_YR2_RT,AY2011 cohort measured in AY2013
+PELL_COMP_ORIG_YR2_RT,AY2011 cohort measured in AY2013
+PELL_COMP_4YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+PELL_COMP_2YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+PELL_WDRAW_ORIG_YR2_RT,AY2011 cohort measured in AY2013
+PELL_WDRAW_4YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+PELL_WDRAW_2YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+PELL_ENRL_ORIG_YR2_RT,AY2011 cohort measured in AY2013
+PELL_ENRL_4YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+PELL_ENRL_2YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+PELL_UNKN_ORIG_YR2_RT,AY2011 cohort measured in AY2013
+PELL_UNKN_4YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+PELL_UNKN_2YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+NOPELL_DEATH_YR2_RT,AY2011 cohort measured in AY2013
+NOPELL_COMP_ORIG_YR2_RT,AY2011 cohort measured in AY2013
+NOPELL_COMP_4YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+NOPELL_COMP_2YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+NOPELL_WDRAW_ORIG_YR2_RT,AY2011 cohort measured in AY2013
+NOPELL_WDRAW_4YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+NOPELL_WDRAW_2YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+NOPELL_ENRL_ORIG_YR2_RT,AY2011 cohort measured in AY2013
+NOPELL_ENRL_4YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+NOPELL_ENRL_2YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+NOPELL_UNKN_ORIG_YR2_RT,AY2011 cohort measured in AY2013
+NOPELL_UNKN_4YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+NOPELL_UNKN_2YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+LOAN_DEATH_YR2_RT,AY2011 cohort measured in AY2013
+LOAN_COMP_ORIG_YR2_RT,AY2011 cohort measured in AY2013
+LOAN_COMP_4YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+LOAN_COMP_2YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+LOAN_WDRAW_ORIG_YR2_RT,AY2011 cohort measured in AY2013
+LOAN_WDRAW_4YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+LOAN_WDRAW_2YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+LOAN_ENRL_ORIG_YR2_RT,AY2011 cohort measured in AY2013
+LOAN_ENRL_4YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+LOAN_ENRL_2YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+LOAN_UNKN_ORIG_YR2_RT,AY2011 cohort measured in AY2013
+LOAN_UNKN_4YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+LOAN_UNKN_2YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+NOLOAN_DEATH_YR2_RT,AY2011 cohort measured in AY2013
+NOLOAN_COMP_ORIG_YR2_RT,AY2011 cohort measured in AY2013
+NOLOAN_COMP_4YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+NOLOAN_COMP_2YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+NOLOAN_WDRAW_ORIG_YR2_RT,AY2011 cohort measured in AY2013
+NOLOAN_WDRAW_4YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+NOLOAN_WDRAW_2YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+NOLOAN_ENRL_ORIG_YR2_RT,AY2011 cohort measured in AY2013
+NOLOAN_ENRL_4YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+NOLOAN_ENRL_2YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+NOLOAN_UNKN_ORIG_YR2_RT,AY2011 cohort measured in AY2013
+NOLOAN_UNKN_4YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+NOLOAN_UNKN_2YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+FIRSTGEN_DEATH_YR2_RT,AY2011 cohort measured in AY2013
+FIRSTGEN_COMP_ORIG_YR2_RT,AY2011 cohort measured in AY2013
+FIRSTGEN_COMP_4YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+FIRSTGEN_COMP_2YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+FIRSTGEN_WDRAW_ORIG_YR2_RT,AY2011 cohort measured in AY2013
+FIRSTGEN_WDRAW_4YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+FIRSTGEN_WDRAW_2YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+FIRSTGEN_ENRL_ORIG_YR2_RT,AY2011 cohort measured in AY2013
+FIRSTGEN_ENRL_4YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+FIRSTGEN_ENRL_2YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+FIRSTGEN_UNKN_ORIG_YR2_RT,AY2011 cohort measured in AY2013
+FIRSTGEN_UNKN_4YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+FIRSTGEN_UNKN_2YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+NOT1STGEN_DEATH_YR2_RT,AY2011 cohort measured in AY2013
+NOT1STGEN_COMP_ORIG_YR2_RT,AY2011 cohort measured in AY2013
+NOT1STGEN_COMP_4YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+NOT1STGEN_COMP_2YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+NOT1STGEN_WDRAW_ORIG_YR2_RT,AY2011 cohort measured in AY2013
+NOT1STGEN_WDRAW_4YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+NOT1STGEN_WDRAW_2YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+NOT1STGEN_ENRL_ORIG_YR2_RT,AY2011 cohort measured in AY2013
+NOT1STGEN_ENRL_4YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+NOT1STGEN_ENRL_2YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+NOT1STGEN_UNKN_ORIG_YR2_RT,AY2011 cohort measured in AY2013
+NOT1STGEN_UNKN_4YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+NOT1STGEN_UNKN_2YR_TRANS_YR2_RT,AY2011 cohort measured in AY2013
+DEATH_YR3_RT,AY2010 cohort measured in AY2013
+COMP_ORIG_YR3_RT,AY2010 cohort measured in AY2013
+COMP_4YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+COMP_2YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+WDRAW_ORIG_YR3_RT,AY2010 cohort measured in AY2013
+WDRAW_4YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+WDRAW_2YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+ENRL_ORIG_YR3_RT,AY2010 cohort measured in AY2013
+ENRL_4YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+ENRL_2YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+UNKN_ORIG_YR3_RT,AY2010 cohort measured in AY2013
+UNKN_4YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+UNKN_2YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+LO_INC_DEATH_YR3_RT,AY2010 cohort measured in AY2013
+LO_INC_COMP_ORIG_YR3_RT,AY2010 cohort measured in AY2013
+LO_INC_COMP_4YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+LO_INC_COMP_2YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+LO_INC_WDRAW_ORIG_YR3_RT,AY2010 cohort measured in AY2013
+LO_INC_WDRAW_4YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+LO_INC_WDRAW_2YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+LO_INC_ENRL_ORIG_YR3_RT,AY2010 cohort measured in AY2013
+LO_INC_ENRL_4YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+LO_INC_ENRL_2YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+LO_INC_UNKN_ORIG_YR3_RT,AY2010 cohort measured in AY2013
+LO_INC_UNKN_4YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+LO_INC_UNKN_2YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+MD_INC_DEATH_YR3_RT,AY2010 cohort measured in AY2013
+MD_INC_COMP_ORIG_YR3_RT,AY2010 cohort measured in AY2013
+MD_INC_COMP_4YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+MD_INC_COMP_2YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+MD_INC_WDRAW_ORIG_YR3_RT,AY2010 cohort measured in AY2013
+MD_INC_WDRAW_4YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+MD_INC_WDRAW_2YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+MD_INC_ENRL_ORIG_YR3_RT,AY2010 cohort measured in AY2013
+MD_INC_ENRL_4YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+MD_INC_ENRL_2YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+MD_INC_UNKN_ORIG_YR3_RT,AY2010 cohort measured in AY2013
+MD_INC_UNKN_4YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+MD_INC_UNKN_2YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+HI_INC_DEATH_YR3_RT,AY2010 cohort measured in AY2013
+HI_INC_COMP_ORIG_YR3_RT,AY2010 cohort measured in AY2013
+HI_INC_COMP_4YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+HI_INC_COMP_2YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+HI_INC_WDRAW_ORIG_YR3_RT,AY2010 cohort measured in AY2013
+HI_INC_WDRAW_4YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+HI_INC_WDRAW_2YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+HI_INC_ENRL_ORIG_YR3_RT,AY2010 cohort measured in AY2013
+HI_INC_ENRL_4YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+HI_INC_ENRL_2YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+HI_INC_UNKN_ORIG_YR3_RT,AY2010 cohort measured in AY2013
+HI_INC_UNKN_4YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+HI_INC_UNKN_2YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+DEP_DEATH_YR3_RT,AY2010 cohort measured in AY2013
+DEP_COMP_ORIG_YR3_RT,AY2010 cohort measured in AY2013
+DEP_COMP_4YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+DEP_COMP_2YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+DEP_WDRAW_ORIG_YR3_RT,AY2010 cohort measured in AY2013
+DEP_WDRAW_4YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+DEP_WDRAW_2YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+DEP_ENRL_ORIG_YR3_RT,AY2010 cohort measured in AY2013
+DEP_ENRL_4YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+DEP_ENRL_2YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+DEP_UNKN_ORIG_YR3_RT,AY2010 cohort measured in AY2013
+DEP_UNKN_4YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+DEP_UNKN_2YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+IND_DEATH_YR3_RT,AY2010 cohort measured in AY2013
+IND_COMP_ORIG_YR3_RT,AY2010 cohort measured in AY2013
+IND_COMP_4YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+IND_COMP_2YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+IND_WDRAW_ORIG_YR3_RT,AY2010 cohort measured in AY2013
+IND_WDRAW_4YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+IND_WDRAW_2YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+IND_ENRL_ORIG_YR3_RT,AY2010 cohort measured in AY2013
+IND_ENRL_4YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+IND_ENRL_2YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+IND_UNKN_ORIG_YR3_RT,AY2010 cohort measured in AY2013
+IND_UNKN_4YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+IND_UNKN_2YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+FEMALE_DEATH_YR3_RT,AY2010 cohort measured in AY2013
+FEMALE_COMP_ORIG_YR3_RT,AY2010 cohort measured in AY2013
+FEMALE_COMP_4YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+FEMALE_COMP_2YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+FEMALE_WDRAW_ORIG_YR3_RT,AY2010 cohort measured in AY2013
+FEMALE_WDRAW_4YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+FEMALE_WDRAW_2YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+FEMALE_ENRL_ORIG_YR3_RT,AY2010 cohort measured in AY2013
+FEMALE_ENRL_4YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+FEMALE_ENRL_2YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+FEMALE_UNKN_ORIG_YR3_RT,AY2010 cohort measured in AY2013
+FEMALE_UNKN_4YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+FEMALE_UNKN_2YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+MALE_DEATH_YR3_RT,AY2010 cohort measured in AY2013
+MALE_COMP_ORIG_YR3_RT,AY2010 cohort measured in AY2013
+MALE_COMP_4YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+MALE_COMP_2YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+MALE_WDRAW_ORIG_YR3_RT,AY2010 cohort measured in AY2013
+MALE_WDRAW_4YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+MALE_WDRAW_2YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+MALE_ENRL_ORIG_YR3_RT,AY2010 cohort measured in AY2013
+MALE_ENRL_4YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+MALE_ENRL_2YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+MALE_UNKN_ORIG_YR3_RT,AY2010 cohort measured in AY2013
+MALE_UNKN_4YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+MALE_UNKN_2YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+PELL_DEATH_YR3_RT,AY2010 cohort measured in AY2013
+PELL_COMP_ORIG_YR3_RT,AY2010 cohort measured in AY2013
+PELL_COMP_4YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+PELL_COMP_2YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+PELL_WDRAW_ORIG_YR3_RT,AY2010 cohort measured in AY2013
+PELL_WDRAW_4YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+PELL_WDRAW_2YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+PELL_ENRL_ORIG_YR3_RT,AY2010 cohort measured in AY2013
+PELL_ENRL_4YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+PELL_ENRL_2YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+PELL_UNKN_ORIG_YR3_RT,AY2010 cohort measured in AY2013
+PELL_UNKN_4YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+PELL_UNKN_2YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+NOPELL_DEATH_YR3_RT,AY2010 cohort measured in AY2013
+NOPELL_COMP_ORIG_YR3_RT,AY2010 cohort measured in AY2013
+NOPELL_COMP_4YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+NOPELL_COMP_2YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+NOPELL_WDRAW_ORIG_YR3_RT,AY2010 cohort measured in AY2013
+NOPELL_WDRAW_4YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+NOPELL_WDRAW_2YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+NOPELL_ENRL_ORIG_YR3_RT,AY2010 cohort measured in AY2013
+NOPELL_ENRL_4YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+NOPELL_ENRL_2YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+NOPELL_UNKN_ORIG_YR3_RT,AY2010 cohort measured in AY2013
+NOPELL_UNKN_4YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+NOPELL_UNKN_2YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+LOAN_DEATH_YR3_RT,AY2010 cohort measured in AY2013
+LOAN_COMP_ORIG_YR3_RT,AY2010 cohort measured in AY2013
+LOAN_COMP_4YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+LOAN_COMP_2YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+LOAN_WDRAW_ORIG_YR3_RT,AY2010 cohort measured in AY2013
+LOAN_WDRAW_4YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+LOAN_WDRAW_2YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+LOAN_ENRL_ORIG_YR3_RT,AY2010 cohort measured in AY2013
+LOAN_ENRL_4YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+LOAN_ENRL_2YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+LOAN_UNKN_ORIG_YR3_RT,AY2010 cohort measured in AY2013
+LOAN_UNKN_4YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+LOAN_UNKN_2YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+NOLOAN_DEATH_YR3_RT,AY2010 cohort measured in AY2013
+NOLOAN_COMP_ORIG_YR3_RT,AY2010 cohort measured in AY2013
+NOLOAN_COMP_4YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+NOLOAN_COMP_2YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+NOLOAN_WDRAW_ORIG_YR3_RT,AY2010 cohort measured in AY2013
+NOLOAN_WDRAW_4YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+NOLOAN_WDRAW_2YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+NOLOAN_ENRL_ORIG_YR3_RT,AY2010 cohort measured in AY2013
+NOLOAN_ENRL_4YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+NOLOAN_ENRL_2YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+NOLOAN_UNKN_ORIG_YR3_RT,AY2010 cohort measured in AY2013
+NOLOAN_UNKN_4YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+NOLOAN_UNKN_2YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+FIRSTGEN_DEATH_YR3_RT,AY2010 cohort measured in AY2013
+FIRSTGEN_COMP_ORIG_YR3_RT,AY2010 cohort measured in AY2013
+FIRSTGEN_COMP_4YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+FIRSTGEN_COMP_2YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+FIRSTGEN_WDRAW_ORIG_YR3_RT,AY2010 cohort measured in AY2013
+FIRSTGEN_WDRAW_4YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+FIRSTGEN_WDRAW_2YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+FIRSTGEN_ENRL_ORIG_YR3_RT,AY2010 cohort measured in AY2013
+FIRSTGEN_ENRL_4YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+FIRSTGEN_ENRL_2YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+FIRSTGEN_UNKN_ORIG_YR3_RT,AY2010 cohort measured in AY2013
+FIRSTGEN_UNKN_4YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+FIRSTGEN_UNKN_2YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+NOT1STGEN_DEATH_YR3_RT,AY2010 cohort measured in AY2013
+NOT1STGEN_COMP_ORIG_YR3_RT,AY2010 cohort measured in AY2013
+NOT1STGEN_COMP_4YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+NOT1STGEN_COMP_2YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+NOT1STGEN_WDRAW_ORIG_YR3_RT,AY2010 cohort measured in AY2013
+NOT1STGEN_WDRAW_4YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+NOT1STGEN_WDRAW_2YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+NOT1STGEN_ENRL_ORIG_YR3_RT,AY2010 cohort measured in AY2013
+NOT1STGEN_ENRL_4YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+NOT1STGEN_ENRL_2YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+NOT1STGEN_UNKN_ORIG_YR3_RT,AY2010 cohort measured in AY2013
+NOT1STGEN_UNKN_4YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+NOT1STGEN_UNKN_2YR_TRANS_YR3_RT,AY2010 cohort measured in AY2013
+DEATH_YR4_RT,AY2009 cohort measured in AY2013
+COMP_ORIG_YR4_RT,AY2009 cohort measured in AY2013
+COMP_4YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+COMP_2YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+WDRAW_ORIG_YR4_RT,AY2009 cohort measured in AY2013
+WDRAW_4YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+WDRAW_2YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+ENRL_ORIG_YR4_RT,AY2009 cohort measured in AY2013
+ENRL_4YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+ENRL_2YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+UNKN_ORIG_YR4_RT,AY2009 cohort measured in AY2013
+UNKN_4YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+UNKN_2YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+LO_INC_DEATH_YR4_RT,AY2009 cohort measured in AY2013
+LO_INC_COMP_ORIG_YR4_RT,AY2009 cohort measured in AY2013
+LO_INC_COMP_4YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+LO_INC_COMP_2YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+LO_INC_WDRAW_ORIG_YR4_RT,AY2009 cohort measured in AY2013
+LO_INC_WDRAW_4YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+LO_INC_WDRAW_2YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+LO_INC_ENRL_ORIG_YR4_RT,AY2009 cohort measured in AY2013
+LO_INC_ENRL_4YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+LO_INC_ENRL_2YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+LO_INC_UNKN_ORIG_YR4_RT,AY2009 cohort measured in AY2013
+LO_INC_UNKN_4YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+LO_INC_UNKN_2YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+MD_INC_DEATH_YR4_RT,AY2009 cohort measured in AY2013
+MD_INC_COMP_ORIG_YR4_RT,AY2009 cohort measured in AY2013
+MD_INC_COMP_4YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+MD_INC_COMP_2YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+MD_INC_WDRAW_ORIG_YR4_RT,AY2009 cohort measured in AY2013
+MD_INC_WDRAW_4YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+MD_INC_WDRAW_2YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+MD_INC_ENRL_ORIG_YR4_RT,AY2009 cohort measured in AY2013
+MD_INC_ENRL_4YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+MD_INC_ENRL_2YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+MD_INC_UNKN_ORIG_YR4_RT,AY2009 cohort measured in AY2013
+MD_INC_UNKN_4YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+MD_INC_UNKN_2YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+HI_INC_DEATH_YR4_RT,AY2009 cohort measured in AY2013
+HI_INC_COMP_ORIG_YR4_RT,AY2009 cohort measured in AY2013
+HI_INC_COMP_4YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+HI_INC_COMP_2YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+HI_INC_WDRAW_ORIG_YR4_RT,AY2009 cohort measured in AY2013
+HI_INC_WDRAW_4YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+HI_INC_WDRAW_2YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+HI_INC_ENRL_ORIG_YR4_RT,AY2009 cohort measured in AY2013
+HI_INC_ENRL_4YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+HI_INC_ENRL_2YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+HI_INC_UNKN_ORIG_YR4_RT,AY2009 cohort measured in AY2013
+HI_INC_UNKN_4YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+HI_INC_UNKN_2YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+DEP_DEATH_YR4_RT,AY2009 cohort measured in AY2013
+DEP_COMP_ORIG_YR4_RT,AY2009 cohort measured in AY2013
+DEP_COMP_4YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+DEP_COMP_2YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+DEP_WDRAW_ORIG_YR4_RT,AY2009 cohort measured in AY2013
+DEP_WDRAW_4YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+DEP_WDRAW_2YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+DEP_ENRL_ORIG_YR4_RT,AY2009 cohort measured in AY2013
+DEP_ENRL_4YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+DEP_ENRL_2YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+DEP_UNKN_ORIG_YR4_RT,AY2009 cohort measured in AY2013
+DEP_UNKN_4YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+DEP_UNKN_2YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+IND_DEATH_YR4_RT,AY2009 cohort measured in AY2013
+IND_COMP_ORIG_YR4_RT,AY2009 cohort measured in AY2013
+IND_COMP_4YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+IND_COMP_2YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+IND_WDRAW_ORIG_YR4_RT,AY2009 cohort measured in AY2013
+IND_WDRAW_4YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+IND_WDRAW_2YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+IND_ENRL_ORIG_YR4_RT,AY2009 cohort measured in AY2013
+IND_ENRL_4YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+IND_ENRL_2YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+IND_UNKN_ORIG_YR4_RT,AY2009 cohort measured in AY2013
+IND_UNKN_4YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+IND_UNKN_2YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+FEMALE_DEATH_YR4_RT,AY2009 cohort measured in AY2013
+FEMALE_COMP_ORIG_YR4_RT,AY2009 cohort measured in AY2013
+FEMALE_COMP_4YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+FEMALE_COMP_2YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+FEMALE_WDRAW_ORIG_YR4_RT,AY2009 cohort measured in AY2013
+FEMALE_WDRAW_4YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+FEMALE_WDRAW_2YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+FEMALE_ENRL_ORIG_YR4_RT,AY2009 cohort measured in AY2013
+FEMALE_ENRL_4YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+FEMALE_ENRL_2YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+FEMALE_UNKN_ORIG_YR4_RT,AY2009 cohort measured in AY2013
+FEMALE_UNKN_4YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+FEMALE_UNKN_2YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+MALE_DEATH_YR4_RT,AY2009 cohort measured in AY2013
+MALE_COMP_ORIG_YR4_RT,AY2009 cohort measured in AY2013
+MALE_COMP_4YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+MALE_COMP_2YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+MALE_WDRAW_ORIG_YR4_RT,AY2009 cohort measured in AY2013
+MALE_WDRAW_4YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+MALE_WDRAW_2YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+MALE_ENRL_ORIG_YR4_RT,AY2009 cohort measured in AY2013
+MALE_ENRL_4YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+MALE_ENRL_2YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+MALE_UNKN_ORIG_YR4_RT,AY2009 cohort measured in AY2013
+MALE_UNKN_4YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+MALE_UNKN_2YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+PELL_DEATH_YR4_RT,AY2009 cohort measured in AY2013
+PELL_COMP_ORIG_YR4_RT,AY2009 cohort measured in AY2013
+PELL_COMP_4YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+PELL_COMP_2YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+PELL_WDRAW_ORIG_YR4_RT,AY2009 cohort measured in AY2013
+PELL_WDRAW_4YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+PELL_WDRAW_2YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+PELL_ENRL_ORIG_YR4_RT,AY2009 cohort measured in AY2013
+PELL_ENRL_4YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+PELL_ENRL_2YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+PELL_UNKN_ORIG_YR4_RT,AY2009 cohort measured in AY2013
+PELL_UNKN_4YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+PELL_UNKN_2YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+NOPELL_DEATH_YR4_RT,AY2009 cohort measured in AY2013
+NOPELL_COMP_ORIG_YR4_RT,AY2009 cohort measured in AY2013
+NOPELL_COMP_4YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+NOPELL_COMP_2YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+NOPELL_WDRAW_ORIG_YR4_RT,AY2009 cohort measured in AY2013
+NOPELL_WDRAW_4YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+NOPELL_WDRAW_2YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+NOPELL_ENRL_ORIG_YR4_RT,AY2009 cohort measured in AY2013
+NOPELL_ENRL_4YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+NOPELL_ENRL_2YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+NOPELL_UNKN_ORIG_YR4_RT,AY2009 cohort measured in AY2013
+NOPELL_UNKN_4YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+NOPELL_UNKN_2YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+LOAN_DEATH_YR4_RT,AY2009 cohort measured in AY2013
+LOAN_COMP_ORIG_YR4_RT,AY2009 cohort measured in AY2013
+LOAN_COMP_4YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+LOAN_COMP_2YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+LOAN_WDRAW_ORIG_YR4_RT,AY2009 cohort measured in AY2013
+LOAN_WDRAW_4YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+LOAN_WDRAW_2YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+LOAN_ENRL_ORIG_YR4_RT,AY2009 cohort measured in AY2013
+LOAN_ENRL_4YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+LOAN_ENRL_2YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+LOAN_UNKN_ORIG_YR4_RT,AY2009 cohort measured in AY2013
+LOAN_UNKN_4YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+LOAN_UNKN_2YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+NOLOAN_DEATH_YR4_RT,AY2009 cohort measured in AY2013
+NOLOAN_COMP_ORIG_YR4_RT,AY2009 cohort measured in AY2013
+NOLOAN_COMP_4YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+NOLOAN_COMP_2YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+NOLOAN_WDRAW_ORIG_YR4_RT,AY2009 cohort measured in AY2013
+NOLOAN_WDRAW_4YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+NOLOAN_WDRAW_2YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+NOLOAN_ENRL_ORIG_YR4_RT,AY2009 cohort measured in AY2013
+NOLOAN_ENRL_4YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+NOLOAN_ENRL_2YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+NOLOAN_UNKN_ORIG_YR4_RT,AY2009 cohort measured in AY2013
+NOLOAN_UNKN_4YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+NOLOAN_UNKN_2YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+FIRSTGEN_DEATH_YR4_RT,AY2009 cohort measured in AY2013
+FIRSTGEN_COMP_ORIG_YR4_RT,AY2009 cohort measured in AY2013
+FIRSTGEN_COMP_4YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+FIRSTGEN_COMP_2YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+FIRSTGEN_WDRAW_ORIG_YR4_RT,AY2009 cohort measured in AY2013
+FIRSTGEN_WDRAW_4YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+FIRSTGEN_WDRAW_2YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+FIRSTGEN_ENRL_ORIG_YR4_RT,AY2009 cohort measured in AY2013
+FIRSTGEN_ENRL_4YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+FIRSTGEN_ENRL_2YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+FIRSTGEN_UNKN_ORIG_YR4_RT,AY2009 cohort measured in AY2013
+FIRSTGEN_UNKN_4YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+FIRSTGEN_UNKN_2YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+NOT1STGEN_DEATH_YR4_RT,AY2009 cohort measured in AY2013
+NOT1STGEN_COMP_ORIG_YR4_RT,AY2009 cohort measured in AY2013
+NOT1STGEN_COMP_4YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+NOT1STGEN_COMP_2YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+NOT1STGEN_WDRAW_ORIG_YR4_RT,AY2009 cohort measured in AY2013
+NOT1STGEN_WDRAW_4YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+NOT1STGEN_WDRAW_2YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+NOT1STGEN_ENRL_ORIG_YR4_RT,AY2009 cohort measured in AY2013
+NOT1STGEN_ENRL_4YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+NOT1STGEN_ENRL_2YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+NOT1STGEN_UNKN_ORIG_YR4_RT,AY2009 cohort measured in AY2013
+NOT1STGEN_UNKN_4YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+NOT1STGEN_UNKN_2YR_TRANS_YR4_RT,AY2009 cohort measured in AY2013
+DEATH_YR6_RT,AY2007 cohort measured in AY2013
+COMP_ORIG_YR6_RT,AY2007 cohort measured in AY2013
+COMP_4YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+COMP_2YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+WDRAW_ORIG_YR6_RT,AY2007 cohort measured in AY2013
+WDRAW_4YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+WDRAW_2YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+ENRL_ORIG_YR6_RT,AY2007 cohort measured in AY2013
+ENRL_4YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+ENRL_2YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+UNKN_ORIG_YR6_RT,AY2007 cohort measured in AY2013
+UNKN_4YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+UNKN_2YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+LO_INC_DEATH_YR6_RT,AY2007 cohort measured in AY2013
+LO_INC_COMP_ORIG_YR6_RT,AY2007 cohort measured in AY2013
+LO_INC_COMP_4YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+LO_INC_COMP_2YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+LO_INC_WDRAW_ORIG_YR6_RT,AY2007 cohort measured in AY2013
+LO_INC_WDRAW_4YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+LO_INC_WDRAW_2YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+LO_INC_ENRL_ORIG_YR6_RT,AY2007 cohort measured in AY2013
+LO_INC_ENRL_4YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+LO_INC_ENRL_2YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+LO_INC_UNKN_ORIG_YR6_RT,AY2007 cohort measured in AY2013
+LO_INC_UNKN_4YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+LO_INC_UNKN_2YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+MD_INC_DEATH_YR6_RT,AY2007 cohort measured in AY2013
+MD_INC_COMP_ORIG_YR6_RT,AY2007 cohort measured in AY2013
+MD_INC_COMP_4YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+MD_INC_COMP_2YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+MD_INC_WDRAW_ORIG_YR6_RT,AY2007 cohort measured in AY2013
+MD_INC_WDRAW_4YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+MD_INC_WDRAW_2YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+MD_INC_ENRL_ORIG_YR6_RT,AY2007 cohort measured in AY2013
+MD_INC_ENRL_4YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+MD_INC_ENRL_2YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+MD_INC_UNKN_ORIG_YR6_RT,AY2007 cohort measured in AY2013
+MD_INC_UNKN_4YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+MD_INC_UNKN_2YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+HI_INC_DEATH_YR6_RT,AY2007 cohort measured in AY2013
+HI_INC_COMP_ORIG_YR6_RT,AY2007 cohort measured in AY2013
+HI_INC_COMP_4YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+HI_INC_COMP_2YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+HI_INC_WDRAW_ORIG_YR6_RT,AY2007 cohort measured in AY2013
+HI_INC_WDRAW_4YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+HI_INC_WDRAW_2YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+HI_INC_ENRL_ORIG_YR6_RT,AY2007 cohort measured in AY2013
+HI_INC_ENRL_4YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+HI_INC_ENRL_2YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+HI_INC_UNKN_ORIG_YR6_RT,AY2007 cohort measured in AY2013
+HI_INC_UNKN_4YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+HI_INC_UNKN_2YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+DEP_DEATH_YR6_RT,AY2007 cohort measured in AY2013
+DEP_COMP_ORIG_YR6_RT,AY2007 cohort measured in AY2013
+DEP_COMP_4YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+DEP_COMP_2YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+DEP_WDRAW_ORIG_YR6_RT,AY2007 cohort measured in AY2013
+DEP_WDRAW_4YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+DEP_WDRAW_2YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+DEP_ENRL_ORIG_YR6_RT,AY2007 cohort measured in AY2013
+DEP_ENRL_4YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+DEP_ENRL_2YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+DEP_UNKN_ORIG_YR6_RT,AY2007 cohort measured in AY2013
+DEP_UNKN_4YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+DEP_UNKN_2YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+IND_DEATH_YR6_RT,AY2007 cohort measured in AY2013
+IND_COMP_ORIG_YR6_RT,AY2007 cohort measured in AY2013
+IND_COMP_4YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+IND_COMP_2YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+IND_WDRAW_ORIG_YR6_RT,AY2007 cohort measured in AY2013
+IND_WDRAW_4YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+IND_WDRAW_2YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+IND_ENRL_ORIG_YR6_RT,AY2007 cohort measured in AY2013
+IND_ENRL_4YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+IND_ENRL_2YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+IND_UNKN_ORIG_YR6_RT,AY2007 cohort measured in AY2013
+IND_UNKN_4YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+IND_UNKN_2YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+FEMALE_DEATH_YR6_RT,AY2007 cohort measured in AY2013
+FEMALE_COMP_ORIG_YR6_RT,AY2007 cohort measured in AY2013
+FEMALE_COMP_4YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+FEMALE_COMP_2YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+FEMALE_WDRAW_ORIG_YR6_RT,AY2007 cohort measured in AY2013
+FEMALE_WDRAW_4YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+FEMALE_WDRAW_2YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+FEMALE_ENRL_ORIG_YR6_RT,AY2007 cohort measured in AY2013
+FEMALE_ENRL_4YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+FEMALE_ENRL_2YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+FEMALE_UNKN_ORIG_YR6_RT,AY2007 cohort measured in AY2013
+FEMALE_UNKN_4YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+FEMALE_UNKN_2YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+MALE_DEATH_YR6_RT,AY2007 cohort measured in AY2013
+MALE_COMP_ORIG_YR6_RT,AY2007 cohort measured in AY2013
+MALE_COMP_4YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+MALE_COMP_2YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+MALE_WDRAW_ORIG_YR6_RT,AY2007 cohort measured in AY2013
+MALE_WDRAW_4YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+MALE_WDRAW_2YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+MALE_ENRL_ORIG_YR6_RT,AY2007 cohort measured in AY2013
+MALE_ENRL_4YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+MALE_ENRL_2YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+MALE_UNKN_ORIG_YR6_RT,AY2007 cohort measured in AY2013
+MALE_UNKN_4YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+MALE_UNKN_2YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+PELL_DEATH_YR6_RT,AY2007 cohort measured in AY2013
+PELL_COMP_ORIG_YR6_RT,AY2007 cohort measured in AY2013
+PELL_COMP_4YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+PELL_COMP_2YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+PELL_WDRAW_ORIG_YR6_RT,AY2007 cohort measured in AY2013
+PELL_WDRAW_4YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+PELL_WDRAW_2YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+PELL_ENRL_ORIG_YR6_RT,AY2007 cohort measured in AY2013
+PELL_ENRL_4YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+PELL_ENRL_2YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+PELL_UNKN_ORIG_YR6_RT,AY2007 cohort measured in AY2013
+PELL_UNKN_4YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+PELL_UNKN_2YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+NOPELL_DEATH_YR6_RT,AY2007 cohort measured in AY2013
+NOPELL_COMP_ORIG_YR6_RT,AY2007 cohort measured in AY2013
+NOPELL_COMP_4YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+NOPELL_COMP_2YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+NOPELL_WDRAW_ORIG_YR6_RT,AY2007 cohort measured in AY2013
+NOPELL_WDRAW_4YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+NOPELL_WDRAW_2YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+NOPELL_ENRL_ORIG_YR6_RT,AY2007 cohort measured in AY2013
+NOPELL_ENRL_4YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+NOPELL_ENRL_2YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+NOPELL_UNKN_ORIG_YR6_RT,AY2007 cohort measured in AY2013
+NOPELL_UNKN_4YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+NOPELL_UNKN_2YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+LOAN_DEATH_YR6_RT,AY2007 cohort measured in AY2013
+LOAN_COMP_ORIG_YR6_RT,AY2007 cohort measured in AY2013
+LOAN_COMP_4YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+LOAN_COMP_2YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+LOAN_WDRAW_ORIG_YR6_RT,AY2007 cohort measured in AY2013
+LOAN_WDRAW_4YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+LOAN_WDRAW_2YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+LOAN_ENRL_ORIG_YR6_RT,AY2007 cohort measured in AY2013
+LOAN_ENRL_4YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+LOAN_ENRL_2YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+LOAN_UNKN_ORIG_YR6_RT,AY2007 cohort measured in AY2013
+LOAN_UNKN_4YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+LOAN_UNKN_2YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+NOLOAN_DEATH_YR6_RT,AY2007 cohort measured in AY2013
+NOLOAN_COMP_ORIG_YR6_RT,AY2007 cohort measured in AY2013
+NOLOAN_COMP_4YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+NOLOAN_COMP_2YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+NOLOAN_WDRAW_ORIG_YR6_RT,AY2007 cohort measured in AY2013
+NOLOAN_WDRAW_4YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+NOLOAN_WDRAW_2YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+NOLOAN_ENRL_ORIG_YR6_RT,AY2007 cohort measured in AY2013
+NOLOAN_ENRL_4YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+NOLOAN_ENRL_2YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+NOLOAN_UNKN_ORIG_YR6_RT,AY2007 cohort measured in AY2013
+NOLOAN_UNKN_4YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+NOLOAN_UNKN_2YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+FIRSTGEN_DEATH_YR6_RT,AY2007 cohort measured in AY2013
+FIRSTGEN_COMP_ORIG_YR6_RT,AY2007 cohort measured in AY2013
+FIRSTGEN_COMP_4YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+FIRSTGEN_COMP_2YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+FIRSTGEN_WDRAW_ORIG_YR6_RT,AY2007 cohort measured in AY2013
+FIRSTGEN_WDRAW_4YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+FIRSTGEN_WDRAW_2YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+FIRSTGEN_ENRL_ORIG_YR6_RT,AY2007 cohort measured in AY2013
+FIRSTGEN_ENRL_4YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+FIRSTGEN_ENRL_2YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+FIRSTGEN_UNKN_ORIG_YR6_RT,AY2007 cohort measured in AY2013
+FIRSTGEN_UNKN_4YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+FIRSTGEN_UNKN_2YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+NOT1STGEN_DEATH_YR6_RT,AY2007 cohort measured in AY2013
+NOT1STGEN_COMP_ORIG_YR6_RT,AY2007 cohort measured in AY2013
+NOT1STGEN_COMP_4YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+NOT1STGEN_COMP_2YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+NOT1STGEN_WDRAW_ORIG_YR6_RT,AY2007 cohort measured in AY2013
+NOT1STGEN_WDRAW_4YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+NOT1STGEN_WDRAW_2YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+NOT1STGEN_ENRL_ORIG_YR6_RT,AY2007 cohort measured in AY2013
+NOT1STGEN_ENRL_4YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+NOT1STGEN_ENRL_2YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+NOT1STGEN_UNKN_ORIG_YR6_RT,AY2007 cohort measured in AY2013
+NOT1STGEN_UNKN_4YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+NOT1STGEN_UNKN_2YR_TRANS_YR6_RT,AY2007 cohort measured in AY2013
+DEATH_YR8_RT,AY2005 cohort measured in AY2013
+COMP_ORIG_YR8_RT,AY2005 cohort measured in AY2013
+COMP_4YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+COMP_2YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+WDRAW_ORIG_YR8_RT,AY2005 cohort measured in AY2013
+WDRAW_4YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+WDRAW_2YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+ENRL_ORIG_YR8_RT,AY2005 cohort measured in AY2013
+ENRL_4YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+ENRL_2YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+UNKN_ORIG_YR8_RT,AY2005 cohort measured in AY2013
+UNKN_4YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+UNKN_2YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+LO_INC_DEATH_YR8_RT,AY2005 cohort measured in AY2013
+LO_INC_COMP_ORIG_YR8_RT,AY2005 cohort measured in AY2013
+LO_INC_COMP_4YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+LO_INC_COMP_2YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+LO_INC_WDRAW_ORIG_YR8_RT,AY2005 cohort measured in AY2013
+LO_INC_WDRAW_4YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+LO_INC_WDRAW_2YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+LO_INC_ENRL_ORIG_YR8_RT,AY2005 cohort measured in AY2013
+LO_INC_ENRL_4YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+LO_INC_ENRL_2YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+LO_INC_UNKN_ORIG_YR8_RT,AY2005 cohort measured in AY2013
+LO_INC_UNKN_4YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+LO_INC_UNKN_2YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+MD_INC_DEATH_YR8_RT,AY2005 cohort measured in AY2013
+MD_INC_COMP_ORIG_YR8_RT,AY2005 cohort measured in AY2013
+MD_INC_COMP_4YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+MD_INC_COMP_2YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+MD_INC_WDRAW_ORIG_YR8_RT,AY2005 cohort measured in AY2013
+MD_INC_WDRAW_4YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+MD_INC_WDRAW_2YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+MD_INC_ENRL_ORIG_YR8_RT,AY2005 cohort measured in AY2013
+MD_INC_ENRL_4YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+MD_INC_ENRL_2YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+MD_INC_UNKN_ORIG_YR8_RT,AY2005 cohort measured in AY2013
+MD_INC_UNKN_4YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+MD_INC_UNKN_2YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+HI_INC_DEATH_YR8_RT,AY2005 cohort measured in AY2013
+HI_INC_COMP_ORIG_YR8_RT,AY2005 cohort measured in AY2013
+HI_INC_COMP_4YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+HI_INC_COMP_2YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+HI_INC_WDRAW_ORIG_YR8_RT,AY2005 cohort measured in AY2013
+HI_INC_WDRAW_4YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+HI_INC_WDRAW_2YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+HI_INC_ENRL_ORIG_YR8_RT,AY2005 cohort measured in AY2013
+HI_INC_ENRL_4YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+HI_INC_ENRL_2YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+HI_INC_UNKN_ORIG_YR8_RT,AY2005 cohort measured in AY2013
+HI_INC_UNKN_4YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+HI_INC_UNKN_2YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+DEP_DEATH_YR8_RT,AY2005 cohort measured in AY2013
+DEP_COMP_ORIG_YR8_RT,AY2005 cohort measured in AY2013
+DEP_COMP_4YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+DEP_COMP_2YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+DEP_WDRAW_ORIG_YR8_RT,AY2005 cohort measured in AY2013
+DEP_WDRAW_4YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+DEP_WDRAW_2YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+DEP_ENRL_ORIG_YR8_RT,AY2005 cohort measured in AY2013
+DEP_ENRL_4YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+DEP_ENRL_2YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+DEP_UNKN_ORIG_YR8_RT,AY2005 cohort measured in AY2013
+DEP_UNKN_4YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+DEP_UNKN_2YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+IND_DEATH_YR8_RT,AY2005 cohort measured in AY2013
+IND_COMP_ORIG_YR8_RT,AY2005 cohort measured in AY2013
+IND_COMP_4YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+IND_COMP_2YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+IND_WDRAW_ORIG_YR8_RT,AY2005 cohort measured in AY2013
+IND_WDRAW_4YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+IND_WDRAW_2YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+IND_ENRL_ORIG_YR8_RT,AY2005 cohort measured in AY2013
+IND_ENRL_4YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+IND_ENRL_2YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+IND_UNKN_ORIG_YR8_RT,AY2005 cohort measured in AY2013
+IND_UNKN_4YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+IND_UNKN_2YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+FEMALE_DEATH_YR8_RT,AY2005 cohort measured in AY2013
+FEMALE_COMP_ORIG_YR8_RT,AY2005 cohort measured in AY2013
+FEMALE_COMP_4YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+FEMALE_COMP_2YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+FEMALE_WDRAW_ORIG_YR8_RT,AY2005 cohort measured in AY2013
+FEMALE_WDRAW_4YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+FEMALE_WDRAW_2YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+FEMALE_ENRL_ORIG_YR8_RT,AY2005 cohort measured in AY2013
+FEMALE_ENRL_4YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+FEMALE_ENRL_2YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+FEMALE_UNKN_ORIG_YR8_RT,AY2005 cohort measured in AY2013
+FEMALE_UNKN_4YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+FEMALE_UNKN_2YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+MALE_DEATH_YR8_RT,AY2005 cohort measured in AY2013
+MALE_COMP_ORIG_YR8_RT,AY2005 cohort measured in AY2013
+MALE_COMP_4YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+MALE_COMP_2YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+MALE_WDRAW_ORIG_YR8_RT,AY2005 cohort measured in AY2013
+MALE_WDRAW_4YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+MALE_WDRAW_2YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+MALE_ENRL_ORIG_YR8_RT,AY2005 cohort measured in AY2013
+MALE_ENRL_4YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+MALE_ENRL_2YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+MALE_UNKN_ORIG_YR8_RT,AY2005 cohort measured in AY2013
+MALE_UNKN_4YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+MALE_UNKN_2YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+PELL_DEATH_YR8_RT,AY2005 cohort measured in AY2013
+PELL_COMP_ORIG_YR8_RT,AY2005 cohort measured in AY2013
+PELL_COMP_4YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+PELL_COMP_2YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+PELL_WDRAW_ORIG_YR8_RT,AY2005 cohort measured in AY2013
+PELL_WDRAW_4YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+PELL_WDRAW_2YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+PELL_ENRL_ORIG_YR8_RT,AY2005 cohort measured in AY2013
+PELL_ENRL_4YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+PELL_ENRL_2YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+PELL_UNKN_ORIG_YR8_RT,AY2005 cohort measured in AY2013
+PELL_UNKN_4YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+PELL_UNKN_2YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+NOPELL_DEATH_YR8_RT,AY2005 cohort measured in AY2013
+NOPELL_COMP_ORIG_YR8_RT,AY2005 cohort measured in AY2013
+NOPELL_COMP_4YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+NOPELL_COMP_2YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+NOPELL_WDRAW_ORIG_YR8_RT,AY2005 cohort measured in AY2013
+NOPELL_WDRAW_4YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+NOPELL_WDRAW_2YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+NOPELL_ENRL_ORIG_YR8_RT,AY2005 cohort measured in AY2013
+NOPELL_ENRL_4YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+NOPELL_ENRL_2YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+NOPELL_UNKN_ORIG_YR8_RT,AY2005 cohort measured in AY2013
+NOPELL_UNKN_4YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+NOPELL_UNKN_2YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+LOAN_DEATH_YR8_RT,AY2005 cohort measured in AY2013
+LOAN_COMP_ORIG_YR8_RT,AY2005 cohort measured in AY2013
+LOAN_COMP_4YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+LOAN_COMP_2YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+LOAN_WDRAW_ORIG_YR8_RT,AY2005 cohort measured in AY2013
+LOAN_WDRAW_4YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+LOAN_WDRAW_2YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+LOAN_ENRL_ORIG_YR8_RT,AY2005 cohort measured in AY2013
+LOAN_ENRL_4YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+LOAN_ENRL_2YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+LOAN_UNKN_ORIG_YR8_RT,AY2005 cohort measured in AY2013
+LOAN_UNKN_4YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+LOAN_UNKN_2YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+NOLOAN_DEATH_YR8_RT,AY2005 cohort measured in AY2013
+NOLOAN_COMP_ORIG_YR8_RT,AY2005 cohort measured in AY2013
+NOLOAN_COMP_4YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+NOLOAN_COMP_2YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+NOLOAN_WDRAW_ORIG_YR8_RT,AY2005 cohort measured in AY2013
+NOLOAN_WDRAW_4YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+NOLOAN_WDRAW_2YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+NOLOAN_ENRL_ORIG_YR8_RT,AY2005 cohort measured in AY2013
+NOLOAN_ENRL_4YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+NOLOAN_ENRL_2YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+NOLOAN_UNKN_ORIG_YR8_RT,AY2005 cohort measured in AY2013
+NOLOAN_UNKN_4YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+NOLOAN_UNKN_2YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+FIRSTGEN_DEATH_YR8_RT,AY2005 cohort measured in AY2013
+FIRSTGEN_COMP_ORIG_YR8_RT,AY2005 cohort measured in AY2013
+FIRSTGEN_COMP_4YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+FIRSTGEN_COMP_2YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+FIRSTGEN_WDRAW_ORIG_YR8_RT,AY2005 cohort measured in AY2013
+FIRSTGEN_WDRAW_4YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+FIRSTGEN_WDRAW_2YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+FIRSTGEN_ENRL_ORIG_YR8_RT,AY2005 cohort measured in AY2013
+FIRSTGEN_ENRL_4YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+FIRSTGEN_ENRL_2YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+FIRSTGEN_UNKN_ORIG_YR8_RT,AY2005 cohort measured in AY2013
+FIRSTGEN_UNKN_4YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+FIRSTGEN_UNKN_2YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+NOT1STGEN_DEATH_YR8_RT,AY2005 cohort measured in AY2013
+NOT1STGEN_COMP_ORIG_YR8_RT,AY2005 cohort measured in AY2013
+NOT1STGEN_COMP_4YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+NOT1STGEN_COMP_2YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+NOT1STGEN_WDRAW_ORIG_YR8_RT,AY2005 cohort measured in AY2013
+NOT1STGEN_WDRAW_4YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+NOT1STGEN_WDRAW_2YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+NOT1STGEN_ENRL_ORIG_YR8_RT,AY2005 cohort measured in AY2013
+NOT1STGEN_ENRL_4YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+NOT1STGEN_ENRL_2YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+NOT1STGEN_UNKN_ORIG_YR8_RT,AY2005 cohort measured in AY2013
+NOT1STGEN_UNKN_4YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+NOT1STGEN_UNKN_2YR_TRANS_YR8_RT,AY2005 cohort measured in AY2013
+RPY_1YR_RT,"FY2010, 2011 cohort measured in FY2011, 2012"
+COMPL_RPY_1YR_RT,"FY2010, 2011 cohort measured in FY2011, 2012"
+NONCOM_RPY_1YR_RT,"FY2010, 2011 cohort measured in FY2011, 2012"
+LO_INC_RPY_1YR_RT,"FY2010, 2011 cohort measured in FY2011, 2012"
+MD_INC_RPY_1YR_RT,"FY2010, 2011 cohort measured in FY2011, 2012"
+HI_INC_RPY_1YR_RT,"FY2010, 2011 cohort measured in FY2011, 2012"
+DEP_RPY_1YR_RT,"FY2010, 2011 cohort measured in FY2011, 2012"
+IND_RPY_1YR_RT,"FY2010, 2011 cohort measured in FY2011, 2012"
+PELL_RPY_1YR_RT,"FY2010, 2011 cohort measured in FY2011, 2012"
+NOPELL_RPY_1YR_RT,"FY2010, 2011 cohort measured in FY2011, 2012"
+FEMALE_RPY_1YR_RT,"FY2010, 2011 cohort measured in FY2011, 2012"
+MALE_RPY_1YR_RT,"FY2010, 2011 cohort measured in FY2011, 2012"
+FIRSTGEN_RPY_1YR_RT,"FY2010, 2011 cohort measured in FY2011, 2012"
+NOTFIRSTGEN_RPY_1YR_RT,"FY2010, 2011 cohort measured in FY2011, 2012"
+RPY_3YR_RT,"FY2010, 2011 cohort measured in FY2013, 2014"
+COMPL_RPY_3YR_RT,"FY2010, 2011 cohort measured in FY2013, 2014"
+NONCOM_RPY_3YR_RT,"FY2010, 2011 cohort measured in FY2013, 2014"
+LO_INC_RPY_3YR_RT,"FY2010, 2011 cohort measured in FY2013, 2014"
+MD_INC_RPY_3YR_RT,"FY2010, 2011 cohort measured in FY2013, 2014"
+HI_INC_RPY_3YR_RT,"FY2010, 2011 cohort measured in FY2013, 2014"
+DEP_RPY_3YR_RT,"FY2010, 2011 cohort measured in FY2013, 2014"
+IND_RPY_3YR_RT,"FY2010, 2011 cohort measured in FY2013, 2014"
+PELL_RPY_3YR_RT,"FY2010, 2011 cohort measured in FY2013, 2014"
+NOPELL_RPY_3YR_RT,"FY2010, 2011 cohort measured in FY2013, 2014"
+FEMALE_RPY_3YR_RT,"FY2010, 2011 cohort measured in FY2013, 2014"
+MALE_RPY_3YR_RT,"FY2010, 2011 cohort measured in FY2013, 2014"
+FIRSTGEN_RPY_3YR_RT,"FY2010, 2011 cohort measured in FY2013, 2014"
+NOTFIRSTGEN_RPY_3YR_RT,"FY2010, 2011 cohort measured in FY2013, 2014"
+RPY_5YR_RT,"FY2008, 2009 cohort measured in FY2013, 2014"
+COMPL_RPY_5YR_RT,"FY2008, 2009 cohort measured in FY2013, 2014"
+NONCOM_RPY_5YR_RT,"FY2008, 2009 cohort measured in FY2013, 2014"
+LO_INC_RPY_5YR_RT,"FY2008, 2009 cohort measured in FY2013, 2014"
+MD_INC_RPY_5YR_RT,"FY2008, 2009 cohort measured in FY2013, 2014"
+HI_INC_RPY_5YR_RT,"FY2008, 2009 cohort measured in FY2013, 2014"
+DEP_RPY_5YR_RT,"FY2008, 2009 cohort measured in FY2013, 2014"
+IND_RPY_5YR_RT,"FY2008, 2009 cohort measured in FY2013, 2014"
+PELL_RPY_5YR_RT,"FY2008, 2009 cohort measured in FY2013, 2014"
+NOPELL_RPY_5YR_RT,"FY2008, 2009 cohort measured in FY2013, 2014"
+FEMALE_RPY_5YR_RT,"FY2008, 2009 cohort measured in FY2013, 2014"
+MALE_RPY_5YR_RT,"FY2008, 2009 cohort measured in FY2013, 2014"
+FIRSTGEN_RPY_5YR_RT,"FY2008, 2009 cohort measured in FY2013, 2014"
+NOTFIRSTGEN_RPY_5YR_RT,"FY2008, 2009 cohort measured in FY2013, 2014"
+RPY_7YR_RT,"FY2006, 2007 cohort measured in FY2013, 2014"
+COMPL_RPY_7YR_RT,"FY2006, 2007 cohort measured in FY2013, 2014"
+NONCOM_RPY_7YR_RT,"FY2006, 2007 cohort measured in FY2013, 2014"
+LO_INC_RPY_7YR_RT,"FY2006, 2007 cohort measured in FY2013, 2014"
+MD_INC_RPY_7YR_RT,"FY2006, 2007 cohort measured in FY2013, 2014"
+HI_INC_RPY_7YR_RT,"FY2006, 2007 cohort measured in FY2013, 2014"
+DEP_RPY_7YR_RT,"FY2006, 2007 cohort measured in FY2013, 2014"
+IND_RPY_7YR_RT,"FY2006, 2007 cohort measured in FY2013, 2014"
+PELL_RPY_7YR_RT,"FY2006, 2007 cohort measured in FY2013, 2014"
+NOPELL_RPY_7YR_RT,"FY2006, 2007 cohort measured in FY2013, 2014"
+FEMALE_RPY_7YR_RT,"FY2006, 2007 cohort measured in FY2013, 2014"
+MALE_RPY_7YR_RT,"FY2006, 2007 cohort measured in FY2013, 2014"
+FIRSTGEN_RPY_7YR_RT,"FY2006, 2007 cohort measured in FY2013, 2014"
+NOTFIRSTGEN_RPY_7YR_RT,"FY2006, 2007 cohort measured in FY2013, 2014"
+INC_PCT_LO,"AY2013, 2014 pooled cohort"
+DEP_STAT_PCT_IND,"AY2013, 2014 pooled cohort"
+DEP_INC_PCT_LO,"AY2013, 2014 pooled cohort"
+IND_INC_PCT_LO,"AY2013, 2014 pooled cohort"
+PAR_ED_PCT_1STGEN,"AY2013, 2014 pooled cohort"
+INC_PCT_M1,"AY2013, 2014 pooled cohort"
+INC_PCT_M2,"AY2013, 2014 pooled cohort"
+INC_PCT_H1,"AY2013, 2014 pooled cohort"
+INC_PCT_H2,"AY2013, 2014 pooled cohort"
+DEP_INC_PCT_M1,"AY2013, 2014 pooled cohort"
+DEP_INC_PCT_M2,"AY2013, 2014 pooled cohort"
+DEP_INC_PCT_H1,"AY2013, 2014 pooled cohort"
+DEP_INC_PCT_H2,"AY2013, 2014 pooled cohort"
+IND_INC_PCT_M1,"AY2013, 2014 pooled cohort"
+IND_INC_PCT_M2,"AY2013, 2014 pooled cohort"
+IND_INC_PCT_H1,"AY2013, 2014 pooled cohort"
+IND_INC_PCT_H2,"AY2013, 2014 pooled cohort"
+PAR_ED_PCT_MS,"AY2013, 2014 pooled cohort"
+PAR_ED_PCT_HS,"AY2013, 2014 pooled cohort"
+PAR_ED_PCT_PS,"AY2013, 2014 pooled cohort"
+APPL_SCH_PCT_GE2,"AY2013, 2014 pooled cohort"
+APPL_SCH_PCT_GE3,"AY2013, 2014 pooled cohort"
+APPL_SCH_PCT_GE4,"AY2013, 2014 pooled cohort"
+APPL_SCH_PCT_GE5,"AY2013, 2014 pooled cohort"
+DEP_INC_AVG,"AY2013, 2014 pooled cohort"
+IND_INC_AVG,"AY2013, 2014 pooled cohort"
+OVERALL_YR2_N,AY2011 cohort measured in AY2013
+LO_INC_YR2_N,AY2011 cohort measured in AY2013
+MD_INC_YR2_N,AY2011 cohort measured in AY2013
+HI_INC_YR2_N,AY2011 cohort measured in AY2013
+DEP_YR2_N,AY2011 cohort measured in AY2013
+IND_YR2_N,AY2011 cohort measured in AY2013
+FEMALE_YR2_N,AY2011 cohort measured in AY2013
+MALE_YR2_N,AY2011 cohort measured in AY2013
+PELL_YR2_N,AY2011 cohort measured in AY2013
+NOPELL_YR2_N,AY2011 cohort measured in AY2013
+LOAN_YR2_N,AY2011 cohort measured in AY2013
+NOLOAN_YR2_N,AY2011 cohort measured in AY2013
+FIRSTGEN_YR2_N,AY2011 cohort measured in AY2013
+NOT1STGEN_YR2_N,AY2011 cohort measured in AY2013
+OVERALL_YR3_N,AY2010 cohort measured in AY2013
+LO_INC_YR3_N,AY2010 cohort measured in AY2013
+MD_INC_YR3_N,AY2010 cohort measured in AY2013
+HI_INC_YR3_N,AY2010 cohort measured in AY2013
+DEP_YR3_N,AY2010 cohort measured in AY2013
+IND_YR3_N,AY2010 cohort measured in AY2013
+FEMALE_YR3_N,AY2010 cohort measured in AY2013
+MALE_YR3_N,AY2010 cohort measured in AY2013
+PELL_YR3_N,AY2010 cohort measured in AY2013
+NOPELL_YR3_N,AY2010 cohort measured in AY2013
+LOAN_YR3_N,AY2010 cohort measured in AY2013
+NOLOAN_YR3_N,AY2010 cohort measured in AY2013
+FIRSTGEN_YR3_N,AY2010 cohort measured in AY2013
+NOT1STGEN_YR3_N,AY2010 cohort measured in AY2013
+OVERALL_YR4_N,AY2009 cohort measured in AY2013
+LO_INC_YR4_N,AY2009 cohort measured in AY2013
+MD_INC_YR4_N,AY2009 cohort measured in AY2013
+HI_INC_YR4_N,AY2009 cohort measured in AY2013
+DEP_YR4_N,AY2009 cohort measured in AY2013
+IND_YR4_N,AY2009 cohort measured in AY2013
+FEMALE_YR4_N,AY2009 cohort measured in AY2013
+MALE_YR4_N,AY2009 cohort measured in AY2013
+PELL_YR4_N,AY2009 cohort measured in AY2013
+NOPELL_YR4_N,AY2009 cohort measured in AY2013
+LOAN_YR4_N,AY2009 cohort measured in AY2013
+NOLOAN_YR4_N,AY2009 cohort measured in AY2013
+FIRSTGEN_YR4_N,AY2009 cohort measured in AY2013
+NOT1STGEN_YR4_N,AY2009 cohort measured in AY2013
+OVERALL_YR6_N,AY2007 cohort measured in AY2013
+LO_INC_YR6_N,AY2007 cohort measured in AY2013
+MD_INC_YR6_N,AY2007 cohort measured in AY2013
+HI_INC_YR6_N,AY2007 cohort measured in AY2013
+DEP_YR6_N,AY2007 cohort measured in AY2013
+IND_YR6_N,AY2007 cohort measured in AY2013
+FEMALE_YR6_N,AY2007 cohort measured in AY2013
+MALE_YR6_N,AY2007 cohort measured in AY2013
+PELL_YR6_N,AY2007 cohort measured in AY2013
+NOPELL_YR6_N,AY2007 cohort measured in AY2013
+LOAN_YR6_N,AY2007 cohort measured in AY2013
+NOLOAN_YR6_N,AY2007 cohort measured in AY2013
+FIRSTGEN_YR6_N,AY2007 cohort measured in AY2013
+NOT1STGEN_YR6_N,AY2007 cohort measured in AY2013
+OVERALL_YR8_N,AY2005 cohort measured in AY2013
+LO_INC_YR8_N,AY2005 cohort measured in AY2013
+MD_INC_YR8_N,AY2005 cohort measured in AY2013
+HI_INC_YR8_N,AY2005 cohort measured in AY2013
+DEP_YR8_N,AY2005 cohort measured in AY2013
+IND_YR8_N,AY2005 cohort measured in AY2013
+FEMALE_YR8_N,AY2005 cohort measured in AY2013
+MALE_YR8_N,AY2005 cohort measured in AY2013
+PELL_YR8_N,AY2005 cohort measured in AY2013
+NOPELL_YR8_N,AY2005 cohort measured in AY2013
+LOAN_YR8_N,AY2005 cohort measured in AY2013
+NOLOAN_YR8_N,AY2005 cohort measured in AY2013
+FIRSTGEN_YR8_N,AY2005 cohort measured in AY2013
+NOT1STGEN_YR8_N,AY2005 cohort measured in AY2013
+DEBT_MDN,"AY2013, 2014 pooled cohort"
+GRAD_DEBT_MDN,"AY2013, 2014 pooled cohort"
+WDRAW_DEBT_MDN,"AY2013, 2014 pooled cohort"
+LO_INC_DEBT_MDN,"AY2013, 2014 pooled cohort"
+MD_INC_DEBT_MDN,"AY2013, 2014 pooled cohort"
+HI_INC_DEBT_MDN,"AY2013, 2014 pooled cohort"
+DEP_DEBT_MDN,"AY2013, 2014 pooled cohort"
+IND_DEBT_MDN,"AY2013, 2014 pooled cohort"
+PELL_DEBT_MDN,"AY2013, 2014 pooled cohort"
+NOPELL_DEBT_MDN,"AY2013, 2014 pooled cohort"
+FEMALE_DEBT_MDN,"AY2013, 2014 pooled cohort"
+MALE_DEBT_MDN,"AY2013, 2014 pooled cohort"
+FIRSTGEN_DEBT_MDN,"AY2013, 2014 pooled cohort"
+NOTFIRSTGEN_DEBT_MDN,"AY2013, 2014 pooled cohort"
+DEBT_N,"AY2013, 2014 pooled cohort"
+GRAD_DEBT_N,"AY2013, 2014 pooled cohort"
+WDRAW_DEBT_N,"AY2013, 2014 pooled cohort"
+LO_INC_DEBT_N,"AY2013, 2014 pooled cohort"
+MD_INC_DEBT_N,"AY2013, 2014 pooled cohort"
+HI_INC_DEBT_N,"AY2013, 2014 pooled cohort"
+DEP_DEBT_N,"AY2013, 2014 pooled cohort"
+IND_DEBT_N,"AY2013, 2014 pooled cohort"
+PELL_DEBT_N,"AY2013, 2014 pooled cohort"
+NOPELL_DEBT_N,"AY2013, 2014 pooled cohort"
+FEMALE_DEBT_N,"AY2013, 2014 pooled cohort"
+MALE_DEBT_N,"AY2013, 2014 pooled cohort"
+FIRSTGEN_DEBT_N,"AY2013, 2014 pooled cohort"
+NOTFIRSTGEN_DEBT_N,"AY2013, 2014 pooled cohort"
+GRAD_DEBT_MDN10YR,"AY2013, 2014 pooled cohort"
+CUML_DEBT_N,"AY2013, 2014 pooled cohort"
+CUML_DEBT_P90,"AY2013, 2014 pooled cohort"
+CUML_DEBT_P75,"AY2013, 2014 pooled cohort"
+CUML_DEBT_P25,"AY2013, 2014 pooled cohort"
+CUML_DEBT_P10,"AY2013, 2014 pooled cohort"
+INC_N,"AY2013, 2014 pooled cohort"
+DEP_INC_N,"AY2013, 2014 pooled cohort"
+IND_INC_N,"AY2013, 2014 pooled cohort"
+DEP_STAT_N,"AY2013, 2014 pooled cohort"
+PAR_ED_N,"AY2013, 2014 pooled cohort"
+APPL_SCH_N,"AY2013, 2014 pooled cohort"
+APPL_SCH_N,"AY2012, 2013 pooled cohort"
+SEPAR_DT_MDN,"AY2012, 2013 pooled cohort"
+REPAY_DT_N,"AY2012, 2013 pooled cohort"
+SEPAR_DT_N,"AY2012, 2013 pooled cohort"
+RPY_1YR_N,"FY2010, 2011 cohort measured in FY2011, 2012"
+COMPL_RPY_1YR_N,"FY2010, 2011 cohort measured in FY2011, 2012"
+NONCOM_RPY_1YR_N,"FY2010, 2011 cohort measured in FY2011, 2012"
+LO_INC_RPY_1YR_N,"FY2010, 2011 cohort measured in FY2011, 2012"
+MD_INC_RPY_1YR_N,"FY2010, 2011 cohort measured in FY2011, 2012"
+HI_INC_RPY_1YR_N,"FY2010, 2011 cohort measured in FY2011, 2012"
+DEP_RPY_1YR_N,"FY2010, 2011 cohort measured in FY2011, 2012"
+IND_RPY_1YR_N,"FY2010, 2011 cohort measured in FY2011, 2012"
+PELL_RPY_1YR_N,"FY2010, 2011 cohort measured in FY2011, 2012"
+NOPELL_RPY_1YR_N,"FY2010, 2011 cohort measured in FY2011, 2012"
+FEMALE_RPY_1YR_N,"FY2010, 2011 cohort measured in FY2011, 2012"
+MALE_RPY_1YR_N,"FY2010, 2011 cohort measured in FY2011, 2012"
+FIRSTGEN_RPY_1YR_N,"FY2010, 2011 cohort measured in FY2011, 2012"
+NOTFIRSTGEN_RPY_1YR_N,"FY2010, 2011 cohort measured in FY2011, 2012"
+RPY_3YR_N,"FY2010, 2011 cohort measured in FY2013, 2014"
+COMPL_RPY_3YR_N,"FY2010, 2011 cohort measured in FY2013, 2014"
+NONCOM_RPY_3YR_N,"FY2010, 2011 cohort measured in FY2013, 2014"
+LO_INC_RPY_3YR_N,"FY2010, 2011 cohort measured in FY2013, 2014"
+MD_INC_RPY_3YR_N,"FY2010, 2011 cohort measured in FY2013, 2014"
+HI_INC_RPY_3YR_N,"FY2010, 2011 cohort measured in FY2013, 2014"
+DEP_RPY_3YR_N,"FY2010, 2011 cohort measured in FY2013, 2014"
+IND_RPY_3YR_N,"FY2010, 2011 cohort measured in FY2013, 2014"
+PELL_RPY_3YR_N,"FY2010, 2011 cohort measured in FY2013, 2014"
+NOPELL_RPY_3YR_N,"FY2010, 2011 cohort measured in FY2013, 2014"
+FEMALE_RPY_3YR_N,"FY2010, 2011 cohort measured in FY2013, 2014"
+MALE_RPY_3YR_N,"FY2010, 2011 cohort measured in FY2013, 2014"
+FIRSTGEN_RPY_3YR_N,"FY2010, 2011 cohort measured in FY2013, 2014"
+NOTFIRSTGEN_RPY_3YR_N,"FY2010, 2011 cohort measured in FY2013, 2014"
+RPY_5YR_N,"FY2008, 2009 cohort measured in FY2013, 2014"
+COMPL_RPY_5YR_N,"FY2008, 2009 cohort measured in FY2013, 2014"
+NONCOM_RPY_5YR_N,"FY2008, 2009 cohort measured in FY2013, 2014"
+LO_INC_RPY_5YR_N,"FY2008, 2009 cohort measured in FY2013, 2014"
+MD_INC_RPY_5YR_N,"FY2008, 2009 cohort measured in FY2013, 2014"
+HI_INC_RPY_5YR_N,"FY2008, 2009 cohort measured in FY2013, 2014"
+DEP_RPY_5YR_N,"FY2008, 2009 cohort measured in FY2013, 2014"
+IND_RPY_5YR_N,"FY2008, 2009 cohort measured in FY2013, 2014"
+PELL_RPY_5YR_N,"FY2008, 2009 cohort measured in FY2013, 2014"
+NOPELL_RPY_5YR_N,"FY2008, 2009 cohort measured in FY2013, 2014"
+FEMALE_RPY_5YR_N,"FY2008, 2009 cohort measured in FY2013, 2014"
+MALE_RPY_5YR_N,"FY2008, 2009 cohort measured in FY2013, 2014"
+FIRSTGEN_RPY_5YR_N,"FY2008, 2009 cohort measured in FY2013, 2014"
+NOTFIRSTGEN_RPY_5YR_N,"FY2008, 2009 cohort measured in FY2013, 2014"
+RPY_7YR_N,"FY2006, 2007 cohort measured in FY2013, 2014"
+COMPL_RPY_7YR_N,"FY2006, 2007 cohort measured in FY2013, 2014"
+NONCOM_RPY_7YR_N,"FY2006, 2007 cohort measured in FY2013, 2014"
+LO_INC_RPY_7YR_N,"FY2006, 2007 cohort measured in FY2013, 2014"
+MD_INC_RPY_7YR_N,"FY2006, 2007 cohort measured in FY2013, 2014"
+HI_INC_RPY_7YR_N,"FY2006, 2007 cohort measured in FY2013, 2014"
+DEP_RPY_7YR_N,"FY2006, 2007 cohort measured in FY2013, 2014"
+IND_RPY_7YR_N,"FY2006, 2007 cohort measured in FY2013, 2014"
+PELL_RPY_7YR_N,"FY2006, 2007 cohort measured in FY2013, 2014"
+NOPELL_RPY_7YR_N,"FY2006, 2007 cohort measured in FY2013, 2014"
+FEMALE_RPY_7YR_N,"FY2006, 2007 cohort measured in FY2013, 2014"
+MALE_RPY_7YR_N,"FY2006, 2007 cohort measured in FY2013, 2014"
+FIRSTGEN_RPY_7YR_N,"FY2006, 2007 cohort measured in FY2013, 2014"
+NOTFIRSTGEN_RPY_7YR_N,"FY2006, 2007 cohort measured in FY2013, 2014"
+count_ed,"AY2005, 2006 pooled cohort"
+loan_ever,"AY2005, 2006 pooled cohort"
+pell_ever,"AY2005, 2006 pooled cohort"
+age_entry,"AY2005, 2006 pooled cohort"
+age_entry_sq,"AY2005, 2006 pooled cohort"
+agege24,"AY2005, 2006 pooled cohort"
+female,"AY2005, 2006 pooled cohort"
+married,"AY2005, 2006 pooled cohort"
+dependent,"AY2005, 2006 pooled cohort"
+veteran,"AY2005, 2006 pooled cohort"
+first_gen,"AY2005, 2006 pooled cohort"
+faminc,"AY2005, 2006 pooled cohort"
+md_faminc,"AY2005, 2006 pooled cohort"
+faminc_ind,"AY2005, 2006 pooled cohort"
+lnfaminc,"AY2005, 2006 pooled cohort"
+lnfaminc_ind,"AY2005, 2006 pooled cohort"
+pct_white,"AY2005, 2006 pooled cohort"
+pct_black,"AY2005, 2006 pooled cohort"
+pct_asian,"AY2005, 2006 pooled cohort"
+pct_hispanic,"AY2005, 2006 pooled cohort"
+pct_ba,"AY2005, 2006 pooled cohort"
+pct_grad_prof,"AY2005, 2006 pooled cohort"
+pct_born_us,"AY2005, 2006 pooled cohort"
+median_hh_inc,"AY2005, 2006 pooled cohort"
+poverty_rate,"AY2005, 2006 pooled cohort"
+unemp_rate,"AY2005, 2006 pooled cohort"
+ln_median_hh_inc,"AY2005, 2006 pooled cohort"
+fsend_count,"AY2005, 2006 pooled cohort"
+fsend_1,"AY2005, 2006 pooled cohort"
+fsend_2,"AY2005, 2006 pooled cohort"
+fsend_3,"AY2005, 2006 pooled cohort"
+fsend_4,"AY2005, 2006 pooled cohort"
+fsend_5,"AY2005, 2006 pooled cohort"
+count_nwne_p10,"AY2001, 2002 pooled cohort measured in CY2011,2012"
+count_wne_p10,"AY2001, 2002 pooled cohort measured in CY2011,2012"
+mn_earn_wne_p10,"AY2001, 2002 pooled cohort measured in CY2011,2012"
+md_earn_wne_p10,"AY2001, 2002 pooled cohort measured in CY2011,2012"
+pct10_earn_wne_p10,"AY2001, 2002 pooled cohort measured in CY2011,2012"
+pct25_earn_wne_p10,"AY2001, 2002 pooled cohort measured in CY2011,2012"
+pct75_earn_wne_p10,"AY2001, 2002 pooled cohort measured in CY2011,2012"
+pct90_earn_wne_p10,"AY2001, 2002 pooled cohort measured in CY2011,2012"
+sd_earn_wne_p10,"AY2001, 2002 pooled cohort measured in CY2011,2012"
+count_wne_inc1_p10,"AY2001, 2002 pooled cohort measured in CY2011,2012"
+count_wne_inc2_p10,"AY2001, 2002 pooled cohort measured in CY2011,2012"
+count_wne_inc3_p10,"AY2001, 2002 pooled cohort measured in CY2011,2012"
+count_wne_indep0_inc1_p10,"AY2001, 2002 pooled cohort measured in CY2011,2012"
+count_wne_indep0_p10,"AY2001, 2002 pooled cohort measured in CY2011,2012"
+count_wne_indep1_p10,"AY2001, 2002 pooled cohort measured in CY2011,2012"
+count_wne_male0_p10,"AY2001, 2002 pooled cohort measured in CY2011,2012"
+count_wne_male1_p10,"AY2001, 2002 pooled cohort measured in CY2011,2012"
+gt_25k_p10,"AY2001, 2002 pooled cohort measured in CY2011,2012"
+mn_earn_wne_inc1_p10,"AY2001, 2002 pooled cohort measured in CY2011,2012"
+mn_earn_wne_inc2_p10,"AY2001, 2002 pooled cohort measured in CY2011,2012"
+mn_earn_wne_inc3_p10,"AY2001, 2002 pooled cohort measured in CY2011,2012"
+mn_earn_wne_indep0_inc1_p10,"AY2001, 2002 pooled cohort measured in CY2011,2012"
+mn_earn_wne_indep0_p10,"AY2001, 2002 pooled cohort measured in CY2011,2012"
+mn_earn_wne_indep1_p10,"AY2001, 2002 pooled cohort measured in CY2011,2012"
+mn_earn_wne_male0_p10,"AY2001, 2002 pooled cohort measured in CY2011,2012"
+mn_earn_wne_male1_p10,"AY2001, 2002 pooled cohort measured in CY2011,2012"
+count_nwne_p6,"AY2005, 2006 pooled cohort measured in CY2011,2012"
+count_wne_p6,"AY2005, 2006 pooled cohort measured in CY2011,2012"
+mn_earn_wne_p6,"AY2005, 2006 pooled cohort measured in CY2011,2012"
+md_earn_wne_p6,"AY2005, 2006 pooled cohort measured in CY2011,2012"
+pct10_earn_wne_p6,"AY2005, 2006 pooled cohort measured in CY2011,2012"
+pct25_earn_wne_p6,"AY2005, 2006 pooled cohort measured in CY2011,2012"
+pct75_earn_wne_p6,"AY2005, 2006 pooled cohort measured in CY2011,2012"
+pct90_earn_wne_p6,"AY2005, 2006 pooled cohort measured in CY2011,2012"
+sd_earn_wne_p6,"AY2005, 2006 pooled cohort measured in CY2011,2012"
+count_wne_inc1_p6,"AY2005, 2006 pooled cohort measured in CY2011,2012"
+count_wne_inc2_p6,"AY2005, 2006 pooled cohort measured in CY2011,2012"
+count_wne_inc3_p6,"AY2005, 2006 pooled cohort measured in CY2011,2012"
+count_wne_indep0_inc1_p6,"AY2005, 2006 pooled cohort measured in CY2011,2012"
+count_wne_indep0_p6,"AY2005, 2006 pooled cohort measured in CY2011,2012"
+count_wne_indep1_p6,"AY2005, 2006 pooled cohort measured in CY2011,2012"
+count_wne_male0_p6,"AY2005, 2006 pooled cohort measured in CY2011,2012"
+count_wne_male1_p6,"AY2005, 2006 pooled cohort measured in CY2011,2012"
+gt_25k_p6,"AY2005, 2006 pooled cohort measured in CY2011,2012"
+mn_earn_wne_inc1_p6,"AY2005, 2006 pooled cohort measured in CY2011,2012"
+mn_earn_wne_inc2_p6,"AY2005, 2006 pooled cohort measured in CY2011,2012"
+mn_earn_wne_inc3_p6,"AY2005, 2006 pooled cohort measured in CY2011,2012"
+mn_earn_wne_indep0_inc1_p6,"AY2005, 2006 pooled cohort measured in CY2011,2012"
+mn_earn_wne_indep0_p6,"AY2005, 2006 pooled cohort measured in CY2011,2012"
+mn_earn_wne_indep1_p6,"AY2005, 2006 pooled cohort measured in CY2011,2012"
+mn_earn_wne_male0_p6,"AY2005, 2006 pooled cohort measured in CY2011,2012"
+mn_earn_wne_male1_p6,"AY2005, 2006 pooled cohort measured in CY2011,2012"
+count_nwne_p7,"AY2003, 2004 pooled cohort measured in CY2010,2011"
+count_wne_p7,"AY2003, 2004 pooled cohort measured in CY2010,2011"
+mn_earn_wne_p7,"AY2003, 2004 pooled cohort measured in CY2010,2011"
+sd_earn_wne_p7,"AY2003, 2004 pooled cohort measured in CY2010,2011"
+gt_25k_p7,"AY2003, 2004 pooled cohort measured in CY2010,2011"
+count_nwne_p8,"AY2003, 2004 pooled cohort measured in CY2011,2012"
+count_wne_p8,"AY2003, 2004 pooled cohort measured in CY2011,2012"
+mn_earn_wne_p8,"AY2003, 2004 pooled cohort measured in CY2011,2012"
+md_earn_wne_p8,"AY2003, 2004 pooled cohort measured in CY2011,2012"
+pct10_earn_wne_p8,"AY2003, 2004 pooled cohort measured in CY2011,2012"
+pct25_earn_wne_p8,"AY2003, 2004 pooled cohort measured in CY2011,2012"
+pct75_earn_wne_p8,"AY2003, 2004 pooled cohort measured in CY2011,2012"
+pct90_earn_wne_p8,"AY2003, 2004 pooled cohort measured in CY2011,2012"
+sd_earn_wne_p8,"AY2003, 2004 pooled cohort measured in CY2011,2012"
+gt_25k_p8,"AY2003, 2004 pooled cohort measured in CY2011,2012"
+count_nwne_p9,"AY2001, 2002 pooled cohort measured in CY2010,2011"
+count_wne_p9,"AY2001, 2002 pooled cohort measured in CY2010,2011"
+mn_earn_wne_p9,"AY2001, 2002 pooled cohort measured in CY2010,2011"
+sd_earn_wne_p9,"AY2001, 2002 pooled cohort measured in CY2010,2011"
+gt_25k_p9,"AY2001, 2002 pooled cohort measured in CY2010,2011"
+DEBT_MDN_SUPP,"AY2013, 2014 pooled cohort"
+GRAD_DEBT_MDN_SUPP,"AY2013, 2014 pooled cohort"
+GRAD_DEBT_MDN10YR_SUPP,"AY2013, 2014 pooled cohort"
+RPY_3YR_RT_SUPP,"FY2010, 2011 cohort measured in FY2013, 2014"
+LO_INC_RPY_3YR_RT_SUPP,"FY2010, 2011 cohort measured in FY2013, 2014"
+MD_INC_RPY_3YR_RT_SUPP,"FY2010, 2011 cohort measured in FY2013, 2014"
+HI_INC_RPY_3YR_RT_SUPP,"FY2010, 2011 cohort measured in FY2013, 2014"
+COMPL_RPY_3YR_RT_SUPP,"FY2010, 2011 cohort measured in FY2013, 2014"
+NONCOM_RPY_3YR_RT_SUPP,"FY2010, 2011 cohort measured in FY2013, 2014"
+DEP_RPY_3YR_RT_SUPP,"FY2010, 2011 cohort measured in FY2013, 2014"
+IND_RPY_3YR_RT_SUPP,"FY2010, 2011 cohort measured in FY2013, 2014"
+PELL_RPY_3YR_RT_SUPP,"FY2010, 2011 cohort measured in FY2013, 2014"
+NOPELL_RPY_3YR_RT_SUPP,"FY2010, 2011 cohort measured in FY2013, 2014"
+FEMALE_RPY_3YR_RT_SUPP,"FY2010, 2011 cohort measured in FY2013, 2014"
+MALE_RPY_3YR_RT_SUPP,"FY2010, 2011 cohort measured in FY2013, 2014"
+FIRSTGEN_RPY_3YR_RT_SUPP,"FY2010, 2011 cohort measured in FY2013, 2014"
+NOTFIRSTGEN_RPY_3YR_RT_SUPP,"FY2010, 2011 cohort measured in FY2013, 2014"
+C150_L4_POOLED_SUPP,IPEDS 2013 data collection year pooled with previous years (# of total pooled years in poolyrs)
+C150_4_POOLED_SUPP,IPEDS 2013 data collection year pooled with previous years (# of total pooled years in poolyrs)
+C200_L4_POOLED_SUPP,IPEDS 2013 data collection year pooled with previous years (# of total pooled years in poolyrs200)
+C200_4_POOLED_SUPP,IPEDS 2013 data collection year pooled with previous years (# of total pooled years in poolyrs200)
