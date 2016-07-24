@@ -1,0 +1,495 @@
+---
+title: "Analysis of school drug zone convictions in Connecticut"
+author: "Andrew Ba Tran"
+output: html_document
+---
+
+```{r, echo=FALSE, results='hide', warning=FALSE, message=FALSE}
+require(lubridate)
+require(stringi)
+require(gtools)
+require(ggplot2)
+require(rgdal)
+require(scales)
+require(ggmap)
+require(dplyr)
+require(Cairo)
+require(gpclib)
+require(stringi)
+require(maptools)
+require(knitr)
+require(tidyr)
+require(gridExtra)
+require(reshape)
+gpclibPermit()
+gpclibPermitStatus()
+tract <- readOGR(dsn="CSPMap", layer="CSPJurisdictions")
+towntracts <- readOGR(dsn="townsmap", layer="towns")
+raw <- read.csv("sentences.csv")
+```
+
+This analysis was used for the story on TrendCT.org based on convictions data from the Connecticut Judicial Branch.
+
+Under current law, a conviction of “Simple Possession” of drugs (21a-279(d)) within 1,500 feet of a school or day care center carries a mandatory minimum two year prison term. A conviction of “Possession with Intent to Sell” (21a-278(b)) drugs within 1,500 feet of a school, day care center, or public housing carries a mandatory minimum three year prison term.
+
+Governor Dannel Malloy has proposed Bill 952 to remove mandatory minimums for the possession of drugs (21a-279(d)) because he states that the two year mandatory prison sentence in urban areas "has had an extraordinarily impact" on African-American and Latino communities. Almost all of the area of New Haven, Hartford, Bridgeport and most other densely populated cities in the state are within a "school zone" while the vast majority of suburban towns are not.
+
+Earlier this month Malloy said 64 percent of those charged with drug possession in school zones are minorities, according to the Sentencing Commission. The Connecticut Judicial Branch could only provide raw data on convictions stretching back to 1999. We looked at data for the following conviction charges:
+
+- 21a-267 (c): Delivering / possessing with intent to deliver / manufacturing with intent to deliver drug paraphernalia.
+- 21a-278 (b): Sells / possesses with the intent to sell)1 to another person any controlled substance in or on school / public housing project / licensed child day care center
+- 21a-279 (d): Possession of a controlled substance
+
+****
+#### Before we begin: our data has `r I(nrow(raw))` rows and `r I(ncol(raw))` columns.
+****
+
+## Universal assumptions
+- Some races had an extra indication that the convicted was also Hispanic. 
+```{r, results='asis'}
+hispanic_list <- c("Race", "Hispanic")
+hispanic_table <- raw[,hispanic_list]
+kable(head(hispanic_table))
+```
+
+- Thus if 'Yes' was marked in the Hispanic column, Hispanic overruled the value in the Race column
+
+```{r, results='asis'}
+raw$RaceOf <- paste(raw$Race, raw$Hispanic, sep="")
+index <- c("", "A", "B", "BY", "C", "CY", "HY")
+values <- c("Unlisted", "Asian", "Black", "Hispanic", "White", "Hispanic", "Hispanic")
+raw$RaceOfConvicted <- values[match(raw$RaceOf, index)]
+```
+
+****
+
+#### What is the overall racial breakdown of drug convictions (c, b, and d combined) since 1999? 
+
+```{r kable}
+race_table <- data.frame(table(raw$RaceOfConvicted))
+colnames(race_table) <- c("Race", "Convictions")
+race_table$Percent <- (race_table$Convictions/sum(race_table$Convictions)*100)
+race_table$Percent <- round(race_table$Percent, digits=2)
+kable(race_table)
+```
+
+#### Simplified to white versus non-white
+```{r results='asis', out.width='910px', fig.width=10, fig.height=2, warning=FALSE, message=FALSE, dpi=50}
+white_total <- race_table$Percent[5]
+minority_total <- sum(race_table$Percent) - white_total
+data_versus <- c("White", white_total)
+data_versus <- rbind(data_versus, c("Minority", minority_total))
+colnames(data_versus) <- c("Race", "Percent")
+data_versus <- data.frame(data_versus)
+data_versus$Percent <- as.numeric(as.character(data_versus$Percent))
+ggplot(data_versus, aes(x=Race, y=Percent, fill=Race)) +
+  geom_bar(stat='identity') +
+  geom_text(aes(label=Percent), hjust=1) +
+  ylab('Percent of convictions') +
+  xlab(NULL) +
+  expand_limits(y=c(0,100)) +
+  theme(
+    axis.ticks.y=element_blank(),
+    axis.text.y=element_blank()
+  ) +
+  coord_flip() +
+  ggtitle('White and minority convictions since 1999')
+```
+
+****
+
+#### What is the racial breakdown by specific charge? 
+To simplify, we will refer to 21a-267(c) as Delivering, 21a-278(b) as Selling, and 21a-279(d) as Possession
+
+```{r results='asis', out.width='910px', fig.width=10, fig.height=2, warning=FALSE, message=FALSE, dpi=50}
+convictions_table <- as.data.frame.matrix(table(raw$RaceOfConvicted, raw$Final.Statute))
+colnames(convictions_table) <- c("Delivering", "Selling", "Possession")
+kable(convictions_table)
+```
+
+#### As a percent of sentences
+
+```{r results='asis', out.width='910px', fig.width=10, fig.height=5, warning=FALSE, message=FALSE, dpi=50}
+percent_convictions <- round((convictions_table$Delivering/sum(convictions_table$Delivering))*100, digits=2)
+percent_convictions <- data.frame(percent_convictions)
+rownames(percent_convictions) <- c("Asian", "Black", "Hispanic", "Unlisted", "White")
+percent_convictions$Selling <- round((convictions_table$Selling/sum(convictions_table$Selling))*100, digits=2)
+percent_convictions$Possession <- round((convictions_table$Possession/sum(convictions_table$Possession))*100, digits=2)
+colnames(percent_convictions) <- c("Delivering Percent", "Selling Percent", "Possession Percent")
+kable(percent_convictions)
+```
+
+It looks like convictions for Delivering is almost equal between minorities and whites, but there's a disparity for the other two convictions-- Selling and Possession.
+
+```{r results='asis', out.width='910px', fig.width=10, fig.height=4, warning=FALSE, message=FALSE, dpi=50}
+white_delivering <- percent_convictions$Delivering[5]
+white_selling <- percent_convictions$Selling[5]
+white_possession <- percent_convictions$Possession[5]
+
+minority_delivering <- sum(percent_convictions$Delivering) - white_delivering
+minority_selling <- sum(percent_convictions$Selling) - white_selling
+minority_possession <- sum(percent_convictions$Possession) - white_possession
+
+data_versus_d <- c("White", white_delivering)
+data_versus_d <- rbind(data_versus_d, c("Minority", minority_delivering))
+colnames(data_versus_d) <- c("Race", "Percent")
+data_versus_d <- data.frame(data_versus_d)
+data_versus_d$Percent <- as.numeric(as.character(data_versus_d$Percent))
+
+data_versus_s <- c("White", white_selling)
+data_versus_s <- rbind(data_versus_s, c("Minority", minority_selling))
+colnames(data_versus_s) <- c("Race", "Percent")
+data_versus_s <- data.frame(data_versus_s)
+data_versus_s$Percent <- as.numeric(as.character(data_versus_s$Percent))
+
+data_versus_p <- c("White", white_possession)
+data_versus_p <- rbind(data_versus_p, c("Minority", minority_possession))
+colnames(data_versus_p) <- c("Race", "Percent")
+data_versus_p <- data.frame(data_versus_p)
+data_versus_p$Percent <- as.numeric(as.character(data_versus_p$Percent))
+
+
+d_plot <- ggplot(data_versus_d, aes(x=Race, y=Percent, fill=Race)) +
+  geom_bar(stat='identity') +
+  geom_text(aes(label=Percent), vjust=1) +
+  ylab('Percent of convictions') +
+  xlab(NULL) +
+  expand_limits(y=c(0,100)) +
+  theme(
+    axis.ticks.y=element_blank(),
+    axis.text.y=element_blank()
+  ) +
+  ggtitle('Delivering')
+
+s_plot <- ggplot(data_versus_s, aes(x=Race, y=Percent, fill=Race)) +
+  geom_bar(stat='identity') +
+  geom_text(aes(label=Percent), vjust=1) +
+  ylab('Percent of convictions') +
+  xlab(NULL) +
+  expand_limits(y=c(0,100)) +
+  theme(
+    axis.ticks.y=element_blank(),
+    axis.text.y=element_blank()
+  ) +
+  ggtitle('Selling')
+
+p_plot <- ggplot(data_versus_p, aes(x=Race, y=Percent, fill=Race)) +
+  geom_bar(stat='identity') +
+  geom_text(aes(label=Percent), vjust=1) +
+  ylab('Percent of convictions') +
+  xlab(NULL) +
+  expand_limits(y=c(0,100)) +
+  theme(
+    axis.ticks.y=element_blank(),
+    axis.text.y=element_blank()
+  ) +
+  ggtitle('possession')
+
+grid.arrange(d_plot, s_plot, p_plot, ncol=3)
+#qplot(Charge, data=convictions_table2, geom="bar", fill=Race)
+```
+
+#### Which town police departments lead to the most convictions?
+
+```{r results='asis'}
+# Subset based on arresting agency
+juris_conv<- data.frame(table(raw$Police.Name))
+colnames(juris_conv) <- c("Department", "Convictions.Total")
+juris_conv <- juris_conv[order(-juris_conv$Convictions.Total),]
+
+# subset out town police departments vs the rest
+towns_only <- juris_conv[grepl("LOCAL POLICE", juris_conv$Department),]
+not_towns <- juris_conv[grep("LOCAL POLICE", juris_conv$Department, invert=TRUE),]
+
+csp_only <- juris_conv[grepl("CSP TROOP", juris_conv$Department),]
+csp_only$Department <- as.character(csp_only$Department)
+csp_only$Department <- gsub("CSP TROOP ", "", csp_only$Department)
+colnames(csp_only) <- c("id", "Convictions")
+
+towns_only$Department <- as.character(towns_only$Department)
+towns_only$Department <- gsub("LOCAL POLICE ", "", towns_only$Department)
+colnames(towns_only) <- c("id", "Convictions")
+townpop <- read.csv("townsmap/townpopulation.csv")
+colnames(townpop) <- c("id","Population")
+townpop$id <- toupper(townpop$id)
+
+towns_only <- left_join(townpop, towns_only)
+towns_only$Convictions [is.na(towns_only$Convictions)] <-0
+towns_only$id <- stri_trans_general(towns_only$id, id="Title")
+towns_only$Per10kResidents <- (towns_only$Convictions/towns_only$Population)*10000
+towns_only$Per10kResidents <- round(towns_only$Per10kResidents, digits=2)
+towns_only <- towns_only[order(-towns_only$Per10kResidents),]
+kable(head(towns_only,10))
+```
+```{r results='asis', out.width='910px', fig.width=10, fig.height=4, warning=FALSE, message=FALSE, dpi=50}
+towntracts <- fortify(towntracts, region="NAME10")
+townData <- left_join(towntracts, towns_only)
+
+p2 <- ggplot() +
+  geom_polygon(data = townData, aes(x=long, y=lat, group=group, 
+                                    fill=Per10kResidents), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", palette = "Greens", breaks=pretty_breaks(n=5)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Convictions from city police departments per 10,000 residents", fill="")
+p2
+```
+
+#### What about non-town police departments?
+```{r results='asis', out.width='910px', fig.width=10, fig.height=4, warning=FALSE, message=FALSE, dpi=50}
+not_towns <- juris_conv[grep("LOCAL POLICE", juris_conv$Department, invert=TRUE),]
+not_towns <- not_towns[order(-not_towns$Convictions),]
+kable(head(not_towns))
+
+csp_only <- juris_conv[grepl("CSP TROOP", juris_conv$Department),]
+csp_only$Department <- as.character(csp_only$Department)
+csp_only$Department <- gsub("CSP TROOP ", "", csp_only$Department)
+colnames(csp_only) <- c("id", "Convictions")
+
+tract <- fortify(tract, region="Troop")
+
+plotData <- left_join(tract, csp_only)
+
+p <- ggplot() +
+  geom_polygon(data = plotData, aes(x=long, y=lat, group=group, 
+                                    fill=Convictions), color = "black", size=0.25) +
+  coord_map() +
+  scale_fill_distiller(palette = "Greens",
+                       breaks = pretty_breaks(n = 10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Number of convictions from Connecticut State Troopers", fill="")
+p
+```
+It looks like Connecticut State Troop G is the most active when it comes to getting drug convictions. 
+That's interesting because it overlaps with some of the more active city police departments-- Bridgeport, Norwalk, and Stamford. According to [their map](http://www.ct.gov/despp/cwp/view.asp?a=4201&q=494682), CSP Troop G has jurisdiction in the south west corner of Connecticut (as indicated in the map above) but also patrols Interstate 95 from Greenwich to Branford.
+
+#### How do cities compare in convictions of Possession? 
+```{r results='asis',}
+d_only <- subset(raw, Final.Statute=="21a-279(d)")
+
+# Subset based on arresting agency
+juris_conv_d<- data.frame(table(d_only$Police.Name))
+colnames(juris_conv_d) <- c("Department", "Convictions.Total")
+juris_conv_d<- juris_conv_d[order(-juris_conv_d$Convictions.Total),]
+
+# subset out town police departments vs the rest
+towns_only_d <- juris_conv_d[grepl("LOCAL POLICE", juris_conv_d$Department),]
+not_towns_d <- juris_conv_d[grep("LOCAL POLICE", juris_conv_d$Department, invert=TRUE),]
+
+csp_only_d <- juris_conv_d[grepl("CSP TROOP", juris_conv_d$Department),]
+csp_only_d$Department <- as.character(csp_only_d$Department)
+csp_only_d$Department <- gsub("CSP TROOP ", "", csp_only_d$Department)
+colnames(csp_only_d) <- c("id", "Convictions")
+
+towns_only_d$Department <- as.character(towns_only_d$Department)
+towns_only_d$Department <- gsub("LOCAL POLICE ", "", towns_only_d$Department)
+colnames(towns_only_d) <- c("id", "Possession.Convictions")
+townpop_d <- read.csv("townsmap/townpopulation.csv")
+colnames(townpop_d) <- c("id","Population")
+townpop_d$id <- toupper(townpop_d$id)
+
+towns_only_d <- left_join(townpop_d, towns_only_d)
+towns_only_d$Possession.Convictions [is.na(towns_only_d$Possession.Convictions)] <-0
+towns_only_d$id <- stri_trans_general(towns_only_d$id, id="Title")
+towns_only_d$Per10kResidents <- (towns_only_d$Possession.Convictions/towns_only_d$Population)*10000
+towns_only_d$Per10kResidents <- round(towns_only_d$Per10kResidents, digits=2)
+towns_only_d <- towns_only_d[order(-towns_only_d$Per10kResidents),]
+kable(head(towns_only_d,10))
+```
+```{r results='asis', out.width='910px', fig.width=10, fig.height=4, warning=FALSE, message=FALSE, dpi=50}
+towntracts_d <- fortify(towntracts, region="NAME10")
+townData_d <- left_join(towntracts_d, towns_only_d)
+
+p2 <- ggplot() +
+  geom_polygon(data = townData_d, aes(x=long, y=lat, group=group, 
+                                    fill=Per10kResidents), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", palette = "Greens", breaks=pretty_breaks(n=5)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Possessions convictions from city police departments per 10,000 residents", fill="")
+p2
+```
+The numbers shift around, although . Bridgeport and Stamford are not as high on the map. The highest rate of convictions that resulted in a Possession statute was in New Haven with almost two per 10,000 residents.
+
+#### How has convictions evolved over time?
+
+```{r results='asis', out.width='910px', fig.width=10, fig.height=5, warning=FALSE, message=FALSE, dpi=50}
+raw$Date <- mdy(raw$Sentenced)
+raw$Year <- year(raw$Date)
+
+conv_c <- subset(raw, Final.Statute=="21a-267(c)")
+conv_b <- subset(raw, Final.Statute=="21a-278a(b)")
+conv_d <- subset(raw, Final.Statute=="21a-279(d)")
+
+c_conv <- data.frame(table(conv_c$Year))
+colnames(c_conv) <- c("Year", "C.Convictions")
+c_conv$Year <- as.numeric(as.character(c_conv$Year))
+b_conv <- data.frame(table(conv_b$Year))
+colnames(b_conv) <- c("Year", "B.Convictions")
+b_conv$Year <- as.numeric(as.character(b_conv$Year))
+d_conv <- data.frame(table(conv_d$Year))
+colnames(d_conv) <- c("Year", "D.Convictions")
+d_conv$Year <- as.numeric(as.character(d_conv$Year))
+
+conv_all <- left_join(c_conv, b_conv)
+conv_all <- left_join(conv_all, d_conv)
+
+meltedJoinsByYear <- melt(conv_all, id="Year")
+colnames(meltedJoinsByYear) <- c("Year", "Final.Statute", "Convictions")
+
+ggplot(meltedJoinsByYear, aes(x=Year, y=Convictions, colour=Final.Statute)) +
+  geom_line() +
+  ylab(label="Convictions") +
+  xlab(label="Year") +
+  scale_colour_manual(values=c("blue","red", "green"))
+
+```
+
+#### How about as a percent of total convictions?
+
+```{r results='asis', out.width='910px', fig.width=10, fig.height=5, warning=FALSE, message=FALSE, dpi=50}
+raw$Date <- mdy(raw$Sentenced)
+raw$Year <- year(raw$Date)
+convictions_year <- data.frame(table(raw$Year,raw$Final.Statute))
+colnames(convictions_year) <- c("Year", "Statute", "Convictions")
+ggplot(convictions_year, aes(Year, Convictions, group=Statute, fill=Statute)) + geom_area(position="fill")
+
+```
+
+#### What's the breakdown for race per year by specific convictions? 
+```{r results='asis', out.width='910px', fig.width=10, fig.height=5, warning=FALSE, message=FALSE, dpi=50}
+c_convictions_race <- table(conv_c$Year, conv_c$RaceOfConvicted)
+c_convictions_race <- data.frame(c_convictions_race)
+colnames(c_convictions_race) <- c("Year", "Race", "Convictions")
+ggplot(c_convictions_race, aes(Year, Convictions, group=Race, colour=Race)) +
+  geom_path(alpha=0.5) +
+  ggtitle("Race of those convicted for Delivering by year") +
+  theme_minimal()
+
+
+b_convictions_race <- table(conv_b$Year, conv_b$RaceOfConvicted)
+b_convictions_race <- data.frame(b_convictions_race)
+colnames(b_convictions_race) <- c("Year", "Race", "Convictions")
+ggplot(b_convictions_race, aes(Year, Convictions, group=Race, colour=Race)) +
+  geom_path(alpha=0.5) +
+  ggtitle("Race of those convicted for Selling by year") +
+  theme_minimal()
+
+d_convictions_race <- table(conv_d$Year, conv_d$RaceOfConvicted)
+d_convictions_race <- data.frame(d_convictions_race)
+colnames(d_convictions_race) <- c("Year", "Race", "Convictions")
+ggplot(d_convictions_race, aes(Year, Convictions, group=Race, colour=Race)) +
+  geom_path(alpha=0.5) +
+ggtitle("Race of those convicted for Possession by year") +
+  theme_minimal()
+```
+
+#### What's the racial breakdown for Possession convictions? 
+```{r results='asis', out.width='910px', fig.width=10, fig.height=5, warning=FALSE, message=FALSE, dpi=50}
+ggplot(d_convictions_race, aes(Year, Convictions, group=Race, fill=Race)) + geom_area(position="fill")
+```
+
+## What’s the racial breakdown in towns with the most Possession convictions?
+```{r results='asis', out.width='910px', fig.width=10, fig.height=5, warning=FALSE, message=FALSE, dpi=50}
+conv_d$Department <- as.character(conv_d$Police.Name)
+conv_d$Department <- gsub("LOCAL POLICE ", "", conv_d$Department)
+
+# New Haven
+conv_d_New.Haven <- subset(conv_d, Department=="NEW HAVEN")
+conv_d_New.Haven.year <- data.frame(table(conv_d_New.Haven$Year, conv_d_New.Haven$RaceOfConvicted))
+colnames(conv_d_New.Haven.year) <- c("Year", "Race", "Convictions")
+
+nh1 <- ggplot(conv_d_New.Haven.year, aes(Year, Convictions, group=Race, colour=Race)) +
+  geom_path(alpha=0.5) +
+ggtitle("Total") +
+  theme(legend.position="top")
+
+nh2 <- ggplot(conv_d_New.Haven.year, aes(Year, Convictions, group=Race, fill=Race)) + geom_area(position="fill") + 
+  ggtitle("Percent")  +
+  theme(legend.position="top")
+
+grid.arrange(nh1, nh2, ncol=2, main="Race of those convicted for Possession in New Haven")
+
+# Hartford
+conv_d_Hartford <- subset(conv_d, Department=="HARTFORD")
+conv_d_Hartford.year <- data.frame(table(conv_d_Hartford$Year, conv_d_Hartford$RaceOfConvicted))
+colnames(conv_d_Hartford.year) <- c("Year", "Race", "Convictions")
+
+nh1 <- ggplot(conv_d_Hartford.year, aes(Year, Convictions, group=Race, colour=Race)) +
+  geom_path(alpha=0.5) +
+ggtitle("Total") +
+  theme(legend.position="top")
+
+nh2 <- ggplot(conv_d_Hartford.year, aes(Year, Convictions, group=Race, fill=Race)) + geom_area(position="fill") + 
+  ggtitle("Percent")  +
+  theme(legend.position="top")
+
+grid.arrange(nh1, nh2, ncol=2, main="Race of those convicted for Possession in Hartford")
+```
+
+#### Urban areas versus Suburban areas
+
+```{r results='asis', out.width='910px', fig.width=10, fig.height=5, warning=FALSE, message=FALSE, dpi=50}
+raw$Police.Name <- as.character(raw$Police.Name)
+towns_subset <- raw[grepl("LOCAL POLICE", raw$Police.Name),]
+towns_subset$Police.Name <- gsub("LOCAL POLICE ", "", towns_subset$Police.Name)
+
+urban_convictions <- subset(towns_subset, (Police.Name=="BRIDGEPORT" | Police.Name=="HARTFORD" | Police.Name=="NEW HAVEN" |
+                               Police.Name=="NEW BRITAIN" | Police.Name=="WEST HAVEN" | Police.Name=="NEW LONDON" |
+                               Police.Name=="WATERBURY" | Police.Name=="NORWALK" | Police.Name=="WATERBURY" |
+                               Police.Name=="NORWALK" | Police.Name=="ANSONIA" | Police.Name=="STAMFORD"))
+
+suburban_convictions <- subset(towns_subset, !(Police.Name=="BRIDGEPORT" | Police.Name=="HARTFORD" | Police.Name=="NEW HAVEN" |
+                                    Police.Name=="NEW BRITAIN" | Police.Name=="WEST HAVEN" | Police.Name=="NEW LONDON" |
+                                    Police.Name=="WATERBURY" | Police.Name=="NORWALK" | Police.Name=="WATERBURY" |
+                                    Police.Name=="NORWALK" | Police.Name=="ANSONIA" | Police.Name=="STAMFORD"))
+
+urban_conv_statute <- data.frame(table(urban_convictions$Year, urban_convictions$Final.Statute))
+colnames(urban_conv_statute) <- c("Year", "Statute", "Convictions")
+
+ucs1 <- ggplot(urban_conv_statute, aes(Year, Convictions, group=Statute, colour=Statute)) +
+  geom_path(alpha=0.5) +
+  ggtitle("Total") +
+  theme(legend.position="top")
+
+ucs2 <- ggplot(urban_conv_statute, aes(Year, Convictions, group=Statute, fill=Statute)) + geom_area(position="fill") + 
+  ggtitle("Percent")  +
+  theme(legend.position="top")
+
+grid.arrange(ucs1, ucs2, ncol=2, main="Types of convictions in Urban towns by year")
+
+
+suburban_conv_statute <- data.frame(table(suburban_convictions$Year, suburban_convictions$Final.Statute))
+colnames(suburban_conv_statute) <- c("Year", "Statute", "Convictions")
+
+scs1 <- ggplot(suburban_conv_statute, aes(Year, Convictions, group=Statute, colour=Statute)) +
+  geom_path(alpha=0.5) +
+  ggtitle("Total") +
+  theme(legend.position="top")
+
+scs2 <- ggplot(suburban_conv_statute, aes(Year, Convictions, group=Statute, fill=Statute)) + geom_area(position="fill") + 
+  ggtitle("Percent")  +
+  theme(legend.position="top")
+
+grid.arrange(scs1, scs2, ncol=2, main="Types of convictions in Suburban towns by year")
+
+```
+
+#### Convictions by race: Urban vs Suburban areas
+
+```{r results='asis', out.width='910px', fig.width=10, fig.height=5, warning=FALSE, message=FALSE, dpi=50}
+suburban_conv_race <- data.frame(table(suburban_convictions$Year, suburban_convictions$RaceOfConvicted))
+colnames(suburban_conv_race) <- c("Year", "Race", "Convictions")
+
+scr1 <- ggplot(suburban_conv_race, aes(Year, Convictions, group=Race, colour=Race)) +
+  geom_path(alpha=0.5) +
+  ggtitle("Total") +
+  theme(legend.position="top")
+
+scr2 <- ggplot(suburban_conv_race, aes(Year, Convictions, group=Race, fill=Race)) + geom_area(position="fill") + 
+  ggtitle("Percent")  +
+  theme(legend.position="top")
+
+grid.arrange(scr1, scr2, ncol=2, main="Race of those convicted in Suburban towns by year")
+```
+

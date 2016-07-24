@@ -1,0 +1,385 @@
+---
+title: "Increase in gun purchases triggered by Connecticut state legislation"
+author: "Andrew Ba Tran"
+date: "December 13, 2015"
+output: html_document
+---
+
+An analysis for the TrendCT story: [Increase in gun purchases triggered by Connecticut state legislation](http://trendct.org/2015/12/14/increase-in-gun-purchases-triggered-by-connecticut-state-legislation/)
+
+The data is/are from the [Buzzfeed repo](https://github.com/BuzzFeedNews/nics-firearm-background-checks) that scraped the [FBI NICS](https://www.fbi.gov/about-us/cjis/nics) PDFs on the number of firearm checks by month, state, and type.
+
+Check the Trend CT [repo](https://github.com/trendct/background_checks/) for the scripts and [data sets](https://github.com/trendct/background_checks/tree/master/data) that were used and generated. Just want the seasonally adjusted state per capita data? Here's [the csv](https://github.com/trendct/background_checks/blob/master/data/states_monthly_adjusted.csv).
+
+There are many caveats to the data, but the basic thing to take away is that a background check does not necessarily mean a gun sale. The [Buzzfeed repo](https://github.com/BuzzFeedNews/nics-firearm-background-checks) has more details.
+
+This analysis will go over the process used to put together [the story](http://trendct.org/2015/12/14/increase-in-gun-purchases-triggered-by-connecticut-state-legislation/). In short, the background checks were normalized for annual population by state, adjusted for seasonality, and then charted.
+
+### Population estimates
+
+The historical population data was gathered from [Census.gov](http://www.census.gov/popest/data/historical/index.html).
+
+```{r, message=FALSE}
+# Packages we'll need
+library(knitr)
+library(stringr)
+library(ggplot2)
+library(lubridate)
+library(tidyr)
+library(dplyr)
+library(seasonal)
+
+us <- read.csv("data/historicalpop-US.csv", stringsAsFactors=FALSE)
+states <- read.csv("data/historicalpop-StatesT.csv", stringsAsFactors=FALSE)
+kable(head(us))
+kable(head(states[,1:5]))
+```
+
+Bringing in the data from the [Buzzfeed repo](https://github.com/BuzzFeedNews/nics-firearm-background-checks).
+```{r}
+nics <- read.csv("data/nics-firearm-background-checks.csv", stringsAsFactors=FALSE)
+# Quick trimming up of leading and trailing white spaces
+# Using the stringr package
+nics$state <- str_trim(nics$state)
+kable(head(nics[,1:5]))
+```
+
+### Preliminary annual US analysis
+
+```{r}
+# Adding a column for year in the dataframe
+# But first have to convert the data into a date-friendly format
+
+nics$date <- as.Date(paste(nics$month,"-01",sep=""))
+nics$year <- year(nics$date)
+
+# Creating a new dataframe with the total background checks in the country by year
+annual <- data.frame(tapply(nics$totals, nics$year, sum))
+
+# Cleaning up the new dataframe
+annual$year <- rownames(annual)
+rownames(annual) <- NULL
+colnames(annual) <- c("Total", "Year")
+annual <- annual[c("Year", "Total")]
+
+# Merging background checks to population dataframe
+annual <- merge(annual, us)
+
+# Calculating per capita (1,000 residents)
+annual$percapita <- round((annual$Total/annual$US)*1000,2)
+
+# 1998 is an incomplete year, so let's take that out
+annual <- annual[-1,]
+
+kable(head(annual))
+```
+
+### Charting the total background checks by year 
+
+```{r, fig.width=12, fig.height=6}
+ggplot(data=annual, aes(x=Year,y=Total, group=1)) +
+  geom_line() +
+  ggtitle("Background checks for firearms in the US") +
+  labs(x="Year", y="Total")
+```
+
+### Charting the total background checks by year per capita
+
+```{r, fig.width=12, fig.height=6}
+ggplot(data=annual, aes(x=Year,y=percapita, group=1)) +
+  geom_line() +
+  ggtitle("Background checks per capita for firearms in the US") +
+  labs(x="Year", y="Per 1,000 residents")
+```
+
+Not much difference, right.
+
+### Monthly totals for the US
+
+```{r}
+monthly <-data.frame(tapply(nics$totals, nics$date, sum))
+monthly$date <- rownames(monthly)
+rownames(monthly) <- NULL
+colnames(monthly) <- c("Total", "Month")
+monthly<- monthly[c("Month", "Total")]
+kable(head(monthly))
+```
+
+### Monthly background checks for the US per capita
+
+```{r}
+monthly$Month <- ymd(monthly$Month)
+monthly$Year <- year(monthly$Month)
+
+# Join by annual population from the Census
+monthly <- left_join(monthly, us)
+
+monthly$percapita <- round((monthly$Total/monthly$US)*1000,2)
+
+us_month <- monthly[c("Month", "percapita")]
+colnames(us_month) <- c("Month", "US")
+kable(head(us_month))
+
+```
+
+### Monthly totals for Connecticut
+```{r}
+ct <- subset(nics, state=="Connecticut")
+ctpop  <- read.csv("data/historicalpop-CT.csv", stringsAsFactors=FALSE)
+ct_monthly<-data.frame(tapply(ct$totals, ct$month, sum))
+ct_monthly$date <- rownames(ct_monthly)
+rownames(ct_monthly) <- NULL
+colnames(ct_monthly) <- c("Total", "Month")
+ct_monthly<- ct_monthly[c("Month", "Total")]
+kable(head(ct_monthly))
+```
+
+### Monthly checks per capita: US vs CT
+```{r, fig.width=12, fig.height=6}
+ct_monthly$Month <- as.Date(paste(ct_monthly$Month, "-01", sep=""))
+ct_monthly$Month <- ymd(ct_monthly$Month)
+ct_monthly$Year <- year(ct_monthly$Month)
+
+ct_monthly <- left_join(ct_monthly, ctpop)
+ct_monthly$percapita <- round((ct_monthly$Total/ct_monthly$CT)*1000,2)
+
+ct_month <- ct_monthly[c("Month", "percapita")]
+colnames(ct_month) <- c("Month", "CT")
+
+ct_us_month <- left_join(us_month, ct_month)
+
+# Prepping the dataframe for ggplot
+ct_us_month_gg <- gather(ct_us_month, "State", "Per.Capita", 2:3)
+
+ggplot(data=ct_us_month_gg, aes(x=Month,y=Per.Capita, group=State, colour=State)) +
+  geom_line() +
+  ggtitle("Background checks per capita for firearms in the US and CT") +
+  labs(x="Year", y="Per 1,000 residents")
+```
+
+### Calculating the background checks per capita by state
+
+```{r, message=FALSE}
+# per capita for US one more time
+monthly <-data.frame(tapply(nics$totals, nics$month, sum))
+monthly$date <- rownames(monthly)
+rownames(monthly) <- NULL
+colnames(monthly) <- c("Total", "Month")
+monthly<- monthly[c("Month", "Total")]
+monthly$Month <- as.Date(paste(monthly$Month, "-01", sep=""))
+
+monthly$Month <- ymd(monthly$Month)
+monthly$Year <- year(monthly$Month)
+
+monthly <- left_join(monthly, us)
+monthly$percapita <- round((monthly$Total/monthly$US)*1000,2)
+
+by_month <- monthly[c("Month", "percapita")]
+colnames(by_month) <- c("Month", "US")
+
+by_month$Month <- substr(by_month$Month, 1, 7)
+
+# Monthly for all states now
+# Restructure data.frame 
+
+totals_only <- nics[c("month", "state", "totals")] 
+
+spreaded_totals <- spread(totals_only, state, totals)
+spreaded_totals <- spreaded_totals[,colSums(is.na(spreaded_totals))<nrow(spreaded_totals)]
+spreaded_totals$year <- substr(spreaded_totals$month, 1, 4)
+spreaded_totals$year <- as.numeric(spreaded_totals$year)
+
+# Setting up the loop to go through the two dataframes
+# - One with annual historical state population
+# - One from the NICS for total background checks
+
+states_num <- ncol(states)
+states_list <- 2:states_num
+
+# This is the messy loop
+for (i in states_list) {
+  state_name <- colnames(states[i])
+  temp_df <- states[c("Year", state_name)]
+  colnames(temp_df) <- c("year", "Population")
+  state_name <- gsub("\\.", " ", state_name)
+  test_this <- grepl(state_name, colnames(spreaded_totals))
+  test_sum <- sum(test_this)
+  if (test_sum>0) {
+    # looking just at totals
+    nics_df <- spreaded_totals[c("month", "year", state_name)]
+    temp_df <- left_join(temp_df, nics_df)
+    temp_df$per_capita <- round((temp_df[,4]/temp_df[,2])*1000,2)
+    temp_df <- temp_df[c("month", "per_capita")]
+    colnames(temp_df) <- c("Month", state_name)
+    
+    by_month <- left_join(by_month, temp_df)
+  }
+}
+```
+
+### Charting out the state per capita results
+
+```{r, fig.width=12, fig.height=4}
+test_df <- by_month
+
+test_df$Month <- factor(test_df$Month)
+
+test_df <- gather(test_df, "State", "Per.Capita", 2:53)
+
+ggplot(data=test_df, aes(x=test_df$Month,y=Per.Capita, group=State)) +
+  geom_line() +
+  ggtitle("Background checks by state") +
+  labs(x="Month", y="Per 1,000 residents")
+```
+
+### Charting out the state per capita with small multiples
+
+```{r, fig.width=12, fig.height=9}
+ggplot(data=test_df, aes(x=Month,y=Per.Capita)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~State) +
+  ggtitle("Background checks by state") +
+  theme(plot.title = element_text(family="Trebuchet MS", face="bold", size=20, hjust=0, color="#555555")) +
+  theme(axis.text.x = element_text(angle=90)) 
+```
+
+### Adjusting CT figures for seasonality
+
+```{r, fig.width=12, fig.height=4}
+# Visit [seasonal.website](http://www.seasonal.website/seasonal.html) to learn how to set up the seasonal package from the Census
+Sys.setenv(X13_PATH = "/Users/andrewtran/Documents/Github/seasonal")
+
+ct_seas <- ts(ct_month[,2],frequency=12,start=c(1998,11))
+m <- seas(ct_seas)
+plot(m)
+```
+
+```{r}
+# Prepping for export as a spreadsheet
+dfct <- as.data.frame(ct_seas)
+
+ct_months_only <- ct_month$Month
+
+dfct <- cbind(ct_months_only, dfct)
+colnames(dfct) <- c("Month", "Original")
+dfct2 <- data.frame(final(m))
+dfct <- cbind(dfct, dfct2)
+
+colnames(dfct) <- c("Month", "Original", "Adjusted")
+dfct$Adjusted <- round(dfct$Adjusted, 2)
+
+dfct = dfct[-1,]
+kable(head(dfct))
+
+```
+
+### Adjusting US figures for seasonality
+
+```{r, fig.width=12, fig.height=4}
+
+## Prep dataframe 
+us_col <- monthly[c("Month", "percapita")]
+us_col <- us_col[-1,]
+
+## Turn it into a time series
+us_tl <- ts(us_col[,2],frequency=12,start=c(1998,11))
+
+## Adjust it for seasonality
+us_m <- seas(us_tl)
+plot(us_m)
+
+## new data.frame specifically for US
+colnames(us_col) <- c("Month", "Original") 
+us_df <- as.data.frame(final(us_m))
+us_col <- cbind(us_col, us_df)
+colnames(us_col) <- c("Month", "Original", "Adjusted")
+us_col$Adjusted <- round(us_col$Adjusted, 2)
+kable(head(us_col))
+```
+
+###  US vs. CT adjusted
+```{r, fig.width=12, fig.height=4}
+usct <- us_col[c("Month", "Adjusted")]
+colnames(usct) <- c("Month", "US.Adjusted")
+ct_adjusted <- dfct[c("Month", "Adjusted")]
+colnames(ct_adjusted) <- c("Month", "CT.Adjusted")
+
+usct <- left_join(usct, ct_adjusted)
+kable(head(usct))
+```
+
+### Charting out the seasonally adjusted per capita data
+
+```{r, fig.width=12, fig.height=4, message=FALSE}
+us_seas_only <- us_col[c("Month", "Adjusted")]
+us_seas_only$Month <- as.character(us_seas_only$Month)
+colnames(us_seas_only) <- c("Month", "US")
+us_seas_only$US <- as.numeric(as.character(us_seas_only$US))
+months_only <- as.character(us_seas_only$Month)
+
+adj_seas <- by_month
+adj_seas_num <- 2:ncol(adj_seas)
+adj_seas_list <- colnames(adj_seas)
+
+adj_seas$Month <- as.Date(adj_seas$Month, format="%Y-%m")
+
+for (i in adj_seas_num) {
+  adj_seas_col <- colnames(adj_seas[i])
+  seas_df_subset <- adj_seas[c("Month", adj_seas_col)]
+  subset_series <- ts(seas_df_subset[,2],frequency=12,start=c(1998,11))
+  subset_seas <- seas(subset_series)
+  subset_seas_df <- as.data.frame(final(subset_seas))
+  
+  subset_seas_df <- subset_seas_df[-1,]
+  months_only_df <- months_only
+  months_only_df <- as.data.frame(cbind(months_only_df, subset_seas_df))
+  colnames(months_only_df) <- c("Month", adj_seas_col)
+  months_only_df$Month <- as.character(months_only_df$Month)
+  months_only_df[,2] <- as.numeric(as.character(months_only_df[,2]))
+  months_only_df[,2] <- round(months_only_df[,2], 2)
+  
+  if (!exists("months_only_all")) {
+    months_only_all <- left_join(us_seas_only, months_only_df)
+  } else {
+    months_only_all <- left_join(months_only_all, months_only_df)
+  }
+  
+}
+kable(head(months_only_all[,1:5]))
+
+# Exporting seasonally-adjusted figures to csv
+write.csv(months_only_all, "data/states_monthly_adjusted.csv")
+
+# Charting out with ggplot 
+for_gg <- months_only_all
+
+# Adjusting timestamp just for cosmetic reasons
+for_gg$Month <- substring(for_gg$Month, 1,7)
+
+# Prepping the time stamps for ggplot
+for_gg$Month <- factor(for_gg$Month)
+
+# Reshaping the dataframe for ggplot and also D3
+for_gg <- gather(for_gg, "State", "Per.Capita", 2:53)
+
+## Charting it in one line graph
+ggplot(data=for_gg, aes(x=for_gg$Month,y=Per.Capita, group=State)) +
+  geom_line() +
+  ggtitle("Background checks by state") +
+  labs(x="Month", y="Per 1,000 residents")
+```
+
+### Charting it using small multiples
+
+```{r, fig.width=12, fig.height=9, message=FALSE}
+
+ggplot(data=for_gg, aes(x=Month,y=Per.Capita)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~State) +
+  ggtitle(expression(atop("Background checks by state", atop(italic("Adjusted for seasonality"), "")))) +
+  theme(plot.title = element_text(family="Trebuchet MS", face="bold", size=20, hjust=0, color="#555555")) +
+  theme(axis.text.x = element_text(angle=90)) 
+
+# Exporting for D3
+write.table(for_gg, file="seasonally_adjusted.tsv", quote=FALSE, sep='\t', col.names=NA)
+```

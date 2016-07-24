@@ -1,0 +1,40 @@
+Andrew                  Hurricane Andrew: googleVis example data set
+Cairo                   Daily temperature data for Cairo
+CityPopularity          CityPopularity: googleVis example data set
+Exports                 Exports: googleVis example data set
+Fruits                  Fruits: googleVis example data set
+OpenClose               OpenClose: googleVis example data set
+Population              Population: googleVis example data set
+Regions                 Regions: googleVis example data set
+Stock                   Stock: googleVis example data set
+createGoogleGadget      Create a Google Gadget
+dino                    Dinosaur data
+googleVis-package       R Interface to Google Charts
+gvisAnnotatedTimeLine   Google Annotated Time Line with R
+gvisAnnotationChart     Google Annotation Chart with R
+gvisAreaChart           Google Area Chart with R
+gvisBarChart            Google Bar Chart with R
+gvisBubbleChart         Google Bubble Chart with R
+gvisCalendar            Google Calendar Chart with R
+gvisCandlestickChart    Google Candlestick chart with R
+gvisColumnChart         Google Column Chart with R
+gvisComboChart          Google Combo Chart with R
+gvisGauge               Google Gauge with R
+gvisGeoChart            Google Geo Chart with R
+gvisGeoMap              Google Geo Map with R
+gvisHistogram           Google Histogram Chart with R
+gvisIntensityMap        Google Intensity Map with R
+gvisLineChart           Google Line Chart with R
+gvisMap                 Google Maps with R
+gvisMerge               Merge two googleVis charts into one gvis-object
+gvisMotionChart         Google Motion Chart with R
+gvisOrgChart            Google Org Chart with R
+gvisPieChart            Google Pie Chart with R
+gvisSankey              Google Sankey Chart with R
+gvisScatterChart        Google Scatter Chart with R
+gvisSteppedAreaChart    Google Stepped Area Chart with R
+gvisTable               Google Table Chart with R
+gvisTimeline            Google Timeline Chart with R
+gvisTreeMap             Google Tree Map with R
+print.gvis              Print and plot gvis objects
+renderGvis              renderGvis

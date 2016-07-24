@@ -1,0 +1,363 @@
+---
+title: "Analysis of Simple Possession arrests in Connecticut"
+author: "Andrew Ba Tran"
+date: "June 30, 2015"
+output: html_document
+---
+
+This documentation accompanies the TrendCT story: [Minorities were disproportionately charged for drug possession in urban Connecticut](http://trendct.org/2015/06/30/drug-free-school-zone-charges/).
+
+The [analysis](http://trendct.github.io/ct-drug-zones/story1.html) was based on [arrests data](https://raw.githubusercontent.com/trendct/ct-drug-zones/master/data/original3.csv) from the Connecticut Judicial Branch. 
+
+```{r, echo=FALSE, message=FALSE}
+require(lubridate)
+require(lubridate)
+require(stringi)
+require(gridExtra)
+require(gtools)
+require(ggplot2)
+require(rgdal)
+require(scales)
+require(ggmap)
+require(dplyr)
+require(Cairo)
+require(gpclib)
+require(maptools)
+require(reshape)
+require(knitr)
+require(stringr)
+library(DT)
+
+arrests <- read.csv("data/original3.csv")
+arrests <- arrests[,1:5]
+
+# Clean up the dates
+arrests$Date <- mdy(arrests$ARREST.DATE)
+arrests$Year <- year(arrests$Date)
+arrests$Year[arrests$Year==2099] <- 1999
+
+arrests$RaceOf <- paste(arrests$RACE, arrests$DEF_HISPANIC_IND, sep="")
+
+index <- c("Asian", "AsianY", "Black", "BlackY", "HY", "Native American", 
+          "Not Identified", "White", "WhiteY")
+
+
+values <- c("Asian", "Hispanic", "Black", "Hispanic", "Hispanic", "Native American", 
+            "Not Identified", "White", "Hispanic")
+arrests$Def_Race <- values[match(arrests$RaceOf, index)]
+
+library(ctnamecleaner)
+arrests <- ctnamecleaner(TOWN, arrests, case="Title")
+
+just_d <- subset(arrests, ORIGINAL_STATUTE=="21a-279(d)")
+```
+
+Since 1999 there have been `r I(nrow(just_d))` arrests for 21-279(d).
+
+#### What's the racial breakdown for thoses arrests?
+
+```{r results='asis', out.width='910px', fig.width=10, fig.height=5, warning=FALSE, message=FALSE, dpi=50}
+
+
+race_year_d <- data.frame(table(just_d$Year,just_d$Def_Race))
+colnames(race_year_d) <- c("Year", "Race", "Arrests")
+ggplot(race_year_d, aes(Year, Arrests, group=Race, colour=Race)) +
+  geom_path(alpha=0.5) +
+  ggtitle("Race of those arrested for Possession since 1999") +
+  theme_minimal()
+
+# And by percent
+ggplot(race_year_d, aes(Year, Arrests, group=Race, fill=Race)) + geom_area(position="fill")
+
+```
+
+
+## Which towns have the most arrests for Possession?
+
+
+```{r results='asis'}
+
+# Which towns have the most arrests?
+town_arrests_d <- data.frame(table(just_d$real.town.name))
+colnames(town_arrests_d) <- c("id", "Total.Arrests")
+town_arrests_d$id <- as.character(town_arrests_d$id)
+town_arrests_d <- town_arrests_d[order(-town_arrests_d$Total.Arrests),]
+datatable(town_arrests_d)
+
+```
+
+## Which towns have the most arrests for Possession (after adjusting for population)?
+
+
+```{r results='asis'}
+library(sp)
+library(rgeos)
+library(maps)
+library(maptools)
+library(rgdal)
+library(leaflet)
+library(dplyr)
+gpclibPermit()
+gpclibPermitStatus()
+
+towns_arrests_pop_d <- left_join(townpop, town_arrests_d)
+towns_arrests_pop_d$Total.Arrests[is.na(towns_arrests_pop_d$Total.Arrests)] <-0
+towns_arrests_pop_d$id <- stri_trans_general(towns_arrests_pop_d$id, id="Title")
+towns_arrests_pop_d$Per10kResidents <- (towns_arrests_pop_d$Total.Arrests/towns_arrests_pop_d$Population)*10000
+towns_arrests_pop_d$Per10kResidents <- round(towns_arrests_pop_d$Per10kResidents, digits=2)
+towns_arrests_pop_d <- towns_arrests_pop_d[order(-towns_arrests_pop_d$Per10kResidents),]
+
+datatable(towns_arrests_pop_d)
+
+towntracts <- readOGR(dsn="townsmap", layer="towns")
+towntracts <- fortify(towntracts, region="NAME10")
+
+
+town_arr_Data_d <- left_join(towntracts, towns_arrests_pop_d)
+
+p3 <- ggplot() +
+  geom_polygon(data = town_arr_Data_d, aes(x=long, y=lat, group=group, 
+                                         fill=Per10kResidents), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", palette = "Greens", breaks=pretty_breaks(n=5)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Possession arrests between 1999 and 2014 per 10,000 residents", fill="")
+p3
+```
+
+## Race of those arrested for Possession in Urban towns
+
+```{r results='asis', out.width='910px', fig.width=10, fig.height=10, warning=FALSE, message=FALSE, dpi=50}
+arrests_d_urban <- subset(just_d, (TOWN=="Bridgeport" | TOWN=="Hartford" | TOWN=="New Haven" |
+                               TOWN=="New Britain" | TOWN=="West Haven" | TOWN=="New London" |
+                               TOWN=="Waterbury" | TOWN=="Norwalk" | TOWN=="Waterbury" |
+                               TOWN=="Norwalk" | TOWN=="Ansonia" | TOWN=="Stamford"))
+
+arrests_d_urban.year <- data.frame(table(arrests_d_urban$Year, arrests_d_urban$Def_Race))
+colnames(arrests_d_urban.year) <- c("Year", "Race", "Arrests")
+
+ady1 <- ggplot(arrests_d_urban.year, aes(Year, Arrests, group=Race, colour=Race)) +
+  geom_path(alpha=0.5) +
+ggtitle("Total") +
+  theme(legend.position="top")
+
+ady2 <- ggplot(arrests_d_urban.year, aes(Year, Arrests, group=Race, fill=Race)) + geom_area(position="fill") + 
+  ggtitle("Percent")  +
+  theme(legend.position="top")
+
+grid.arrange(ady1, ady2, ncol=1, main="Race of those arrested for Possession in Urban towns")
+
+```
+
+## Race of those arrested for Possession in suburban towns
+
+```{r results='asis', out.width='910px', fig.width=10, fig.height=10, warning=FALSE, message=FALSE, dpi=50}
+
+arrests_d_suburban <- subset(just_d, !(TOWN=="Bridgeport" | TOWN=="Hartford" | TOWN=="New Haven" |
+                               TOWN=="New Britain" | TOWN=="West Haven" | TOWN=="New London" |
+                               TOWN=="Waterbury" | TOWN=="Norwalk" | TOWN=="Waterbury" |
+                               TOWN=="Norwalk" | TOWN=="Ansonia" | TOWN=="Stamford"))
+
+arrests_d_suburban.year <- data.frame(table(arrests_d_suburban$Year, arrests_d_suburban$Def_Race))
+colnames(arrests_d_suburban.year) <- c("Year", "Race", "Arrests")
+
+ady1 <- ggplot(arrests_d_suburban.year, aes(Year, Arrests, group=Race, colour=Race)) +
+  geom_path(alpha=0.5) +
+ggtitle("Total") +
+  theme(legend.position="top")
+
+ady2 <- ggplot(arrests_d_suburban.year, aes(Year, Arrests, group=Race, fill=Race)) + geom_area(position="fill") + 
+  ggtitle("Percent")  +
+  theme(legend.position="top")
+
+grid.arrange(ady1, ady2, ncol=1, main="Race of those arrested for Possession in Suburban towns")
+```
+
+## Mapping out the buffer zones
+
+This spatial analysis was conducted in QGIS. 
+
+We mapped this [list](https://github.com/trendct/ct-drug-zones/blob/master/unsorted/dataschoolsdaycares.csv) of schools and day care centers obtained from the state, added a buffer zone of 1,500 feet around each spot and merged the blobs.
+
+Then we calculated the area of each town and the area of the zones within each to find the percent makeup of each. Here's the [data](https://github.com/trendct/ct-drug-zones/blob/master/data/calculations.csv).
+
+```{r, results='asis', out.width='910px', fig.width=10, fig.height=10, warning=FALSE, message=FALSE, dpi=50}
+townshapes <- readOGR(dsn="shapes", layer="finaltowns")
+dshapes <- readOGR(dsn="shapes", layer="finalschoolsdaycares")
+bshapes <- readOGR(dsn="shapes", layer="finalzones")
+
+
+leaflet(townshapes) %>% addTiles('http://{s}.tile.thunderforest.com/transport/{z}/{x}/{y}.png') %>%
+  addPolygons(stroke=TRUE, color="Black", weight=1, fillOpacity=0.1, smoothFactor=.5,
+              fillColor = "#999999") %>%
+    addPolygons(data=dshapes, stroke=TRUE, weight=3, fillOpacity=0.8, smoothFactor=.5,
+              color = "#f72a5f") %>%
+  addLegend("bottomright", colors= "#f72a5f", labels="Schools, Day Cares", title="1,500 ft Violation Zones")
+```
+
+
+
+We calculated the area of the school and day care zones in each city versus the area of the entire town according to the US Census. Dense urban areas like Hartford, New Haven and Bridgeport had a higher percent of those mandatory minimum zones within town borders.
+
+*Note: Calculations for towns along the coast will be off because the census borders for the towns sometimes extends out into the water.*
+
+```{r, results='asis', out.width='910px', fig.width=10, fig.height=10, warning=FALSE, message=FALSE, dpi=50}
+library(DT)
+calculations <- read.csv("data/calculations.csv", stringsAsFactors=FALSE)
+
+d279 <- calculations[,c("NAME10","AREA","SCHOOLSDAYCARES", "PER1")]
+colnames(d279) <- c("Town", "Square.Feet", "Buffer.Square.Feet", "Percent.of.town.in.buffer")
+d279 <- arrange(d279, desc(Percent.of.town.in.buffer))
+datatable(d279)
+
+```
+
+### The relationship between number of arrests and percent of town in a buffer
+```{r, plotly=TRUE}
+library(ggplot2)
+library(stringr)
+library(plotly)
+arrests_new <- read.csv("data/arrests_h.csv", stringsAsFactors=FALSE)
+pop <- read.csv("data/ctpop.csv", stringsAsFactors=FALSE)
+newnames <- read.csv("data/townlist.csv", stringsAsFactors=FALSE)
+
+colnames(newnames) <- c("TOWN", "Town.Name")
+arrests_new <- left_join(arrests_new, newnames)
+
+arr_charges <- data.frame(table(arrests_new$Town.Name, arrests_new$ORIGINAL_STATUTE))
+arr_charges_d <- filter(arr_charges, Var2=="21a-279(d)")
+
+colnames(arr_charges_d) <- c("Town", "Statute", "Arrests")
+arr_charges_d$Town <- str_to_title(arr_charges_d$Town)
+arr_charges_d <- left_join(arr_charges_d, d279)
+
+arr_charges_d <- na.omit(arr_charges_d)
+
+arr_charges_d[2] <- NULL
+arr_charges_d[3] <- NULL
+arr_charges_d[3] <- NULL
+
+
+colnames(pop) <- c("Town", "Population")
+pop$Town <- str_to_title(pop$Town)
+arr_charges_d <- left_join(arr_charges_d, pop)
+arr_charges_d$Arrests.Per.Capita <- (arr_charges_d$Arrests/arr_charges_d$Population)*1000
+arr_charges_d$Arrests.Per.Capita <- round(arr_charges_d$Arrests.Per.Capita, digits=2)
+
+daplot <- ggplot(arr_charges_d, aes(x=Percent.of.town.in.buffer, y=Arrests)) +
+  geom_point(aes(text=Town)) +
+  geom_smooth(method=lm, formula = y ~ poly(x, 3), size=1) +
+  theme_minimal() +
+  ggtitle("Number of arrests versus percent of town in zone") +
+  labs(x="Percent of town in buffer", y="Arrests for 279(d) since 1999")
+
+oy <- plotly()
+oy$ggplotly(daplot, session="knitr", kwargs=list(layout=list(hovermode="closest", filename="buffer-279d", fileopt="overwrite")))
+
+
+```
+
+So the correlation between Arrests and Percent of Town in the Buffer zone? 
+
+`r cor(arr_charges_d$Arrests, arr_charges_d$Percent.of.town.in.buffer, use="all.obs")`
+
+That's a strong positive relationship.
+
+### Just to compare, let's look at the relationship between Arrests and town population
+
+```{r, plotly=TRUE}
+ug <- ggplot(arr_charges_d, aes(x=Population, y=Arrests)) +
+  geom_point(aes(text=Town)) +
+  geom_smooth(method=lm,  formula = y ~ poly(x, 2), size=1) +
+  theme_minimal() 
+ug <- ug + ggtitle("Number of arrests versus population of town")
+ug <- ug + labs(x="Population", y="Arrests for 279(d) since 1999")
+#ug
+
+qy <- plotly()
+qy$ggplotly(ug, session="knitr", kwargs=list(layout=list(hovermode="closest", filename="arrests-279d", fileopt="overwrite")))
+
+```
+
+### Some choropleth maps with the data
+
+```{r, results='asis', out.width='910px', fig.width=10, fig.height=10, warning=FALSE, message=FALSE, dpi=50}
+#pal <- colorQuantile("YlGn", NULL, n = 10)
+
+mb_tiles <- "http://a.tiles.mapbox.com/v3/kwalkertcu.l1fc0hab/{z}/{x}/{y}.png"
+
+mb_attribution <- 'Mapbox <a href="http://mapbox.com/about/maps" target="_blank">Terms &amp; Feedback</a>'
+
+d279 <- arr_charges_d
+names(d279)[names(d279) == 'Town'] <- 'NAME10'
+
+townstuffd <- merge(townshapes, d279)
+
+town_popupd <- paste0("<strong>", 
+                      townstuffd$NAME10, 
+                      "</strong><br>",
+                     "<strong>Percent in buffer: </strong>",
+                     townstuffd$Percent.of.town.in.buffer, "%<br><strong>Arrests: </strong>",
+                     townstuffd$Arrests, "<br><strong>Arrests per capita: </strong>",
+                     townstuffd$Arrests.Per.Capita)
+```
+
+#### Percent of town in a buffer zone
+
+```{r, results='asis', out.width='910px', fig.width=10, fig.height=10, warning=FALSE, message=FALSE, dpi=50}
+binpald <- colorBin("Blues", townstuffd$Percent.of.town.in.buffer, 6, pretty = FALSE)
+
+leaflet(townstuffd) %>%
+  addTiles(urlTemplate = mb_tiles,  
+           attribution = mb_attribution) %>%
+  addPolygons(fillColor = ~binpald(Percent.of.town.in.buffer), 
+              fillOpacity = 0.8, 
+              color = "#BDBDC3", 
+              weight = 1, 
+              popup = town_popupd) %>%
+  addLegend("bottomright", pal=binpald, values=~Percent.of.town.in.buffer,
+            title="Percent of town in a buffer zone",
+            opacity = 1 )
+```
+
+#### Arrests per capita
+
+```{r, results='asis', out.width='910px', fig.width=10, fig.height=10, warning=FALSE, message=FALSE, dpi=50}
+binpald2 <- colorBin("Greens", townstuffd$Arrests.Per.Capita, 6, pretty = FALSE)
+
+leaflet(townstuffd) %>%
+  addTiles(urlTemplate = mb_tiles,  
+           attribution = mb_attribution) %>%
+  addPolygons(fillColor = ~binpald2(Arrests.Per.Capita), 
+              fillOpacity = 0.8, 
+              color = "#BDBDC3", 
+              weight = 1, 
+              popup = town_popupd) %>%
+  addLegend("bottomright", pal=binpald2, values=~Arrests.Per.Capita,
+            title="Arrests per capita",
+            opacity = 1 )
+```
+
+### Here's a table to explore further.
+
+```{r, results='asis', out.width='910px', fig.width=10, fig.height=10, warning=FALSE, message=FALSE, dpi=50}
+
+count_d <- table(just_d$real.town.name, just_d$Def_Race)
+count_d <- as.data.frame.matrix(count_d)
+count_d$Total <- count_d[,1]+count_d[,2]+count_d[,3]+count_d[,4]+count_d[,5]+count_d[,6]
+count_d$White.Percent <- round((count_d$White/count_d$Total)*100, digits=2)
+count_d$Minority.Percent <- 100-count_d$White.Percent
+count_d$Town <- rownames(count_d)
+
+count_d[,1] <- NULL
+count_d[,1] <- NULL
+count_d[,1] <- NULL
+count_d[,1] <- NULL
+count_d[,1] <- NULL
+count_d[,1] <- NULL
+count_d[,1] <- NULL
+
+joined_d <- left_join(arr_charges_d, count_d)
+datatable(joined_d)
+```
+

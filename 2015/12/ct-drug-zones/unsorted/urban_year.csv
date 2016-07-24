@@ -1,0 +1,97 @@
+"","Year","Race","Arrests"
+"1","1999","Asian",1
+"2","2000","Asian",2
+"3","2001","Asian",2
+"4","2002","Asian",3
+"5","2003","Asian",5
+"6","2004","Asian",1
+"7","2005","Asian",7
+"8","2006","Asian",4
+"9","2007","Asian",4
+"10","2008","Asian",6
+"11","2009","Asian",3
+"12","2010","Asian",5
+"13","2011","Asian",10
+"14","2012","Asian",3
+"15","2013","Asian",0
+"16","2014","Asian",3
+"17","1999","Black",918
+"18","2000","Black",1169
+"19","2001","Black",1141
+"20","2002","Black",972
+"21","2003","Black",1420
+"22","2004","Black",1797
+"23","2005","Black",1572
+"24","2006","Black",2264
+"25","2007","Black",1552
+"26","2008","Black",1653
+"27","2009","Black",1449
+"28","2010","Black",1730
+"29","2011","Black",1489
+"30","2012","Black",926
+"31","2013","Black",1033
+"32","2014","Black",825
+"33","1999","Hispanic",431
+"34","2000","Hispanic",437
+"35","2001","Hispanic",322
+"36","2002","Hispanic",263
+"37","2003","Hispanic",458
+"38","2004","Hispanic",484
+"39","2005","Hispanic",401
+"40","2006","Hispanic",443
+"41","2007","Hispanic",406
+"42","2008","Hispanic",406
+"43","2009","Hispanic",529
+"44","2010","Hispanic",636
+"45","2011","Hispanic",698
+"46","2012","Hispanic",429
+"47","2013","Hispanic",420
+"48","2014","Hispanic",391
+"49","1999","Native American",0
+"50","2000","Native American",0
+"51","2001","Native American",1
+"52","2002","Native American",3
+"53","2003","Native American",2
+"54","2004","Native American",3
+"55","2005","Native American",5
+"56","2006","Native American",4
+"57","2007","Native American",3
+"58","2008","Native American",2
+"59","2009","Native American",1
+"60","2010","Native American",0
+"61","2011","Native American",1
+"62","2012","Native American",2
+"63","2013","Native American",2
+"64","2014","Native American",3
+"65","1999","Not Identified",8
+"66","2000","Not Identified",3
+"67","2001","Not Identified",12
+"68","2002","Not Identified",15
+"69","2003","Not Identified",12
+"70","2004","Not Identified",10
+"71","2005","Not Identified",7
+"72","2006","Not Identified",4
+"73","2007","Not Identified",3
+"74","2008","Not Identified",5
+"75","2009","Not Identified",11
+"76","2010","Not Identified",13
+"77","2011","Not Identified",12
+"78","2012","Not Identified",4
+"79","2013","Not Identified",15
+"80","2014","Not Identified",11
+"81","1999","White",517
+"82","2000","White",564
+"83","2001","White",595
+"84","2002","White",564
+"85","2003","White",990
+"86","2004","White",1164
+"87","2005","White",940
+"88","2006","White",1272
+"89","2007","White",986
+"90","2008","White",1038
+"91","2009","White",878
+"92","2010","White",735
+"93","2011","White",716
+"94","2012","White",533
+"95","2013","White",455
+"96","2014","White",451

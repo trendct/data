@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+<title>Portable and non-portable R6 classes</title>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<link href="data:text/css;charset=utf-8,pre%20%2Eoperator%2C%0Apre%20%2Eparen%20%7B%0Acolor%3A%20rgb%28104%2C%20118%2C%20135%29%0A%7D%0Apre%20%2Eliteral%20%7B%0Acolor%3A%20%23990073%0A%7D%0Apre%20%2Enumber%20%7B%0Acolor%3A%20%23099%3B%0A%7D%0Apre%20%2Ecomment%20%7B%0Acolor%3A%20%23998%3B%0Afont%2Dstyle%3A%20italic%0A%7D%0Apre%20%2Ekeyword%20%7B%0Acolor%3A%20%23900%3B%0Afont%2Dweight%3A%20bold%0A%7D%0Apre%20%2Eidentifier%20%7B%0Acolor%3A%20rgb%280%2C%200%2C%200%29%3B%0A%7D%0Apre%20%2Estring%20%7B%0Acolor%3A%20%23d14%3B%0A%7D%0A" rel="stylesheet" type="text/css" />
+<script src="data:application/x-javascript;base64,CnZhciBobGpzPW5ldyBmdW5jdGlvbigpe2Z1bmN0aW9uIG0ocCl7cmV0dXJuIHAucmVwbGFjZSgvJi9nbSwiJmFtcDsiKS5yZXBsYWNlKC88L2dtLCImbHQ7Iil9ZnVuY3Rpb24gZihyLHEscCl7cmV0dXJuIFJlZ0V4cChxLCJtIisoci5jST8iaSI6IiIpKyhwPyJnIjoiIikpfWZ1bmN0aW9uIGIocil7Zm9yKHZhciBwPTA7cDxyLmNoaWxkTm9kZXMubGVuZ3RoO3ArKyl7dmFyIHE9ci5jaGlsZE5vZGVzW3BdO2lmKHEubm9kZU5hbWU9PSJDT0RFIil7cmV0dXJuIHF9aWYoIShxLm5vZGVUeXBlPT0zJiZxLm5vZGVWYWx1ZS5tYXRjaCgvXHMrLykpKXticmVha319fWZ1bmN0aW9uIGgodCxzKXt2YXIgcD0iIjtmb3IodmFyIHI9MDtyPHQuY2hpbGROb2Rlcy5sZW5ndGg7cisrKXtpZih0LmNoaWxkTm9kZXNbcl0ubm9kZVR5cGU9PTMpe3ZhciBxPXQuY2hpbGROb2Rlc1tyXS5ub2RlVmFsdWU7aWYocyl7cT1xLnJlcGxhY2UoL1xuL2csIiIpfXArPXF9ZWxzZXtpZih0LmNoaWxkTm9kZXNbcl0ubm9kZU5hbWU9PSJCUiIpe3ArPSJcbiJ9ZWxzZXtwKz1oKHQuY2hpbGROb2Rlc1tyXSl9fX1pZigvTVNJRSBbNjc4XS8udGVzdChuYXZpZ2F0b3IudXNlckFnZW50KSl7cD1wLnJlcGxhY2UoL1xyL2csIlxuIil9cmV0dXJuIHB9ZnVuY3Rpb24gYShzKXt2YXIgcj1zLmNsYXNzTmFtZS5zcGxpdCgvXHMrLyk7cj1yLmNvbmNhdChzLnBhcmVudE5vZGUuY2xhc3NOYW1lLnNwbGl0KC9ccysvKSk7Zm9yKHZhciBxPTA7cTxyLmxlbmd0aDtxKyspe3ZhciBwPXJbcV0ucmVwbGFjZSgvXmxhbmd1YWdlLS8sIiIpO2lmKGVbcF0pe3JldHVybiBwfX19ZnVuY3Rpb24gYyhxKXt2YXIgcD1bXTsoZnVuY3Rpb24ocyx0KXtmb3IodmFyIHI9MDtyPHMuY2hpbGROb2Rlcy5sZW5ndGg7cisrKXtpZihzLmNoaWxkTm9kZXNbcl0ubm9kZVR5cGU9PTMpe3QrPXMuY2hpbGROb2Rlc1tyXS5ub2RlVmFsdWUubGVuZ3RofWVsc2V7aWYocy5jaGlsZE5vZGVzW3JdLm5vZGVOYW1lPT0iQlIiKXt0Kz0xfWVsc2V7aWYocy5jaGlsZE5vZGVzW3JdLm5vZGVUeXBlPT0xKXtwLnB1c2goe2V2ZW50OiJzdGFydCIsb2Zmc2V0OnQsbm9kZTpzLmNoaWxkTm9kZXNbcl19KTt0PWFyZ3VtZW50cy5jYWxsZWUocy5jaGlsZE5vZGVzW3JdLHQpO3AucHVzaCh7ZXZlbnQ6InN0b3AiLG9mZnNldDp0LG5vZGU6cy5jaGlsZE5vZGVzW3JdfSl9fX19cmV0dXJuIHR9KShxLDApO3JldHVybiBwfWZ1bmN0aW9uIGsoeSx3LHgpe3ZhciBxPTA7dmFyIHo9IiI7dmFyIHM9W107ZnVuY3Rpb24gdSgpe2lmKHkubGVuZ3RoJiZ3Lmxlbmd0aCl7aWYoeVswXS5vZmZzZXQhPXdbMF0ub2Zmc2V0KXtyZXR1cm4oeVswXS5vZmZzZXQ8d1swXS5vZmZzZXQpP3k6d31lbHNle3JldHVybiB3WzBdLmV2ZW50PT0ic3RhcnQiP3k6d319ZWxzZXtyZXR1cm4geS5sZW5ndGg/eTp3fX1mdW5jdGlvbiB0KEQpe3ZhciBBPSI8IitELm5vZGVOYW1lLnRvTG93ZXJDYXNlKCk7Zm9yKHZhciBCPTA7QjxELmF0dHJpYnV0ZXMubGVuZ3RoO0IrKyl7dmFyIEM9RC5hdHRyaWJ1dGVzW0JdO0ErPSIgIitDLm5vZGVOYW1lLnRvTG93ZXJDYXNlKCk7aWYoQy52YWx1ZSE9PXVuZGVmaW5lZCYmQy52YWx1ZSE9PWZhbHNlJiZDLnZhbHVlIT09bnVsbCl7QSs9Jz0iJyttKEMudmFsdWUpKyciJ319cmV0dXJuIEErIj4ifXdoaWxlKHkubGVuZ3RofHx3Lmxlbmd0aCl7dmFyIHY9dSgpLnNwbGljZSgwLDEpWzBdO3orPW0oeC5zdWJzdHIocSx2Lm9mZnNldC1xKSk7cT12Lm9mZnNldDtpZih2LmV2ZW50PT0ic3RhcnQiKXt6Kz10KHYubm9kZSk7cy5wdXNoKHYubm9kZSl9ZWxzZXtpZih2LmV2ZW50PT0ic3RvcCIpe3ZhciBwLHI9cy5sZW5ndGg7ZG97ci0tO3A9c1tyXTt6Kz0oIjwvIitwLm5vZGVOYW1lLnRvTG93ZXJDYXNlKCkrIj4iKX13aGlsZShwIT12Lm5vZGUpO3Muc3BsaWNlKHIsMSk7d2hpbGUocjxzLmxlbmd0aCl7eis9dChzW3JdKTtyKyt9fX19cmV0dXJuIHorbSh4LnN1YnN0cihxKSl9ZnVuY3Rpb24gaigpe2Z1bmN0aW9uIHEoeCx5LHYpe2lmKHguY29tcGlsZWQpe3JldHVybn12YXIgdTt2YXIgcz1bXTtpZih4Lmspe3gubFI9Zih5LHgubHx8aGxqcy5JUix0cnVlKTtmb3IodmFyIHcgaW4geC5rKXtpZigheC5rLmhhc093blByb3BlcnR5KHcpKXtjb250aW51ZX1pZih4Lmtbd10gaW5zdGFuY2VvZiBPYmplY3Qpe3U9eC5rW3ddfWVsc2V7dT14Lms7dz0ia2V5d29yZCJ9Zm9yKHZhciByIGluIHUpe2lmKCF1Lmhhc093blByb3BlcnR5KHIpKXtjb250aW51ZX14Lmtbcl09W3csdVtyXV07cy5wdXNoKHIpfX19aWYoIXYpe2lmKHguYldLKXt4LmI9IlxcYigiK3Muam9pbigifCIpKyIpXFxzIn14LmJSPWYoeSx4LmI/eC5iOiJcXEJ8XFxiIik7aWYoIXguZSYmIXguZVcpe3guZT0iXFxCfFxcYiJ9aWYoeC5lKXt4LmVSPWYoeSx4LmUpfX1pZih4Lmkpe3guaVI9Zih5LHguaSl9aWYoeC5yPT09dW5kZWZpbmVkKXt4LnI9MX1pZigheC5jKXt4LmM9W119eC5jb21waWxlZD10cnVlO2Zvcih2YXIgdD0wO3Q8eC5jLmxlbmd0aDt0Kyspe2lmKHguY1t0XT09InNlbGYiKXt4LmNbdF09eH1xKHguY1t0XSx5LGZhbHNlKX1pZih4LnN0YXJ0cyl7cSh4LnN0YXJ0cyx5LGZhbHNlKX19Zm9yKHZhciBwIGluIGUpe2lmKCFlLmhhc093blByb3BlcnR5KHApKXtjb250aW51ZX1xKGVbcF0uZE0sZVtwXSx0cnVlKX19ZnVuY3Rpb24gZChCLEMpe2lmKCFqLmNhbGxlZCl7aigpO2ouY2FsbGVkPXRydWV9ZnVuY3Rpb24gcShyLE0pe2Zvcih2YXIgTD0wO0w8TS5jLmxlbmd0aDtMKyspe2lmKChNLmNbTF0uYlIuZXhlYyhyKXx8W251bGxdKVswXT09cil7cmV0dXJuIE0uY1tMXX19fWZ1bmN0aW9uIHYoTCxyKXtpZihEW0xdLmUmJkRbTF0uZVIudGVzdChyKSl7cmV0dXJuIDF9aWYoRFtMXS5lVyl7dmFyIE09dihMLTEscik7cmV0dXJuIE0/TSsxOjB9cmV0dXJuIDB9ZnVuY3Rpb24gdyhyLEwpe3JldHVybiBMLmkmJkwuaVIudGVzdChyKX1mdW5jdGlvbiBLKE4sTyl7dmFyIE09W107Zm9yKHZhciBMPTA7TDxOLmMubGVuZ3RoO0wrKyl7TS5wdXNoKE4uY1tMXS5iKX12YXIgcj1ELmxlbmd0aC0xO2Rve2lmKERbcl0uZSl7TS5wdXNoKERbcl0uZSl9ci0tfXdoaWxlKERbcisxXS5lVyk7aWYoTi5pKXtNLnB1c2goTi5pKX1yZXR1cm4gZihPLE0uam9pbigifCIpLHRydWUpfWZ1bmN0aW9uIHAoTSxMKXt2YXIgTj1EW0QubGVuZ3RoLTFdO2lmKCFOLnQpe04udD1LKE4sRSl9Ti50Lmxhc3RJbmRleD1MO3ZhciByPU4udC5leGVjKE0pO3JldHVybiByP1tNLnN1YnN0cihMLHIuaW5kZXgtTCksclswXSxmYWxzZV06W00uc3Vic3RyKEwpLCIiLHRydWVdfWZ1bmN0aW9uIHooTixyKXt2YXIgTD1FLmNJP3JbMF0udG9Mb3dlckNhc2UoKTpyWzBdO3ZhciBNPU4ua1tMXTtpZihNJiZNIGluc3RhbmNlb2YgQXJyYXkpe3JldHVybiBNfXJldHVybiBmYWxzZX1mdW5jdGlvbiBGKEwsUCl7TD1tKEwpO2lmKCFQLmspe3JldHVybiBMfXZhciByPSIiO3ZhciBPPTA7UC5sUi5sYXN0SW5kZXg9MDt2YXIgTT1QLmxSLmV4ZWMoTCk7d2hpbGUoTSl7cis9TC5zdWJzdHIoTyxNLmluZGV4LU8pO3ZhciBOPXooUCxNKTtpZihOKXt4Kz1OWzFdO3IrPSc8c3BhbiBjbGFzcz0iJytOWzBdKyciPicrTVswXSsiPC9zcGFuPiJ9ZWxzZXtyKz1NWzBdfU89UC5sUi5sYXN0SW5kZXg7TT1QLmxSLmV4ZWMoTCl9cmV0dXJuIHIrTC5zdWJzdHIoTyxMLmxlbmd0aC1PKX1mdW5jdGlvbiBKKEwsTSl7aWYoTS5zTCYmZVtNLnNMXSl7dmFyIHI9ZChNLnNMLEwpO3grPXIua2V5d29yZF9jb3VudDtyZXR1cm4gci52YWx1ZX1lbHNle3JldHVybiBGKEwsTSl9fWZ1bmN0aW9uIEkoTSxyKXt2YXIgTD1NLmNOPyc8c3BhbiBjbGFzcz0iJytNLmNOKyciPic6IiI7aWYoTS5yQil7eSs9TDtNLmJ1ZmZlcj0iIn1lbHNle2lmKE0uZUIpe3krPW0ocikrTDtNLmJ1ZmZlcj0iIn1lbHNle3krPUw7TS5idWZmZXI9cn19RC5wdXNoKE0pO0ErPU0ucn1mdW5jdGlvbiBHKE4sTSxRKXt2YXIgUj1EW0QubGVuZ3RoLTFdO2lmKFEpe3krPUooUi5idWZmZXIrTixSKTtyZXR1cm4gZmFsc2V9dmFyIFA9cShNLFIpO2lmKFApe3krPUooUi5idWZmZXIrTixSKTtJKFAsTSk7cmV0dXJuIFAuckJ9dmFyIEw9dihELmxlbmd0aC0xLE0pO2lmKEwpe3ZhciBPPVIuY04/Ijwvc3Bhbj4iOiIiO2lmKFIuckUpe3krPUooUi5idWZmZXIrTixSKStPfWVsc2V7aWYoUi5lRSl7eSs9SihSLmJ1ZmZlcitOLFIpK08rbShNKX1lbHNle3krPUooUi5idWZmZXIrTitNLFIpK099fXdoaWxlKEw+MSl7Tz1EW0QubGVuZ3RoLTJdLmNOPyI8L3NwYW4+IjoiIjt5Kz1PO0wtLTtELmxlbmd0aC0tfXZhciByPURbRC5sZW5ndGgtMV07RC5sZW5ndGgtLTtEW0QubGVuZ3RoLTFdLmJ1ZmZlcj0iIjtpZihyLnN0YXJ0cyl7SShyLnN0YXJ0cywiIil9cmV0dXJuIFIuckV9aWYodyhNLFIpKXt0aHJvdyJJbGxlZ2FsIn19dmFyIEU9ZVtCXTt2YXIgRD1bRS5kTV07dmFyIEE9MDt2YXIgeD0wO3ZhciB5PSIiO3RyeXt2YXIgcyx1PTA7RS5kTS5idWZmZXI9IiI7ZG97cz1wKEMsdSk7dmFyIHQ9RyhzWzBdLHNbMV0sc1syXSk7dSs9c1swXS5sZW5ndGg7aWYoIXQpe3UrPXNbMV0ubGVuZ3RofX13aGlsZSghc1syXSk7aWYoRC5sZW5ndGg+MSl7dGhyb3ciSWxsZWdhbCJ9cmV0dXJue3I6QSxrZXl3b3JkX2NvdW50OngsdmFsdWU6eX19Y2F0Y2goSCl7aWYoSD09IklsbGVnYWwiKXtyZXR1cm57cjowLGtleXdvcmRfY291bnQ6MCx2YWx1ZTptKEMpfX1lbHNle3Rocm93IEh9fX1mdW5jdGlvbiBnKHQpe3ZhciBwPXtrZXl3b3JkX2NvdW50OjAscjowLHZhbHVlOm0odCl9O3ZhciByPXA7Zm9yKHZhciBxIGluIGUpe2lmKCFlLmhhc093blByb3BlcnR5KHEpKXtjb250aW51ZX12YXIgcz1kKHEsdCk7cy5sYW5ndWFnZT1xO2lmKHMua2V5d29yZF9jb3VudCtzLnI+ci5rZXl3b3JkX2NvdW50K3Iucil7cj1zfWlmKHMua2V5d29yZF9jb3VudCtzLnI+cC5rZXl3b3JkX2NvdW50K3Aucil7cj1wO3A9c319aWYoci5sYW5ndWFnZSl7cC5zZWNvbmRfYmVzdD1yfXJldHVybiBwfWZ1bmN0aW9uIGkocixxLHApe2lmKHEpe3I9ci5yZXBsYWNlKC9eKCg8W14+XSs+fFx0KSspL2dtLGZ1bmN0aW9uKHQsdyx2LHUpe3JldHVybiB3LnJlcGxhY2UoL1x0L2cscSl9KX1pZihwKXtyPXIucmVwbGFjZSgvXG4vZywiPGJyPiIpfXJldHVybiByfWZ1bmN0aW9uIG4odCx3LHIpe3ZhciB4PWgodCxyKTt2YXIgdj1hKHQpO3ZhciB5LHM7aWYodil7eT1kKHYseCl9ZWxzZXtyZXR1cm59dmFyIHE9Yyh0KTtpZihxLmxlbmd0aCl7cz1kb2N1bWVudC5jcmVhdGVFbGVtZW50KCJwcmUiKTtzLmlubmVySFRNTD15LnZhbHVlO3kudmFsdWU9ayhxLGMocykseCl9eS52YWx1ZT1pKHkudmFsdWUsdyxyKTt2YXIgdT10LmNsYXNzTmFtZTtpZighdS5tYXRjaCgiKFxcc3xeKShsYW5ndWFnZS0pPyIrdisiKFxcc3wkKSIpKXt1PXU/KHUrIiAiK3YpOnZ9aWYoL01TSUUgWzY3OF0vLnRlc3QobmF2aWdhdG9yLnVzZXJBZ2VudCkmJnQudGFnTmFtZT09IkNPREUiJiZ0LnBhcmVudE5vZGUudGFnTmFtZT09IlBSRSIpe3M9dC5wYXJlbnROb2RlO3ZhciBwPWRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoImRpdiIpO3AuaW5uZXJIVE1MPSI8cHJlPjxjb2RlPiIreS52YWx1ZSsiPC9jb2RlPjwvcHJlPiI7dD1wLmZpcnN0Q2hpbGQuZmlyc3RDaGlsZDtwLmZpcnN0Q2hpbGQuY049cy5jTjtzLnBhcmVudE5vZGUucmVwbGFjZUNoaWxkKHAuZmlyc3RDaGlsZCxzKX1lbHNle3QuaW5uZXJIVE1MPXkudmFsdWV9dC5jbGFzc05hbWU9dTt0LnJlc3VsdD17bGFuZ3VhZ2U6dixrdzp5LmtleXdvcmRfY291bnQscmU6eS5yfTtpZih5LnNlY29uZF9iZXN0KXt0LnNlY29uZF9iZXN0PXtsYW5ndWFnZTp5LnNlY29uZF9iZXN0Lmxhbmd1YWdlLGt3Onkuc2Vjb25kX2Jlc3Qua2V5d29yZF9jb3VudCxyZTp5LnNlY29uZF9iZXN0LnJ9fX1mdW5jdGlvbiBvKCl7aWYoby5jYWxsZWQpe3JldHVybn1vLmNhbGxlZD10cnVlO3ZhciByPWRvY3VtZW50LmdldEVsZW1lbnRzQnlUYWdOYW1lKCJwcmUiKTtmb3IodmFyIHA9MDtwPHIubGVuZ3RoO3ArKyl7dmFyIHE9YihyW3BdKTtpZihxKXtuKHEsaGxqcy50YWJSZXBsYWNlKX19fWZ1bmN0aW9uIGwoKXtpZih3aW5kb3cuYWRkRXZlbnRMaXN0ZW5lcil7d2luZG93LmFkZEV2ZW50TGlzdGVuZXIoIkRPTUNvbnRlbnRMb2FkZWQiLG8sZmFsc2UpO3dpbmRvdy5hZGRFdmVudExpc3RlbmVyKCJsb2FkIixvLGZhbHNlKX1lbHNle2lmKHdpbmRvdy5hdHRhY2hFdmVudCl7d2luZG93LmF0dGFjaEV2ZW50KCJvbmxvYWQiLG8pfWVsc2V7d2luZG93Lm9ubG9hZD1vfX19dmFyIGU9e307dGhpcy5MQU5HVUFHRVM9ZTt0aGlzLmhpZ2hsaWdodD1kO3RoaXMuaGlnaGxpZ2h0QXV0bz1nO3RoaXMuZml4TWFya3VwPWk7dGhpcy5oaWdobGlnaHRCbG9jaz1uO3RoaXMuaW5pdEhpZ2hsaWdodGluZz1vO3RoaXMuaW5pdEhpZ2hsaWdodGluZ09uTG9hZD1sO3RoaXMuSVI9IlthLXpBLVpdW2EtekEtWjAtOV9dKiI7dGhpcy5VSVI9IlthLXpBLVpfXVthLXpBLVowLTlfXSoiO3RoaXMuTlI9IlxcYlxcZCsoXFwuXFxkKyk/Ijt0aGlzLkNOUj0iXFxiKDBbeFhdW2EtZkEtRjAtOV0rfChcXGQrKFxcLlxcZCopP3xcXC5cXGQrKShbZUVdWy0rXT9cXGQrKT8pIjt0aGlzLkJOUj0iXFxiKDBiWzAxXSspIjt0aGlzLlJTUj0iIXwhPXwhPT18JXwlPXwmfCYmfCY9fFxcKnxcXCo9fFxcK3xcXCs9fCx8XFwufC18LT18L3wvPXw6fDt8PHw8PHw8PD18PD18PXw9PXw9PT18Pnw+PXw+Pnw+Pj18Pj4+fD4+Pj18XFw/fFxcW3xcXHt8XFwofFxcXnxcXF49fFxcfHxcXHw9fFxcfFxcfHx+Ijt0aGlzLkVSPSIoPyFbXFxzXFxTXSkiO3RoaXMuQkU9e2I6IlxcXFwuIixyOjB9O3RoaXMuQVNNPXtjTjoic3RyaW5nIixiOiInIixlOiInIixpOiJcXG4iLGM6W3RoaXMuQkVdLHI6MH07dGhpcy5RU009e2NOOiJzdHJpbmciLGI6JyInLGU6JyInLGk6IlxcbiIsYzpbdGhpcy5CRV0scjowfTt0aGlzLkNMQ009e2NOOiJjb21tZW50IixiOiIvLyIsZToiJCJ9O3RoaXMuQ0JMQ0xNPXtjTjoiY29tbWVudCIsYjoiL1xcKiIsZToiXFwqLyJ9O3RoaXMuSENNPXtjTjoiY29tbWVudCIsYjoiIyIsZToiJCJ9O3RoaXMuTk09e2NOOiJudW1iZXIiLGI6dGhpcy5OUixyOjB9O3RoaXMuQ05NPXtjTjoibnVtYmVyIixiOnRoaXMuQ05SLHI6MH07dGhpcy5CTk09e2NOOiJudW1iZXIiLGI6dGhpcy5CTlIscjowfTt0aGlzLmluaGVyaXQ9ZnVuY3Rpb24ocixzKXt2YXIgcD17fTtmb3IodmFyIHEgaW4gcil7cFtxXT1yW3FdfWlmKHMpe2Zvcih2YXIgcSBpbiBzKXtwW3FdPXNbcV19fXJldHVybiBwfX0oKTtobGpzLkxBTkdVQUdFUy5jcHA9ZnVuY3Rpb24oKXt2YXIgYT17a2V5d29yZDp7ImZhbHNlIjoxLCJpbnQiOjEsImZsb2F0IjoxLCJ3aGlsZSI6MSwicHJpdmF0ZSI6MSwiY2hhciI6MSwiY2F0Y2giOjEsImV4cG9ydCI6MSx2aXJ0dWFsOjEsb3BlcmF0b3I6MixzaXplb2Y6MixkeW5hbWljX2Nhc3Q6Mix0eXBlZGVmOjIsY29uc3RfY2FzdDoyLCJjb25zdCI6MSxzdHJ1Y3Q6MSwiZm9yIjoxLHN0YXRpY19jYXN0OjIsdW5pb246MSxuYW1lc3BhY2U6MSx1bnNpZ25lZDoxLCJsb25nIjoxLCJ0aHJvdyI6MSwidm9sYXRpbGUiOjIsInN0YXRpYyI6MSwicHJvdGVjdGVkIjoxLGJvb2w6MSx0ZW1wbGF0ZToxLG11dGFibGU6MSwiaWYiOjEsInB1YmxpYyI6MSxmcmllbmQ6MiwiZG8iOjEsInJldHVybiI6MSwiZ290byI6MSxhdXRvOjEsInZvaWQiOjIsImVudW0iOjEsImVsc2UiOjEsImJyZWFrIjoxLCJuZXciOjEsZXh0ZXJuOjEsdXNpbmc6MSwidHJ1ZSI6MSwiY2xhc3MiOjEsYXNtOjEsImNhc2UiOjEsdHlwZWlkOjEsInNob3J0IjoxLHJlaW50ZXJwcmV0X2Nhc3Q6MiwiZGVmYXVsdCI6MSwiZG91YmxlIjoxLHJlZ2lzdGVyOjEsZXhwbGljaXQ6MSxzaWduZWQ6MSx0eXBlbmFtZToxLCJ0cnkiOjEsInRoaXMiOjEsInN3aXRjaCI6MSwiY29udGludWUiOjEsd2NoYXJfdDoxLGlubGluZToxLCJkZWxldGUiOjEsYWxpZ25vZjoxLGNoYXIxNl90OjEsY2hhcjMyX3Q6MSxjb25zdGV4cHI6MSxkZWNsdHlwZToxLG5vZXhjZXB0OjEsbnVsbHB0cjoxLHN0YXRpY19hc3NlcnQ6MSx0aHJlYWRfbG9jYWw6MSxyZXN0cmljdDoxLF9Cb29sOjEsY29tcGxleDoxfSxidWlsdF9pbjp7c3RkOjEsc3RyaW5nOjEsY2luOjEsY291dDoxLGNlcnI6MSxjbG9nOjEsc3RyaW5nc3RyZWFtOjEsaXN0cmluZ3N0cmVhbToxLG9zdHJpbmdzdHJlYW06MSxhdXRvX3B0cjoxLGRlcXVlOjEsbGlzdDoxLHF1ZXVlOjEsc3RhY2s6MSx2ZWN0b3I6MSxtYXA6MSxzZXQ6MSxiaXRzZXQ6MSxtdWx0aXNldDoxLG11bHRpbWFwOjEsdW5vcmRlcmVkX3NldDoxLHVub3JkZXJlZF9tYXA6MSx1bm9yZGVyZWRfbXVsdGlzZXQ6MSx1bm9yZGVyZWRfbXVsdGltYXA6MSxhcnJheToxLHNoYXJlZF9wdHI6MX19O3JldHVybntkTTp7azphLGk6IjwvIixjOltobGpzLkNMQ00saGxqcy5DQkxDTE0saGxqcy5RU00se2NOOiJzdHJpbmciLGI6IidcXFxcPy4iLGU6IiciLGk6Ii4ifSx7Y046Im51bWJlciIsYjoiXFxiKFxcZCsoXFwuXFxkKik/fFxcLlxcZCspKHV8VXxsfEx8dWx8VUx8ZnxGKSJ9LGhsanMuQ05NLHtjTjoicHJlcHJvY2Vzc29yIixiOiIjIixlOiIkIn0se2NOOiJzdGxfY29udGFpbmVyIixiOiJcXGIoZGVxdWV8bGlzdHxxdWV1ZXxzdGFja3x2ZWN0b3J8bWFwfHNldHxiaXRzZXR8bXVsdGlzZXR8bXVsdGltYXB8dW5vcmRlcmVkX21hcHx1bm9yZGVyZWRfc2V0fHVub3JkZXJlZF9tdWx0aXNldHx1bm9yZGVyZWRfbXVsdGltYXB8YXJyYXkpXFxzKjwiLGU6Ij4iLGs6YSxyOjEwLGM6WyJzZWxmIl19XX19fSgpO2hsanMuTEFOR1VBR0VTLnI9e2RNOntjOltobGpzLkhDTSx7Y046Im51bWJlciIsYjoiXFxiMFt4WF1bMC05YS1mQS1GXStbTGldP1xcYiIsZTpobGpzLklNTUVESUFURV9SRSxyOjB9LHtjTjoibnVtYmVyIixiOiJcXGJcXGQrKD86W2VFXVsrXFwtXT9cXGQqKT9MXFxiIixlOmhsanMuSU1NRURJQVRFX1JFLHI6MH0se2NOOiJudW1iZXIiLGI6IlxcYlxcZCtcXC4oPyFcXGQpKD86aVxcYik/IixlOmhsanMuSU1NRURJQVRFX1JFLHI6MX0se2NOOiJudW1iZXIiLGI6IlxcYlxcZCsoPzpcXC5cXGQqKT8oPzpbZUVdWytcXC1dP1xcZCopP2k/XFxiIixlOmhsanMuSU1NRURJQVRFX1JFLHI6MH0se2NOOiJudW1iZXIiLGI6IlxcLlxcZCsoPzpbZUVdWytcXC1dP1xcZCopP2k/XFxiIixlOmhsanMuSU1NRURJQVRFX1JFLHI6MX0se2NOOiJrZXl3b3JkIixiOiIoPzp0cnlDYXRjaHxsaWJyYXJ5fHNldEdlbmVyaWN8c2V0R3JvdXBHZW5lcmljKVxcYiIsZTpobGpzLklNTUVESUFURV9SRSxyOjEwfSx7Y046ImtleXdvcmQiLGI6IlxcLlxcLlxcLiIsZTpobGpzLklNTUVESUFURV9SRSxyOjEwfSx7Y046ImtleXdvcmQiLGI6IlxcLlxcLlxcZCsoPyFbXFx3Ll0pIixlOmhsanMuSU1NRURJQVRFX1JFLHI6MTB9LHtjTjoia2V5d29yZCIsYjoiXFxiKD86ZnVuY3Rpb24pIixlOmhsanMuSU1NRURJQVRFX1JFLHI6Mn0se2NOOiJrZXl3b3JkIixiOiIoPzppZnxpbnxicmVha3xuZXh0fHJlcGVhdHxlbHNlfGZvcnxyZXR1cm58c3dpdGNofHdoaWxlfHRyeXxzdG9wfHdhcm5pbmd8cmVxdWlyZXxhdHRhY2h8ZGV0YWNofHNvdXJjZXxzZXRNZXRob2R8c2V0Q2xhc3MpXFxiIixlOmhsanMuSU1NRURJQVRFX1JFLHI6MX0se2NOOiJsaXRlcmFsIixiOiIoPzpOQXxOQV9pbnRlZ2VyX3xOQV9yZWFsX3xOQV9jaGFyYWN0ZXJffE5BX2NvbXBsZXhfKVxcYiIsZTpobGpzLklNTUVESUFURV9SRSxyOjEwfSx7Y046ImxpdGVyYWwiLGI6Iig/Ok5VTEx8VFJVRXxGQUxTRXxUfEZ8SW5mfE5hTilcXGIiLGU6aGxqcy5JTU1FRElBVEVfUkUscjoxfSx7Y046ImlkZW50aWZpZXIiLGI6IlthLXpBLVouXVthLXpBLVowLTkuX10qXFxiIixlOmhsanMuSU1NRURJQVRFX1JFLHI6MH0se2NOOiJvcGVyYXRvciIsYjoiPFxcLSg/IVxccypcXGQpIixlOmhsanMuSU1NRURJQVRFX1JFLHI6Mn0se2NOOiJvcGVyYXRvciIsYjoiXFwtPnw8XFwtIixlOmhsanMuSU1NRURJQVRFX1JFLHI6MX0se2NOOiJvcGVyYXRvciIsYjoiJSV8fiIsZTpobGpzLklNTUVESUFURV9SRX0se2NOOiJvcGVyYXRvciIsYjoiPj18PD18PT18IT18XFx8XFx8fCYmfD18XFwrfFxcLXxcXCp8L3xcXF58Pnw8fCF8JnxcXHx8XFwkfDoiLGU6aGxqcy5JTU1FRElBVEVfUkUscjowfSx7Y046Im9wZXJhdG9yIixiOiIlIixlOiIlIixpOiJcXG4iLHI6MX0se2NOOiJpZGVudGlmaWVyIixiOiJgIixlOiJgIixyOjB9LHtjTjoic3RyaW5nIixiOiciJyxlOiciJyxjOltobGpzLkJFXSxyOjB9LHtjTjoic3RyaW5nIixiOiInIixlOiInIixjOltobGpzLkJFXSxyOjB9LHtjTjoicGFyZW4iLGI6IltbKHtcXF0pfV0iLGU6aGxqcy5JTU1FRElBVEVfUkUscjowfV19fTsKaGxqcy5pbml0SGlnaGxpZ2h0aW5nT25Mb2FkKCk7Cgo="></script>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%200%20auto%3B%0Amax%2Dwidth%3A%20800px%3B%0Afloat%3A%20center%3B%0Amargin%2Dleft%3A%20auto%3B%0Amargin%2Dright%3A%20auto%3B%0Aoverflow%3A%20visible%3B%0A%7D%0Abody%20%23header%20%7B%0Aclear%3A%20both%3B%0Amargin%2Dbottom%3A%208px%3B%0Aborder%2Dbottom%3A%202px%20solid%20%23999%3B%0Afont%2Dsize%3A%2020px%3B%0Apadding%3A%202px%2010px%202px%2025px%3B%0A%7D%0Abody%20%23content%20%7B%0Abackground%2Dcolor%3A%20white%3B%0Aclear%3A%20both%3B%0Afloat%3A%20left%3B%0Aoverflow%3A%20visible%3B%0Apadding%3A%2010px%3B%0Aborder%3A%201px%20solid%20%23BBBBBB%3B%0Aborder%2Dradius%3A%205px%3B%0Awidth%3A%20780px%3B%0A%7D%0Abody%20%23footer%20%7B%0Abackground%2Dcolor%3A%20%2399BBDD%3B%0Aclear%3A%20both%3B%0Afloat%3A%20left%3B%0Amargin%3A%208px%200%3B%0Aborder%3A%201px%20solid%20%236688AA%3B%0Aborder%2Dradius%3A%205px%3B%0Apadding%3A%200%2010px%3B%0Awidth%3A%20780px%3B%0A%7D%0Abody%20%2Eclear%20%7B%0Aclear%3A%20both%3B%0Aborder%2Dwidth%3A%200%3B%0Amargin%3A%200%3B%0Avisibility%3A%20hidden%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%2Dleft%3A%2025px%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dspacing%3A%200px%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcolor%3A%20gray%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Abackground%2Dcolor%3A%20white%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Abackground%2Dcolor%3A%20white%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%202px%205px%3B%0A%7D%0Ap%20%7B%0Amargin%2Dleft%3A%2015px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%2013px%3B%0Apadding%2Dbottom%3A%201px%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Acolor%3A%20%23000%3B%0Apadding%3A%200px%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Acolor%3A%20%23333%3B%0Aborder%3A%201px%20solid%20%23ddd%3B%0Aborder%2Dradius%3A%203px%3B%0Abackground%2Dcolor%3A%20%23f8f8f8%3B%0Afont%2Dsize%3A%2080%25%3B%0Apadding%3A%200px%202px%3B%0A%7D%0A%0Apre%20%7B%0Afont%2Dsize%3A%2012px%3B%0Aline%2Dheight%3A%2016px%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%2Er%20%7B%0Abackground%2Dcolor%3A%20%23F3F5F7%3B%0Apadding%3A%204px%2010px%3B%0Aborder%3A%201px%20solid%20%23AEBDCC%3B%0Aborder%2Dradius%3A%205px%3B%0Amargin%3A%205px%205px%2010px%2020px%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Abox%2Dshadow%3A%202px%202px%2012px%20%2D5px%20%23999999%3B%0Amargin%3A%200%205px%3B%0A%7D%0Abody%20%7B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2015px%3B%0Aline%2Dheight%3A%2022px%3B%0A%7D%0Abody%20%23header%20%7B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23ccc%3B%0Awidth%3A%2085%25%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%2022px%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23ccc%3B%0Awidth%3A%2075%25%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%2018px%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Awidth%3A%2060%25%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%2016px%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Awidth%3A%2060%25%3B%0Amargin%2Dleft%3A%2015px%3B%0Afont%2Dsize%3A%2016px%3B%0A%7D%0Ah4%2Eauthor%20%7B%0Aborder%2Dbottom%3A%20none%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Apre%20%2Eoperator%2C%0Apre%20%2Eparen%20%7B%0Acolor%3A%20%23888%3B%0A%7D%0Apre%20%2Eliteral%20%7B%0Acolor%3A%20%23990073%3B%0A%7D%0Apre%20%2Enumber%20%7B%0Acolor%3A%20%230080C0%3B%0A%7D%0Apre%20%2Ecomment%20%7B%0Acolor%3A%20%23008000%3B%0Afont%2Dstyle%3A%20italic%0A%7D%0Apre%20%2Ekeyword%20%7B%0Acolor%3A%20%23900%3B%0Afont%2Dweight%3A%20bold%0A%7D%0Apre%20%2Eidentifier%20%7B%0Acolor%3A%20%23000%3B%0A%7D%0Apre%20%2Estring%20%7B%0Acolor%3A%20%23b44%3B%0A%7D%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+<div id="header">
+<h1 class="title">Portable and non-portable R6 classes</h1>
+</div>
+
+<div id="TOC">
+<ul>
+<li><a href="#the-problem">The problem</a></li>
+<li><a href="#portable-r6">Portable R6</a></li>
+<li><a href="#using-self">Using <code>self</code></a></li>
+<li><a href="#potential-pitfalls-with-cross-package-inheritance">Potential pitfalls with cross-package inheritance</a></li>
+<li><a href="#wrap-up">Wrap-up</a></li>
+</ul>
+</div>
+
+<!--
+%\VignetteEngine{knitr::rmarkdown}
+%\VignetteIndexEntry{Portable R6 classes}
+-->
+<p>One limitation to R’s reference classes is that class inheritance across package namespaces is limited. R6 avoids this problem when the <code>portable</code> option is enabled.</p>
+<div id="the-problem" class="section level2">
+<h2>The problem</h2>
+<p>Here is an example of the cross-package inheritance problem with reference classes: Suppose you have ClassA in pkgA, and ClassB in pkgB, which inherits from ClassA. ClassA has a method <code>foo</code> which calls a non-exported function <code>fun</code> in pkgA.</p>
+<p>If ClassB inherits <code>foo</code>, it will try to call <code>fun</code> – but since ClassB objects are created in pkgB namespace (which is an environment) instead of the pkgA namespace, it won’t be able to find <code>fun</code>.</p>
+<p>Something similar happens with R6 when the <code>portable=FALSE</code> option is used. For example:</p>
+<pre class="r"><code>library(R6)
+# Simulate packages by creating environments
+pkgA &lt;- new.env()
+pkgB &lt;- new.env()
+
+# Create a function in pkgA but not pkgB
+pkgA$fun &lt;- function() 10
+
+ClassA &lt;- R6Class(&quot;ClassA&quot;,
+  portable = FALSE,
+  public = list(
+    foo = function() fun()
+  ),
+  parent_env = pkgA
+)
+
+# ClassB inherits from ClassA
+ClassB &lt;- R6Class(&quot;ClassB&quot;,
+  portable = FALSE,
+  inherit = ClassA,
+  parent_env = pkgB
+)</code></pre>
+<p>When we create an instance of ClassA, it works as expected:</p>
+<pre class="r"><code>a &lt;- ClassA$new()
+a$foo()
+#&gt; [1] 10</code></pre>
+<p>But with ClassB, it can’t find the <code>foo</code> function:</p>
+<pre class="r"><code>b &lt;- ClassB$new()
+b$foo()
+#&gt; Error in b$foo() : could not find function &quot;fun&quot;</code></pre>
+</div>
+<div id="portable-r6" class="section level2">
+<h2>Portable R6</h2>
+<p>R6 supports inheritance across different packages, with the default <code>portable=TRUE</code> option. In this example, we’ll again simulate different packages by creating separate parent environments for the classes.</p>
+<pre class="r"><code>pkgA &lt;- new.env()
+pkgB &lt;- new.env()
+
+pkgA$fun &lt;- function() {
+  &quot;This function `fun` in pkgA&quot;
+}
+
+ClassA &lt;- R6Class(&quot;ClassA&quot;,
+  portable = TRUE,  # The default
+  public = list(
+    foo = function() fun()
+  ),
+  parent_env = pkgA
+)
+
+ClassB &lt;- R6Class(&quot;ClassB&quot;,
+  portable = TRUE,
+  inherit = ClassA,
+  parent_env = pkgB
+)
+
+
+a &lt;- ClassA$new()
+a$foo()
+#&gt; [1] &quot;This function `fun` in pkgA&quot;
+
+b &lt;- ClassB$new()
+b$foo()
+#&gt; [1] &quot;This function `fun` in pkgA&quot;</code></pre>
+<p>When a method is inherited from a superclass, that method also gets that class’s environment. In other words, method “runs in” the superclass’s environment. This makes it possible for inheritance to work across packages.</p>
+<p>When a method is defined in the subclass, that method gets the subclass’s environment. For example, here ClassC is a subclass of ClassA, and defines its own <code>foo</code> method which overrides the <code>foo</code> method from ClassA. It happens that the method looks the same as ClassA’s – it just calls <code>fun</code>. But this time it finds <code>pkgC$fun</code> instead of <code>pkgA$fun</code>. This is in contrast to ClassB, which inherited the <code>foo</code> method and environment from ClassA.</p>
+<pre class="r"><code>pkgC &lt;- new.env()
+pkgC$fun &lt;- function() {
+  &quot;This function `fun` in pkgC&quot;
+}
+
+ClassC &lt;- R6Class(&quot;ClassC&quot;,
+  portable = TRUE,
+  inherit = ClassA,
+  public = list(
+    foo = function() fun()
+  ),
+  parent_env = pkgC
+)
+
+cc &lt;- ClassC$new()
+# This method is defined in ClassC, so finds pkgC$fun
+cc$foo()
+#&gt; [1] &quot;This function `fun` in pkgC&quot;</code></pre>
+</div>
+<div id="using-self" class="section level2">
+<h2>Using <code>self</code></h2>
+<p>One important difference between non-portable and portable classes is that with non-portable classes, it’s possible to access members with just the name of the member, and with portable classes, member access always requires using <code>self$</code> or <code>private$</code>. This is a consequence of the inheritance implementation.</p>
+<p>Here’s an example of a non-portable class with two methods: <code>sety</code>, which sets the private field <code>y</code> using the <code>&lt;&lt;-</code> operator, and <code>getxy</code>, which returns a vector with the values of fields <code>x</code> and <code>y</code>:</p>
+<pre class="r"><code>NP &lt;- R6Class(&quot;NP&quot;,
+  portable = FALSE,
+  public = list(
+    x = 1,
+    getxy = function() c(x, y),
+    sety = function(value) y &lt;&lt;- value
+  ),
+  private = list(
+    y = NA
+  )
+)
+
+np &lt;- NP$new()
+
+np$sety(20)
+np$getxy()
+#&gt; [1]  1 20</code></pre>
+<p>If we attempt the same with a portable class, it results in an error:</p>
+<pre class="r"><code>P &lt;- R6Class(&quot;P&quot;,
+  portable = TRUE,
+  public = list(
+    x = 1,
+    getxy = function() c(x, y),
+    sety = function(value) y &lt;&lt;- value
+  ),
+  private = list(
+    y = NA
+  )
+)
+
+p &lt;- P$new()
+
+# No error, but instead of setting private$y, this sets y in the global
+# environment! This is because of the sematics of &lt;&lt;-.
+p$sety(20)
+y
+#&gt; [1] 20
+
+p$getxy()
+#&gt; Error in p$getxy() : object 'y' not found</code></pre>
+<p>To make this work with a portable class, we need to use <code>self$x</code> and <code>private$y</code>:</p>
+<pre class="r"><code>P2 &lt;- R6Class(&quot;P2&quot;,
+  portable = TRUE,
+  public = list(
+    x = 1,
+    getxy = function() c(self$x, private$y),
+    sety = function(value) private$y &lt;- value
+  ),
+  private = list(
+    y = NA
+  )
+)
+
+p2 &lt;- P2$new()
+p2$sety(20)
+p2$getxy()
+#&gt; [1]  1 20</code></pre>
+<p>There is a small performance penalty for using <code>self$x</code> as opposed to <code>x</code>. In most cases, this is negligible, but it can be noticeable in some situations where there are tens of thousands or more accesses per second. For more information, see the Performance vignette.</p>
+</div>
+<div id="potential-pitfalls-with-cross-package-inheritance" class="section level2">
+<h2>Potential pitfalls with cross-package inheritance</h2>
+<p>Inheritance happens when an object is instantiated with <code>MyClass$new()</code>. At that time, members from the superclass get copied to the new object. This means that when you instantiate R6 object, it will essentially save some pieces of the superclass in the object.</p>
+<p>Because of the way that packages are built in R, R6’s inheritance behavior could potentially lead to surprising, hard-to-diagnose problems when packages change versions.</p>
+<p>Suppose you have two packages, pkgA, containing <code>ClassA</code>, and pkgB, containing <code>ClassB</code>, and there is code in pkgB that instantiates <code>ClassB</code> in an object, <code>objB</code>, at build time. This is in contrast to instantiating <code>ClassB</code> at run-time, by calling a function. All of the code in the package is run when a <em>binary</em> package is built, and the resulting objects are saved in the package. (Generally, if the object can be accessed with <code>pkgB:::objB</code>, this means it was created at build time.)</p>
+<p>When <code>objB</code> is created at package build time, pieces from the superclass, <code>pkgA::ClassA</code>, are saved inside of it. This is fine in and of itself. But imagine that pkgB was built and installed against pkgA 1.0, and then you upgrade to pkgA 2.0 without subsequently building and installing pkgB. Then <code>pkgB::objB</code> will contain some code from <code>pkgA::ClassA</code> 1.0, but the version of <code>pkgA::ClassA</code> that’s installed will be 2.0. This can cause problems if <code>objB</code> inherited code which uses parts of <code>pkgA</code> that have changed – but the problems may not be entirely obvious.</p>
+<p>This scenario is entirely possible when installing packages from CRAN. It is very common for a package to be upgraded without upgrading all of its downstream dependencies. As far as I know, R does not have any mechanism to force downstream dependencies to be rebuilt when a package is upgraded on a user’s computer.</p>
+<p>If this problem happens, the remedy is to rebuild pkgB against pkgA 2.0. I don’t know if CRAN rebuilds all downstream dependencies when a package is updated. If it doesn’t, then it’s possible for CRAN to have incompatible binary builds of pkgA and pkgB, and users would then have to install pkgB from source, with <code>install.packages(&quot;pkgB&quot;, type = &quot;source&quot;)</code>.</p>
+<p>To avoid this problem entirely, objects of <code>ClassB</code> must not be instantiated at build time. You can either instantiate them only in functions, or at package load time, by adding an <code>.onLoad</code> function to your package. For example:</p>
+<pre class="r"><code>ClassB &lt;- R6Class(&quot;ClassB&quot;,
+  inherit = pkgA::ClassA,
+  public = list(x = 1)
+)
+
+# We'll fill this at load time
+objB &lt;- NULL
+
+.onLoad &lt;- function(libname, pkgname) {
+  # The namespace is locked after loading; we can still modify objB at this time.
+  objB &lt;&lt;- ClassB$new()
+}</code></pre>
+<p>You might be wondering why <code>ClassB</code> (the class, not the instance of the class <code>objB</code>) doesn’t save a copy of <code>pkgA::ClassA</code> inside of it when the package is built. This is because, for the <code>inherit</code> argument, <code>R6Class</code> saves the unevaluated expression, (<code>pkgA::ClassA</code>), and evaluates it when <code>$new()</code> is called.</p>
+</div>
+<div id="wrap-up" class="section level2">
+<h2>Wrap-up</h2>
+<p>In summary:</p>
+<ul>
+<li>Portable classes allow inheritance across different packages.</li>
+<li>Portable classes always require the use of <code>self</code> or <code>private</code> to access members. This can incur a small performance penalty, since using <code>self$x</code> is slower than just <code>x</code>.</li>
+</ul>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

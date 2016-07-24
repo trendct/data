@@ -1,0 +1,601 @@
+---
+title: "Connecticut temperatures"
+author: "Andrew Ba Tran"
+date: "August 23, 2015"
+output: html_document
+---
+
+This is a [walkthrough](http://trendct.github.io/weather/temperatures.html) to accompany the TrendCT story: [How hot has it been in Connecticut this summer](http://trendct.org/2015/08/24/how-hot-has-it-been-in-connecticut-this-summer)?
+
+These visualizations would not have been possible without the excellent work from Bradley Boehmke's [Dayton's Weather in 2014](https://rpubs.com/bradleyboehmke/weather_graphic) and Randy Olson's [The New York Times weather chart redux](http://www.randalolson.com/2015/08/13/the-new-york-times-weather-chart-redux/).
+
+Before we begin, you need a dataframe of historical temperature data. 
+Please refer to the [wunderground_scraper.R](https://github.com/trendct/weather/blob/master/wunderground_scraper.R) script on how to collect the appropriate data. This is how the data should look. 
+
+```{r}
+library(knitr)
+airp <- read.csv("KHFD.csv", stringsAsFactors=FALSE)
+
+# Label the town for the chart title
+town <- "Hartford"
+
+kable(head(airp))
+
+```
+
+It has max and min average, actual, and record temperatures for each day.
+
+Now let's load the packages to work the data into something to visualize with
+```{r}
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+```
+
+Restructuring the data so it plays nice with ggplot2
+
+```{r}
+airp2 <- gather(airp, "type", "temp", 4:11)
+```
+
+Function to turn y-axis labels into degree formatted values and set the range from -20 to 100.
+
+```{r}
+dgr_fmt <- function(x, ...) {
+  parse(text = paste(x, "*degree", sep = ""))
+}
+a <- dgr_fmt(seq(-20,100, by=10))
+```
+
+Bringing in a package that will allow use of Google fonts to match TrendCT style.
+
+```{r}
+library(extrafont)
+```
+
+Now plotting the chart layer by layer with geom_linerange()
+
+```{r, fig.width=10, fig.height=6, warning=FALSE}
+p <- ggplot(airp, aes(row, average_min_temp)) +
+  theme(plot.background = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank(),
+        panel.border = element_blank(),
+        panel.background = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank()) +
+  geom_linerange(airp, mapping=aes(x=row, ymin=record_min_temp, ymax=record_max_temp), colour = "sienna", alpha=.5)
+
+p <- p + 
+  geom_linerange(airp, mapping=aes(x=row, ymin=average_min_temp, ymax=average_max_temp), colour = "sienna1", alpha=.8)
+
+p <- p + 
+  geom_linerange(airp, mapping=aes(x=row, ymin=actual_min_temp, ymax=actual_max_temp), colour = "sienna4") +
+  geom_vline(xintercept = 0, colour = "sienna4", linetype=1, size=1)
+
+# The colors used in the chart layers above can be replaced with any from
+# http://sape.inf.usi.ch/quick-reference/ggplot2/colour
+
+# Make the grid look pretty
+
+p <- p + 
+  geom_hline(yintercept = -20, colour = "white", linetype=1) +
+  geom_hline(yintercept = -10, colour = "white", linetype=1) +
+  geom_hline(yintercept = 0, colour = "white", linetype=1) +
+  geom_hline(yintercept = 10, colour = "white", linetype=1) +
+  geom_hline(yintercept = 20, colour = "white", linetype=1) +
+  geom_hline(yintercept = 30, colour = "white", linetype=1) +
+  geom_hline(yintercept = 40, colour = "white", linetype=1) +
+  geom_hline(yintercept = 50, colour = "white", linetype=1) +
+  geom_hline(yintercept = 60, colour = "white", linetype=1) +
+  geom_hline(yintercept = 70, colour = "white", linetype=1) +
+  geom_hline(yintercept = 80, colour = "white", linetype=1) +
+  geom_hline(yintercept = 90, colour = "white", linetype=1) +
+  geom_hline(yintercept = 100, colour = "white", linetype=1)
+
+# Identifying the months based on number of days
+
+p <- p + 
+  #June - 30
+  geom_vline(xintercept = 30, colour = "wheat4", linetype=3, size=.5) +
+  #July - 31
+  geom_vline(xintercept = 61, colour = "wheat4", linetype=3, size=.5) +
+  # August - 31
+  geom_vline(xintercept = 92, colour = "wheat4", linetype=3, size=.5) +
+  # September - 30
+  geom_vline(xintercept = 122, colour = "wheat4", linetype=3, size=.5) +
+  # October 31
+  geom_vline(xintercept = 153, colour = "wheat4", linetype=3, size=.5) +
+  # November - 30
+  geom_vline(xintercept = 183, colour = "wheat4", linetype=3, size=.5) +
+  # December - 31
+  geom_vline(xintercept = 214, colour = "wheat4", linetype=3, size=.5) +
+  # January - 31
+  geom_vline(xintercept = 245, colour = "wheat4", linetype=3, size=.5) +
+  # February - 28
+  geom_vline(xintercept = 273, colour = "wheat4", linetype=3, size=.5) +
+  # March - 31
+  geom_vline(xintercept = 304, colour = "wheat4", linetype=3, size=.5) +
+  # April - 30
+  geom_vline(xintercept = 334, colour = "wheat4", linetype=3, size=.5) +
+  # May - 31
+  geom_vline(xintercept = 365, colour = "wheat4", linetype=3, size=.5) +
+  # June - 30
+  geom_vline(xintercept = 396, colour = "wheat4", linetype=3, size=.5) +
+  # July - 31
+  geom_vline(xintercept = 427, colour = "wheat4", linetype=3, size=.5) 
+# August - 31 (19 so far)
+
+# Establishing the x axis
+p <- p +
+  coord_cartesian(ylim = c(-20,100)) +
+  scale_y_continuous(breaks = seq(-20,100, by=10), labels = a) +
+  scale_x_continuous(expand = c(0, 0), 
+                     breaks = c(15,45,75,105,135,165,195,228,258,288,320,350, 380, 410, 440),
+                     labels = c("JUN", "JUL", "AUG", "SEP", "OCT", 
+                                "NOV", "DEC", "JAN", "FEB", "MAR", 
+                                "APR", "MAY", "JUN", "JUL", "AUG"))
+
+# Identifying the record-breaking days by comparing actual vs record
+rlow3 <- airp[airp$actual_min_temp<=airp$record_min_temp,]
+rhigh3 <- airp[airp$actual_max_temp>=airp$record_max_temp,]
+
+# Adding them to the chart with specific colors
+p <- p +
+  geom_point(data=rlow3, aes(x=row, y=record_min_temp), colour="blue3") +
+  geom_point(data=rhigh3, aes(x=row, y=record_max_temp), colour="red3")
+
+# Adding a title based on the variable set above
+title <- paste0(town, "'s weather since summer 2014")
+
+# Setting the title
+p <- p +
+  ggtitle(title) +
+  theme(plot.title=element_text(face="bold",hjust=.012,vjust=.8,colour="#3C3C3C",size=20, family="Lato")) +
+  annotate("text", x = 28, y = 98, label = "Temperature", size=4, fontface="bold", family="Lato Black") 
+
+# Now for the legend
+p <- p +
+  annotate("segment", x = 65, xend = 65, y = -6, yend = 16, colour = "sienna", , alpha=.5, size=3) +
+  annotate("segment", x = 65, xend = 65, y = 0, yend = 10, colour = "sienna1", , alpha=.8, size=3) +
+  annotate("segment", x = 65, xend = 65, y = 2, yend = 8, colour = "sienna4", size=3) +
+  
+  annotate("segment", x = 58, xend = 62, y = 10, yend = 10, colour = "gray30", size=.5) +
+  annotate("segment", x = 58, xend = 62, y = 0, yend = 0, colour = "gray30", size=.5) +
+  annotate("segment", x = 60, xend = 60, y = 10, yend = 0, colour = "gray30", size=.5) +
+  
+  annotate("text", x = 32, y = 5, label = "AVERAGE RANGE", size=3, colour="gray30") +
+  
+  annotate("segment", x = 68, xend = 72, y = 8, yend = 8, colour = "gray30", size=.5) +
+  annotate("segment", x = 68, xend = 72, y = 2, yend = 2, colour = "gray30", size=.5) +
+  annotate("segment", x = 70, xend = 70, y = 8, yend = 2, colour = "gray30", size=.5) +
+  
+  annotate("text", x = 104, y = 5, label = "2014 - 2015 RANGE", size=3.5, colour="gray30") +
+  annotate("text", x = 42, y = 13, label = "RECORD HIGH", size=3, colour="gray30") +
+  annotate("text", x = 43, y = -3, label = "RECORD LOW", size=3, colour="gray30") +
+  
+  annotate("segment", x = 67, xend = 76, y = 17, yend = 17, colour = "gray30", size=.5) +
+  annotate("segment", x = 67, xend = 76, y = -7, yend = -7, colour = "gray30", size=.5) +
+  
+  annotate("point", x = 65, y = 17, colour = "red", size = 2) + 
+  annotate("point", x = 65, y = -7, colour = "blue", size = 2) +
+  annotate("text", x = 106, y = 17, label = "NEW RECORD HIGH", size=3, colour="gray30") +
+  annotate("text", x = 106, y = -7, label = "NEW RECORD LOW", size=3, colour="gray30") +
+  annotate("text", x = 390, y = -15, label = "Source: Weather Underground", size=4, fontface="italic", colour="gray30") 
+print(p)
+```
+
+Pretty cool. To generate a new visualization, just rename the CSV and town name in the first chunk of code above.
+
+```{r, fig.width=10, fig.height=6, warning=FALSE, echo=FALSE}
+airp <- read.csv("KHVN.csv", stringsAsFactors=FALSE)
+
+# Label the town for the chart title
+town <- "New Haven"
+
+airp2 <- gather(airp, "type", "temp", 4:11)
+
+p <- ggplot(airp, aes(row, average_min_temp)) +
+  theme(plot.background = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank(),
+        panel.border = element_blank(),
+        panel.background = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank()) +
+  geom_linerange(airp, mapping=aes(x=row, ymin=record_min_temp, ymax=record_max_temp), colour = "sienna", alpha=.5)
+
+p <- p + 
+  geom_linerange(airp, mapping=aes(x=row, ymin=average_min_temp, ymax=average_max_temp), colour = "sienna1", alpha=.8)
+
+p <- p + 
+  geom_linerange(airp, mapping=aes(x=row, ymin=actual_min_temp, ymax=actual_max_temp), colour = "sienna4") +
+  geom_vline(xintercept = 0, colour = "sienna4", linetype=1, size=1)
+
+# The colors used in the chart layers above can be replaced with any from
+# http://sape.inf.usi.ch/quick-reference/ggplot2/colour
+
+# Make the grid look pretty
+
+p <- p + 
+  geom_hline(yintercept = -20, colour = "white", linetype=1) +
+  geom_hline(yintercept = -10, colour = "white", linetype=1) +
+  geom_hline(yintercept = 0, colour = "white", linetype=1) +
+  geom_hline(yintercept = 10, colour = "white", linetype=1) +
+  geom_hline(yintercept = 20, colour = "white", linetype=1) +
+  geom_hline(yintercept = 30, colour = "white", linetype=1) +
+  geom_hline(yintercept = 40, colour = "white", linetype=1) +
+  geom_hline(yintercept = 50, colour = "white", linetype=1) +
+  geom_hline(yintercept = 60, colour = "white", linetype=1) +
+  geom_hline(yintercept = 70, colour = "white", linetype=1) +
+  geom_hline(yintercept = 80, colour = "white", linetype=1) +
+  geom_hline(yintercept = 90, colour = "white", linetype=1) +
+  geom_hline(yintercept = 100, colour = "white", linetype=1)
+
+# Identifying the months based on number of days
+
+p <- p + 
+  #June - 30
+  geom_vline(xintercept = 30, colour = "wheat4", linetype=3, size=.5) +
+  #July - 31
+  geom_vline(xintercept = 61, colour = "wheat4", linetype=3, size=.5) +
+  # August - 31
+  geom_vline(xintercept = 92, colour = "wheat4", linetype=3, size=.5) +
+  # September - 30
+  geom_vline(xintercept = 122, colour = "wheat4", linetype=3, size=.5) +
+  # October 31
+  geom_vline(xintercept = 153, colour = "wheat4", linetype=3, size=.5) +
+  # November - 30
+  geom_vline(xintercept = 183, colour = "wheat4", linetype=3, size=.5) +
+  # December - 31
+  geom_vline(xintercept = 214, colour = "wheat4", linetype=3, size=.5) +
+  # January - 31
+  geom_vline(xintercept = 245, colour = "wheat4", linetype=3, size=.5) +
+  # February - 28
+  geom_vline(xintercept = 273, colour = "wheat4", linetype=3, size=.5) +
+  # March - 31
+  geom_vline(xintercept = 304, colour = "wheat4", linetype=3, size=.5) +
+  # April - 30
+  geom_vline(xintercept = 334, colour = "wheat4", linetype=3, size=.5) +
+  # May - 31
+  geom_vline(xintercept = 365, colour = "wheat4", linetype=3, size=.5) +
+  # June - 30
+  geom_vline(xintercept = 396, colour = "wheat4", linetype=3, size=.5) +
+  # July - 31
+  geom_vline(xintercept = 427, colour = "wheat4", linetype=3, size=.5) 
+# August - 31 (19 so far)
+
+# Establishing the x axis
+p <- p +
+  coord_cartesian(ylim = c(-20,100)) +
+  scale_y_continuous(breaks = seq(-20,100, by=10), labels = a) +
+  scale_x_continuous(expand = c(0, 0), 
+                     breaks = c(15,45,75,105,135,165,195,228,258,288,320,350, 380, 410, 440),
+                     labels = c("JUN", "JUL", "AUG", "SEP", "OCT", 
+                                "NOV", "DEC", "JAN", "FEB", "MAR", 
+                                "APR", "MAY", "JUN", "JUL", "AUG"))
+
+# Identifying the record-breaking days by comparing actual vs record
+rlow3 <- airp[airp$actual_min_temp<=airp$record_min_temp,]
+rhigh3 <- airp[airp$actual_max_temp>=airp$record_max_temp,]
+
+# Adding them to the chart with specific colors
+p <- p +
+  geom_point(data=rlow3, aes(x=row, y=record_min_temp), colour="blue3") +
+  geom_point(data=rhigh3, aes(x=row, y=record_max_temp), colour="red3")
+
+# Adding a title based on the variable set above
+title <- paste0(town, "'s weather since summer 2014")
+
+# Setting the title
+p <- p +
+  ggtitle(title) +
+  theme(plot.title=element_text(face="bold",hjust=.012,vjust=.8,colour="#3C3C3C",size=20, family="Lato")) +
+  annotate("text", x = 28, y = 98, label = "Temperature", size=4, fontface="bold", family="Lato Black") 
+
+# Now for the legend
+p <- p +
+  annotate("segment", x = 65, xend = 65, y = -6, yend = 16, colour = "sienna", , alpha=.5, size=3) +
+  annotate("segment", x = 65, xend = 65, y = 0, yend = 10, colour = "sienna1", , alpha=.8, size=3) +
+  annotate("segment", x = 65, xend = 65, y = 2, yend = 8, colour = "sienna4", size=3) +
+  
+  annotate("segment", x = 58, xend = 62, y = 10, yend = 10, colour = "gray30", size=.5) +
+  annotate("segment", x = 58, xend = 62, y = 0, yend = 0, colour = "gray30", size=.5) +
+  annotate("segment", x = 60, xend = 60, y = 10, yend = 0, colour = "gray30", size=.5) +
+  
+  annotate("text", x = 32, y = 5, label = "AVERAGE RANGE", size=3, colour="gray30") +
+  
+  annotate("segment", x = 68, xend = 72, y = 8, yend = 8, colour = "gray30", size=.5) +
+  annotate("segment", x = 68, xend = 72, y = 2, yend = 2, colour = "gray30", size=.5) +
+  annotate("segment", x = 70, xend = 70, y = 8, yend = 2, colour = "gray30", size=.5) +
+  
+  annotate("text", x = 104, y = 5, label = "2014 - 2015 RANGE", size=3.5, colour="gray30") +
+  annotate("text", x = 42, y = 13, label = "RECORD HIGH", size=3, colour="gray30") +
+  annotate("text", x = 43, y = -3, label = "RECORD LOW", size=3, colour="gray30") +
+  
+  annotate("segment", x = 67, xend = 76, y = 17, yend = 17, colour = "gray30", size=.5) +
+  annotate("segment", x = 67, xend = 76, y = -7, yend = -7, colour = "gray30", size=.5) +
+  
+  annotate("point", x = 65, y = 17, colour = "red", size = 2) + 
+  annotate("point", x = 65, y = -7, colour = "blue", size = 2) +
+  annotate("text", x = 106, y = 17, label = "NEW RECORD HIGH", size=3, colour="gray30") +
+  annotate("text", x = 106, y = -7, label = "NEW RECORD LOW", size=3, colour="gray30") +
+  annotate("text", x = 390, y = -15, label = "Source: Weather Underground", size=4, fontface="italic", colour="gray30") 
+print(p)
+```
+
+
+```{r, fig.width=10, fig.height=6, warning=FALSE, echo=FALSE}
+airp <- read.csv("KHPN.csv", stringsAsFactors=FALSE)
+
+# Label the town for the chart title
+town <- "Stamford"
+
+airp2 <- gather(airp, "type", "temp", 4:11)
+
+p <- ggplot(airp, aes(row, average_min_temp)) +
+  theme(plot.background = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank(),
+        panel.border = element_blank(),
+        panel.background = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank()) +
+  geom_linerange(airp, mapping=aes(x=row, ymin=record_min_temp, ymax=record_max_temp), colour = "sienna", alpha=.5)
+
+p <- p + 
+  geom_linerange(airp, mapping=aes(x=row, ymin=average_min_temp, ymax=average_max_temp), colour = "sienna1", alpha=.8)
+
+p <- p + 
+  geom_linerange(airp, mapping=aes(x=row, ymin=actual_min_temp, ymax=actual_max_temp), colour = "sienna4") +
+  geom_vline(xintercept = 0, colour = "sienna4", linetype=1, size=1)
+
+# The colors used in the chart layers above can be replaced with any from
+# http://sape.inf.usi.ch/quick-reference/ggplot2/colour
+
+# Make the grid look pretty
+
+p <- p + 
+  geom_hline(yintercept = -20, colour = "white", linetype=1) +
+  geom_hline(yintercept = -10, colour = "white", linetype=1) +
+  geom_hline(yintercept = 0, colour = "white", linetype=1) +
+  geom_hline(yintercept = 10, colour = "white", linetype=1) +
+  geom_hline(yintercept = 20, colour = "white", linetype=1) +
+  geom_hline(yintercept = 30, colour = "white", linetype=1) +
+  geom_hline(yintercept = 40, colour = "white", linetype=1) +
+  geom_hline(yintercept = 50, colour = "white", linetype=1) +
+  geom_hline(yintercept = 60, colour = "white", linetype=1) +
+  geom_hline(yintercept = 70, colour = "white", linetype=1) +
+  geom_hline(yintercept = 80, colour = "white", linetype=1) +
+  geom_hline(yintercept = 90, colour = "white", linetype=1) +
+  geom_hline(yintercept = 100, colour = "white", linetype=1)
+
+# Identifying the months based on number of days
+
+p <- p + 
+  #June - 30
+  geom_vline(xintercept = 30, colour = "wheat4", linetype=3, size=.5) +
+  #July - 31
+  geom_vline(xintercept = 61, colour = "wheat4", linetype=3, size=.5) +
+  # August - 31
+  geom_vline(xintercept = 92, colour = "wheat4", linetype=3, size=.5) +
+  # September - 30
+  geom_vline(xintercept = 122, colour = "wheat4", linetype=3, size=.5) +
+  # October 31
+  geom_vline(xintercept = 153, colour = "wheat4", linetype=3, size=.5) +
+  # November - 30
+  geom_vline(xintercept = 183, colour = "wheat4", linetype=3, size=.5) +
+  # December - 31
+  geom_vline(xintercept = 214, colour = "wheat4", linetype=3, size=.5) +
+  # January - 31
+  geom_vline(xintercept = 245, colour = "wheat4", linetype=3, size=.5) +
+  # February - 28
+  geom_vline(xintercept = 273, colour = "wheat4", linetype=3, size=.5) +
+  # March - 31
+  geom_vline(xintercept = 304, colour = "wheat4", linetype=3, size=.5) +
+  # April - 30
+  geom_vline(xintercept = 334, colour = "wheat4", linetype=3, size=.5) +
+  # May - 31
+  geom_vline(xintercept = 365, colour = "wheat4", linetype=3, size=.5) +
+  # June - 30
+  geom_vline(xintercept = 396, colour = "wheat4", linetype=3, size=.5) +
+  # July - 31
+  geom_vline(xintercept = 427, colour = "wheat4", linetype=3, size=.5) 
+# August - 31 (19 so far)
+
+# Establishing the x axis
+p <- p +
+  coord_cartesian(ylim = c(-20,100)) +
+  scale_y_continuous(breaks = seq(-20,100, by=10), labels = a) +
+  scale_x_continuous(expand = c(0, 0), 
+                     breaks = c(15,45,75,105,135,165,195,228,258,288,320,350, 380, 410, 440),
+                     labels = c("JUN", "JUL", "AUG", "SEP", "OCT", 
+                                "NOV", "DEC", "JAN", "FEB", "MAR", 
+                                "APR", "MAY", "JUN", "JUL", "AUG"))
+
+# Identifying the record-breaking days by comparing actual vs record
+rlow3 <- airp[airp$actual_min_temp<=airp$record_min_temp,]
+rhigh3 <- airp[airp$actual_max_temp>=airp$record_max_temp,]
+
+# Adding them to the chart with specific colors
+p <- p +
+  geom_point(data=rlow3, aes(x=row, y=record_min_temp), colour="blue3") +
+  geom_point(data=rhigh3, aes(x=row, y=record_max_temp), colour="red3")
+
+# Adding a title based on the variable set above
+title <- paste0(town, "'s weather since summer 2014")
+
+# Setting the title
+p <- p +
+  ggtitle(title) +
+  theme(plot.title=element_text(face="bold",hjust=.012,vjust=.8,colour="#3C3C3C",size=20, family="Lato")) +
+  annotate("text", x = 28, y = 98, label = "Temperature", size=4, fontface="bold", family="Lato Black") 
+
+# Now for the legend
+p <- p +
+  annotate("segment", x = 65, xend = 65, y = -6, yend = 16, colour = "sienna", , alpha=.5, size=3) +
+  annotate("segment", x = 65, xend = 65, y = 0, yend = 10, colour = "sienna1", , alpha=.8, size=3) +
+  annotate("segment", x = 65, xend = 65, y = 2, yend = 8, colour = "sienna4", size=3) +
+  
+  annotate("segment", x = 58, xend = 62, y = 10, yend = 10, colour = "gray30", size=.5) +
+  annotate("segment", x = 58, xend = 62, y = 0, yend = 0, colour = "gray30", size=.5) +
+  annotate("segment", x = 60, xend = 60, y = 10, yend = 0, colour = "gray30", size=.5) +
+  
+  annotate("text", x = 32, y = 5, label = "AVERAGE RANGE", size=3, colour="gray30") +
+  
+  annotate("segment", x = 68, xend = 72, y = 8, yend = 8, colour = "gray30", size=.5) +
+  annotate("segment", x = 68, xend = 72, y = 2, yend = 2, colour = "gray30", size=.5) +
+  annotate("segment", x = 70, xend = 70, y = 8, yend = 2, colour = "gray30", size=.5) +
+  
+  annotate("text", x = 104, y = 5, label = "2014 - 2015 RANGE", size=3.5, colour="gray30") +
+  annotate("text", x = 42, y = 13, label = "RECORD HIGH", size=3, colour="gray30") +
+  annotate("text", x = 43, y = -3, label = "RECORD LOW", size=3, colour="gray30") +
+  
+  annotate("segment", x = 67, xend = 76, y = 17, yend = 17, colour = "gray30", size=.5) +
+  annotate("segment", x = 67, xend = 76, y = -7, yend = -7, colour = "gray30", size=.5) +
+  
+  annotate("point", x = 65, y = 17, colour = "red", size = 2) + 
+  annotate("point", x = 65, y = -7, colour = "blue", size = 2) +
+  annotate("text", x = 106, y = 17, label = "NEW RECORD HIGH", size=3, colour="gray30") +
+  annotate("text", x = 106, y = -7, label = "NEW RECORD LOW", size=3, colour="gray30") +
+  annotate("text", x = 390, y = -15, label = "Source: Weather Underground", size=4, fontface="italic", colour="gray30") 
+print(p)
+```
+
+
+```{r, fig.width=10, fig.height=6, warning=FALSE, echo=FALSE}
+airp <- read.csv("KGON.csv", stringsAsFactors=FALSE)
+
+# Label the town for the chart title
+town <- "New London"
+
+airp2 <- gather(airp, "type", "temp", 4:11)
+
+p <- ggplot(airp, aes(row, average_min_temp)) +
+  theme(plot.background = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank(),
+        panel.border = element_blank(),
+        panel.background = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank()) +
+  geom_linerange(airp, mapping=aes(x=row, ymin=record_min_temp, ymax=record_max_temp), colour = "sienna", alpha=.5)
+
+p <- p + 
+  geom_linerange(airp, mapping=aes(x=row, ymin=average_min_temp, ymax=average_max_temp), colour = "sienna1", alpha=.8)
+
+p <- p + 
+  geom_linerange(airp, mapping=aes(x=row, ymin=actual_min_temp, ymax=actual_max_temp), colour = "sienna4") +
+  geom_vline(xintercept = 0, colour = "sienna4", linetype=1, size=1)
+
+# The colors used in the chart layers above can be replaced with any from
+# http://sape.inf.usi.ch/quick-reference/ggplot2/colour
+
+# Make the grid look pretty
+
+p <- p + 
+  geom_hline(yintercept = -20, colour = "white", linetype=1) +
+  geom_hline(yintercept = -10, colour = "white", linetype=1) +
+  geom_hline(yintercept = 0, colour = "white", linetype=1) +
+  geom_hline(yintercept = 10, colour = "white", linetype=1) +
+  geom_hline(yintercept = 20, colour = "white", linetype=1) +
+  geom_hline(yintercept = 30, colour = "white", linetype=1) +
+  geom_hline(yintercept = 40, colour = "white", linetype=1) +
+  geom_hline(yintercept = 50, colour = "white", linetype=1) +
+  geom_hline(yintercept = 60, colour = "white", linetype=1) +
+  geom_hline(yintercept = 70, colour = "white", linetype=1) +
+  geom_hline(yintercept = 80, colour = "white", linetype=1) +
+  geom_hline(yintercept = 90, colour = "white", linetype=1) +
+  geom_hline(yintercept = 100, colour = "white", linetype=1)
+
+# Identifying the months based on number of days
+
+p <- p + 
+  #June - 30
+  geom_vline(xintercept = 30, colour = "wheat4", linetype=3, size=.5) +
+  #July - 31
+  geom_vline(xintercept = 61, colour = "wheat4", linetype=3, size=.5) +
+  # August - 31
+  geom_vline(xintercept = 92, colour = "wheat4", linetype=3, size=.5) +
+  # September - 30
+  geom_vline(xintercept = 122, colour = "wheat4", linetype=3, size=.5) +
+  # October 31
+  geom_vline(xintercept = 153, colour = "wheat4", linetype=3, size=.5) +
+  # November - 30
+  geom_vline(xintercept = 183, colour = "wheat4", linetype=3, size=.5) +
+  # December - 31
+  geom_vline(xintercept = 214, colour = "wheat4", linetype=3, size=.5) +
+  # January - 31
+  geom_vline(xintercept = 245, colour = "wheat4", linetype=3, size=.5) +
+  # February - 28
+  geom_vline(xintercept = 273, colour = "wheat4", linetype=3, size=.5) +
+  # March - 31
+  geom_vline(xintercept = 304, colour = "wheat4", linetype=3, size=.5) +
+  # April - 30
+  geom_vline(xintercept = 334, colour = "wheat4", linetype=3, size=.5) +
+  # May - 31
+  geom_vline(xintercept = 365, colour = "wheat4", linetype=3, size=.5) +
+  # June - 30
+  geom_vline(xintercept = 396, colour = "wheat4", linetype=3, size=.5) +
+  # July - 31
+  geom_vline(xintercept = 427, colour = "wheat4", linetype=3, size=.5) 
+# August - 31 (19 so far)
+
+# Establishing the x axis
+p <- p +
+  coord_cartesian(ylim = c(-20,100)) +
+  scale_y_continuous(breaks = seq(-20,100, by=10), labels = a) +
+  scale_x_continuous(expand = c(0, 0), 
+                     breaks = c(15,45,75,105,135,165,195,228,258,288,320,350, 380, 410, 440),
+                     labels = c("JUN", "JUL", "AUG", "SEP", "OCT", 
+                                "NOV", "DEC", "JAN", "FEB", "MAR", 
+                                "APR", "MAY", "JUN", "JUL", "AUG"))
+
+# Identifying the record-breaking days by comparing actual vs record
+rlow3 <- airp[airp$actual_min_temp<=airp$record_min_temp,]
+rhigh3 <- airp[airp$actual_max_temp>=airp$record_max_temp,]
+
+# Adding them to the chart with specific colors
+p <- p +
+  geom_point(data=rlow3, aes(x=row, y=record_min_temp), colour="blue3") +
+  geom_point(data=rhigh3, aes(x=row, y=record_max_temp), colour="red3")
+
+# Adding a title based on the variable set above
+title <- paste0(town, "'s weather since summer 2014")
+
+# Setting the title
+p <- p +
+  ggtitle(title) +
+  theme(plot.title=element_text(face="bold",hjust=.012,vjust=.8,colour="#3C3C3C",size=20, family="Lato")) +
+  annotate("text", x = 28, y = 98, label = "Temperature", size=4, fontface="bold", family="Lato Black") 
+
+# Now for the legend
+p <- p +
+  annotate("segment", x = 65, xend = 65, y = -6, yend = 16, colour = "sienna", , alpha=.5, size=3) +
+  annotate("segment", x = 65, xend = 65, y = 0, yend = 10, colour = "sienna1", , alpha=.8, size=3) +
+  annotate("segment", x = 65, xend = 65, y = 2, yend = 8, colour = "sienna4", size=3) +
+  
+  annotate("segment", x = 58, xend = 62, y = 10, yend = 10, colour = "gray30", size=.5) +
+  annotate("segment", x = 58, xend = 62, y = 0, yend = 0, colour = "gray30", size=.5) +
+  annotate("segment", x = 60, xend = 60, y = 10, yend = 0, colour = "gray30", size=.5) +
+  
+  annotate("text", x = 32, y = 5, label = "AVERAGE RANGE", size=3, colour="gray30") +
+  
+  annotate("segment", x = 68, xend = 72, y = 8, yend = 8, colour = "gray30", size=.5) +
+  annotate("segment", x = 68, xend = 72, y = 2, yend = 2, colour = "gray30", size=.5) +
+  annotate("segment", x = 70, xend = 70, y = 8, yend = 2, colour = "gray30", size=.5) +
+  
+  annotate("text", x = 104, y = 5, label = "2014 - 2015 RANGE", size=3.5, colour="gray30") +
+  annotate("text", x = 42, y = 13, label = "RECORD HIGH", size=3, colour="gray30") +
+  annotate("text", x = 43, y = -3, label = "RECORD LOW", size=3, colour="gray30") +
+  
+  annotate("segment", x = 67, xend = 76, y = 17, yend = 17, colour = "gray30", size=.5) +
+  annotate("segment", x = 67, xend = 76, y = -7, yend = -7, colour = "gray30", size=.5) +
+  
+  annotate("point", x = 65, y = 17, colour = "red", size = 2) + 
+  annotate("point", x = 65, y = -7, colour = "blue", size = 2) +
+  annotate("text", x = 106, y = 17, label = "NEW RECORD HIGH", size=3, colour="gray30") +
+  annotate("text", x = 106, y = -7, label = "NEW RECORD LOW", size=3, colour="gray30") +
+  annotate("text", x = 390, y = -15, label = "Source: Weather Underground", size=4, fontface="italic", colour="gray30") 
+print(p)
+```

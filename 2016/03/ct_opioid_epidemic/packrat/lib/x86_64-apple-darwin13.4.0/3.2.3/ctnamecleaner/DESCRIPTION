@@ -1,0 +1,27 @@
+Package: ctnamecleaner
+Title: Connecticut Town Name and Population Matcher
+Version: 0.3.1
+Authors@R: person("Andrew", "Tran", email = "abtran@gmail.com.com",
+    role = c("aut", "cre"))
+Description: Fixes Connecticut town names and optionally adds
+    population stats.
+Depends: R (>= 3.2.0)
+License: MIT+ file LICENSE
+LazyData: true
+Imports: dplyr, stringr, RCurl, ggplot2, reshape
+Author: Andrew Tran [aut, cre]
+Maintainer: Andrew Tran <abtran@gmail.com.com>
+Built: R 3.2.3; ; 2016-03-14 15:39:34 UTC; unix
+RemoteType: github
+RemoteHost: api.github.com
+RemoteRepo: ctnamecleaner
+RemoteUsername: trendct
+RemoteRef: master
+RemoteSha: ef17c564b4cb51df5a1b420090739c9db6ba266b
+GithubRepo: ctnamecleaner
+GithubUsername: trendct
+GithubRef: master
+GithubSHA1: ef17c564b4cb51df5a1b420090739c9db6ba266b
+InstallAgent: packrat 0.4.6.1
+InstallSource: github
+Hash: 60d3e11a4977ba98cc4e453e0dbd4aeb

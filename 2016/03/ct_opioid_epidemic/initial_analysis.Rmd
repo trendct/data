@@ -1,0 +1,111 @@
+---
+title: "Initial drug overdose deaths analysis"
+author: "Andrew Ba Tran"
+date: "February 22, 2016"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(cache=TRUE)
+```
+
+```{r first, fig.width=10, fig.height=6}
+
+ind <- read.csv("http://data.ctdata.org/dataset/925c6ee5-daa1-45a4-b71a-5e9dc965024c/resource/26522dd7-6860-47be-8cdc-2b0911dfd877/download/accidentaldrugrelateddeathsbyindividualdrugsdetected.csv")
+
+acc <- read.csv("http://data.ctdata.org/dataset/a4ad31a4-4d6c-41c5-9e32-72bdd1c4fcd0/resource/882710c3-a9ec-4e36-9138-33dcc3ee35ba/download/accidentaldrugrelateddeathsbydrugtype.csv")
+
+acc$RE <- paste(acc$Race, acc$Ethnicity)
+ind$RE <- paste(ind$Race, ind$Ethnicity)
+
+# Take out the totals
+
+acc_adjusted <- acc
+for (i in 1:ncol(acc)) {
+  acc_adjusted <- subset(acc_adjusted, acc_adjusted[,i]!="Total")
+}
+
+ind_adjusted <- ind
+for (i in 1:ncol(ind)) {
+  ind_adjusted <- subset(ind_adjusted, ind_adjusted[,i]!="Total")
+}
+
+ct_ind <- subset(ind_adjusted, Town=="Connecticut")
+ct_acc <- subset(acc_adjusted, Town=="Connecticut")
+
+ind_adjusted <- subset(ind_adjusted, Town!="Connecticut")
+acc_adjusted <- subset(acc_adjusted, Town!="Connecticut")
+
+# charting
+
+library(ggplot2)
+
+ggplot(data=ct_ind, aes(x=Age,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Drug.Type) +
+  ggtitle("Overall overdose deaths by age group and drug type") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=ct_acc, aes(x=Age,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Drug.Type) +
+  ggtitle("Overall overdose deaths by age group and drug type") +
+  theme(axis.text.x = element_text(angle=90)) 
+```
+
+```{r towns, fig.width=10, fig.height=15}
+ggplot(data=acc_adjusted, aes(x=Age,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town) +
+  ggtitle("Overall overdose deaths by age group and Town") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=ind_adjusted, aes(x=Year,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town) +
+  ggtitle("Overall overdose deaths by age group and year") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=ind_adjusted, aes(x=Gender,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town) +
+  ggtitle("Overall overdose deaths by gender and town") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+
+ggplot(data=ind_adjusted, aes(x=RE,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town) +
+  ggtitle("Overall overdose deaths by town and race") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=ind_adjusted, aes(x=Drug.Type,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town) +
+  ggtitle("Overall overdose deaths by town and drug type") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+
+ggplot(data=acc_adjusted, aes(x=Drug.Type,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town) +
+  ggtitle("Overall overdose deaths by town and drug type") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=ind_adjusted, aes(x=Drug.Type,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~RE) +
+  ggtitle("Overall overdose deaths by town and race/ethnicity") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+
+ggplot(data=acc_adjusted, aes(x=Drug.Type,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~RE) +
+  ggtitle("Overall overdose deaths by town and race/ethnicity") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+
+
+
+```

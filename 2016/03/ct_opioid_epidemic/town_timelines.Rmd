@@ -1,0 +1,52 @@
+---
+title: "11 town death timelines"
+author: "Andrew Ba Tran"
+date: "May 25, 2016"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Town timelines
+
+```{r charts, message=FALSE, warning=FALSE, fig.height=6, fig.width=9}
+library(lubridate)
+library(dplyr)
+library(ctnamecleaner)
+#raw <- read.csv("data/clean_no_duplicates.csv")
+raw <- read.csv("od2012-2016.csv")
+raw$Date <- mdy(raw$Date)
+
+raw <- ctnamecleaner(Death.City, raw)
+
+# date_analysis <- raw %>%
+#   group_by(Date, RealDeathTownName) %>% 
+#   dplyr::summarize(Count=n())
+
+raw <- subset(raw, !is.na(real.town.name))
+
+date_analysis <- raw %>%
+  group_by(Date, real.town.name) %>% 
+  dplyr::summarize(Count=n())
+
+library(lattice)
+library(chron)
+source("calendarHeat.R")
+
+
+#town_names <- data.frame(table(date_analysis$RealDeathTownName))
+town_names <- data.frame(table(date_analysis$real.town.name))
+town_names <- subset(town_names, Freq>50)
+
+for (i in 1:nrow(town_names)) {
+  named <- town_names$Var1[i]
+#  subsetted <- subset(date_analysis, RealDeathTownName==named)
+  subsetted <- subset(date_analysis, real.town.name==named)
+  head_name <- paste("drug overdose deaths in", named)
+  calendarHeat(subsetted$Date, subsetted$Count, 
+             varname=head_name)
+}
+
+```

@@ -1,0 +1,28 @@
+Package: RSocrata
+Type: Package
+Title: Download or Upload 'Socrata' Data Sets
+Description: Provides easier interaction with Socrata open data portals
+    http://dev.socrata.com. Users can provide a 'Socrata' data set
+    resource URL, or a 'Socrata' Open Data API (SoDA) web query, or a
+    'Socrata' "human-friendly" URL, returns an R data frame. Converts
+    dates to 'POSIX' format and manages throttling by 'Socrata'. Users
+    can upload data to Socrata portals directly from R.
+Version: 1.7.0-14
+Date: 2016-02-11
+Author: Hugh Devlin, Ph. D., Tom Schenk, Jr., and John Malc
+Maintainer: "Tom Schenk Jr." <developers@cityofchicago.org>
+Depends: R (>= 3.0.0)
+Imports: httr (>= 1.0.0), jsonlite (>= 0.9.16), mime (>= 0.3)
+Suggests: testthat (>= 0.10.0), roxygen2 (>= 4.1.0), readr (>= 0.2.2)
+License: MIT + file LICENSE
+URL: https://github.com/Chicago/RSocrata
+BugReports: https://github.com/Chicago/RSocrata/issues
+RoxygenNote: 5.0.1
+NeedsCompilation: no
+Packaged: 2016-02-11 18:39:17 UTC; tomschenk
+Repository: CRAN
+Date/Publication: 2016-02-12 00:53:33
+Built: R 3.2.3; ; 2016-02-12 13:49:31 UTC; unix
+InstallAgent: packrat 0.4.6.1
+InstallSource: CRAN
+Hash: 75736174c1769c3e8368ef9af28e6e7b

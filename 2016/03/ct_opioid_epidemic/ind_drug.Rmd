@@ -1,0 +1,965 @@
+---
+title: "ind_drug"
+author: "Andrew Ba Tran"
+date: "February 22, 2016"
+output: html_document
+---
+```{r setup, include=FALSE}
+library(svglite)
+knitr::opts_chunk$set(echo=FALSE)
+```
+
+By individual drug
+```{r towns, fig.width=8, fig.height=8}
+ind <- read.csv("http://data.ctdata.org/dataset/925c6ee5-daa1-45a4-b71a-5e9dc965024c/resource/26522dd7-6860-47be-8cdc-2b0911dfd877/download/accidentaldrugrelateddeathsbyindividualdrugsdetected.csv")
+ind$RE <- paste(ind$Race, ind$Ethnicity)
+levels(ind$Age) <- c("Under 21 years", "21 to 45 years", "46 to 60 years", "61 years and over", "Total")
+
+
+ind_adjusted <- ind
+for (i in 1:ncol(ind)) {
+  ind_adjusted <- subset(ind_adjusted, ind_adjusted[,i]!="Total")
+}
+
+ct_ind <- subset(ind_adjusted, Town=="Connecticut")
+
+ind_adjusted <- subset(ind_adjusted, Town!="Connecticut")
+
+library(ggplot2)
+
+
+# charting
+
+library(ggplot2)
+
+ggplot(data=ct_ind, aes(x=Age,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Drug.Type) +
+  ggtitle("Overall overdose deaths by age group and drug type") +
+  theme(axis.text.x = element_text(angle=90)) 
+```
+
+```{r next49, fig.width=10, fig.height=4}
+ggplot(data=ct_ind, aes(x=Year,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Age, ncol=4) +
+  ggtitle("Overall overdose deaths by age group and Year") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+```
+
+```{r next1, fig.width=10, fig.height=30}
+ggplot(data=ind_adjusted, aes(x=Age,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("Overall overdose deaths by age group and Town") +
+  theme(axis.text.x = element_text(angle=90)) 
+```
+
+```{r next2, fig.width=10, fig.height=25}
+ggplot(data=ind_adjusted, aes(x=Drug.Type,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("Overall overdose deaths by town and drug type") +
+  theme(axis.text.x = element_text(angle=90)) 
+```
+
+```{r next3, fig.width=10, fig.height=6}
+ggplot(data=ind_adjusted, aes(x=Drug.Type,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~RE) +
+  ggtitle("Overall overdose deaths by drug type and race/ethnicity") +
+  theme(axis.text.x = element_text(angle=90)) 
+```
+
+```{r next4, fig.width=10, fig.height=25}
+ggplot(data=ind_adjusted, aes(x=RE,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("Overall overdose deaths by town and race/ethnicity") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+# Break it out by age group?
+
+age1 <- subset(ind_adjusted, Age=="Under 21 years")
+age2 <- subset(ind_adjusted, Age=="21 to 45 years")
+age3 <- subset(ind_adjusted, Age=="46 to 60 years")
+age4 <- subset(ind_adjusted, Age=="61 years and over")
+
+# Under 21 years
+
+```
+
+
+```{r next5, fig.width=10, fig.height=4}
+ggplot(data=age1, aes(x=Gender,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~RE, ncol=7) +
+  ggtitle("Under 21 years: Overall overdose deaths by gender and race/ethnicity") +
+  theme(axis.text.x = element_text(angle=90)) 
+```
+
+```{r next6, fig.width=10, fig.height=6}
+
+ggplot(data=age1, aes(x=Year,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Drug.Type, ncol=7) +
+  ggtitle("Under 21 years: Overall overdose deaths by year and drug type") +
+  theme(axis.text.x = element_text(angle=90)) 
+```
+
+
+```{r next7, fig.width=10, fig.height=4}
+ggplot(data=age1, aes(x=Year,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Gender, ncol=7) +
+  ggtitle("Under 21 years: Overall overdose deaths by year and gender") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=age1, aes(x=RE,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Gender, ncol=7) +
+  ggtitle("Under 21 years: Overall overdose deaths by race/ethnicity and gender") +
+  theme(axis.text.x = element_text(angle=90)) 
+```
+
+```{r next8, fig.width=10, fig.height=6}
+ggplot(data=age1, aes(x=RE,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Drug.Type, ncol=7) +
+  ggtitle("Under 21 years: Overall overdose deaths by race/ethnicity and drug type") +
+  theme(axis.text.x = element_text(angle=90)) 
+```
+
+```{r next9, fig.width=10, fig.height=25}
+ggplot(data=age1, aes(x=RE,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("Under 21 years: Overall overdose deaths by race/ethnicity and town") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=age1, aes(x=Year,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("Under 21 years: Overall overdose deaths by year and town") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=age1, aes(x=Gender,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("Under 21 years: Overall overdose deaths by gender and Town") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+```
+
+```{r next10, fig.width=10, fig.height=4}
+# 21 to 45 years
+
+ggplot(data=age2, aes(x=Gender,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~RE, ncol=7) +
+  ggtitle("21 to 45 years: Overall overdose deaths by gender and race/ethnicity") +
+  theme(axis.text.x = element_text(angle=90)) 
+```
+
+```{r next11, fig.width=10, fig.height=6}
+ggplot(data=age2, aes(x=Year,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Drug.Type, ncol=7) +
+  ggtitle("21 to 45 years: Overall overdose deaths by year and drug type") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+```
+
+```{r next12, fig.width=10, fig.height=4}
+ggplot(data=age2, aes(x=Year,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Gender, ncol=7) +
+  ggtitle("21 to 45 years: Overall overdose deaths by year and gender") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=age2, aes(x=RE,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Gender, ncol=7) +
+  ggtitle("21 to 45 years: Overall overdose deaths by race/ethnicity and gender") +
+  theme(axis.text.x = element_text(angle=90)) 
+```
+
+```{r next13, fig.width=10, fig.height=6}
+ggplot(data=age2, aes(x=RE,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Drug.Type, ncol=7) +
+  ggtitle("21 to 45 years: Overall overdose deaths by race/ethnicity and drug type") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+```
+
+```{r next14, fig.width=10, fig.height=25}
+ggplot(data=age2, aes(x=RE,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("21 to 45 years: Overall overdose deaths by race/ethnicity and town") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+
+ggplot(data=age2, aes(x=Year,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("21 to 45 years: Overall overdose deaths by year and town") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=age2, aes(x=Gender,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("21 to 45 years: Overall overdose deaths by gender and Town") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+```
+
+```{r next15, fig.width=10, fig.height=4}
+# 46 to 60 years
+
+ggplot(data=age3, aes(x=Gender,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~RE, ncol=7) +
+  ggtitle("46 to 60 years: Overall overdose deaths by gender and race/ethnicity") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+```
+
+```{r next16, fig.width=10, fig.height=6}
+ggplot(data=age3, aes(x=Year,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Drug.Type, ncol=7) +
+  ggtitle("46 to 60 years: Overall overdose deaths by year and drug type") +
+  theme(axis.text.x = element_text(angle=90)) 
+```
+
+```{r next17, fig.width=10, fig.height=4}
+ggplot(data=age3, aes(x=Year,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Gender, ncol=7) +
+  ggtitle("46 to 60 years: Overall overdose deaths by year and gender") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=age3, aes(x=RE,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Gender, ncol=7) +
+  ggtitle("46 to 60 years: Overall overdose deaths by race/ethnicity and gender") +
+  theme(axis.text.x = element_text(angle=90)) 
+```
+
+```{r next18, fig.width=10, fig.height=6}
+ggplot(data=age3, aes(x=RE,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Drug.Type, ncol=7) +
+  ggtitle("46 to 60 years: Overall overdose deaths by race/ethnicity and drug type") +
+  theme(axis.text.x = element_text(angle=90)) 
+```
+
+
+```{r next19, fig.width=10, fig.height=25}
+ggplot(data=age3, aes(x=RE,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("46 to 60 years: Overall overdose deaths by race/ethnicity and town") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=age3, aes(x=Year,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("46 to 60 years: Overall overdose deaths by year and town") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=age3, aes(x=Gender,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("46 to 60 years: Overall overdose deaths by gender and Town") +
+  theme(axis.text.x = element_text(angle=90)) 
+```
+
+```{r next20, fig.width=10, fig.height=4}
+# 61 years and over
+ggplot(data=age4, aes(x=Gender,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~RE, ncol=7) +
+  ggtitle("61 years and over: Overall overdose deaths by gender and race/ethnicity") +
+  theme(axis.text.x = element_text(angle=90)) 
+```
+
+```{r next21, fig.width=10, fig.height=6}
+ggplot(data=age4, aes(x=Year,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Drug.Type, ncol=7) +
+  ggtitle("61 years and over: Overall overdose deaths by year and drug type") +
+  theme(axis.text.x = element_text(angle=90)) 
+```
+
+
+```{r next22, fig.width=10, fig.height=4}
+ggplot(data=age4, aes(x=Year,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Gender, ncol=7) +
+  ggtitle("61 years and over: Overall overdose deaths by year and gender") +
+  theme(axis.text.x = element_text(angle=90)) 
+```
+
+```{r next23, fig.width=10, fig.height=6}
+ggplot(data=age4, aes(x=RE,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Gender, ncol=7) +
+  ggtitle("61 years and over: Overall overdose deaths by race/ethnicity and gender") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=age4, aes(x=RE,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Drug.Type, ncol=7) +
+  ggtitle("61 years and over: Overall overdose deaths by race/ethnicity and drug type") +
+  theme(axis.text.x = element_text(angle=90)) 
+```
+
+```{r next24, fig.width=10, fig.height=25}
+
+ggplot(data=age4, aes(x=RE,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("61 years and over: Overall overdose deaths by race/ethnicity and town") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=age4, aes(x=Year,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("61 years and over: Overall overdose deaths by year and town") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=age4, aes(x=Gender,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("61 years and over: Overall overdose deaths by gender and Town") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+# Break it out by drug type
+
+anho <- subset(ind_adjusted, Drug.Type=="Any Non-Heroin Opioid")
+ano <- subset(ind_adjusted, Drug.Type=="Any Non-Opioid")
+onho <- subset(ind_adjusted, Drug.Type=="Only Non-Heroin Opioids")
+ono <- subset(ind_adjusted, Drug.Type=="Only Non-Opioids")
+oo <- subset(ind_adjusted, Drug.Type=="Only Opioids")
+
+amph <- subset(ind_adjusted, Drug.Type=="Amphetamine")
+benz <- subset(ind_adjusted, Drug.Type=="Benzodiazepine")
+coca <- subset(ind_adjusted, Drug.Type=="Cocaine")
+etha <- subset(ind_adjusted, Drug.Type=="Ethanol")
+fent <- subset(ind_adjusted, Drug.Type=="Fentanyl")
+hero <- subset(ind_adjusted, Drug.Type=="Heroin")
+hydr <- subset(ind_adjusted, Drug.Type=="Hydrocodone")
+meth <- subset(ind_adjusted, Drug.Type=="Methadone")
+othe <- subset(ind_adjusted, Drug.Type=="Other")
+oxyc <- subset(ind_adjusted, Drug.Type=="Oxycodone")
+oxym <- subset(ind_adjusted, Drug.Type=="Oxymorphone")
+tram <- subset(ind_adjusted, Drug.Type=="Tramadol")
+
+```
+
+```{r next25, fig.width=10, fig.height=6}
+# Amphetamine
+
+ggplot(data=amph, aes(x=Age,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~RE) +
+  ggtitle("Amphetamine overdose deaths by age group and race/ethnicity") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=amph, aes(x=Year,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Age) +
+  ggtitle("Amphetamine overdose deaths by year and age group") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=amph, aes(x=Gender,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~RE) +
+  ggtitle("Amphetamine overdose deaths by age gender and race/ethnicity") +
+  theme(axis.text.x = element_text(angle=90)) 
+```
+
+```{r next26, fig.width=10, fig.height=25}
+ggplot(data=amph, aes(x=Year,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("Amphetamine overdose deaths by year and town") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=amph, aes(x=RE,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("Amphetamine overdose deaths by race/ethnicity and town") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=amph, aes(x=Gender,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("Amphetamine overdose deaths by gender and town") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=amph, aes(x=RE,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("Amphetamine overdose deaths by town and race/ethnicity") +
+  theme(axis.text.x = element_text(angle=90)) 
+```
+
+```{r next27, fig.width=10, fig.height=6}
+###
+
+# Benzodiazepine
+
+ggplot(data=benz, aes(x=Age,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~RE) +
+  ggtitle("Benzodiazepine overdose deaths by age group and race/ethnicity") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=benz, aes(x=Year,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Age) +
+  ggtitle("Benzodiazepine overdose deaths by year and age group") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=benz, aes(x=Gender,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~RE) +
+  ggtitle("Benzodiazepine overdose deaths by age gender and race/ethnicity") +
+  theme(axis.text.x = element_text(angle=90)) 
+```
+
+```{r next28, fig.width=10, fig.height=25}
+
+ggplot(data=benz, aes(x=Year,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("Benzodiazepine overdose deaths by year and town") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=benz, aes(x=RE,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("Benzodiazepine overdose deaths by race/ethnicity and town") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=benz, aes(x=Gender,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("Benzodiazepine overdose deaths by gender and town") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=benz, aes(x=RE,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("Benzodiazepine overdose deaths by town and race/ethnicity") +
+  theme(axis.text.x = element_text(angle=90)) 
+```
+
+```{r next29, fig.width=10, fig.height=6}
+
+# Cocaine
+
+ggplot(data=coca, aes(x=Age,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~RE) +
+  ggtitle("Cocaine overdose deaths by age group and race/ethnicity") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=coca, aes(x=Year,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Age) +
+  ggtitle("Cocaine overdose deaths by year and age group") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=coca, aes(x=Gender,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~RE) +
+  ggtitle("Cocaine overdose deaths by age gender and race/ethnicity") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+```
+
+```{r next30, fig.width=10, fig.height=25}
+
+ggplot(data=coca, aes(x=Year,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("Cocaine overdose deaths by year and town") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=coca, aes(x=RE,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("Cocaine overdose deaths by race/ethnicity and town") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=coca, aes(x=Gender,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("Cocaine overdose deaths by gender and town") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=coca, aes(x=RE,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("Cocaine overdose deaths by town and race/ethnicity") +
+  theme(axis.text.x = element_text(angle=90)) 
+```
+
+```{r next31, fig.width=10, fig.height=6}
+
+# Ethanol
+
+ggplot(data=etha, aes(x=Age,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~RE) +
+  ggtitle("Ethanol overdose deaths by age group and race/ethnicity") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=etha, aes(x=Year,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Age) +
+  ggtitle("Ethanol overdose deaths by year and age group") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=etha, aes(x=Gender,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~RE) +
+  ggtitle("Ethanol overdose deaths by age gender and race/ethnicity") +
+  theme(axis.text.x = element_text(angle=90)) 
+```
+
+```{r next32, fig.width=10, fig.height=25}
+
+ggplot(data=etha, aes(x=Year,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("Ethanol overdose deaths by year and town") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=etha, aes(x=RE,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("Ethanol overdose deaths by race/ethnicity and town") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=etha, aes(x=Gender,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("Ethanol overdose deaths by gender and town") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=etha, aes(x=RE,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("Ethanol overdose deaths by town and race/ethnicity") +
+  theme(axis.text.x = element_text(angle=90)) 
+```
+
+```{r next33, fig.width=10, fig.height=6}
+
+# Fentanyl
+
+ggplot(data=fent, aes(x=Age,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~RE) +
+  ggtitle("Fentanyl overdose deaths by age group and race/ethnicity") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=fent, aes(x=Year,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Age) +
+  ggtitle("Fentanyl overdose deaths by year and age group") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=fent, aes(x=Gender,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~RE) +
+  ggtitle("Fentanyl overdose deaths by age gender and race/ethnicity") +
+  theme(axis.text.x = element_text(angle=90)) 
+```
+
+```{r next34, fig.width=10, fig.height=25}
+
+ggplot(data=fent, aes(x=Year,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("Fentanyl overdose deaths by year and town") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=fent, aes(x=RE,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("Fentanyl overdose deaths by race/ethnicity and town") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=fent, aes(x=Gender,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("Fentanyl overdose deaths by gender and town") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=fent, aes(x=RE,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("Fentanyl overdose deaths by town and race/ethnicity") +
+  theme(axis.text.x = element_text(angle=90)) 
+```
+
+```{r next35, fig.width=10, fig.height=6}
+
+# Heroin
+
+ggplot(data=hero, aes(x=Age,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~RE) +
+  ggtitle("Heroin overdose deaths by age group and race/ethnicity") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=hero, aes(x=Year,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Age) +
+  ggtitle("Heroin overdose deaths by year and age group") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=hero, aes(x=Gender,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~RE) +
+  ggtitle("Heroin overdose deaths by age gender and race/ethnicity") +
+  theme(axis.text.x = element_text(angle=90)) 
+```
+
+```{r next36, fig.width=10, fig.height=25}
+ggplot(data=hero, aes(x=Year,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("Heroin overdose deaths by year and town") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=hero, aes(x=RE,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("Heroin overdose deaths by race/ethnicity and town") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=hero, aes(x=Gender,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("Heroin overdose deaths by gender and town") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=hero, aes(x=RE,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("Heroin overdose deaths by town and race/ethnicity") +
+  theme(axis.text.x = element_text(angle=90)) 
+```
+
+```{r next37, fig.width=10, fig.height=6}
+# Hydrocodone
+
+ggplot(data=hydr, aes(x=Age,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~RE) +
+  ggtitle("Hydrocodone overdose deaths by age group and race/ethnicity") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=hydr, aes(x=Year,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Age) +
+  ggtitle("Hydrocodone overdose deaths by year and age group") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=hydr, aes(x=Gender,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~RE) +
+  ggtitle("Hydrocodone overdose deaths by age gender and race/ethnicity") +
+  theme(axis.text.x = element_text(angle=90)) 
+```
+
+```{r next38, fig.width=10, fig.height=6}
+
+ggplot(data=hydr, aes(x=Year,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town) +
+  ggtitle("Hydrocodone overdose deaths by year and town") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=hydr, aes(x=RE,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town) +
+  ggtitle("Hydrocodone overdose deaths by race/ethnicity and town") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=hydr, aes(x=Gender,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town) +
+  ggtitle("Hydrocodone overdose deaths by gender and town") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=hydr, aes(x=RE,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("Hydrocodone overdose deaths by town and race/ethnicity") +
+  theme(axis.text.x = element_text(angle=90)) 
+```
+
+```{r next39, fig.width=10, fig.height=6}
+
+
+# Methadone
+
+ggplot(data=meth, aes(x=Age,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~RE) +
+  ggtitle("Methadone overdose deaths by age group and race/ethnicity") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=meth, aes(x=Year,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Age) +
+  ggtitle("Methadone overdose deaths by year and age group") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=meth, aes(x=Gender,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~RE) +
+  ggtitle("Methadone overdose deaths by age gender and race/ethnicity") +
+  theme(axis.text.x = element_text(angle=90)) 
+```
+
+```{r next40, fig.width=10, fig.height=25}
+
+ggplot(data=meth, aes(x=Year,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("Methadone overdose deaths by year and town") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=meth, aes(x=RE,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("Methadone overdose deaths by race/ethnicity and town") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=meth, aes(x=Gender,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("Methadone overdose deaths by gender and town") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=meth, aes(x=RE,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("Methadone overdose deaths by town and race/ethnicity") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+```
+
+```{r next41, fig.width=10, fig.height=6}
+# Other
+
+ggplot(data=othe, aes(x=Age,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~RE) +
+  ggtitle("Other overdose deaths by age group and race/ethnicity") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=othe, aes(x=Year,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Age) +
+  ggtitle("Other overdose deaths by year and age group") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=othe, aes(x=Gender,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~RE) +
+  ggtitle("Other overdose deaths by age gender and race/ethnicity") +
+  theme(axis.text.x = element_text(angle=90)) 
+```
+
+```{r next42, fig.width=10, fig.height=25}
+
+ggplot(data=othe, aes(x=Year,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("Other overdose deaths by year and town") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=othe, aes(x=RE,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("Other overdose deaths by race/ethnicity and town") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=othe, aes(x=Gender,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("Other overdose deaths by gender and town") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=othe, aes(x=RE,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("Other overdose deaths by town and race/ethnicity") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+```
+
+```{r next43, fig.width=10, fig.height=6}
+
+# Oxycodone
+
+ggplot(data=othe, aes(x=Age,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~RE) +
+  ggtitle("Oxycodone overdose deaths by age group and race/ethnicity") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=othe, aes(x=Year,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Age) +
+  ggtitle("Oxycodone overdose deaths by year and age group") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=othe, aes(x=Gender,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~RE) +
+  ggtitle("Oxycodone overdose deaths by age gender and race/ethnicity") +
+  theme(axis.text.x = element_text(angle=90)) 
+```
+
+```{r next44, fig.width=10, fig.height=25}
+
+ggplot(data=othe, aes(x=Year,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("Oxycodone overdose deaths by year and town") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=othe, aes(x=RE,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("Oxycodone overdose deaths by race/ethnicity and town") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=othe, aes(x=Gender,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("Oxycodone overdose deaths by gender and town") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=othe, aes(x=RE,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("Oxycodone overdose deaths by town and race/ethnicity") +
+  theme(axis.text.x = element_text(angle=90))
+```
+
+```{r next45, fig.width=10, fig.height=6}
+
+# Oxymorphone
+
+ggplot(data=oxym, aes(x=Age,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~RE) +
+  ggtitle("Oxymorphone overdose deaths by age group and race/ethnicity") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=oxym, aes(x=Year,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Age) +
+  ggtitle("Oxymorphone overdose deaths by year and age group") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=oxym, aes(x=Gender,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~RE) +
+  ggtitle("Oxymorphone overdose deaths by age gender and race/ethnicity") +
+  theme(axis.text.x = element_text(angle=90)) 
+```
+
+```{r next46, fig.width=10, fig.height=25}
+
+ggplot(data=oxym, aes(x=Year,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("Oxymorphone overdose deaths by year and town") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=oxym, aes(x=RE,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("Oxymorphone overdose deaths by race/ethnicity and town") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=oxym, aes(x=Gender,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("Oxymorphone overdose deaths by gender and town") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=oxym, aes(x=RE,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("Oxymorphone overdose deaths by town and race/ethnicity") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+```
+
+```{r next47, fig.width=10, fig.height=6}
+
+# Tramadol
+
+ggplot(data=tram, aes(x=Age,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~RE) +
+  ggtitle("Tramadol overdose deaths by age group and race/ethnicity") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=tram, aes(x=Year,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Age) +
+  ggtitle("Tramadol overdose deaths by year and age group") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=tram, aes(x=Gender,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~RE) +
+  ggtitle("Tramadol overdose deaths by age gender and race/ethnicity") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+```
+
+```{r next48, fig.width=10, fig.height=25}
+
+ggplot(data=tram, aes(x=Year,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("Tramadol overdose deaths by year and town") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=tram, aes(x=RE,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("Tramadol overdose deaths by race/ethnicity and town") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=tram, aes(x=Gender,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("Tramadol overdose deaths by gender and town") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+ggplot(data=tram, aes(x=RE,y=Value)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~Town, ncol=7) +
+  ggtitle("Tramadol overdose deaths by town and race/ethnicity") +
+  theme(axis.text.x = element_text(angle=90)) 
+
+```

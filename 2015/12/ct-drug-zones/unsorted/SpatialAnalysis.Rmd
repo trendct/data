@@ -1,0 +1,345 @@
+---
+title: "Buffer zones spatial analysis"
+author: "Andrew Ba Tran"
+date: "June 17, 2015"
+output: html_document
+---
+
+Under current law, a conviction of “Simple Possession” of drugs (21a-279(d)) within 1,500 feet of a school or day care center carries a mandatory minimum two year prison term. A conviction of “Possession with Intent to Sell” (21a-278(b)) drugs within 1,500 feet of a school, day care center, or public housing carries a mandatory minimum three year prison term.
+
+Governor Dannel Malloy has proposed Bill 952 to remove mandatory minimums for the possession of drugs (21a-279(d)) because he states that the two year mandatory prison sentence in urban areas “has had an extraordinarily impact” on African-American and Latino communities. Almost all of the area of New Haven, Hartford, Bridgeport and most other densely populated cities in the state are within a “school zone” while the vast majority of suburban towns are not.
+
+Earlier this month Malloy said 64 percent of those charged with drug possession in school zones are minorities, according to the Sentencing Commission. The Connecticut Judicial Branch could only provide raw data on convictions stretching back to 1999. We looked at arrests and convictions data for the following charges:
+
+- 21a-278 (b): Sells / possesses with the intent to sell to another person any controlled substance in or on school / public housing project / licensed child day care center
+- 21a-279 (d): Possession of a controlled substance
+
+*This analysis was used for the story on <http://www.trendct.org>TrendCT.org based on arrests and convictions data from the **Connecticut Judicial Branch**.*
+
+
+****
+
+### Visualizing the zones where suspects can get charged for 21a-279d
+
+There are more than 3,000 day cares centers and schools across Connecticut. A 1,500 radius around each one would look like this.
+
+```{r, echo=FALSE}
+library(sp)
+library(rgeos)
+library(maps)
+library(maptools)
+library(rgdal)
+library(leaflet)
+library(dplyr)
+#gpclibPermit()
+#gpclibPermitStatus()
+townshapes <- readOGR(dsn="shapes", layer="finaltowns")
+dshapes <- readOGR(dsn="shapes", layer="finalschoolsdaycares")
+bshapes <- readOGR(dsn="shapes", layer="finalzones")
+
+
+leaflet(townshapes) %>% addTiles('http://{s}.tile.thunderforest.com/transport/{z}/{x}/{y}.png') %>%
+  addPolygons(stroke=TRUE, color="Black", weight=1, fillOpacity=0.1, smoothFactor=.5,
+              fillColor = "#999999") %>%
+    addPolygons(data=dshapes, stroke=TRUE, weight=3, fillOpacity=0.8, smoothFactor=.5,
+              color = "#f72a5f") %>%
+  addLegend("bottomright", colors= "#f72a5f", labels="Schools, Day Cares", title="1,500 ft Violation Zones")
+```
+
+We calculated the area of the school and day care zones in each city versus the area of the entire town according to the US Census. Dense urban areas like Hartford, New Haven and Bridgeport had a higher percent of those mandatory minimum zones within town borders.
+
+*Note: Calculations for towns along the coast will be off because the census borders for the towns sometimes extends out into the water.*
+
+```{r, echo=FALSE}
+library(DT)
+calculations <- read.csv("calculations.csv", stringsAsFactors=FALSE)
+
+d279 <- calculations[,c("NAME10","AREA","SCHOOLSDAYCARES", "PER1")]
+colnames(d279) <- c("Town", "Square.Feet", "Buffer.Square.Feet", "Percent.of.town.in.buffer")
+d279 <- arrange(d279, desc(Percent.of.town.in.buffer))
+datatable(d279)
+
+```
+
+### The relationship between number of arrests and percent of town in a buffer
+```{r, plotly=TRUE}
+library(ggplot2)
+library(stringr)
+library(plotly)
+arrests_new <- read.csv("arrests_h.csv", stringsAsFactors=FALSE)
+pop <- read.csv("ctpop.csv", stringsAsFactors=FALSE)
+newnames <- read.csv("townlist.csv", stringsAsFactors=FALSE)
+
+colnames(newnames) <- c("TOWN", "Town.Name")
+arrests_new <- left_join(arrests_new, newnames)
+
+arr_charges <- data.frame(table(arrests_new$Town.Name, arrests_new$ORIGINAL_STATUTE))
+arr_charges_d <- filter(arr_charges, Var2=="21a-279(d)")
+
+colnames(arr_charges_d) <- c("Town", "Statute", "Arrests")
+arr_charges_d$Town <- str_to_title(arr_charges_d$Town)
+arr_charges_d <- left_join(arr_charges_d, d279)
+
+arr_charges_d <- na.omit(arr_charges_d)
+
+arr_charges_d[2] <- NULL
+arr_charges_d[3] <- NULL
+arr_charges_d[3] <- NULL
+
+
+colnames(pop) <- c("Town", "Population")
+pop$Town <- str_to_title(pop$Town)
+arr_charges_d <- left_join(arr_charges_d, pop)
+arr_charges_d$Arrests.Per.Capita <- (arr_charges_d$Arrests/arr_charges_d$Population)*1000
+arr_charges_d$Arrests.Per.Capita <- round(arr_charges_d$Arrests.Per.Capita, digits=2)
+
+daplot <- ggplot(arr_charges_d, aes(x=Percent.of.town.in.buffer, y=Arrests)) +
+  geom_point(aes(text=Town)) +
+  geom_smooth(method=lm, formula = y ~ poly(x, 3), size=1) +
+  theme_minimal() +
+  ggtitle("Number of arrests versus percent of town in zone") +
+  labs(x="Percent of town in buffer", y="Arrests for 279(d) since 1999")
+
+oy <- plotly()
+oy$ggplotly(daplot, kwargs=list(layout=list(hovermode="closest", filename="buffer-279d", fileopt="overwrite")))
+
+
+
+arr_lm3 <- lm(arr_charges_d$Percent.of.town.in.buffer ~ poly(arr_charges_d$Arrests, 3))
+summary(arr_lm3)
+
+```
+
+So the correlation between Arrests and Percent of Town in the Buffer zone? 
+
+`r cor(arr_charges_d$Arrests, arr_charges_d$Percent.of.town.in.buffer, use="all.obs")`
+
+That's a strong positive relationship.
+
+### Just to compare, let's look at the relationship between Arrests and town population
+
+```{r, plotly=TRUE}
+ug <- ggplot(arr_charges_d, aes(x=Population, y=Arrests)) +
+  geom_point(aes(text=Town)) +
+  geom_smooth(method=lm,  formula = y ~ poly(x, 2), size=1) +
+  theme_minimal() 
+ug <- ug + ggtitle("Number of arrests versus population of town")
+ug <- ug + labs(x="Population", y="Arrests for 279(d) since 1999")
+#ug
+
+qy <- plotly()
+qy$ggplotly(ug, kwargs=list(layout=list(hovermode="closest", filename="arrests-279d", fileopt="overwrite")))
+
+```
+
+### Some choropleth maps with the data
+
+```{r, echo=FALSE}
+#pal <- colorQuantile("YlGn", NULL, n = 10)
+
+mb_tiles <- "http://a.tiles.mapbox.com/v3/kwalkertcu.l1fc0hab/{z}/{x}/{y}.png"
+
+mb_attribution <- 'Mapbox <a href="http://mapbox.com/about/maps" target="_blank">Terms &amp; Feedback</a>'
+
+d279 <- arr_charges_d
+names(d279)[names(d279) == 'Town'] <- 'NAME10'
+
+townstuffd <- merge(townshapes, d279)
+
+town_popupd <- paste0("<strong>", 
+                      townstuffd$NAME10, 
+                      "</strong><br>",
+                     "<strong>Percent in buffer: </strong>",
+                     townstuffd$Percent.of.town.in.buffer, "%<br><strong>Arrests: </strong>",
+                     townstuffd$Arrests, "<br><strong>Arrests per capita: </strong>",
+                     townstuffd$Arrests.Per.Capita)
+```
+
+#### Percent of town in a buffer zone
+
+```{r, echo=FALSE}
+binpald <- colorBin("Blues", townstuffd$Percent.of.town.in.buffer, 6, pretty = FALSE)
+
+leaflet(townstuffd) %>%
+  addTiles(urlTemplate = mb_tiles,  
+           attribution = mb_attribution) %>%
+  addPolygons(fillColor = ~binpald(Percent.of.town.in.buffer), 
+              fillOpacity = 0.8, 
+              color = "#BDBDC3", 
+              weight = 1, 
+              popup = town_popupd) %>%
+  addLegend("bottomright", pal=binpald, values=~Percent.of.town.in.buffer,
+            title="Percent of town in a buffer zone",
+            opacity = 1 )
+```
+
+#### Arrests per capita
+
+```{r, echo=FALSE}
+binpald2 <- colorBin("Greens", townstuffd$Arrests.Per.Capita, 6, pretty = FALSE)
+
+leaflet(townstuffd) %>%
+  addTiles(urlTemplate = mb_tiles,  
+           attribution = mb_attribution) %>%
+  addPolygons(fillColor = ~binpald2(Arrests.Per.Capita), 
+              fillOpacity = 0.8, 
+              color = "#BDBDC3", 
+              weight = 1, 
+              popup = town_popupd) %>%
+  addLegend("bottomright", pal=binpald2, values=~Arrests.Per.Capita,
+            title="Arrests per capita",
+            opacity = 1 )
+```
+
+Here's a table to explore further.
+
+```{r, echo=FALSE}
+datatable(arr_charges_d)
+```
+
+
+The correlation between Arrests and Town population: `r cor(arr_charges_d$Arrests, arr_charges_d$Population, use="all.obs")`
+
+That's a slightly stronger positive relationship than buffer zone size.
+
+
+### Visualizing the zones where suspects can get charged for 21a-278b
+
+Statute 21a-278b expands on the day cares and school zones by adding about 2,000 public housing units. 
+
+```{r, echo=FALSE}
+leaflet(townshapes) %>% addTiles() %>%
+  addPolygons(stroke=TRUE, color="Black", weight=1.5, fillOpacity=0.4, smoothFactor=.5,
+              fillColor = "#999999") %>%
+      addPolygons(data=bshapes, stroke=TRUE, weight=1, fillOpacity=0.8, smoothFactor=.5,
+              color = "#000080") %>%
+      addPolygons(data=dshapes, stroke=TRUE, weight=1, fillOpacity=0.8, smoothFactor=.5,
+              color = "#00ff00")  
+
+```
+
+The additional 2,000 housing spots expands the the density of the buffer zones across the state, most notably in towns like Waterbury, New Haven, and Bridgeport. 
+
+```{r, echo=FALSE}
+
+b278 <- calculations[,c("NAME10","AREA","ALL", "PER2")]
+colnames(b278) <- c("Town", "Square Feet", "Buffer Square Feet", "Percent.of.town.in.buffer")
+b278 <- arrange(b278, desc(Percent.of.town.in.buffer))
+datatable(b278)
+
+```
+
+### The relationship between number of arrests and percent of town in buffer
+
+```{r, plotly=TRUE}
+library(ctnamecleaner)
+
+all_arrests <- read.csv("arrests.csv")
+b278_all <- filter(all_arrests, ORIGINAL.STATUTE=="21a-278a(b)")
+b278_all <- ctnamecleaner(Town, b278_all)
+
+b278_count <- data.frame(table(b278_all$real.town.name))
+colnames(b278_count) <- c("Town","arrests")
+b278 <- left_join(b278, b278_count)
+b278 <- left_join(b278, pop)
+
+b278$Arrests.Per.Capita <- (b278$arrests/b278$Population)*1000
+b278$Arrests.Per.Capita <- round(b278$Arrests.Per.Capita, digits=2)
+
+b278 <- na.omit(b278)
+
+
+bplot <- ggplot(b278, aes(x=Percent.of.town.in.buffer, y=arrests)) +
+  geom_point(aes(text=Town)) +
+  geom_smooth(method=lm, formula = y ~ poly(x, 3), size=1) +
+  theme_minimal() +
+  ggtitle("Number of arrests versus percent of Buffer zone") %>%
+  labs(x="Percent of town in buffer", y="Arrests for 278(b) since 1999")
+#bplot
+ry <- plotly()
+ry$ggplotly(bplot,session="knitr", kwargs=list(layout=list(hovermode="closest", filename="buffer-278b", fileopt="overwrite")))
+```
+
+### Just to compare, let's look at the relationship between Arrests and town population
+
+```{r, plotly=TRUE}
+
+bpplot <- ggplot(b278, aes(x=Population, y=arrests)) +
+  geom_point(aes(text=Town)) +
+  geom_smooth(method=lm, formula = y ~ poly(x, 3), size=1) +
+  theme_minimal() +
+  ggtitle("Number of arrests versus percent of Buffer zone") %>%
+  labs(x="Town population", y="Arrests for 278(b) since 1999")
+#bpplot
+py <- plotly()
+py$ggplotly(bpplot,session="knitr", kwargs=list(layout=list(hovermode="closest", filename="arrests-278b", fileopt="overwrite")))
+
+```
+
+### Some choropleth maps with the data
+
+```{r, echo=FALSE}
+#pal <- colorQuantile("YlGn", NULL, n = 10)
+
+mb_tiles <- "http://a.tiles.mapbox.com/v3/kwalkertcu.l1fc0hab/{z}/{x}/{y}.png"
+
+mb_attribution <- 'Mapbox <a href="http://mapbox.com/about/maps" target="_blank">Terms &amp; Feedback</a>'
+
+#names(b278)[names(b278) == 'Town'] <- 'id'
+#names(b278)[names(b278) == 'id'] <- 'NAME10'
+names(b278)[names(b278) == 'Town'] <- 'NAME10'
+#names(b278)[names(b278) == 'NAME10'] <- 'id'
+
+townstuff <- merge(townshapes, b278)
+
+town_popup <- paste0("<strong>", 
+                      townstuff$NAME10, 
+                      "</strong><br>",
+                     "<strong>Percent in buffer: </strong>",
+                     townstuff$Percent.of.town.in.buffer, "%<br><strong>Arrests: </strong>",
+                     townstuff$arrests, "<br><strong>Arrests per capita: </strong>",
+                     townstuff$Arrests.Per.Capita)
+```
+
+#### Percent of town in a buffer zone
+
+```{r, echo=FALSE}
+binpal <- colorBin("Blues", townstuff$Percent.of.town.in.buffer, 6, pretty = FALSE)
+
+leaflet(townstuff) %>%
+  addTiles(urlTemplate = mb_tiles,  
+           attribution = mb_attribution) %>%
+  addPolygons(fillColor = ~binpal(Percent.of.town.in.buffer), 
+              fillOpacity = 0.8, 
+              color = "#BDBDC3", 
+              weight = 1, 
+              popup = town_popup) %>%
+  addLegend("bottomright", pal=binpal, values=~Percent.of.town.in.buffer,
+            title="Percent of town in a buffer zone",
+            opacity = 1 )
+```
+
+#### Arrests per capita
+
+```{r, echo=FALSE}
+binpal2 <- colorBin("Greens", townstuff$Arrests.Per.Capita, 6, pretty = FALSE)
+
+leaflet(townstuff) %>%
+  addTiles(urlTemplate = mb_tiles,  
+           attribution = mb_attribution) %>%
+  addPolygons(fillColor = ~binpal2(Arrests.Per.Capita), 
+              fillOpacity = 0.8, 
+              color = "#BDBDC3", 
+              weight = 1, 
+              popup = town_popup) %>%
+  addLegend("bottomright", pal=binpal2, values=~Arrests.Per.Capita,
+            title="Arrests per capita",
+            opacity = 1 )
+```
+
+```{r, echo=FALSE}
+b278table <- b278[c("NAME10", "arrests","Percent.of.town.in.buffer", "Population", "Arrests.Per.Capita")]
+colnames(b278table) <- c("Town", "Arrests", "Percent.of.town.in.buffer", "Population", "Arrests.Per.Capita")
+datatable(b278table)
+```
+

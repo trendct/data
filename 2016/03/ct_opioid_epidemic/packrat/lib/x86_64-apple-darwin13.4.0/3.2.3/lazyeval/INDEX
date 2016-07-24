@@ -1,0 +1,8 @@
+as.lazy                 Convert an object to a lazy expression or lazy
+                        dots.
+interp                  Interpolate values into an expression.
+lazy_                   Capture expression for later lazy evaluation.
+lazy_dots               Capture ... (dots) for later lazy evaluation.
+lazy_eval               Evaluate a lazy expression.
+make_call               Make a call with 'lazy_dots' as arguments.
+missing_arg             Generate a missing argument.
