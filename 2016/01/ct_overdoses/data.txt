@@ -1,0 +1,1691 @@
+[ {
+  "type": "Feature",
+  "properties": {
+    "Town": "Andover",
+"Population": 3095,
+"Heroin.overdoses": 1,
+"opioid.overdoses": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": AndoverBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Ansonia",
+"Population": 19163,
+"Heroin.overdoses": 2,
+"opioid.overdoses": 3},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": AnsoniaBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Ashford",
+"Population": 4301,
+"Heroin.overdoses": NA,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": AshfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Avon",
+"Population": 18205,
+"Heroin.overdoses": 1,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": AvonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Barkhamsted",
+"Population": 3772,
+"Heroin.overdoses": 1,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BarkhamstedBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Beacon Falls",
+"Population": 6038,
+"Heroin.overdoses": NA,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BeaconFallsBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Berlin",
+"Population": 20179,
+"Heroin.overdoses": 5,
+"opioid.overdoses": 4},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BerlinBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Bethany",
+"Population": 5555,
+"Heroin.overdoses": 1,
+"opioid.overdoses": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BethanyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Bethel",
+"Population": 18887,
+"Heroin.overdoses": 5,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BethelBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Bethlehem",
+"Population": 3585,
+"Heroin.overdoses": NA,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BethlehemBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Bloomfield",
+"Population": 20562,
+"Heroin.overdoses": 1,
+"opioid.overdoses": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BloomfieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Bolton",
+"Population": 4971,
+"Heroin.overdoses": NA,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BoltonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Bozrah",
+"Population": 2618,
+"Heroin.overdoses": 1,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BozrahBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Branford",
+"Population": 28025,
+"Heroin.overdoses": 6,
+"opioid.overdoses": 2},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BranfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Bridgeport",
+"Population": 145587,
+"Heroin.overdoses": 58,
+"opioid.overdoses": 22},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BridgeportBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Bridgewater",
+"Population": 1729,
+"Heroin.overdoses": NA,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BridgewaterBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Bristol",
+"Population": 60536,
+"Heroin.overdoses": 28,
+"opioid.overdoses": 12},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BristolBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Brookfield",
+"Population": 16614,
+"Heroin.overdoses": 1,
+"opioid.overdoses": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BrookfieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Brooklyn",
+"Population": 8220,
+"Heroin.overdoses": 1,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BrooklynBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Burlington",
+"Population": 9384,
+"Heroin.overdoses": 1,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BurlingtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Canaan",
+"Population": 1148,
+"Heroin.overdoses": NA,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": CanaanBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Canterbury",
+"Population": 5119,
+"Heroin.overdoses": 1,
+"opioid.overdoses": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": CanterburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Canton",
+"Population": 10304,
+"Heroin.overdoses": 2,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": CantonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Chaplin",
+"Population": 2408,
+"Heroin.overdoses": 1,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ChaplinBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Cheshire",
+"Population": 29264,
+"Heroin.overdoses": 2,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": CheshireBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Chester",
+"Population": 4154,
+"Heroin.overdoses": 1,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ChesterBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Clinton",
+"Population": 13239,
+"Heroin.overdoses": 1,
+"opioid.overdoses": 2},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ClintonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Colchester",
+"Population": 16119,
+"Heroin.overdoses": NA,
+"opioid.overdoses": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ColchesterBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Colebrook",
+"Population": 1523,
+"Heroin.overdoses": NA,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ColebrookBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Columbia",
+"Population": 5476,
+"Heroin.overdoses": NA,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ColumbiaBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Cornwall",
+"Population": 1519,
+"Heroin.overdoses": NA,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": CornwallBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Coventry",
+"Population": 12435,
+"Heroin.overdoses": 3,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": CoventryBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Cromwell",
+"Population": 14076,
+"Heroin.overdoses": 1,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": CromwellBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Danbury",
+"Population": 81967,
+"Heroin.overdoses": 27,
+"opioid.overdoses": 12},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": DanburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Darien",
+"Population": 20925,
+"Heroin.overdoses": NA,
+"opioid.overdoses": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": DarienBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Deep River",
+"Population": 4615,
+"Heroin.overdoses": 3,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": DeepRiverBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Derby",
+"Population": 12841,
+"Heroin.overdoses": 9,
+"opioid.overdoses": 7},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": DerbyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Durham",
+"Population": 7380,
+"Heroin.overdoses": 3,
+"opioid.overdoses": 2},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": DurhamBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "East Granby",
+"Population": 5036,
+"Heroin.overdoses": 1,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EastGranbyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "East Haddam",
+"Population": 9138,
+"Heroin.overdoses": 2,
+"opioid.overdoses": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EastHaddamBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "East Hampton",
+"Population": 12949,
+"Heroin.overdoses": 2,
+"opioid.overdoses": 2},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EastHamptonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "East Hartford",
+"Population": 51241,
+"Heroin.overdoses": 20,
+"opioid.overdoses": 5},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EastHartfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "East Haven",
+"Population": 29167,
+"Heroin.overdoses": 4,
+"opioid.overdoses": 8},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EastHavenBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "East Lyme",
+"Population": 19119,
+"Heroin.overdoses": 5,
+"opioid.overdoses": 2},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EastLymeBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "East Windsor",
+"Population": 11281,
+"Heroin.overdoses": 4,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EastWindsorBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Eastford",
+"Population": 1650,
+"Heroin.overdoses": NA,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EastfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Easton",
+"Population": 7550,
+"Heroin.overdoses": NA,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EastonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Ellington",
+"Population": 15675,
+"Heroin.overdoses": 2,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EllingtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Enfield",
+"Population": 44699,
+"Heroin.overdoses": 16,
+"opioid.overdoses": 9},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EnfieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Essex",
+"Population": 6668,
+"Heroin.overdoses": 2,
+"opioid.overdoses": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EssexBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Fairfield",
+"Population": 60126,
+"Heroin.overdoses": 5,
+"opioid.overdoses": 2},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": FairfieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Farmington",
+"Population": 25429,
+"Heroin.overdoses": 4,
+"opioid.overdoses": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": FarmingtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Franklin",
+"Population": 1950,
+"Heroin.overdoses": 1,
+"opioid.overdoses": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": FranklinBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Glastonbury",
+"Population": 34551,
+"Heroin.overdoses": 8,
+"opioid.overdoses": 2},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": GlastonburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Goshen",
+"Population": 2953,
+"Heroin.overdoses": NA,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": GoshenBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Granby",
+"Population": 11284,
+"Heroin.overdoses": 2,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": GranbyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Greenwich",
+"Population": 61733,
+"Heroin.overdoses": 3,
+"opioid.overdoses": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": GreenwichBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Griswold",
+"Population": 11959,
+"Heroin.overdoses": 2,
+"opioid.overdoses": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": GriswoldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Groton",
+"Population": 40126,
+"Heroin.overdoses": 13,
+"opioid.overdoses": 6},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": GrotonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Guilford",
+"Population": 22377,
+"Heroin.overdoses": 2,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": GuilfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Haddam",
+"Population": 8343,
+"Heroin.overdoses": 1,
+"opioid.overdoses": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": HaddamBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Hamden",
+"Population": 61468,
+"Heroin.overdoses": 9,
+"opioid.overdoses": 8},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": HamdenBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Hampton",
+"Population": 1815,
+"Heroin.overdoses": NA,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": HamptonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Hartford",
+"Population": 125130,
+"Heroin.overdoses": 113,
+"opioid.overdoses": 50},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": HartfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Hartland",
+"Population": 2257,
+"Heroin.overdoses": NA,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": HartlandBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Harwinton",
+"Population": 5636,
+"Heroin.overdoses": 2,
+"opioid.overdoses": 2},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": HarwintonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Hebron",
+"Population": 9638,
+"Heroin.overdoses": 3,
+"opioid.overdoses": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": HebronBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Kent",
+"Population": 2964,
+"Heroin.overdoses": NA,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": KentBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Killingly",
+"Population": 17317,
+"Heroin.overdoses": 3,
+"opioid.overdoses": 3},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": KillinglyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Killingworth",
+"Population": 6501,
+"Heroin.overdoses": 1,
+"opioid.overdoses": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": KillingworthBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Lebanon",
+"Population": 7322,
+"Heroin.overdoses": 2,
+"opioid.overdoses": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": LebanonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Ledyard",
+"Population": 15051,
+"Heroin.overdoses": 3,
+"opioid.overdoses": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": LedyardBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Lisbon",
+"Population": 4334,
+"Heroin.overdoses": 2,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": LisbonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Litchfield",
+"Population": 8406,
+"Heroin.overdoses": NA,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": LitchfieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Lyme",
+"Population": 2417,
+"Heroin.overdoses": NA,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": LymeBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Madison",
+"Population": 18289,
+"Heroin.overdoses": 1,
+"opioid.overdoses": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MadisonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Manchester",
+"Population": 58196,
+"Heroin.overdoses": 26,
+"opioid.overdoses": 11},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ManchesterBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Mansfield",
+"Population": 26379,
+"Heroin.overdoses": 1,
+"opioid.overdoses": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MansfieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Marlborough",
+"Population": 6398,
+"Heroin.overdoses": 5,
+"opioid.overdoses": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MarlboroughBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Meriden",
+"Population": 60691,
+"Heroin.overdoses": 25,
+"opioid.overdoses": 9},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MeridenBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Middlebury",
+"Population": 7550,
+"Heroin.overdoses": 1,
+"opioid.overdoses": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MiddleburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Middlefield",
+"Population": 4421,
+"Heroin.overdoses": NA,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MiddlefieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Middletown",
+"Population": 47539,
+"Heroin.overdoses": 27,
+"opioid.overdoses": 14},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MiddletownBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Milford",
+"Population": 52894,
+"Heroin.overdoses": 18,
+"opioid.overdoses": 6},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MilfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Monroe",
+"Population": 19631,
+"Heroin.overdoses": 1,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MonroeBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Montville",
+"Population": 19621,
+"Heroin.overdoses": 4,
+"opioid.overdoses": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MontvilleBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Morris",
+"Population": 2380,
+"Heroin.overdoses": NA,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MorrisBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Naugatuck",
+"Population": 31786,
+"Heroin.overdoses": 5,
+"opioid.overdoses": 5},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NaugatuckBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "New Britain",
+"Population": 73112,
+"Heroin.overdoses": 36,
+"opioid.overdoses": 20},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewBritainBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "New Canaan",
+"Population": 19938,
+"Heroin.overdoses": NA,
+"opioid.overdoses": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewCanaanBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "New Fairfield",
+"Population": 14010,
+"Heroin.overdoses": 1,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewFairfieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "New Hartford",
+"Population": 6932,
+"Heroin.overdoses": 1,
+"opioid.overdoses": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewHartfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "New Haven",
+"Population": 130338,
+"Heroin.overdoses": 77,
+"opioid.overdoses": 34},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewHavenBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "New London",
+"Population": 27588,
+"Heroin.overdoses": 44,
+"opioid.overdoses": 14},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewLondonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "New Milford",
+"Population": 27983,
+"Heroin.overdoses": 15,
+"opioid.overdoses": 5},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewMilfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Newington",
+"Population": 30606,
+"Heroin.overdoses": 2,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewingtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Newtown",
+"Population": 27772,
+"Heroin.overdoses": 2,
+"opioid.overdoses": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewtownBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Norfolk",
+"Population": 1497,
+"Heroin.overdoses": NA,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NorfolkBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "North Branford",
+"Population": 14383,
+"Heroin.overdoses": 2,
+"opioid.overdoses": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NorthBranfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "North Canaan",
+"Population": 3286,
+"Heroin.overdoses": 4,
+"opioid.overdoses": 3},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NorthCanaanBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "North Haven",
+"Population": 24011,
+"Heroin.overdoses": 4,
+"opioid.overdoses": 2},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NorthHavenBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "North Stonington",
+"Population": 5291,
+"Heroin.overdoses": NA,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NorthStoningtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Norwalk",
+"Population": 86499,
+"Heroin.overdoses": 15,
+"opioid.overdoses": 7},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NorwalkBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Norwich",
+"Population": 40424,
+"Heroin.overdoses": 36,
+"opioid.overdoses": 13},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NorwichBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Old Lyme",
+"Population": 7598,
+"Heroin.overdoses": NA,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": OldLymeBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Old Saybrook",
+"Population": 10258,
+"Heroin.overdoses": 1,
+"opioid.overdoses": 2},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": OldSaybrookBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Orange",
+"Population": 13934,
+"Heroin.overdoses": 1,
+"opioid.overdoses": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": OrangeBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Oxford",
+"Population": 12736,
+"Heroin.overdoses": 1,
+"opioid.overdoses": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": OxfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Plainfield",
+"Population": 15320,
+"Heroin.overdoses": 6,
+"opioid.overdoses": 2},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": PlainfieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Plainville",
+"Population": 17767,
+"Heroin.overdoses": 7,
+"opioid.overdoses": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": PlainvilleBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Plymouth",
+"Population": 12148,
+"Heroin.overdoses": 5,
+"opioid.overdoses": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": PlymouthBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Pomfret",
+"Population": 4219,
+"Heroin.overdoses": 1,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": PomfretBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Portland",
+"Population": 9487,
+"Heroin.overdoses": 1,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": PortlandBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Preston",
+"Population": 4751,
+"Heroin.overdoses": 1,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": PrestonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Prospect",
+"Population": 9520,
+"Heroin.overdoses": NA,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ProspectBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Putnam",
+"Population": 9548,
+"Heroin.overdoses": 12,
+"opioid.overdoses": 2},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": PutnamBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Redding",
+"Population": 9207,
+"Heroin.overdoses": NA,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ReddingBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Ridgefield",
+"Population": 24831,
+"Heroin.overdoses": NA,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": RidgefieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Rocky Hill",
+"Population": 19743,
+"Heroin.overdoses": 1,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": RockyHillBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Roxbury",
+"Population": 2301,
+"Heroin.overdoses": NA,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": RoxburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Salem",
+"Population": 4173,
+"Heroin.overdoses": 1,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SalemBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Salisbury",
+"Population": 3722,
+"Heroin.overdoses": 1,
+"opioid.overdoses": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SalisburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Scotland",
+"Population": 1739,
+"Heroin.overdoses": NA,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ScotlandBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Seymour",
+"Population": 16535,
+"Heroin.overdoses": 2,
+"opioid.overdoses": 2},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SeymourBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Sharon",
+"Population": 2769,
+"Heroin.overdoses": 3,
+"opioid.overdoses": 3},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SharonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Shelton",
+"Population": 40006,
+"Heroin.overdoses": 4,
+"opioid.overdoses": 2},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SheltonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Sherman",
+"Population": 3627,
+"Heroin.overdoses": NA,
+"opioid.overdoses": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ShermanBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Simsbury",
+"Population": 23591,
+"Heroin.overdoses": NA,
+"opioid.overdoses": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SimsburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Somers",
+"Population": 11447,
+"Heroin.overdoses": NA,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SomersBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "South Windsor",
+"Population": 25756,
+"Heroin.overdoses": NA,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SouthWindsorBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Southbury",
+"Population": 19864,
+"Heroin.overdoses": NA,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SouthburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Southington",
+"Population": 43288,
+"Heroin.overdoses": 15,
+"opioid.overdoses": 6},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SouthingtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Sprague",
+"Population": 2986,
+"Heroin.overdoses": 4,
+"opioid.overdoses": 3},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SpragueBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Stafford",
+"Population": 12035,
+"Heroin.overdoses": 6,
+"opioid.overdoses": 2},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": StaffordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Stamford",
+"Population": 123995,
+"Heroin.overdoses": 17,
+"opioid.overdoses": 3},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": StamfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Sterling",
+"Population": 3801,
+"Heroin.overdoses": 1,
+"opioid.overdoses": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SterlingBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Stonington",
+"Population": 18527,
+"Heroin.overdoses": 2,
+"opioid.overdoses": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": StoningtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Stratford",
+"Population": 51694,
+"Heroin.overdoses": 4,
+"opioid.overdoses": 2},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": StratfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Suffield",
+"Population": 15731,
+"Heroin.overdoses": 1,
+"opioid.overdoses": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SuffieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Thomaston",
+"Population": 7831,
+"Heroin.overdoses": 2,
+"opioid.overdoses": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ThomastonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Thompson",
+"Population": 9411,
+"Heroin.overdoses": 2,
+"opioid.overdoses": 3},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ThompsonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Tolland",
+"Population": 14977,
+"Heroin.overdoses": 2,
+"opioid.overdoses": 3},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": TollandBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Torrington",
+"Population": 36061,
+"Heroin.overdoses": 35,
+"opioid.overdoses": 8},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": TorringtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Trumbull",
+"Population": 36251,
+"Heroin.overdoses": 1,
+"opioid.overdoses": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": TrumbullBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Union",
+"Population": 1041,
+"Heroin.overdoses": NA,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": UnionBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Vernon",
+"Population": 29179,
+"Heroin.overdoses": 13,
+"opioid.overdoses": 4},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": VernonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Voluntown",
+"Population": 2608,
+"Heroin.overdoses": 1,
+"opioid.overdoses": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": VoluntownBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Wallingford",
+"Population": 45112,
+"Heroin.overdoses": 6,
+"opioid.overdoses": 3},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WallingfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Warren",
+"Population": 1475,
+"Heroin.overdoses": NA,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WarrenBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Washington",
+"Population": 3562,
+"Heroin.overdoses": NA,
+"opioid.overdoses": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WashingtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Waterbury",
+"Population": 110052,
+"Heroin.overdoses": 81,
+"opioid.overdoses": 36},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WaterburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Waterford",
+"Population": 19508,
+"Heroin.overdoses": 2,
+"opioid.overdoses": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WaterfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Watertown",
+"Population": 22387,
+"Heroin.overdoses": 2,
+"opioid.overdoses": 2},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WatertownBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "West Hartford",
+"Population": 63340,
+"Heroin.overdoses": 4,
+"opioid.overdoses": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WestHartfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "West Haven",
+"Population": 55349,
+"Heroin.overdoses": 6,
+"opioid.overdoses": 9},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WestHavenBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Westbrook",
+"Population": 6922,
+"Heroin.overdoses": 2,
+"opioid.overdoses": 3},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WestbrookBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Weston",
+"Population": 10261,
+"Heroin.overdoses": NA,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WestonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Westport",
+"Population": 26769,
+"Heroin.overdoses": NA,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WestportBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Wethersfield",
+"Population": 26590,
+"Heroin.overdoses": 4,
+"opioid.overdoses": 2},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WethersfieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Willington",
+"Population": 6018,
+"Heroin.overdoses": NA,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WillingtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Wilton",
+"Population": 18353,
+"Heroin.overdoses": 1,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WiltonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Winchester",
+"Population": 11150,
+"Heroin.overdoses": 1,
+"opioid.overdoses": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WinchesterBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Windham",
+"Population": 25315,
+"Heroin.overdoses": 14,
+"opioid.overdoses": 6},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WindhamBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Windsor",
+"Population": 29100,
+"Heroin.overdoses": 5,
+"opioid.overdoses": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WindsorBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Windsor Locks",
+"Population": 12531,
+"Heroin.overdoses": 4,
+"opioid.overdoses": 3},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WindsorLocksBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Wolcott",
+"Population": 16688,
+"Heroin.overdoses": NA,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WolcottBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Woodbridge",
+"Population": 8981,
+"Heroin.overdoses": 1,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WoodbridgeBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Woodbury",
+"Population": 9910,
+"Heroin.overdoses": 2,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WoodburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Woodstock",
+"Population": 7932,
+"Heroin.overdoses": NA,
+"opioid.overdoses": NA},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WoodstockBorders}
+} ]

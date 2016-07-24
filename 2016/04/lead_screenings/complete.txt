@@ -1,0 +1,662 @@
+<!DOCTYPE HTML>
+      <html>
+      <head>
+          <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+          <title>Number of lead-poisoned children versus number of black residents</title>
+          <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700' rel='stylesheet' type='text/css'>
+          <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+          <script type="text/javascript" src="http://code.highcharts.com/highcharts.js"> </script>  
+          <link rel=StyleSheet href="http://projects.ctmirror.org/libs/universal.css" type="text/css">
+          <link rel=StyleSheet href="http://projects.ctmirror.org/content/trend/2015/7/incidents/scatter/libs/style.css" type="text/css">
+          </head>
+          <body>
+          
+          <div class="interactiveContainer">
+          <div class="graphicHeader">Number of lead-poisoned children versus number of black residents</div>
+<div class="explainer">Children who had blood lead levels higher than 5 µg/dL. Based on figures from 2013.</div>
+<div id="container"></div>
+<div class="sourceline">Department of Public Health, U.S. Census</div>
+<div class="smallByline">Andrew Ba Tran/TrendCT.org</div>
+<script>
+          
+          $(function () {
+          $('#container').highcharts({
+          chart: {
+          type: 'scatter'
+          },
+          title: {
+          text: '',
+          x: -20,
+          style: {
+          display: 'none'
+          }
+          },
+          subtitle: {
+          text: '',
+          x: -20,
+          style: {
+          display: 'none'
+          }
+          },
+          plotOptions: {
+          scatter: {
+          color: "rgba(35,100,35,0.6)",
+          marker: {
+          radius: 4,
+          symbol: "circle"
+          }
+          }
+          },
+          credits: {
+          enabled: false
+          },
+          exporting: {
+          enabled: false
+          },
+          xAxis: {
+          min: 0,
+          tickPixelInterval: 100,
+          title : {
+          text: ' Residents living in poverty ', 
+          style: {
+          fontFamily: "Source Sans Pro, Arial",
+          color: "#444",
+          fontSize: 17,
+          fontWeight: "100"
+          }
+          },
+          labels: {
+          valueSuffix: "",
+          style: {
+          fontFamily: "Source Sans Pro, Arial",
+          color: "#aaa",
+          fontSize: 13,
+          fontWeight: "100"
+          },
+          formatter: function() {
+          return "" + comma(this.value) + "";
+          }
+          }
+          },
+          yAxis: {
+          min: 0,
+          tickPixelInterval: 50,
+          title: {
+          text: 'Lead-poisoned children',
+          style: {
+          fontFamily: "Source Sans Pro, Arial",
+          color: "#444",
+          fontSize: 17,
+          fontWeight: "100"
+          }
+          },
+          labels: {
+          style: {
+          fontFamily: "Source Sans Pro, Arial",
+          color: "#aaa",
+          fontSize: 13,
+          fontWeight: "100"
+          },
+          formatter: function() {
+          return "" + comma(this.value) + "";
+          }
+          },
+          lineColor: "#eee"
+          },
+          tooltip: {
+          shadow: false,
+          backgroundColor: "#ffffff",
+          borderColor: "#444444",
+          borderWidth: 2,
+          useHTML: true,
+          headerFormat: '<div class="tooltipHead">{point.key}</div>',
+          formatter: function() {
+          return "<div class='toolTipper'><b>" + this.series.name + "</b><br><div class='kicker'>Lead-poisoned children</div>" + comma(this.y) + "</div><div class='tooltipbottom'><div class='kicker'>Residents living in poverty</div>" + comma(this.key) + "</div>";
+          },
+          //          formatter: function() {
+          //  return "<h2>" + this.series.name + "</h2><br><b>Density:</b> " +  Math.round(this.y) + " per sq. mile<br><b>Times won per 1,000 people:</b> " +  comma(this.x);
+          // },
+          style: {
+          fontFamily: "Lato, Arial",
+          color: "#333",
+          fontSize: 14,
+          opacity: 1,
+          fontWeight: "400"
+          }
+          },
+          legend: {
+          layout: 'vertical',
+          align: 'right',
+          verticalAlign: 'middle',
+          borderWidth: 0,
+          enabled: false,
+          itemStyle: {
+          fontFamily: "Source Sans Pro, Arial",
+          color: "#444",
+                      fontSize: 13,
+                      fontWeight: "100"
+                  }
+              },
+              series: data
+          });
+      
+      
+      function comma(val){
+        while (/(\d+)(\d{3})/.test(val.toString())){
+          val = val.toString().replace(/(\d+)(\d{3})/, '$1'+','+'$2');
+        }
+        return val;
+      }
+      });
+      var data = [ 
+ {
+"name" : "Barkhamsted",
+"data" : [[1,0]]
+},{
+"name" : "Bethlehem",
+"data" : [[19,0]]
+},{
+"name" : "Bolton",
+"data" : [[62,0]]
+},{
+"name" : "Bozrah",
+"data" : [[49,0]]
+},{
+"name" : "Bridgewater",
+"data" : [[12,0]]
+},{
+"name" : "Canton",
+"data" : [[51,0]]
+},{
+"name" : "Chaplin",
+"data" : [[27,0]]
+},{
+"name" : "Colchester",
+"data" : [[52,0]]
+},{
+"name" : "Columbia",
+"data" : [[124,0]]
+},{
+"name" : "East Granby",
+"data" : [[276,0]]
+},{
+"name" : "Eastford",
+"data" : [[8,0]]
+},{
+"name" : "Easton",
+"data" : [[36,0]]
+},{
+"name" : "Essex",
+"data" : [[33,0]]
+},{
+"name" : "Franklin",
+"data" : [[0,0]]
+},{
+"name" : "Goshen",
+"data" : [[1,0]]
+},{
+"name" : "Hartland",
+"data" : [[17,0]]
+},{
+"name" : "Harwinton",
+"data" : [[0,0]]
+},{
+"name" : "Hebron",
+"data" : [[47,0]]
+},{
+"name" : "Killingworth",
+"data" : [[0,0]]
+},{
+"name" : "Ledyard",
+"data" : [[257,0]]
+},{
+"name" : "Lisbon",
+"data" : [[1,0]]
+},{
+"name" : "Lyme",
+"data" : [[0,0]]
+},{
+"name" : "Madison",
+"data" : [[80,0]]
+},{
+"name" : "Marlborough",
+"data" : [[80,0]]
+},{
+"name" : "Middlefield",
+"data" : [[18,0]]
+},{
+"name" : "Monroe",
+"data" : [[145,0]]
+},{
+"name" : "Morris",
+"data" : [[8,0]]
+},{
+"name" : "North Canaan",
+"data" : [[36,0]]
+},{
+"name" : "Orange",
+"data" : [[159,0]]
+},{
+"name" : "Preston",
+"data" : [[80,0]]
+},{
+"name" : "Prospect",
+"data" : [[283,0]]
+},{
+"name" : "Redding",
+"data" : [[61,0]]
+},{
+"name" : "Roxbury",
+"data" : [[0,0]]
+},{
+"name" : "Salem",
+"data" : [[39,0]]
+},{
+"name" : "Sherman",
+"data" : [[0,0]]
+},{
+"name" : "Warren",
+"data" : [[0,0]]
+},{
+"name" : "Waterford",
+"data" : [[85,0]]
+},{
+"name" : "Weston",
+"data" : [[130,0]]
+},{
+"name" : "Willington",
+"data" : [[0,0]]
+},{
+"name" : "Andover",
+"data" : [[94,1]]
+},{
+"name" : "Ashford",
+"data" : [[47,1]]
+},{
+"name" : "Avon",
+"data" : [[131,1]]
+},{
+"name" : "Bethany",
+"data" : [[13,1]]
+},{
+"name" : "Brookfield",
+"data" : [[83,1]]
+},{
+"name" : "Burlington",
+"data" : [[123,1]]
+},{
+"name" : "Cheshire",
+"data" : [[1290,1]]
+},{
+"name" : "Colebrook",
+"data" : [[4,1]]
+},{
+"name" : "Coventry",
+"data" : [[47,1]]
+},{
+"name" : "Darien",
+"data" : [[72,1]]
+},{
+"name" : "Durham",
+"data" : [[1,1]]
+},{
+"name" : "East Haddam",
+"data" : [[97,1]]
+},{
+"name" : "Ellington",
+"data" : [[104,1]]
+},{
+"name" : "Farmington",
+"data" : [[590,1]]
+},{
+"name" : "Guilford",
+"data" : [[225,1]]
+},{
+"name" : "Hampton",
+"data" : [[12,1]]
+},{
+"name" : "Kent",
+"data" : [[30,1]]
+},{
+"name" : "Mansfield",
+"data" : [[1176,1]]
+},{
+"name" : "New Canaan",
+"data" : [[187,1]]
+},{
+"name" : "New Fairfield",
+"data" : [[51,1]]
+},{
+"name" : "New Hartford",
+"data" : [[24,1]]
+},{
+"name" : "Norfolk",
+"data" : [[0,1]]
+},{
+"name" : "North Branford",
+"data" : [[100,1]]
+},{
+"name" : "Old Saybrook",
+"data" : [[27,1]]
+},{
+"name" : "Portland",
+"data" : [[93,1]]
+},{
+"name" : "Ridgefield",
+"data" : [[21,1]]
+},{
+"name" : "Scotland",
+"data" : [[2,1]]
+},{
+"name" : "Southbury",
+"data" : [[378,1]]
+},{
+"name" : "Sterling",
+"data" : [[42,1]]
+},{
+"name" : "Tolland",
+"data" : [[38,1]]
+},{
+"name" : "Union",
+"data" : [[0,1]]
+},{
+"name" : "Voluntown",
+"data" : [[0,1]]
+},{
+"name" : "Washington",
+"data" : [[34,1]]
+},{
+"name" : "Westport",
+"data" : [[280,1]]
+},{
+"name" : "Wethersfield",
+"data" : [[964,1]]
+},{
+"name" : "Wilton",
+"data" : [[107,1]]
+},{
+"name" : "Wolcott",
+"data" : [[230,1]]
+},{
+"name" : "Woodbridge",
+"data" : [[181,1]]
+},{
+"name" : "Woodstock",
+"data" : [[39,1]]
+},{
+"name" : "Beacon Falls",
+"data" : [[0,2]]
+},{
+"name" : "Brooklyn",
+"data" : [[106,2]]
+},{
+"name" : "Cornwall",
+"data" : [[0,2]]
+},{
+"name" : "Deep River",
+"data" : [[120,2]]
+},{
+"name" : "East Lyme",
+"data" : [[877,2]]
+},{
+"name" : "Granby",
+"data" : [[160,2]]
+},{
+"name" : "Haddam",
+"data" : [[27,2]]
+},{
+"name" : "Lebanon",
+"data" : [[39,2]]
+},{
+"name" : "Litchfield",
+"data" : [[0,2]]
+},{
+"name" : "Middlebury",
+"data" : [[96,2]]
+},{
+"name" : "Plymouth",
+"data" : [[32,2]]
+},{
+"name" : "Salisbury",
+"data" : [[116,2]]
+},{
+"name" : "Sharon",
+"data" : [[3,2]]
+},{
+"name" : "Simsbury",
+"data" : [[462,2]]
+},{
+"name" : "Somers",
+"data" : [[24,2]]
+},{
+"name" : "Southington",
+"data" : [[571,2]]
+},{
+"name" : "Suffield",
+"data" : [[1470,2]]
+},{
+"name" : "Thomaston",
+"data" : [[16,2]]
+},{
+"name" : "Woodbury",
+"data" : [[32,2]]
+},{
+"name" : "Berlin",
+"data" : [[270,3]]
+},{
+"name" : "Bethel",
+"data" : [[376,3]]
+},{
+"name" : "Branford",
+"data" : [[292,3]]
+},{
+"name" : "Canaan",
+"data" : [[20,3]]
+},{
+"name" : "Chester",
+"data" : [[30,3]]
+},{
+"name" : "Clinton",
+"data" : [[3,3]]
+},{
+"name" : "Cromwell",
+"data" : [[1052,3]]
+},{
+"name" : "East Windsor",
+"data" : [[964,3]]
+},{
+"name" : "Glastonbury",
+"data" : [[694,3]]
+},{
+"name" : "New Milford",
+"data" : [[416,3]]
+},{
+"name" : "Newington",
+"data" : [[1663,3]]
+},{
+"name" : "North Haven",
+"data" : [[684,3]]
+},{
+"name" : "North Stonington",
+"data" : [[119,3]]
+},{
+"name" : "Old Lyme",
+"data" : [[21,3]]
+},{
+"name" : "Oxford",
+"data" : [[34,3]]
+},{
+"name" : "Windsor Locks",
+"data" : [[561,3]]
+},{
+"name" : "Canterbury",
+"data" : [[0,4]]
+},{
+"name" : "East Hampton",
+"data" : [[26,4]]
+},{
+"name" : "Newtown",
+"data" : [[7,4]]
+},{
+"name" : "Plainville",
+"data" : [[542,4]]
+},{
+"name" : "Seymour",
+"data" : [[688,4]]
+},{
+"name" : "Sprague",
+"data" : [[52,4]]
+},{
+"name" : "Westbrook",
+"data" : [[40,4]]
+},{
+"name" : "Groton",
+"data" : [[705,5]]
+},{
+"name" : "Montville",
+"data" : [[1154,5]]
+},{
+"name" : "Pomfret",
+"data" : [[56,5]]
+},{
+"name" : "Shelton",
+"data" : [[628,5]]
+},{
+"name" : "Trumbull",
+"data" : [[978,5]]
+},{
+"name" : "Watertown",
+"data" : [[36,5]]
+},{
+"name" : "Fairfield",
+"data" : [[1026,6]]
+},{
+"name" : "South Windsor",
+"data" : [[1668,6]]
+},{
+"name" : "Stonington",
+"data" : [[11,6]]
+},{
+"name" : "Windsor",
+"data" : [[10594,6]]
+},{
+"name" : "Milford",
+"data" : [[1360,7]]
+},{
+"name" : "Rocky Hill",
+"data" : [[475,7]]
+},{
+"name" : "Greenwich",
+"data" : [[293,8]]
+},{
+"name" : "Derby",
+"data" : [[933,9]]
+},{
+"name" : "Killingly",
+"data" : [[234,9]]
+},{
+"name" : "Plainfield",
+"data" : [[273,9]]
+},{
+"name" : "Bloomfield",
+"data" : [[11106,10]]
+},{
+"name" : "Putnam",
+"data" : [[84,10]]
+},{
+"name" : "Stafford",
+"data" : [[95,10]]
+},{
+"name" : "Wallingford",
+"data" : [[718,10]]
+},{
+"name" : "Thompson",
+"data" : [[43,11]]
+},{
+"name" : "Winchester",
+"data" : [[133,11]]
+},{
+"name" : "East Haven",
+"data" : [[831,12]]
+},{
+"name" : "Enfield",
+"data" : [[2406,12]]
+},{
+"name" : "Griswold",
+"data" : [[79,12]]
+},{
+"name" : "West Hartford",
+"data" : [[4265,13]]
+},{
+"name" : "Naugatuck",
+"data" : [[1497,19]]
+},{
+"name" : "Ansonia",
+"data" : [[2120,20]]
+},{
+"name" : "Hamden",
+"data" : [[11571,21]]
+},{
+"name" : "East Hartford",
+"data" : [[12381,22]]
+},{
+"name" : "Vernon",
+"data" : [[1895,22]]
+},{
+"name" : "Windham",
+"data" : [[1312,22]]
+},{
+"name" : "Stratford",
+"data" : [[7615,23]]
+},{
+"name" : "Bristol",
+"data" : [[1909,24]]
+},{
+"name" : "Middletown",
+"data" : [[6142,25]]
+},{
+"name" : "Manchester",
+"data" : [[4672,26]]
+},{
+"name" : "Danbury",
+"data" : [[6030,28]]
+},{
+"name" : "Torrington",
+"data" : [[632,34]]
+},{
+"name" : "New London",
+"data" : [[4717,37]]
+},{
+"name" : "West Haven",
+"data" : [[11941,41]]
+},{
+"name" : "Stamford",
+"data" : [[17968,50]]
+},{
+"name" : "Norwalk",
+"data" : [[12390,51]]
+},{
+"name" : "Norwich",
+"data" : [[4829,56]]
+},{
+"name" : "New Britain",
+"data" : [[8689,88]]
+},{
+"name" : "Meriden",
+"data" : [[5841,102]]
+},{
+"name" : "Hartford",
+"data" : [[47786,161]]
+},{
+"name" : "Waterbury",
+"data" : [[21794,229]]
+},{
+"name" : "Bridgeport",
+"data" : [[52583,402]]
+},{
+"name" : "New Haven",
+"data" : [[45020,405]]
+}   ];
+</script>
+</body>
+</html>

@@ -1,0 +1,1691 @@
+[ {
+  "type": "Feature",
+  "properties": {
+    "Town": "Andover",
+"Romney": 38.5,
+"McCain": 44.6,
+"Huckabee": 10.33},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": AndoverBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Ansonia",
+"Romney": 33.16,
+"McCain": 47.93,
+"Huckabee": 8.55},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": AnsoniaBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Ashford",
+"Romney": 33.33,
+"McCain": 42.19,
+"Huckabee": 11.46},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": AshfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Avon",
+"Romney": 39.19,
+"McCain": 51.4,
+"Huckabee": 4.59},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": AvonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Barkhamsted",
+"Romney": 37.99,
+"McCain": 45.88,
+"Huckabee": 7.17},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BarkhamstedBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Beacon Falls",
+"Romney": 31.5,
+"McCain": 53.48,
+"Huckabee": 5.86},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BeaconFallsBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Berlin",
+"Romney": 38.68,
+"McCain": 47.01,
+"Huckabee": 6.34},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BerlinBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Bethany",
+"Romney": 30.65,
+"McCain": 52.21,
+"Huckabee": 7.27},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BethanyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Bethel",
+"Romney": 33.06,
+"McCain": 49.85,
+"Huckabee": 7.52},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BethelBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Bethlehem",
+"Romney": 34.32,
+"McCain": 47.34,
+"Huckabee": 7.1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BethlehemBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Bloomfield",
+"Romney": 37.2,
+"McCain": 48.81,
+"Huckabee": 4.76},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BloomfieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Bolton",
+"Romney": 32.06,
+"McCain": 48.09,
+"Huckabee": 10.18},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BoltonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Bozrah",
+"Romney": 32.43,
+"McCain": 45.95,
+"Huckabee": 8.11},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BozrahBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Branford",
+"Romney": 33.22,
+"McCain": 54.61,
+"Huckabee": 5.35},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BranfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Bridgeport",
+"Romney": 23.34,
+"McCain": 56.27,
+"Huckabee": 8.87},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BridgeportBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Bridgewater",
+"Romney": 34.72,
+"McCain": 53.89,
+"Huckabee": 3.63},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BridgewaterBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Bristol",
+"Romney": 33.58,
+"McCain": 46.04,
+"Huckabee": 11.3},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BristolBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Brookfield",
+"Romney": 35.74,
+"McCain": 50.15,
+"Huckabee": 7.21},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BrookfieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Brooklyn",
+"Romney": 36.53,
+"McCain": 47.06,
+"Huckabee": 7.74},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BrooklynBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Burlington",
+"Romney": 32.62,
+"McCain": 49.46,
+"Huckabee": 7.89},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BurlingtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Canaan",
+"Romney": 27.16,
+"McCain": 45.68,
+"Huckabee": 8.64},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": CanaanBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Canterbury",
+"Romney": 37,
+"McCain": 37.27,
+"Huckabee": 16.35},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": CanterburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Canton",
+"Romney": 39.78,
+"McCain": 47.34,
+"Huckabee": 6.86},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": CantonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Chaplin",
+"Romney": 24.26,
+"McCain": 50,
+"Huckabee": 11.76},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ChaplinBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Cheshire",
+"Romney": 33.89,
+"McCain": 51.21,
+"Huckabee": 6.92},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": CheshireBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Chester",
+"Romney": 27.03,
+"McCain": 52.7,
+"Huckabee": 10.81},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ChesterBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Clinton",
+"Romney": 32.08,
+"McCain": 54.56,
+"Huckabee": 6.74},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ClintonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Colchester",
+"Romney": 32.05,
+"McCain": 48.85,
+"Huckabee": 10},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ColchesterBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Colebrook",
+"Romney": 46.15,
+"McCain": 39.56,
+"Huckabee": 3.3},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ColebrookBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Columbia",
+"Romney": 28.53,
+"McCain": 52.99,
+"Huckabee": 11.41},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ColumbiaBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Cornwall",
+"Romney": 25,
+"McCain": 45.83,
+"Huckabee": 8.33},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": CornwallBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Coventry",
+"Romney": 36.28,
+"McCain": 46.43,
+"Huckabee": 9.96},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": CoventryBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Cromwell",
+"Romney": 36.45,
+"McCain": 48.95,
+"Huckabee": 6.48},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": CromwellBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Danbury",
+"Romney": 35.81,
+"McCain": 49.32,
+"Huckabee": 6.55},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": DanburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Darien",
+"Romney": 29.97,
+"McCain": 62.48,
+"Huckabee": 2.53},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": DarienBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Deep River",
+"Romney": 26.32,
+"McCain": 58.33,
+"Huckabee": 6.14},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": DeepRiverBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Derby",
+"Romney": 26.74,
+"McCain": 52.01,
+"Huckabee": 12.45},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": DerbyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Durham",
+"Romney": 33.46,
+"McCain": 53.97,
+"Huckabee": 7.02},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": DurhamBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "East Granby",
+"Romney": 38.95,
+"McCain": 47.03,
+"Huckabee": 8.08},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EastGranbyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "East Haddam",
+"Romney": 34.9,
+"McCain": 47.54,
+"Huckabee": 9.64},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EastHaddamBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "East Hampton",
+"Romney": 37,
+"McCain": 47.33,
+"Huckabee": 9.21},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EastHamptonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "East Hartford",
+"Romney": 33.17,
+"McCain": 45.42,
+"Huckabee": 8.1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EastHartfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "East Haven",
+"Romney": 28.81,
+"McCain": 54.58,
+"Huckabee": 4.24},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EastHavenBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "East Lyme",
+"Romney": 30.33,
+"McCain": 57.56,
+"Huckabee": 6.1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EastLymeBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "East Windsor",
+"Romney": 40.64,
+"McCain": 44.06,
+"Huckabee": 8.45},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EastWindsorBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Eastford",
+"Romney": 27.87,
+"McCain": 38.8,
+"Huckabee": 20.22},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EastfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Easton",
+"Romney": 32.53,
+"McCain": 54.26,
+"Huckabee": 4.83},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EastonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Ellington",
+"Romney": 39.51,
+"McCain": 45.11,
+"Huckabee": 8.05},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EllingtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Enfield",
+"Romney": 39.96,
+"McCain": 41.7,
+"Huckabee": 9.91},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EnfieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Essex",
+"Romney": 33.22,
+"McCain": 57.24,
+"Huckabee": 3.78},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EssexBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Fairfield",
+"Romney": 26.3,
+"McCain": 62.9,
+"Huckabee": 4.59},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": FairfieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Farmington",
+"Romney": 38.79,
+"McCain": 47.39,
+"Huckabee": 5.98},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": FarmingtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Franklin",
+"Romney": 25.42,
+"McCain": 51.69,
+"Huckabee": 10.17},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": FranklinBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Glastonbury",
+"Romney": 37.78,
+"McCain": 51.92,
+"Huckabee": 4.62},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": GlastonburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Goshen",
+"Romney": 34.09,
+"McCain": 50,
+"Huckabee": 3.9},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": GoshenBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Granby",
+"Romney": 41.79,
+"McCain": 46.42,
+"Huckabee": 6.45},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": GranbyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Greenwich",
+"Romney": 30.34,
+"McCain": 60.94,
+"Huckabee": 2.77},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": GreenwichBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Griswold",
+"Romney": 29.18,
+"McCain": 42.82,
+"Huckabee": 14.82},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": GriswoldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Groton",
+"Romney": 30.45,
+"McCain": 51.58,
+"Huckabee": 8.42},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": GrotonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Guilford",
+"Romney": 31.56,
+"McCain": 56.56,
+"Huckabee": 5.62},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": GuilfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Haddam",
+"Romney": 35.64,
+"McCain": 49.46,
+"Huckabee": 9.94},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": HaddamBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Hamden",
+"Romney": 30.63,
+"McCain": 51.7,
+"Huckabee": 7.08},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": HamdenBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Hampton",
+"Romney": 20.86,
+"McCain": 57.55,
+"Huckabee": 9.35},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": HamptonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Hartford",
+"Romney": 32.41,
+"McCain": 43.46,
+"Huckabee": 6.08},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": HartfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Hartland",
+"Romney": 36.99,
+"McCain": 34.96,
+"Huckabee": 19.92},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": HartlandBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Harwinton",
+"Romney": 38.44,
+"McCain": 42.47,
+"Huckabee": 5.91},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": HarwintonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Hebron",
+"Romney": 33.16,
+"McCain": 53.9,
+"Huckabee": 7.27},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": HebronBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Kent",
+"Romney": 25.21,
+"McCain": 58.82,
+"Huckabee": 7.56},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": KentBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Killingly",
+"Romney": 29.68,
+"McCain": 45.38,
+"Huckabee": 11.4},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": KillinglyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Killingworth",
+"Romney": 32.33,
+"McCain": 54.97,
+"Huckabee": 8.78},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": KillingworthBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Lebanon",
+"Romney": 28.99,
+"McCain": 49.58,
+"Huckabee": 13.03},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": LebanonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Ledyard",
+"Romney": 34.16,
+"McCain": 47.72,
+"Huckabee": 10.1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": LedyardBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Lisbon",
+"Romney": 40.3,
+"McCain": 45.27,
+"Huckabee": 6.97},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": LisbonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Litchfield",
+"Romney": 33.07,
+"McCain": 51.62,
+"Huckabee": 5.71},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": LitchfieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Lyme",
+"Romney": 25.37,
+"McCain": 64.55,
+"Huckabee": 2.99},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": LymeBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Madison",
+"Romney": 31.03,
+"McCain": 57.82,
+"Huckabee": 5.17},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MadisonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Manchester",
+"Romney": 36.03,
+"McCain": 44.21,
+"Huckabee": 8.37},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ManchesterBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Mansfield",
+"Romney": 31.53,
+"McCain": 51.41,
+"Huckabee": 6.83},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MansfieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Marlborough",
+"Romney": 37.2,
+"McCain": 46.62,
+"Huckabee": 10.39},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MarlboroughBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Meriden",
+"Romney": 29.22,
+"McCain": 46.66,
+"Huckabee": 9.74},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MeridenBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Middlebury",
+"Romney": 32.11,
+"McCain": 53.16,
+"Huckabee": 6.61},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MiddleburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Middlefield",
+"Romney": 32.57,
+"McCain": 50.46,
+"Huckabee": 7.34},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MiddlefieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Middletown",
+"Romney": 29.81,
+"McCain": 49.96,
+"Huckabee": 9.75},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MiddletownBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Milford",
+"Romney": 29.65,
+"McCain": 54.91,
+"Huckabee": 7.06},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MilfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Monroe",
+"Romney": 33.3,
+"McCain": 52.37,
+"Huckabee": 7.81},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MonroeBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Montville",
+"Romney": 32.52,
+"McCain": 46.36,
+"Huckabee": 13.08},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MontvilleBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Morris",
+"Romney": 28.77,
+"McCain": 46.12,
+"Huckabee": 10.5},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MorrisBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Naugatuck",
+"Romney": 29.41,
+"McCain": 47.56,
+"Huckabee": 11.47},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NaugatuckBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "New Britain",
+"Romney": 32.48,
+"McCain": 46.55,
+"Huckabee": 8.4},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewBritainBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "New Canaan",
+"Romney": 34.09,
+"McCain": 59.37,
+"Huckabee": 1.71},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewCanaanBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "New Fairfield",
+"Romney": 36.79,
+"McCain": 50.24,
+"Huckabee": 6.6},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewFairfieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "New Hartford",
+"Romney": 37.05,
+"McCain": 44.23,
+"Huckabee": 12.1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewHartfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "New Haven",
+"Romney": 29.54,
+"McCain": 46.6,
+"Huckabee": 10.03},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewHavenBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "New London",
+"Romney": 28.57,
+"McCain": 51.82,
+"Huckabee": 7.26},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewLondonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "New Milford",
+"Romney": 30.01,
+"McCain": 50.33,
+"Huckabee": 9.7},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewMilfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Newington",
+"Romney": 35.2,
+"McCain": 48.93,
+"Huckabee": 6.42},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewingtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Newtown",
+"Romney": 33.3,
+"McCain": 52.62,
+"Huckabee": 8.07},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewtownBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Norfolk",
+"Romney": 33.33,
+"McCain": 46.43,
+"Huckabee": 13.1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NorfolkBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "North Branford",
+"Romney": 32.87,
+"McCain": 50.43,
+"Huckabee": 8.09},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NorthBranfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "North Canaan",
+"Romney": 21.39,
+"McCain": 58.29,
+"Huckabee": 5.88},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NorthCanaanBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "North Haven",
+"Romney": 31.24,
+"McCain": 54.42,
+"Huckabee": 6.82},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NorthHavenBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "North Stonington",
+"Romney": 35.31,
+"McCain": 48.25,
+"Huckabee": 7.82},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NorthStoningtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Norwalk",
+"Romney": 30.99,
+"McCain": 56.34,
+"Huckabee": 5.18},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NorwalkBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Norwich",
+"Romney": 31.65,
+"McCain": 47.48,
+"Huckabee": 12.28},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NorwichBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Old Lyme",
+"Romney": 29.95,
+"McCain": 55.96,
+"Huckabee": 7.45},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": OldLymeBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Old Saybrook",
+"Romney": 28.8,
+"McCain": 58.48,
+"Huckabee": 5.33},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": OldSaybrookBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Orange",
+"Romney": 31.22,
+"McCain": 57.56,
+"Huckabee": 5.33},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": OrangeBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Oxford",
+"Romney": 30.27,
+"McCain": 53.27,
+"Huckabee": 8.35},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": OxfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Plainfield",
+"Romney": 33.26,
+"McCain": 45.2,
+"Huckabee": 12.58},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": PlainfieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Plainville",
+"Romney": 30.97,
+"McCain": 46.02,
+"Huckabee": 11.36},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": PlainvilleBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Plymouth",
+"Romney": 31.73,
+"McCain": 41.59,
+"Huckabee": 12.5},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": PlymouthBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Pomfret",
+"Romney": 29.12,
+"McCain": 51.23,
+"Huckabee": 10.18},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": PomfretBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Portland",
+"Romney": 33.68,
+"McCain": 48.86,
+"Huckabee": 8.73},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": PortlandBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Preston",
+"Romney": 30.22,
+"McCain": 54.22,
+"Huckabee": 8.44},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": PrestonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Prospect",
+"Romney": 29.23,
+"McCain": 50,
+"Huckabee": 10.58},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ProspectBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Putnam",
+"Romney": 29.17,
+"McCain": 47.92,
+"Huckabee": 14.24},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": PutnamBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Redding",
+"Romney": 29,
+"McCain": 59.2,
+"Huckabee": 4.87},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ReddingBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Ridgefield",
+"Romney": 34.75,
+"McCain": 54.6,
+"Huckabee": 4.47},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": RidgefieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Rocky Hill",
+"Romney": 33.69,
+"McCain": 50.96,
+"Huckabee": 6.24},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": RockyHillBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Roxbury",
+"Romney": 33.19,
+"McCain": 56.9,
+"Huckabee": 4.31},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": RoxburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Salem",
+"Romney": 28.29,
+"McCain": 57.75,
+"Huckabee": 6.2},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SalemBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Salisbury",
+"Romney": 19.92,
+"McCain": 57.37,
+"Huckabee": 8.76},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SalisburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Scotland",
+"Romney": 26.17,
+"McCain": 43.93,
+"Huckabee": 21.5},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ScotlandBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Seymour",
+"Romney": 30.35,
+"McCain": 53.62,
+"Huckabee": 9.12},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SeymourBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Sharon",
+"Romney": 26.5,
+"McCain": 60,
+"Huckabee": 4},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SharonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Shelton",
+"Romney": 27.78,
+"McCain": 58.04,
+"Huckabee": 8.13},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SheltonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Sherman",
+"Romney": 35.76,
+"McCain": 51.52,
+"Huckabee": 6.06},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ShermanBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Simsbury",
+"Romney": 39.53,
+"McCain": 49.87,
+"Huckabee": 4.96},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SimsburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Somers",
+"Romney": 50.44,
+"McCain": 36.68,
+"Huckabee": 6.17},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SomersBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "South Windsor",
+"Romney": 39.24,
+"McCain": 48.03,
+"Huckabee": 6.09},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SouthWindsorBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Southbury",
+"Romney": 33.17,
+"McCain": 53.17,
+"Huckabee": 6.77},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SouthburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Southington",
+"Romney": 36.36,
+"McCain": 47.73,
+"Huckabee": 8.93},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SouthingtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Sprague",
+"Romney": 27.7,
+"McCain": 52.7,
+"Huckabee": 11.49},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SpragueBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Stafford",
+"Romney": 36.74,
+"McCain": 46.05,
+"Huckabee": 9.53},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": StaffordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Stamford",
+"Romney": 29.36,
+"McCain": 57.52,
+"Huckabee": 4.49},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": StamfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Sterling",
+"Romney": 30.33,
+"McCain": 52.46,
+"Huckabee": 11.48},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SterlingBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Stonington",
+"Romney": 35.2,
+"McCain": 52.55,
+"Huckabee": 4.12},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": StoningtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Stratford",
+"Romney": 27.34,
+"McCain": 58.03,
+"Huckabee": 7.31},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": StratfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Suffield",
+"Romney": 43.62,
+"McCain": 43.17,
+"Huckabee": 5.35},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SuffieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Thomaston",
+"Romney": 35.34,
+"McCain": 42.11,
+"Huckabee": 11.28},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ThomastonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Thompson",
+"Romney": 35.32,
+"McCain": 42.24,
+"Huckabee": 11.93},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ThompsonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Tolland",
+"Romney": 34.44,
+"McCain": 47.97,
+"Huckabee": 10.46},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": TollandBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Torrington",
+"Romney": 36.82,
+"McCain": 38.55,
+"Huckabee": 11.97},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": TorringtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Trumbull",
+"Romney": 30.58,
+"McCain": 54.16,
+"Huckabee": 8.01},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": TrumbullBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Union",
+"Romney": 24.3,
+"McCain": 59.81,
+"Huckabee": 9.35},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": UnionBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Vernon",
+"Romney": 37.62,
+"McCain": 44.06,
+"Huckabee": 8.98},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": VernonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Voluntown",
+"Romney": 31.53,
+"McCain": 39.64,
+"Huckabee": 11.71},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": VoluntownBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Wallingford",
+"Romney": 33.65,
+"McCain": 49.91,
+"Huckabee": 7.25},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WallingfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Warren",
+"Romney": 15.49,
+"McCain": 54.23,
+"Huckabee": 5.63},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WarrenBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Washington",
+"Romney": 25.45,
+"McCain": 56.89,
+"Huckabee": 4.19},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WashingtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Waterbury",
+"Romney": 30.98,
+"McCain": 45.14,
+"Huckabee": 10.69},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WaterburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Waterford",
+"Romney": 32.41,
+"McCain": 49.13,
+"Huckabee": 10.5},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WaterfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Watertown",
+"Romney": 35.49,
+"McCain": 50.62,
+"Huckabee": 5.82},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WatertownBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "West Hartford",
+"Romney": 37.42,
+"McCain": 51.44,
+"Huckabee": 4.23},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WestHartfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "West Haven",
+"Romney": 28.16,
+"McCain": 52.11,
+"Huckabee": 8.93},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WestHavenBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Westbrook",
+"Romney": 29.48,
+"McCain": 57.78,
+"Huckabee": 8.02},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WestbrookBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Weston",
+"Romney": 25.94,
+"McCain": 65.21,
+"Huckabee": 3.03},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WestonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Westport",
+"Romney": 25.96,
+"McCain": 65.37,
+"Huckabee": 2.72},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WestportBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Wethersfield",
+"Romney": 40.21,
+"McCain": 43.96,
+"Huckabee": 6.94},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WethersfieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Willington",
+"Romney": 39.51,
+"McCain": 42.31,
+"Huckabee": 7.69},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WillingtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Wilton",
+"Romney": 31.11,
+"McCain": 59.81,
+"Huckabee": 4.04},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WiltonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Winchester",
+"Romney": 34.86,
+"McCain": 47.6,
+"Huckabee": 9.62},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WinchesterBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Windham",
+"Romney": 27.36,
+"McCain": 46.26,
+"Huckabee": 10.83},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WindhamBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Windsor",
+"Romney": 38.77,
+"McCain": 44.12,
+"Huckabee": 9.18},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WindsorBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Windsor Locks",
+"Romney": 39.66,
+"McCain": 43.1,
+"Huckabee": 9.91},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WindsorLocksBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Wolcott",
+"Romney": 35.14,
+"McCain": 45.83,
+"Huckabee": 10},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WolcottBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Woodbridge",
+"Romney": 28.97,
+"McCain": 59.48,
+"Huckabee": 5.34},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WoodbridgeBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Woodbury",
+"Romney": 36.4,
+"McCain": 49.21,
+"Huckabee": 5.94},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WoodburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Woodstock",
+"Romney": 40.27,
+"McCain": 41.74,
+"Huckabee": 11.5},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WoodstockBorders}
+} ]

@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Achievement Gap</title>
+    <script type="text/javascript" src="http://projects.ctmirror.org/libs/jquery.js"></script>
+    <link rel=StyleSheet href="style.css" type="text/css">
+    <link rel=StyleSheet href="http://projects.ctmirror.org/libs/universal.css" type="text/css" />
+    <script type="text/javascript" src="data.js"></script>
+</head>
+
+<body>
+    <script class='scripter2' type="text/javascript" src="init.js"></script>
+    <div class="interactiveContainer">
+        <div class="graphicHeader">Graduation gaps nationwide</div>
+        <div class="explainer">A look at public high school graduation rates from the 2011-12 school year.</div>
+        <div class="raceBar">
+            <div class="toolHeader">Groups to compare</div>
+            <div class="toolItemRace">
+                <div class="green"></div>
+                <select class="race">
+                    <option val="White">Total</option>
+                    <option val="Black" selected>American Indian/Alaska Native</option>
+                    <option val="Hisp">Asian/Pacific Islander</option>
+                    <option val="Asian">Hispanic</option>
+                    <option val="AmIn">Black</option>
+                    <option val="Free">White</option>
+                    <option val="NotFree">Economically disadvantaged</option>
+                    <option val="ell" selected>Limited English proficiency</option>
+                    <option val="notell">Students with disabilities</option>
+                </select>
+            </div>
+            <div class="toolItemRace">
+                <div class="purple"></div>
+                <select class="race">
+                    <option val="White" selected>Total</option>
+                    <option val="Black">American Indian/Alaska Native</option>
+                    <option val="Hisp">Asian/Pacific Islander</option>
+                    <option val="Asian">Hispanic</option>
+                    <option val="AmIn">Black</option>
+                    <option val="Free">White</option>
+                    <option val="NotFree">Economically disadvantaged</option>
+                    <option val="ell">Limited English proficiency</option>
+                    <option val="notell">Students with disabilities</option>
+                </select>
+            </div>
+        </div>
+        <div class="gapArea">
+            <div class="ctpullout">
+                <div class="pulloutItem">
+                    <div class="pulloutHeader">Conn. Gap</div>
+                    <div class="pulloutNum gap"></div>
+                </div>
+                <div class="pulloutItem">
+                    <div class="pulloutHeader">National Gap</div>
+                    <div class="pulloutNum natgap"></div>
+                </div>
+            </div>
+            <div class="tooltip"></div>
+        </div>
+        <div class="sourceline">Source: National Center for Education Statistics, the research arm of the Department of Education, using the Adjusted Cohort Graduation Rate, which takes into account the number of students leaving the cohort and those transferring in.</div>
+        <div class="smallByline">Alvin Chang / CT Mirror</div>
+    </div>
+</body>
+
+</html>

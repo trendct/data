@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title></title>
+
+    <link rel=StyleSheet href="http://datatables.net/release-datatables/media/css/demo_page.css" type="text/css">
+    <link rel=StyleSheet href="http://datatables.net/release-datatables/media/css/jquery.dataTables.css" type="text/css">
+
+    <style type="text/css" title="currentStyle">
+ 
+ 
+        td.right {
+            text-align: right;
+        }
+    </style>
+ 
+    <script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.js"></script>
+    <script type="text/javascript" src="http://datatables.net/release-datatables/media/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" src=" http://omnipotent.net/jquery.sparkline/2.1.2/jquery.sparkline.js"></script></a>;
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+ 
+            $('#dynamic').html('<table cellpadding="0" cellspacing="0" border="0" class="display" id="example"></table>');
+            var table = $('#example').dataTable({
+                "aaSorting": [],
+                "aaData": [
+                     ["1000 Friends of Connecticut", "6062.24", "0", "0", "0", "0", "0", "0", "6062.24,0,0,0,0,0,0"],
+        ["142 Railroad Avenue LLC", "0", "10600", "0", "0", "0", "0", "0", "0,10600,0,0,0,0,0"],
+        ["1454East Street, LLC", "0", "11058", "0", "0", "0", "0", "0", "0,11058,0,0,0,0,0"],
+        ["21st century recycling.org", "31411.1", "0", "0", "0", "0", "0", "0", "31411.1,0,0,0,0,0,0"],
+        ["3M Health Information Systems", "0", "0", "0", "24228.75", "69627.5", "63937.5", "0", "0,0,0,24228.75,69627.5,63937.5,0"],
+        ["4uDoctor", "0", "5375", "27297.5", "18611.25", "0", "0", "0", "0,5375,27297.5,18611.25,0,0,0"],
+        ["625 West Avenue Associates", "6678", "1060", "0", "0", "0", "0", "0", "6678,1060,0,0,0,0,0"],
+        ["7-Eleven, Inc.", "0", "0", "38340", "60000", "40000", "0", "0", "0,0,38340,60000,40000,0,0"],
+        ["95/7 Ventures, LLC", "25660", "25970", "0", "0", "0", "0", "0", "25660,25970,0,0,0,0,0"],
+        ["AAA Allied Group", "0", "7420", "20169.13", "5641.24", "8459.62", "7817.91", "0", "0,7420,20169.13,5641.24,8459.62,7817.91,0"],
+        ["AAA Northeast", "0", "0", "0", "4848.3", "7667.05", "3975.48", "14357.25", "0,0,0,4848.3,7667.05,3975.48,14357.25"],
+        ["AARP", "58702.86", "61434.86", "240087.65", "91012.03", "218697.5", "580177.98", "377242.78", "58702.86,61434.86,240087.65,91012.03,218697.5,580177.98,377242.78"],
+        ["AAUP/UCONN Chapter", "36000", "36000", "36500", "27000", "31635.64", "36000", "18750", "36000,36000,36500,27000,31635.64,36000,18750"],
+        ["Abbott Laboratories", "48399", "57140", "50500", "47875", "68625", "42625", "20050", "48399,57140,50500,47875,68625,42625,20050"],
+        ["AbbVie Inc.", "0", "0", "0", "0", "0", "91551.19", "39116.91", "0,0,0,0,0,91551.19,39116.91"],
+        ["A Better Connecticut", "0", "0", "0", "0", "85800", "0", "0", "0,0,0,0,85800,0,0"]
+                ],
+                "aoColumns": [{
+        "sTitle": "ClientName"
+    }, {
+        "sTitle": "2009"
+    }, {
+        "sTitle": "2010"
+    }, {
+        "sTitle": "2011"
+    }, {
+        "sTitle": "2012"
+    }, {
+        "sTitle": "2013"
+    }, {
+        "sTitle": "2014"
+    }, {
+        "sTitle": "2015"
+    }, {
+        "sTitle": "Combined"
+    }],
+                "aoColumnDefs": [
+                    {
+                        "aTargets": [8],
+                        "mRender": function (data, type, full) {
+                            return '<span class="spark">' + data + '</span>'
+                        }
+                    }
+                ],
+                "fnDrawCallback": function (oSettings) {
+                $('.spark:not(:has(canvas))').sparkline('html', {
+                    type: 'bar',
+                    minSpotColor: 'red',
+                    maxSpotColor: 'green',
+                    spotColor: false
+                });
+            }
+            });
+        });
+    </script>
+</head>
+ 
+<body id="dt_example">
+ 
+<div id="container">
+    <div id="dynamic"></div>
+    <div class="spacer"></div>
+</div>
+ 
+</body>
+</html>

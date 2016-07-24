@@ -5,7 +5,7 @@ date: "July 21, 2016"
 output: html_document
 ---
 
-Donald Trump's campaign is under the impression that a majority of Connecticut could be persuaded to vote for him as President in November's general electon.
+Donald Trump's campaign is under the impression that a majority of Connecticut could be persuaded to vote for him as President in November's general election.
 
 Based on a state poll last month from Quinnipiac University, 45 percent of voters would choose Clinton compared to 38 percent for Trump. That single digit lead coupled with Governor Dannel Malloy's low approval rating based on another Quinnipiac poll leads many to believe there is an opportunity for Trump.
 
@@ -29,13 +29,217 @@ In all, that's about 213,000 Republican primary voters— of which 123,000 voted
 
 Based on raw primary votes, Trump would have won 99 towns in Connecticut while Clinton would have won just 70. 
 
-[MAP]
+```{r libraries, warning=F, message=F, echo=F}
+library(dplyr)
+library(tidyr)
+library(scales)
+
+library(ggplot2)
+library(ggalt)
+
+library(stringr)
+library(knitr)
+library(rgdal)
+require(maptools)
+library(extrafont)
+```
+
+```{r working_the_data}
+
+## Republicans
+
+rep_results <- read.csv("data/RepublicanPresidentialPreferencePrimary.csv", stringsAsFactors=FALSE)
+rep_results <- rep_results %>%
+  group_by(Town.Name, Candidate.Name) %>%
+  summarise(votes=sum(Vote.Totals))
+
+rep_results$Candidate.Name <- gsub("Donald J. Trump", "trump_count", rep_results$Candidate.Name)
+rep_results$Candidate.Name <- gsub("John R. Kasich", "kasich_count", rep_results$Candidate.Name)
+rep_results$Candidate.Name <- gsub("Ben Carson", "others_count", rep_results$Candidate.Name)
+rep_results$Candidate.Name <- gsub("Ted Cruz", "others_count", rep_results$Candidate.Name)
+rep_results$Candidate.Name <- gsub("Uncommitted", "others_count", rep_results$Candidate.Name)
+
+rep_results <- rep_results %>%
+  group_by(Town.Name, Candidate.Name) %>%
+  summarise(votes=sum(votes)) %>%
+  spread(Candidate.Name, votes)
+
+rep_results$vote_diff <- rep_results$trump_count - rep_results$kasich_count
+rep_results$total <- rep_results$trump_count + rep_results$kasich_count + rep_results$others_count
+rep_results$trump_per <- round(rep_results$trump_count/rep_results$total*100,1)
+rep_results$kasich_per <- round(rep_results$kasich_count/rep_results$total*100,1)
+rep_results$others_per <- round(rep_results$others_count/rep_results$total*100,1)
+rep_results$percent_diff <- rep_results$trump_per - rep_results$kasich_per
+names(rep_results)[names(rep_results) == 'Town.Name'] <- 'Town'
+rep_results <- data.frame(rep_results)
+
+## Democrats
+
+dem_results_sos <- read.csv("data/DemocraticPresidentialPreferencePrimary.csv", stringsAsFactors=FALSE)
+dem_results_sos <- dem_results_sos %>%
+  group_by(Town.Name, Candidate.Name) %>%
+  summarise(votes=sum(Vote.Totals))
+
+dem_results_sos$Candidate.Name <- gsub("Bernie Sanders", "sanders_count", dem_results_sos$Candidate.Name)
+dem_results_sos$Candidate.Name <- gsub("Hillary Clinton", "clinton_count", dem_results_sos$Candidate.Name)
+dem_results_sos$Candidate.Name <- gsub("Roque Rocky De La Fuente", "others_count", dem_results_sos$Candidate.Name)
+dem_results_sos$Candidate.Name <- gsub("Uncommitted", "others_count", dem_results_sos$Candidate.Name)
+
+dem_results_sos <- dem_results_sos %>%
+  group_by(Town.Name, Candidate.Name) %>%
+  summarise(votes=sum(votes)) %>%
+  spread(Candidate.Name, votes)
+
+dem_results_sos$vote_diff <- dem_results_sos$clinton_count - dem_results_sos$sanders_count
+dem_results_sos$total <- dem_results_sos$clinton_count + dem_results_sos$sanders_count + dem_results_sos$others_count
+dem_results_sos$clinton_per <- round(dem_results_sos$clinton_count/dem_results_sos$total*100,1)
+dem_results_sos$sanders_per <- round(dem_results_sos$sanders_count/dem_results_sos$total*100,1)
+dem_results_sos$others_per <- round(dem_results_sos$others_count/dem_results_sos$total*100,1)
+dem_results_sos$percent_diff <- dem_results_sos$clinton_per - dem_results_sos$sanders_per
+
+names(dem_results_sos)[names(dem_results_sos) == 'Town.Name'] <- 'Town'
+dem_results <- dem_results_sos
+
+
+clinton <- dem_results[c("Town", "clinton_count", "sanders_count")]
+trump <- rep_results[c("Town", "trump_count", "total")]
+
+clinton_trump <- left_join(clinton, trump)
+clinton_trump$ct <- ifelse(clinton_trump$trump_count > clinton_trump$clinton_count, "trump", "clinton")
+```
+
+```{r map, fig.width=9, fig.height=6}
+
+town_shape <- readOGR(dsn="maps", layer="ctgeo")
+town_shape_df <- fortify(town_shape, region="NAME10")
+
+town_map <- clinton_trump
+town_map <- town_map[c("Town",  "trump_count", "clinton_count", "ct")]
+
+colnames(town_map) <- c("id", "Clinton", "Trump", "Winner")
+town_map$Winner <- gsub("trump", "Trump", town_map$Winner)
+town_map$Winner <- gsub("clinton", "Clinton", town_map$Winner)
+
+voters_map <- left_join(town_shape_df, town_map)
+
+
+
+# plot map
+gg <- ggplot(voters_map, aes(long,lat, group=group, fill=Winner)) + 
+  geom_polygon() + 
+  geom_path(color = "white") +
+  coord_equal() 
+gg <- gg + labs(x=NULL, y=NULL, title="Trump versus Clinton votes in the primaries",
+                subtitle="Based on raw primary votes, Trump would have won 99 towns in Connecticut while Clinton would have won just 70.",
+                caption="SOURCE: Office of the Secretary of State\nAndrew Ba Tran/TrendCT.org")
+gg <- gg + theme_bw(base_family="Calibri")
+gg <- gg + theme(text = element_text(size=16))
+gg <- gg + theme(panel.grid.major=element_blank())
+gg <- gg + theme(panel.grid.minor=element_blank())
+gg <- gg + theme(panel.border=element_blank())
+gg <- gg + theme(axis.ticks=element_blank())
+gg <- gg + theme(axis.text.x=element_blank())
+gg <- gg + theme(axis.text.y=element_blank())
+
+gg <- gg + theme(plot.title=element_text(face="bold", family="Lato Black", size=22))
+gg <- gg + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(b=12)))
+gg <- gg + theme(plot.caption=element_text(size=12, margin=margin(t=10, r=80), color="#7a7d7e"))
+gg <- gg + theme(plot.margin = unit(c(1, 1, 1, 1), "lines"))
+
+gg
+```
 
 But those towns are the most-populous ones because Clinton received 170,000 votes in the Democratic primary— almost 50,000 more than Trump.
 
 So based on primary votes, what would it take for Trump to beat Clinton?
 
 A couple things: If all Republican primary voters (213,000) voted for Trump or if all voters who chose Bernie Sanders picked Trump, his votes would be boosted to 276,000. 
+
+
+```{r map_test1, fig.width=9, fig.height=6}
+
+town_map <- clinton_trump
+town_map$ct <- ifelse(town_map$total > town_map$clinton_count, "Trump", "Clinton")
+
+town_map <- town_map[c("Town",  "trump_count", "clinton_count", "ct")]
+
+colnames(town_map) <- c("id", "Clinton", "Trump", "Winner")
+town_map$Winner <- gsub("trump", "Trump", town_map$Winner)
+town_map$Winner <- gsub("clinton", "Clinton", town_map$Winner)
+
+voters_map <- left_join(town_shape_df, town_map)
+
+
+
+# plot map
+gg <- ggplot(voters_map, aes(long,lat, group=group, fill=Winner)) + 
+  geom_polygon() + 
+  geom_path(color = "white") +
+  coord_equal() 
+gg <- gg + labs(x=NULL, y=NULL, title="Republican votes compared to Clinton votes in the primaries",
+                subtitle="If all participating registered Republicans voted for Trump in the primaries.",
+                caption="SOURCE: Office of the Secretary of State\nAndrew Ba Tran/TrendCT.org")
+gg <- gg + theme_bw(base_family="Calibri")
+gg <- gg + theme(text = element_text(size=16))
+gg <- gg + theme(panel.grid.major=element_blank())
+gg <- gg + theme(panel.grid.minor=element_blank())
+gg <- gg + theme(panel.border=element_blank())
+gg <- gg + theme(axis.ticks=element_blank())
+gg <- gg + theme(axis.text.x=element_blank())
+gg <- gg + theme(axis.text.y=element_blank())
+
+gg <- gg + theme(plot.title=element_text(face="bold", family="Lato Black", size=22))
+gg <- gg + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(b=12)))
+gg <- gg + theme(plot.caption=element_text(size=12, margin=margin(t=10, r=80), color="#7a7d7e"))
+gg <- gg + theme(plot.margin = unit(c(1, 1, 1, 1), "lines"))
+
+gg
+
+```
+
+
+
+```{r map_test2, fig.width=9, fig.height=6}
+
+
+town_map <- clinton_trump
+town_map$total <- town_map$sanders_count + town_map$trump_count
+town_map$ct <- ifelse(town_map$total > town_map$clinton_count, "Trump", "Clinton")
+
+town_map <- town_map[c("Town",  "trump_count", "clinton_count", "ct")]
+
+colnames(town_map) <- c("id", "Clinton", "Trump", "Winner")
+town_map$Winner <- gsub("trump", "Trump", town_map$Winner)
+town_map$Winner <- gsub("clinton", "Clinton", town_map$Winner)
+
+voters_map <- left_join(town_shape_df, town_map)
+
+
+
+# plot map
+gg <- ggplot(voters_map, aes(long,lat, group=group, fill=Winner)) + 
+  geom_polygon() + 
+  geom_path(color = "white") +
+  coord_equal() 
+gg <- gg + labs(x=NULL, y=NULL, title="Trump (and Sanders) versus Clinton votes in the primaries",
+                subtitle="If all Bernie Sanders voters switched to Trump",
+                caption="SOURCE: Office of the Secretary of State\nAndrew Ba Tran/TrendCT.org")
+gg <- gg + theme_bw(base_family="Calibri")
+gg <- gg + theme(text = element_text(size=16))
+gg <- gg + theme(panel.grid.major=element_blank())
+gg <- gg + theme(panel.grid.minor=element_blank())
+gg <- gg + theme(panel.border=element_blank())
+gg <- gg + theme(axis.ticks=element_blank())
+gg <- gg + theme(axis.text.x=element_blank())
+gg <- gg + theme(axis.text.y=element_blank())
+
+gg <- gg + theme(plot.title=element_text(face="bold", family="Lato Black", size=22))
+gg <- gg + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(b=12)))
+gg <- gg + theme(plot.caption=element_text(size=12, margin=margin(t=10, r=80), color="#7a7d7e"))
+gg <- gg + theme(plot.margin = unit(c(1, 1, 1, 1), "lines"))
+
+gg
+```
 
 ## If unaffiliated voters went to Trump
 
@@ -53,7 +257,51 @@ That's more than the 730,000 registered as Democrats and 426,000 registered as R
 
 If Trump could reach those large numbers of unaffiliated voters to make up for the Democrats outnumbering the Republicans in Connecticut, he's got a shot. Just 38 percent of the unaffiliated voters would make up the the difference between the number of registered Democrats and Republicans.
 
-[Map of where unaffiliated voters are]
+```{r calculating_registered}
+regis <- read.csv("data/ACT_VOTER_TOWN_PRTY_072116.csv")
+
+regis_percent <- regis %>%
+  group_by(Town) %>%
+  mutate(Percent=round(Registered/sum(Registered)*100, 2))
+
+regis_percent_un <- regis_percent %>%
+  filter(Party=="Unaffiliated")
+```
+
+```{r unaffiliated_map, fig.width=9, fig.height=6}
+
+
+town_map <- regis_percent_un
+
+colnames(town_map) <- c("id",  "party", "Total", "Percent")
+
+voters_map <- left_join(town_shape_df, town_map)
+
+
+gg <- ggplot() +
+  geom_polygon(data = voters_map, aes(x=long, y=lat, group=group, fill=Percent), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Purple", breaks=pretty_breaks(n=10))
+gg <- gg + labs(x=NULL, y=NULL, title="Where the unaffiliated voters are",
+                subtitle="As of July 21, 2016.",
+                caption="SOURCE: Office of the Secretary of State\nAndrew Ba Tran/TrendCT.org")
+gg <- gg + theme_bw(base_family="Calibri")
+gg <- gg + theme(text = element_text(size=16))
+gg <- gg + theme(panel.grid.major=element_blank())
+gg <- gg + theme(panel.grid.minor=element_blank())
+gg <- gg + theme(panel.border=element_blank())
+gg <- gg + theme(axis.ticks=element_blank())
+gg <- gg + theme(axis.text.x=element_blank())
+gg <- gg + theme(axis.text.y=element_blank())
+
+gg <- gg + theme(plot.title=element_text(face="bold", family="Lato Black", size=22))
+gg <- gg + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(b=12)))
+gg <- gg + theme(plot.caption=element_text(size=12, margin=margin(t=10, r=80), color="#7a7d7e"))
+gg <- gg + theme(plot.margin = unit(c(1, 1, 1, 1), "lines"))
+
+gg
+
+```
 
 [Scatterplot of unemployment percent to percent of unaffiliated voters]
 [Scatterplot of unemployment percent to Clinton win percent?]
@@ -95,6 +343,10 @@ The Republican nominee for President has alienated many Hispanic voters with pro
 
 According to a recent poll from the [Latino Victory Fund/Latino Decisions/Fusion](http://thehill.com/blogs/ballot-box/presidential-races/288413-poll-most-hispanics-see-trump-unfavorably) poll, 79 percent of Hispanic voters view Trump negatively.
 
+However, minorities only make up less than 20 percent of the state population.
+
+Will there be enough white voters choosing Trump to make up for the minorities who will vote for Clinton?
+
 ## If he has a time machine
 
 Connecticut had a streak of voting for Republican candidates for President starting in 1972 through 1988, with the election of George Bush and Dan Quayle. 
@@ -109,3 +361,49 @@ These are the towns that voted for John McCain and Sarah Palin in 2008.
 
 If they remained and the towns that voted for President Obama disappeared, then Trump definitely has a strong chance to win.
 
+
+```{r 2008_data}
+p2008 <- read.csv("data/2008presidential.csv")
+p2008$winner <- ifelse(p2008$McCain.Palin > p2008$Obama.Biden, "McCain and Palin", "Obama and Biden")
+
+```
+
+```{r 2008_results, fig.width=9, fig.height=6}
+
+p2008 <- subset(p2008, winner=="McCain and Palin")
+
+town_map <- p2008
+town_map <- town_map[c("Town", "McCain.Palin", "winner")]
+colnames(town_map) <- c("id", "McCain.Palin", "Winner")
+
+voters_map <- left_join(town_shape_df, town_map)
+voters_map <- subset(voters_map, !is.na(Winner))
+
+
+# plot map
+gg <- ggplot(voters_map, aes(long,lat, group=group, fill=Winner)) + 
+  geom_polygon() + 
+  geom_path(color = "white") +
+  coord_equal() 
+gg <- gg + labs(x=NULL, y=NULL, title="Towns where McCain and Palin won in 2008",
+                subtitle="During the Presidential general election.",
+                caption="SOURCE: Office of the Secretary of State\nAndrew Ba Tran/TrendCT.org")
+gg <- gg + theme_bw(base_family="Calibri")
+gg <- gg + theme(panel.background = element_rect(fill = "Sky Blue"))
+
+gg <- gg + theme(text = element_text(size=16))
+gg <- gg + theme(panel.grid.major=element_blank())
+gg <- gg + theme(panel.grid.minor=element_blank())
+gg <- gg + theme(panel.border=element_blank())
+gg <- gg + theme(axis.ticks=element_blank())
+gg <- gg + theme(axis.text.x=element_blank())
+gg <- gg + theme(axis.text.y=element_blank())
+
+gg <- gg + theme(plot.title=element_text(face="bold", family="Lato Black", size=22))
+gg <- gg + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(b=12)))
+gg <- gg + theme(plot.caption=element_text(size=12, margin=margin(t=10, r=80), color="#7a7d7e"))
+gg <- gg + theme(plot.margin = unit(c(1, 1, 1, 1), "lines"))
+
+gg
+
+```

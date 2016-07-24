@@ -1,0 +1,242 @@
+.interactiveContainer select {
+    border-radius: 0px !important;
+    background: #fff !important;
+    font-family: Lato;
+}
+
+.explainer a {
+    color: #cc4545;
+    text-decoration: none;
+}
+
+.toolItemRace {
+    float: left;
+    margin: 3px;
+    padding: 4px 5px;
+    background: #eee;
+    color: #777;
+    border-radius: 3px;
+    font-size: 13px;
+    cursor: pointer;
+    background: ;
+    font-family: "Lato", Arial, sans-serif;
+}
+
+.pulloutItem {
+    margin-bottom: 10px;
+}
+
+.pulloutNum {
+    font-size: 29px;
+    font-weight: bold;
+    color: #333;
+    margin-top: 0px;
+}
+
+.toolItemRace,
+.toolItemRace:hover {
+    background: none;
+}
+
+.toolHeader {
+    font-size: 11px;
+    text-transform: uppercase;
+    font-family: "Lato", Arial, sans-serif;
+}
+
+.gapArea {
+    position: relative;
+    width: 80%;
+    margin: 0 10%;
+    float: left;
+    height: 550px;
+}
+
+.tick {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 1px;
+    border-left: 1px solid #eee;
+    z-index: -1;
+}
+
+.tickLabel {
+    margin-left: 2px;
+    font-size: 12px;
+    color: #aaa;
+    font-family: "Lato", Arial, sans-serif;
+}
+
+.ctpullout {
+    position: absolute;
+    left: -20px;
+    bottom: 50px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    padding: 10px;
+    font-family: "Lato", Arial, sans-serif;
+}
+
+.ctpullout.otherSide {
+    right: auto;
+    left: 10px;
+}
+
+.pulloutHeader {
+    font-size: 12px;
+    color: #cc4545;
+    text-transform: uppercase;
+}
+
+.rectLabel {
+    position: absolute;
+    margin-left: -110px;
+    margin-top: -5px;
+    font-family: "Lato", Arial, sans-serif;
+    left: 0;
+    width: 100px;
+    text-align: right;
+}
+
+.rect {
+    position: absolute;
+    height: 2px;
+    font-size: 9px;
+    font-weight: 100;
+    background: rgba(200, 200, 200, 0.3);
+    color: #aaa;
+    -webkit-transition: all 600ms linear;
+    -moz-transition: all 600ms linear;
+    -o-transition: all 600ms linear;
+    -ms-transition: all 600ms linear;
+    transition: all 600ms linear;
+}
+
+.rect:hover {
+    background: rgba(200, 200, 200, 1);
+}
+
+.rect.ct,
+.rect.nat,
+.rect.natpub.active {
+    height: 3px;
+    opacity: 1;
+    margin-top: 2px;
+    color: rgb(200, 0, 0);
+    font-weight: bold;
+    font-size: 13px;
+    background: rgba(0, 0, 0, 1);
+}
+
+.rect.ct .rectLabel,
+.rect.nat .rectLabel,
+.rect.natpub.active .rectLabel {
+    margin-top: -10px;
+}
+
+.purpleBlock,
+.greenBlock {
+    position: absolute;
+    top: -4px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-left: -4px;
+}
+
+.rect.ct .purpleBlock,
+.rect.ct .greenBlock,
+.rect.nat .purpleBlock,
+.rect.nat .greenBlock {
+    width: 12px;
+    height: 12px;
+    margin-left: -6px;
+    top: -6px;
+}
+
+.purpleBlock {
+    left: 100%;
+    background: #cc4545;
+}
+
+.greenBlock {
+    left: 0%;
+    background: #59ABE3;
+}
+
+.backward .purpleBlock {
+    left: 0%;
+}
+
+.backward .greenBlock {
+    left: 100%;
+}
+
+.raceBar {
+    float: left;
+    width: 100%;
+}
+
+.race {
+    float: left;
+    font-size: 17px;
+}
+
+.purple {
+    width: 23px;
+    height: 23px;
+    border-radius: 50%;
+    background: #cc4545;
+    float: left;
+    margin-top: 0px;
+    margin-right: 2px;
+}
+
+.green {
+    width: 23px;
+    height: 23px;
+    border-radius: 50%;
+    background: #59ABE3;
+    float: left;
+    margin-right: 2px;
+}
+
+.tooltip {
+    z-index: 100000;
+    position: absolute;
+    display: none;
+    background: #fff;
+    padding: 5px;
+    border: 1px solid #ccc;
+    width: 100px;
+}
+
+.tooltipItem {
+    float: left;
+    width: 50%;
+}
+
+.tooltipItemColor {
+    float: left;
+}
+
+.tooltipItem:nth-child(1) .tooltipItemColor {
+    width: 10px;
+    height: 10px;
+    margin-top: 6px;
+    margin-right: 4px;
+    border-radius: 50%;
+    background: #59ABE3;
+}
+
+.tooltipItem:nth-child(2) .tooltipItemColor {
+    width: 10px;
+    height: 10px;
+    margin-top: 6px;
+    margin-right: 4px;
+    border-radius: 50%;
+    background: #cc4545;
+}
+

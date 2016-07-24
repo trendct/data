@@ -1,0 +1,757 @@
+[ {
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Ansonia",
+"Reported.Incidents": 4,
+"incidents.per.capita": 2.09},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": AnsoniaBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Avon",
+"Reported.Incidents": 0,
+"incidents.per.capita": 0},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": AvonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Berlin",
+"Reported.Incidents": 6,
+"incidents.per.capita": 2.97},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BerlinBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Bethel",
+"Reported.Incidents": 2,
+"incidents.per.capita": 1.06},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BethelBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Bloomfield",
+"Reported.Incidents": 2,
+"incidents.per.capita": 0.97},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BloomfieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Branford",
+"Reported.Incidents": 18,
+"incidents.per.capita": 6.42},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BranfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Bridgeport",
+"Reported.Incidents": 16,
+"incidents.per.capita": 1.1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BridgeportBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Bristol",
+"Reported.Incidents": 9,
+"incidents.per.capita": 1.49},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BristolBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Brookfield",
+"Reported.Incidents": 2,
+"incidents.per.capita": 1.2},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BrookfieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Canton",
+"Reported.Incidents": 2,
+"incidents.per.capita": 1.94},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": CantonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Cheshire",
+"Reported.Incidents": 5,
+"incidents.per.capita": 1.71},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": CheshireBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Clinton",
+"Reported.Incidents": 1,
+"incidents.per.capita": 0.76},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ClintonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Coventry",
+"Reported.Incidents": 4,
+"incidents.per.capita": 3.22},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": CoventryBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Cromwell",
+"Reported.Incidents": 1,
+"incidents.per.capita": 0.71},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": CromwellBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Danbury",
+"Reported.Incidents": 20,
+"incidents.per.capita": 2.44},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": DanburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Darien",
+"Reported.Incidents": 2,
+"incidents.per.capita": 0.96},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": DarienBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Derby",
+"Reported.Incidents": 5,
+"incidents.per.capita": 3.89},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": DerbyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "East Hampton",
+"Reported.Incidents": 5,
+"incidents.per.capita": 3.86},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EastHamptonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "East Hartford",
+"Reported.Incidents": 36,
+"incidents.per.capita": 7.03},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EastHartfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "East Haven",
+"Reported.Incidents": 7,
+"incidents.per.capita": 2.4},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EastHavenBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "East Windsor",
+"Reported.Incidents": 2,
+"incidents.per.capita": 1.77},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EastWindsorBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Easton",
+"Reported.Incidents": 1,
+"incidents.per.capita": 1.32},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EastonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Enfield",
+"Reported.Incidents": 2,
+"incidents.per.capita": 0.45},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EnfieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Fairfield",
+"Reported.Incidents": 2,
+"incidents.per.capita": 0.33},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": FairfieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Farmington",
+"Reported.Incidents": 7,
+"incidents.per.capita": 2.75},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": FarmingtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Glastonbury",
+"Reported.Incidents": 3,
+"incidents.per.capita": 0.87},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": GlastonburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Granby",
+"Reported.Incidents": 0,
+"incidents.per.capita": 0},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": GranbyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Greenwich",
+"Reported.Incidents": 1,
+"incidents.per.capita": 0.16},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": GreenwichBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Guilford",
+"Reported.Incidents": 2,
+"incidents.per.capita": 0.89},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": GuilfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Hamden",
+"Reported.Incidents": 5,
+"incidents.per.capita": 0.81},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": HamdenBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Hartford",
+"Reported.Incidents": 51,
+"incidents.per.capita": 4.08},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": HartfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Madison",
+"Reported.Incidents": 0,
+"incidents.per.capita": 0},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MadisonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Manchester",
+"Reported.Incidents": 28,
+"incidents.per.capita": 4.81},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ManchesterBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Ledyard",
+"Reported.Incidents": 12,
+"incidents.per.capita": 7.97},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": LedyardBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Meriden",
+"Reported.Incidents": 15,
+"incidents.per.capita": 2.47},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MeridenBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Middletown",
+"Reported.Incidents": 10,
+"incidents.per.capita": 2.1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MiddletownBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Milford",
+"Reported.Incidents": 11,
+"incidents.per.capita": 2.08},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MilfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Monroe",
+"Reported.Incidents": 0,
+"incidents.per.capita": 0},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MonroeBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Naugatuck",
+"Reported.Incidents": 11,
+"incidents.per.capita": 3.46},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NaugatuckBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "New Britain",
+"Reported.Incidents": 17,
+"incidents.per.capita": 2.33},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewBritainBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "New Canaan",
+"Reported.Incidents": 2,
+"incidents.per.capita": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewCanaanBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "New Haven",
+"Reported.Incidents": 15,
+"incidents.per.capita": 1.15},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewHavenBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "New London",
+"Reported.Incidents": 18,
+"incidents.per.capita": 6.52},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewLondonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "New Milford",
+"Reported.Incidents": 8,
+"incidents.per.capita": 2.86},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewMilfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Newington",
+"Reported.Incidents": 4,
+"incidents.per.capita": 1.31},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewingtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Newtown",
+"Reported.Incidents": 0,
+"incidents.per.capita": 0},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewtownBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "North Branford",
+"Reported.Incidents": 2,
+"incidents.per.capita": 1.39},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NorthBranfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "North Haven",
+"Reported.Incidents": 6,
+"incidents.per.capita": 2.5},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NorthHavenBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Norwalk",
+"Reported.Incidents": 40,
+"incidents.per.capita": 4.62},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NorwalkBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Norwich",
+"Reported.Incidents": 17,
+"incidents.per.capita": 4.21},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NorwichBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Orange",
+"Reported.Incidents": 6,
+"incidents.per.capita": 4.31},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": OrangeBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Plainfield",
+"Reported.Incidents": 1,
+"incidents.per.capita": 0.65},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": PlainfieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Plainville",
+"Reported.Incidents": 2,
+"incidents.per.capita": 1.13},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": PlainvilleBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Plymouth",
+"Reported.Incidents": 3,
+"incidents.per.capita": 2.47},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": PlymouthBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Portland",
+"Reported.Incidents": 1,
+"incidents.per.capita": 1.05},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": PortlandBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Putnam",
+"Reported.Incidents": 6,
+"incidents.per.capita": 6.28},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": PutnamBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Redding",
+"Reported.Incidents": 2,
+"incidents.per.capita": 2.17},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ReddingBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Ridgefield",
+"Reported.Incidents": 4,
+"incidents.per.capita": 1.61},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": RidgefieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Rocky Hill",
+"Reported.Incidents": 0,
+"incidents.per.capita": 0},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": RockyHillBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Seymour",
+"Reported.Incidents": 1,
+"incidents.per.capita": 0.6},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SeymourBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Shelton",
+"Reported.Incidents": 7,
+"incidents.per.capita": 1.75},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SheltonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Simsbury",
+"Reported.Incidents": 0,
+"incidents.per.capita": 0},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SimsburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Southington",
+"Reported.Incidents": 6,
+"incidents.per.capita": 1.39},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SouthingtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "South Windsor",
+"Reported.Incidents": 0,
+"incidents.per.capita": 0},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SouthWindsorBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Stamford",
+"Reported.Incidents": 3,
+"incidents.per.capita": 0.24},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": StamfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Stonington",
+"Reported.Incidents": 0,
+"incidents.per.capita": 0},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": StoningtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Suffield",
+"Reported.Incidents": 3,
+"incidents.per.capita": 1.91},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SuffieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Torrington",
+"Reported.Incidents": 17,
+"incidents.per.capita": 4.71},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": TorringtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Trumbull",
+"Reported.Incidents": 6,
+"incidents.per.capita": 1.66},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": TrumbullBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Vernon",
+"Reported.Incidents": 21,
+"incidents.per.capita": 7.2},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": VernonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Wallingford",
+"Reported.Incidents": 4,
+"incidents.per.capita": 0.89},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WallingfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Waterbury",
+"Reported.Incidents": 27,
+"incidents.per.capita": 2.45},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WaterburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Waterford",
+"Reported.Incidents": 3,
+"incidents.per.capita": 1.54},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WaterfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Watertown",
+"Reported.Incidents": 2,
+"incidents.per.capita": 0.89},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WatertownBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "West Hartford",
+"Reported.Incidents": 13,
+"incidents.per.capita": 2.05},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WestHartfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "West Haven",
+"Reported.Incidents": 6,
+"incidents.per.capita": 1.08},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WestHavenBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Westport",
+"Reported.Incidents": 4,
+"incidents.per.capita": 1.49},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WestportBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Wethersfield",
+"Reported.Incidents": 0,
+"incidents.per.capita": 0},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WethersfieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Windham",
+"Reported.Incidents": 3,
+"incidents.per.capita": 1.19},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WindhamBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Wilton",
+"Reported.Incidents": 5,
+"incidents.per.capita": 2.72},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WiltonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Windsor",
+"Reported.Incidents": 2,
+"incidents.per.capita": 0.69},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WindsorBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Windsor Locks",
+"Reported.Incidents": 1,
+"incidents.per.capita": 0.8},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WindsorLocksBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Wolcott",
+"Reported.Incidents": 0,
+"incidents.per.capita": 0},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WolcottBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "real.town.name": "Woodbridge",
+"Reported.Incidents": 0,
+"incidents.per.capita": 0},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WoodbridgeBorders}
+} ]

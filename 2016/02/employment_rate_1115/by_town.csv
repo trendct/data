@@ -1,0 +1,170 @@
+Town,Unemployment Rate,Affected,High-Low
+Hartford,8.9,No requirements,higher
+Waterbury,7.9,No requirements,higher
+Bridgeport,7.4,No requirements,higher
+New London,7.2,No requirements,higher
+New Britain,7,No requirements,higher
+Ansonia,6.9,No requirements,higher
+New Haven,6.5,No requirements,higher
+Griswold,6.2,No requirements,higher
+Norwich,6.2,No requirements,higher
+Sterling,6.2,No requirements,higher
+East Hartford,6.1,No requirements,higher
+Meriden,6.1,No requirements,higher
+Killingly,6,No requirements,less
+Sprague,6,No requirements,less
+Windham,6,No requirements,less
+West Haven,5.9,No requirements,less
+Derby,5.8,No requirements,less
+Plainfield,5.8,No requirements,less
+Putnam,5.7,No requirements,less
+Bristol,5.5,No requirements,less
+Plymouth,5.5,No requirements,less
+East Haven,5.4,No requirements,less
+Montville,5.4,No requirements,less
+Naugatuck,5.4,No requirements,less
+Stratford,5.4,No requirements,less
+Torrington,5.3,Required,less
+Bloomfield,5.2,No requirements,less
+Seymour,5.1,No requirements,less
+Voluntown,4.9,No requirements,less
+Winchester,4.9,Required,less
+Brooklyn,4.8,No requirements,less
+Canterbury,4.8,No requirements,less
+Chaplin,4.8,No requirements,less
+Hampton,4.8,No requirements,less
+Lisbon,4.8,No requirements,less
+Salem,4.8,No requirements,less
+Stafford,4.8,No requirements,less
+East Lyme,4.7,No requirements,less
+Mansfield,4.7,No requirements,less
+Middletown,4.7,No requirements,less
+Union,4.7,Required,less
+Manchester,4.6,No requirements,less
+Preston,4.6,No requirements,less
+Windsor,4.6,No requirements,less
+East Windsor,4.6,Required,less
+Windsor Locks,4.6,Required,less
+Groton,4.5,No requirements,less
+Hamden,4.5,No requirements,less
+Thompson,4.5,No requirements,less
+Vernon,4.5,No requirements,less
+Enfield,4.5,Required,less
+Bozrah,4.4,No requirements,less
+Shelton,4.4,No requirements,less
+Southbury,4.4,No requirements,less
+Westbrook,4.4,No requirements,less
+Waterford,4.4,Required,less
+Branford,4.3,No requirements,less
+Plainville,4.3,No requirements,less
+Ledyard,4.3,Required,less
+East Haddam,4.2,No requirements,less
+Monroe,4.2,No requirements,less
+Watertown,4.2,No requirements,less
+Norwalk,4.2,Required,less
+Stonington,4.2,Required,less
+Milford,4.1,No requirements,less
+Fairfield,4.1,Required,less
+Beacon Falls,4,No requirements,less
+Cromwell,4,No requirements,less
+Lebanon,4,No requirements,less
+Prospect,4,No requirements,less
+Wallingford,4,No requirements,less
+Wolcott,4,No requirements,less
+Colebrook,4,Required,less
+Essex,4,Required,less
+Franklin,4,Required,less
+New Milford,4,Required,less
+North Haven,4,Required,less
+Scotland,4,Required,less
+Somers,4,Required,less
+Stamford,4,Required,less
+Clinton,3.9,No requirements,less
+Newington,3.9,No requirements,less
+Southington,3.9,No requirements,less
+Thomaston,3.9,No requirements,less
+Wethersfield,3.9,No requirements,less
+Bethel,3.9,Required,less
+New Fairfield,3.9,Required,less
+Trumbull,3.9,Required,less
+Warren,3.9,Required,less
+Woodstock,3.9,Required,less
+Barkhamsted,3.8,No requirements,less
+Coventry,3.8,No requirements,less
+Middlebury,3.8,No requirements,less
+New Hartford,3.8,No requirements,less
+No. Stonington,3.8,No requirements,less
+Old Saybrook,3.8,No requirements,less
+Portland,3.8,No requirements,less
+Berlin,3.8,Required,less
+Brookfield,3.8,Required,less
+Danbury,3.8,Required,less
+Darien,3.8,Required,less
+Deep River,3.8,Required,less
+Ellington,3.8,Required,less
+Middlefield,3.8,Required,less
+North Branford,3.8,Required,less
+North Canaan,3.8,Required,less
+Old Lyme,3.8,Required,less
+Oxford,3.8,Required,less
+Andover,3.7,No requirements,less
+Colchester,3.7,No requirements,less
+Columbia,3.7,No requirements,less
+East Hampton,3.7,No requirements,less
+Burlington,3.7,Required,less
+Hartland,3.7,Required,less
+New Canaan,3.7,Required,less
+Newtown,3.7,Required,less
+Norfolk,3.7,Required,less
+South Windsor,3.7,Required,less
+Suffield,3.7,Required,less
+Weston,3.7,Required,less
+Ashford,3.6,No requirements,less
+Pomfret,3.6,No requirements,less
+Bethany,3.6,Required,less
+Bridgewater,3.6,Required,less
+Goshen,3.6,Required,less
+Harwinton,3.6,Required,less
+Kent,3.6,Required,less
+Rocky Hill,3.6,Required,less
+Sherman,3.6,Required,less
+Westport,3.6,Required,less
+Wilton,3.6,Required,less
+Bethlehem,3.5,No requirements,less
+Greenwich,3.5,Required,less
+Lyme,3.5,Required,less
+Morris,3.5,Required,less
+Orange,3.5,Required,less
+Redding,3.5,Required,less
+West Hartford,3.5,Required,less
+Woodbury,3.4,No requirements,less
+Easton,3.4,Required,less
+Litchfield,3.4,Required,less
+Madison,3.4,Required,less
+Marlborough,3.4,Required,less
+Bolton,3.3,Required,less
+Canton,3.3,Required,less
+East Granby,3.3,Required,less
+Farmington,3.3,Required,less
+Haddam,3.3,Required,less
+Ridgefield,3.3,Required,less
+Willington,3.3,Required,less
+Woodbridge,3.3,Required,less
+Cheshire,3.2,Required,less
+Cornwall,3.2,Required,less
+Durham,3.2,Required,less
+Glastonbury,3.2,Required,less
+Granby,3.2,Required,less
+Guilford,3.2,Required,less
+Hebron,3.2,Required,less
+Killingworth,3.2,Required,less
+Simsbury,3.2,Required,less
+Tolland,3.2,Required,less
+Avon,3.1,Required,less
+Chester,3.1,Required,less
+Eastford,3,No requirements,less
+Sharon,2.8,Required,less
+Washington,2.8,Required,less
+Roxbury,2.5,Required,less
+Salisbury,2.4,Required,less
+Canaan,2.3,Required,less
