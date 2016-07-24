@@ -1,0 +1,1351 @@
+[ {
+  "type": "Feature",
+  "properties": {
+    "town": "Stamford",
+"subsidies": 997697101,
+"count": 144},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": StamfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Farmington",
+"subsidies": 297515750,
+"count": 45},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": FarmingtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Greenwich",
+"subsidies": 223519035,
+"count": 42},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": GreenwichBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Bristol",
+"subsidies": 147107512,
+"count": 48},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BristolBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Norwalk",
+"subsidies": 101268270,
+"count": 88},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NorwalkBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Hartford",
+"subsidies": 86653061,
+"count": 108},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": HartfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "New Haven",
+"subsidies": 76119498,
+"count": 92},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewHavenBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "New London",
+"subsidies": 68143753,
+"count": 20},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewLondonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Windsor",
+"subsidies": 52124974,
+"count": 35},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WindsorBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Enfield",
+"subsidies": 43857488,
+"count": 24},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EnfieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Bridgeport",
+"subsidies": 40735264,
+"count": 87},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BridgeportBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Groton",
+"subsidies": 33893850,
+"count": 26},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": GrotonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Plainfield",
+"subsidies": 30214000,
+"count": 7},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": PlainfieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Bloomfield",
+"subsidies": 27248900,
+"count": 41},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BloomfieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Danbury",
+"subsidies": 22312454,
+"count": 34},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": DanburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Wallingford",
+"subsidies": 17853062,
+"count": 36},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WallingfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "New Britain",
+"subsidies": 16717870,
+"count": 60},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewBritainBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Cheshire",
+"subsidies": 15423650,
+"count": 31},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": CheshireBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Shelton",
+"subsidies": 12468809,
+"count": 25},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SheltonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "South Windsor",
+"subsidies": 12011375,
+"count": 38},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SouthWindsorBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Meriden",
+"subsidies": 8946174,
+"count": 38},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MeridenBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Milford",
+"subsidies": 8736618,
+"count": 34},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MilfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Middlebury",
+"subsidies": 8627360,
+"count": 5},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MiddleburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Glastonbury",
+"subsidies": 7378688,
+"count": 35},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": GlastonburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Rocky Hill",
+"subsidies": 7257785,
+"count": 37},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": RockyHillBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Newington",
+"subsidies": 6984800,
+"count": 27},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewingtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Waterbury",
+"subsidies": 6764820,
+"count": 83},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WaterburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Berlin",
+"subsidies": 6590812,
+"count": 45},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BerlinBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "East Granby",
+"subsidies": 5688166,
+"count": 12},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EastGranbyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Manchester",
+"subsidies": 5519974,
+"count": 38},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ManchesterBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Wilton",
+"subsidies": 5294825,
+"count": 12},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WiltonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Stonington",
+"subsidies": 4832200,
+"count": 10},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": StoningtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Avon",
+"subsidies": 4653425,
+"count": 24},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": AvonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Plainville",
+"subsidies": 4646913,
+"count": 18},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": PlainvilleBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Norwich",
+"subsidies": 4531057,
+"count": 10},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NorwichBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Branford",
+"subsidies": 4265700,
+"count": 30},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BranfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Middletown",
+"subsidies": 4199715,
+"count": 39},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MiddletownBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Torrington",
+"subsidies": 3885144,
+"count": 33},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": TorringtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Montville",
+"subsidies": 3764070,
+"count": 5},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MontvilleBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Southington",
+"subsidies": 3727350,
+"count": 28},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SouthingtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "East Hartford",
+"subsidies": 3491175,
+"count": 50},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EastHartfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Killingly",
+"subsidies": 3303000,
+"count": 9},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": KillinglyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Cromwell",
+"subsidies": 3287730,
+"count": 15},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": CromwellBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "West Hartford",
+"subsidies": 3040550,
+"count": 54},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WestHartfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Lisbon",
+"subsidies": 3e+06,
+"count": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": LisbonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Westport",
+"subsidies": 2985514,
+"count": 14},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WestportBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Stratford",
+"subsidies": 2809863,
+"count": 31},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": StratfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Orange",
+"subsidies": 2648910,
+"count": 7},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": OrangeBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Old Saybrook",
+"subsidies": 2433953,
+"count": 15},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": OldSaybrookBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Hamden",
+"subsidies": 2296800,
+"count": 21},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": HamdenBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Fairfield",
+"subsidies": 2237617,
+"count": 28},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": FairfieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Wethersfield",
+"subsidies": 2217426,
+"count": 10},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WethersfieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Guilford",
+"subsidies": 2196087,
+"count": 16},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": GuilfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Windham",
+"subsidies": 2174253,
+"count": 8},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WindhamBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Monroe",
+"subsidies": 2132779,
+"count": 9},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MonroeBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Waterford",
+"subsidies": 2077353,
+"count": 12},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WaterfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "East Windsor",
+"subsidies": 1879000,
+"count": 11},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EastWindsorBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "North Haven",
+"subsidies": 1667394,
+"count": 17},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NorthHavenBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Simsbury",
+"subsidies": 1450935,
+"count": 21},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SimsburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Ellington",
+"subsidies": 1442000,
+"count": 9},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EllingtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Watertown",
+"subsidies": 1414728,
+"count": 11},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WatertownBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Newtown",
+"subsidies": 1389800,
+"count": 14},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewtownBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Brookfield",
+"subsidies": 1375100,
+"count": 18},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BrookfieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Thomaston",
+"subsidies": 1275000,
+"count": 4},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ThomastonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Ridgefield",
+"subsidies": 1242798,
+"count": 7},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": RidgefieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Thompson",
+"subsidies": 1121444,
+"count": 5},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ThompsonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "New Canaan",
+"subsidies": 1097290,
+"count": 11},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewCanaanBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Prospect",
+"subsidies": 1037264,
+"count": 9},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ProspectBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Vernon",
+"subsidies": 1035176,
+"count": 19},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": VernonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Canaan",
+"subsidies": 1e+06,
+"count": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": CanaanBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Windsor Locks",
+"subsidies": 993525,
+"count": 5},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WindsorLocksBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "New Milford",
+"subsidies": 947500,
+"count": 11},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewMilfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Tolland",
+"subsidies": 919833,
+"count": 6},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": TollandBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Canton",
+"subsidies": 865100,
+"count": 9},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": CantonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Plymouth",
+"subsidies": 860500,
+"count": 8},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": PlymouthBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Oxford",
+"subsidies": 826900,
+"count": 12},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": OxfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "East Haven",
+"subsidies": 813900,
+"count": 12},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EastHavenBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "West Haven",
+"subsidies": 749500,
+"count": 10},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WestHavenBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Ansonia",
+"subsidies": 737000,
+"count": 4},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": AnsoniaBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Wolcott",
+"subsidies": 728000,
+"count": 6},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WolcottBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Marlborough",
+"subsidies": 721962,
+"count": 10},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MarlboroughBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "East Lyme",
+"subsidies": 711500,
+"count": 8},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EastLymeBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Suffield",
+"subsidies": 691138,
+"count": 7},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SuffieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Woodstock",
+"subsidies": 663730,
+"count": 8},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WoodstockBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Winchester",
+"subsidies": 628500,
+"count": 7},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WinchesterBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Durham",
+"subsidies": 599763,
+"count": 8},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": DurhamBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Colchester",
+"subsidies": 598900,
+"count": 6},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ColchesterBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "North Branford",
+"subsidies": 574044,
+"count": 7},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NorthBranfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Weston",
+"subsidies": 546816,
+"count": 2},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WestonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Deep River",
+"subsidies": 535400,
+"count": 11},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": DeepRiverBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Seymour",
+"subsidies": 488800,
+"count": 13},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SeymourBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Bethel",
+"subsidies": 464247,
+"count": 7},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BethelBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Portland",
+"subsidies": 457400,
+"count": 9},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": PortlandBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "North Canaan",
+"subsidies": 450000,
+"count": 4},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NorthCanaanBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Morris",
+"subsidies": 437500,
+"count": 3},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MorrisBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Naugatuck",
+"subsidies": 426874,
+"count": 19},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NaugatuckBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "New Hartford",
+"subsidies": 425000,
+"count": 2},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewHartfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Hebron",
+"subsidies": 424518,
+"count": 3},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": HebronBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Mansfield",
+"subsidies": 420800,
+"count": 7},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MansfieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Stafford",
+"subsidies": 408000,
+"count": 7},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": StaffordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Woodbridge",
+"subsidies": 394500,
+"count": 3},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WoodbridgeBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Woodbury",
+"subsidies": 386000,
+"count": 4},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WoodburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Litchfield",
+"subsidies": 377400,
+"count": 5},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": LitchfieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Madison",
+"subsidies": 349800,
+"count": 7},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MadisonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Coventry",
+"subsidies": 310030,
+"count": 2},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": CoventryBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "New Fairfield",
+"subsidies": 3e+05,
+"count": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewFairfieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "East Hampton",
+"subsidies": 291300,
+"count": 8},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EastHamptonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Bolton",
+"subsidies": 275100,
+"count": 6},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BoltonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Darien",
+"subsidies": 268500,
+"count": 4},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": DarienBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Clinton",
+"subsidies": 255934,
+"count": 6},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ClintonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Preston",
+"subsidies": 231000,
+"count": 3},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": PrestonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Middlefield",
+"subsidies": 225000,
+"count": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MiddlefieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Essex",
+"subsidies": 213600,
+"count": 4},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EssexBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Killingworth",
+"subsidies": 203500,
+"count": 2},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": KillingworthBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Old Lyme",
+"subsidies": 2e+05,
+"count": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": OldLymeBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Pomfret",
+"subsidies": 2e+05,
+"count": 2},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": PomfretBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Salem",
+"subsidies": 191400,
+"count": 4},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SalemBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Southbury",
+"subsidies": 191400,
+"count": 3},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SouthburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Burlington",
+"subsidies": 182672,
+"count": 2},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BurlingtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Westbrook",
+"subsidies": 177000,
+"count": 3},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WestbrookBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "East Haddam",
+"subsidies": 156500,
+"count": 2},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EastHaddamBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Sterling",
+"subsidies": 154500,
+"count": 7},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SterlingBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Beacon Falls",
+"subsidies": 125000,
+"count": 4},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BeaconFallsBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Canterbury",
+"subsidies": 115253,
+"count": 4},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": CanterburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Granby",
+"subsidies": 104000,
+"count": 2},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": GranbyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Andover",
+"subsidies": 1e+05,
+"count": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": AndoverBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Derby",
+"subsidies": 1e+05,
+"count": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": DerbyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Franklin",
+"subsidies": 1e+05,
+"count": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": FranklinBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Trumbull",
+"subsidies": 1e+05,
+"count": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": TrumbullBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Warren",
+"subsidies": 1e+05,
+"count": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WarrenBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Washington",
+"subsidies": 1e+05,
+"count": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WashingtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Haddam",
+"subsidies": 93700,
+"count": 3},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": HaddamBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Brooklyn",
+"subsidies": 85000,
+"count": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BrooklynBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Somers",
+"subsidies": 59000,
+"count": 2},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SomersBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Chester",
+"subsidies": 56500,
+"count": 3},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ChesterBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Putnam",
+"subsidies": 52600,
+"count": 4},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": PutnamBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "North Stonington",
+"subsidies": 50000,
+"count": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NorthStoningtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Ashford",
+"subsidies": 41500,
+"count": 5},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": AshfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Harwinton",
+"subsidies": 40000,
+"count": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": HarwintonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Willington",
+"subsidies": 35400,
+"count": 3},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WillingtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Hampton",
+"subsidies": 35000,
+"count": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": HamptonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Eastford",
+"subsidies": 34232,
+"count": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EastfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Roxbury",
+"subsidies": 32000,
+"count": 3},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": RoxburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Voluntown",
+"subsidies": 25000,
+"count": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": VoluntownBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Columbia",
+"subsidies": 21600,
+"count": 2},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ColumbiaBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Barkhamsted",
+"subsidies": 21000,
+"count": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BarkhamstedBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Redding",
+"subsidies": 10000,
+"count": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ReddingBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Bozrah",
+"subsidies": 9700,
+"count": 1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BozrahBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Cornwall",
+"subsidies": 8500,
+"count": 2},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": CornwallBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Lebanon",
+"subsidies": 8500,
+"count": 2},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": LebanonBorders}
+} ]

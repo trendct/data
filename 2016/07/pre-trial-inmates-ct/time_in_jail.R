@@ -85,3 +85,5 @@ update$total.days <- ymd(update$last.date) - ymd(update$first.date)
 write.csv(table(update$total.days, update$RACE), "race_days.csv")
 tapply(update$total.days, update$RACE, median, na.rm=T)
 tapply(update$total.days, update$RACE, mean, na.rm=T)
+
+cat("total: ")

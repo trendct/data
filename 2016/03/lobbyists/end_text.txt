@@ -1,0 +1,9 @@
+,
+    "column_names": [{ "title": "lobby_group" }, { "title": "total"}],
+    "height": "400",
+    "paging": false,
+    "sourceline": "Random place",
+    "byline": "Random person",
+    "col": "1",
+    "desc_asc": "desc"
+}

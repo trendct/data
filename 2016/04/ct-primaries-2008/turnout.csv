@@ -1,0 +1,170 @@
+"","Town","Democratic","Republican"
+"1","Andover",51.8,40.5
+"2","Ansonia",47,30.1
+"3","Ashford",63.4,38.6
+"4","Avon",64.9,44
+"5","Barkhamsted",58.7,39.7
+"6","Beacon Falls",48.3,34.8
+"7","Berlin",52.9,38.2
+"8","Bethany",66.7,36.5
+"9","Bethel",54.1,36.1
+"10","Bethlehem",62,42.3
+"11","Bloomfield",63.7,40.8
+"12","Bolton",60.6,40.7
+"13","Bozrah",46.9,46.4
+"14","Branford",55.8,31.5
+"15","Bridgeport",32.9,21.8
+"16","Bridgewater",61.4,42.7
+"17","Bristol",48.4,30
+"18","Brookfield",71.5,37.6
+"19","Brooklyn",44.2,34.8
+"20","Burlington",53.6,36.8
+"21","Canaan",64.8,38.4
+"22","Canterbury",53.3,39.4
+"23","Canton",58,37.9
+"24","Chaplin",60.7,37
+"25","Cheshire",54.3,32.8
+"26","Chester",66.1,39.9
+"27","Clinton",52.2,33.6
+"28","Colchester",52.7,38.9
+"29","Colebrook",48.9,36.5
+"30","Columbia",64.6,46.8
+"31","Cornwall",71.5,43
+"32","Coventry",57,35.9
+"33","Cromwell",53.6,35.4
+"34","Danbury",48.9,34.9
+"35","Darien",63.6,41.3
+"36","Deep River",61,36.9
+"37","Derby",46,30.4
+"38","Durham",63.6,42.2
+"39","East Granby",59.8,44.4
+"40","East Haddam",57.6,40.1
+"41","East Hampton",53.6,38.3
+"42","East Hartford",48,36.4
+"43","East Haven",41.5,24.5
+"44","East Lyme",57.3,38.6
+"45","East Windsor",48.3,34.5
+"46","Eastford",64.4,45.5
+"47","Easton",61,40.4
+"48","Ellington",51.4,35.1
+"49","Enfield",44.4,33.8
+"50","Essex",66.4,45.5
+"51","Fairfield",56.4,36.6
+"52","Farmington",58.1,39.8
+"53","Franklin",49.9,39.6
+"54","Glastonbury",61.8,38.5
+"55","Goshen",58.9,41.7
+"56","Granby",63,44.5
+"57","Greenwich",62.6,42.9
+"58","Griswold",45.6,36.4
+"59","Groton",51.9,36.5
+"60","Guilford",64.1,38.6
+"61","Haddam",59,38.5
+"62","Hamden",63.3,39.3
+"63","Hampton",67.6,40.9
+"64","Hartford",39.6,26.9
+"65","Hartland",50.7,41.3
+"66","Harwinton",52.2,36.4
+"67","Hebron",60.8,38.1
+"68","Kent",73,45.3
+"69","Killingly",43.4,31.1
+"70","Killingworth",64.1,40.5
+"71","Lebanon",55.8,41
+"72","Ledyard",52.5,43.1
+"73","Lisbon",51.8,44.3
+"74","Litchfield",60.6,38.4
+"75","Lyme",72.8,45.2
+"76","Madison",58.7,35.5
+"77","Manchester",53.4,35.4
+"78","Mansfield",62.1,34.6
+"79","Marlborough",62.6,41.2
+"80","Meriden",44.9,33
+"81","Middlebury",63,44.3
+"82","Middlefield",56.4,37
+"83","Middletown",57.2,44.7
+"84","Milford",50.2,31.3
+"85","Monroe",53.8,31.3
+"86","Montville",50.1,35.5
+"87","Morris",59.2,35.5
+"88","Naugatuck",41.7,31.5
+"89","New Britain",42.5,29
+"90","New Canaan",64,45.3
+"91","New Fairfield",48.9,30.3
+"92","New Hartford",55.4,40.9
+"93","New Haven",47.2,36.4
+"94","New London",49.7,36.7
+"95","New Milford",50.5,33.2
+"96","Newington",54.7,34.8
+"97","Newtown",58.2,40
+"98","Norfolk",67.3,38.7
+"99","North Branford",55.6,33.2
+"100","North Canaan",50.8,38.4
+"101","North Haven",60.4,33.6
+"102","North Stonington",54.4,38.5
+"103","Norwalk",48.7,30.8
+"104","Norwich",45.2,28.5
+"105","Old Lyme",59.3,39.7
+"106","Old Saybrook",58.8,37.7
+"107","Orange",54.9,36.5
+"108","Oxford",51.8,34.2
+"109","Plainfield",39.4,32.7
+"110","Plainville",50.8,34.9
+"111","Plymouth",41.2,29.4
+"112","Pomfret",63.7,42.8
+"113","Portland",52.7,40.2
+"114","Preston",42.7,24.9
+"115","Prospect",53.3,30.1
+"116","Putnam",41.6,33.8
+"117","Redding",64.2,41.6
+"118","Ridgefield",62.6,38.1
+"119","Rocky Hill",60.4,37.7
+"120","Roxbury",65.1,43.8
+"121","Salem",55.2,44.6
+"122","Salisbury",63.9,36.2
+"123","Scotland",55.2,43
+"124","Seymour",47.1,33
+"125","Sharon",66.6,33.3
+"126","Shelton",49.1,36.9
+"127","Sherman",61.1,38.7
+"128","Simsbury",63.8,43.6
+"129","Somers",52.3,37
+"130","South Windsor",56.8,38
+"131","Southbury",60,40.9
+"132","Southington",50,36
+"133","Sprague",54.2,47.1
+"134","Stafford",44.7,34.5
+"135","Stamford",57.5,41.6
+"136","Sterling",40.6,33.6
+"137","Stonington",54.3,39.6
+"138","Stratford",47.3,33.2
+"139","Suffield",55.1,37.6
+"140","Thomaston",46,36.2
+"141","Thompson",48.3,44.1
+"142","Tolland",58.4,39.4
+"143","Torrington",42.8,30
+"144","Trumbull",49.9,33.4
+"145","Union",64.3,48.6
+"146","Vernon",57,39.7
+"147","Voluntown",46.2,37.5
+"148","Wallingford",54.2,35.4
+"149","Warren",37.6,42.8
+"150","Washington",65.1,46.3
+"151","Waterbury",39.2,23.3
+"152","Waterford",53.3,35.3
+"153","Watertown",47.3,36
+"154","West Hartford",61.6,40
+"155","West Haven",36.5,25.8
+"156","Westbrook",55.9,37.5
+"157","Weston",71.3,42.9
+"158","Westport",70,44.4
+"159","Wethersfield",56.6,41.7
+"160","Willington",59.6,37.1
+"161","Wilton",67.3,44.6
+"162","Winchester",38.9,29.8
+"163","Windham",38.1,29.3
+"164","Windsor",61.3,38.9
+"165","Windsor Locks",45,35.7
+"166","Wolcott",45.1,28.7
+"167","Woodbridge",66.3,41.5
+"168","Woodbury",66,45
+"169","Woodstock",61.2,42.8

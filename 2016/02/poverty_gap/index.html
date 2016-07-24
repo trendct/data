@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Poverty Gap</title>
+    <script type="text/javascript" src="http://projects.ctmirror.org/libs/jquery.js"></script>
+    <link rel=StyleSheet href="style.css" type="text/css">
+    <link rel=StyleSheet href="http://projects.ctmirror.org/libs/universal.css" type="text/css" />
+    <script type="text/javascript" src="data.js"></script>
+</head>
+
+<body>
+    <script class='scripter2' type="text/javascript" src="init.js"></script>
+    <div class="interactiveContainer">
+        <div class="graphicHeader">Poverty gaps in Connecticut's largest towns</div>
+        <div class="explainer">Measuring the difference between percent of those living below the poverty level. </div>
+        <div class="raceBar">
+            <div class="toolHeader">Groups to compare</div>
+            <div class="toolItemRace">
+                <div class="green"></div>
+                <select class="race">
+                    <option val="Black">Black</option>
+                    <option val="White" selected>White</option>
+                    <option val="Hispanic/Latino">Hispanic/Latino</option>
+                </select>
+            </div>
+            <div class="toolItemRace">
+                <div class="purple"></div>
+                <select class="race">
+                    <option val="Black" selected>Black</option>
+                    <option val="White">White</option>
+                    <option val="Hispanic/Latino">Hispanic/Latino</option>
+                   
+                </select>
+            </div>
+        </div>
+        <div class="gapArea">
+            <!--<div class="ctpullout">
+                <div class="pulloutItem">
+                    <div class="pulloutHeader">Conn. Gap</div>
+                    <div class="pulloutNum gap"></div>
+                </div>
+                <div class="pulloutItem">
+                    <div class="pulloutHeader">National Gap</div>
+                    <div class="pulloutNum natgap"></div>
+                </div>
+            </div>-->
+            <div class="tooltip"></div>
+        </div>
+        <div class="sourceline">Source: 2010-2014 American Community Survey (Census) 5-year estimates (state rate based on 1-year estimates)</div>
+        <div class="smallByline">DEREK THOMAS/CT VOICES, ANDREW BA TRAN/TRENDCT.ORG</div>
+    </div>
+</body>
+
+</html>

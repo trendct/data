@@ -1,0 +1,1495 @@
+[ {
+  "type": "Feature",
+  "properties": {
+    "Town": "Andover",
+"Donations": 11,
+"Donation sum": 395},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": AndoverBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Ansonia",
+"Donations": 20,
+"Donation sum": 3404.92},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": AnsoniaBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Ashford",
+"Donations": 12,
+"Donation sum": 395},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": AshfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Avon",
+"Donations": 70,
+"Donation sum": 29243.85},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": AvonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Barkhamsted",
+"Donations": 10,
+"Donation sum": 650},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BarkhamstedBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Beacon Falls",
+"Donations": 1,
+"Donation sum": 25},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BeaconFallsBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Berlin",
+"Donations": 48,
+"Donation sum": 5997.77},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BerlinBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Bethany",
+"Donations": 27,
+"Donation sum": 1200},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BethanyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Bethel",
+"Donations": 40,
+"Donation sum": 5064.37},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BethelBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Bethlehem",
+"Donations": 5,
+"Donation sum": 2980},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BethlehemBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Bloomfield",
+"Donations": 48,
+"Donation sum": 8508.44},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BloomfieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Bolton",
+"Donations": 9,
+"Donation sum": 5310},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BoltonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Bozrah",
+"Donations": 7,
+"Donation sum": 265},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BozrahBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Branford",
+"Donations": 70,
+"Donation sum": 59469.18},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BranfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Bridgeport",
+"Donations": 130,
+"Donation sum": 24232.67},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BridgeportBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Bridgewater",
+"Donations": 26,
+"Donation sum": 7910},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BridgewaterBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Bristol",
+"Donations": 107,
+"Donation sum": 12286.23},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BristolBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Brookfield",
+"Donations": 55,
+"Donation sum": 9456.53},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BrookfieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Brooklyn",
+"Donations": 2,
+"Donation sum": 1050},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BrooklynBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Burlington",
+"Donations": 21,
+"Donation sum": 2735},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BurlingtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Canaan",
+"Donations": 2,
+"Donation sum": 150},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": CanaanBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Canterbury",
+"Donations": 19,
+"Donation sum": 1737},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": CanterburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Canton",
+"Donations": 31,
+"Donation sum": 6008},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": CantonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Chaplin",
+"Donations": 19,
+"Donation sum": 928.56},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ChaplinBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Cheshire",
+"Donations": 95,
+"Donation sum": 9759},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": CheshireBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Chester",
+"Donations": 8,
+"Donation sum": 1100},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ChesterBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Clinton",
+"Donations": 35,
+"Donation sum": 4860},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ClintonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Colchester",
+"Donations": 144,
+"Donation sum": 5541.74},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ColchesterBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Colebrook",
+"Donations": 9,
+"Donation sum": 350},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ColebrookBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Columbia",
+"Donations": 1,
+"Donation sum": 100},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ColumbiaBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Cornwall",
+"Donations": 21,
+"Donation sum": 2217.24},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": CornwallBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Coventry",
+"Donations": 13,
+"Donation sum": 994.33},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": CoventryBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Cromwell",
+"Donations": 17,
+"Donation sum": 3387},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": CromwellBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Danbury",
+"Donations": 125,
+"Donation sum": 13299.6},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": DanburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Darien",
+"Donations": 211,
+"Donation sum": 220774.75},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": DarienBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Deep River",
+"Donations": 29,
+"Donation sum": 1214.64},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": DeepRiverBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Derby",
+"Donations": 1,
+"Donation sum": 250},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": DerbyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Durham",
+"Donations": 20,
+"Donation sum": 4490},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": DurhamBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "East Granby",
+"Donations": 22,
+"Donation sum": 4019.01},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EastGranbyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "East Haddam",
+"Donations": 15,
+"Donation sum": 2765.34},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EastHaddamBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "East Hampton",
+"Donations": 18,
+"Donation sum": 3250.5},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EastHamptonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "East Hartford",
+"Donations": 25,
+"Donation sum": 7323},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EastHartfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "East Haven",
+"Donations": 51,
+"Donation sum": 12051.28},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EastHavenBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "East Lyme",
+"Donations": 71,
+"Donation sum": 8045.61},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EastLymeBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "East Windsor",
+"Donations": 34,
+"Donation sum": 1655.05},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EastWindsorBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Eastford",
+"Donations": 8,
+"Donation sum": 3025},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EastfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Easton",
+"Donations": 29,
+"Donation sum": 16199.85},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EastonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Ellington",
+"Donations": 11,
+"Donation sum": 2701},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EllingtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Enfield",
+"Donations": 36,
+"Donation sum": 4607.36},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EnfieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Essex",
+"Donations": 49,
+"Donation sum": 12929.54},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EssexBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Fairfield",
+"Donations": 414,
+"Donation sum": 194869.48},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": FairfieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Farmington",
+"Donations": 90,
+"Donation sum": 16455.63},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": FarmingtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Franklin",
+"Donations": 5,
+"Donation sum": 450},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": FranklinBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Glastonbury",
+"Donations": 153,
+"Donation sum": 28385.36},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": GlastonburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Goshen",
+"Donations": 5,
+"Donation sum": 225},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": GoshenBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Granby",
+"Donations": 49,
+"Donation sum": 6759.54},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": GranbyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Greenwich",
+"Donations": 1004,
+"Donation sum": 1320934.37},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": GreenwichBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Griswold",
+"Donations": 12,
+"Donation sum": 971.89},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": GriswoldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Groton",
+"Donations": 23,
+"Donation sum": 3127.75},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": GrotonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Guilford",
+"Donations": 115,
+"Donation sum": 20132.58},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": GuilfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Haddam",
+"Donations": 19,
+"Donation sum": 6149.04},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": HaddamBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Hamden",
+"Donations": 184,
+"Donation sum": 52130.41},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": HamdenBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Hampton",
+"Donations": 14,
+"Donation sum": 1185},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": HamptonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Hartford",
+"Donations": 113,
+"Donation sum": 46622.45},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": HartfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Harwinton",
+"Donations": 6,
+"Donation sum": 500},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": HarwintonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Hebron",
+"Donations": 15,
+"Donation sum": 1256},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": HebronBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Kent",
+"Donations": 40,
+"Donation sum": 18546.5},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": KentBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Killingly",
+"Donations": 13,
+"Donation sum": 619},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": KillinglyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Killingworth",
+"Donations": 49,
+"Donation sum": 2118.1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": KillingworthBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Lebanon",
+"Donations": 25,
+"Donation sum": 1740.14},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": LebanonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Ledyard",
+"Donations": 42,
+"Donation sum": 3578},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": LedyardBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Lisbon",
+"Donations": 11,
+"Donation sum": 552.71},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": LisbonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Litchfield",
+"Donations": 70,
+"Donation sum": 20053.39},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": LitchfieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Lyme",
+"Donations": 20,
+"Donation sum": 6670},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": LymeBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Madison",
+"Donations": 89,
+"Donation sum": 27515.84},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MadisonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Manchester",
+"Donations": 89,
+"Donation sum": 12466.26},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ManchesterBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Mansfield",
+"Donations": 64,
+"Donation sum": 11991.4},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MansfieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Marlborough",
+"Donations": 5,
+"Donation sum": 3247.53},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MarlboroughBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Meriden",
+"Donations": 51,
+"Donation sum": 12874.16},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MeridenBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Middlebury",
+"Donations": 86,
+"Donation sum": 9767.1},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MiddleburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Middlefield",
+"Donations": 34,
+"Donation sum": 2010.7},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MiddlefieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Middletown",
+"Donations": 116,
+"Donation sum": 19732.98},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MiddletownBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Milford",
+"Donations": 208,
+"Donation sum": 21506.95},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MilfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Monroe",
+"Donations": 51,
+"Donation sum": 12130},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MonroeBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Montville",
+"Donations": 42,
+"Donation sum": 2865.57},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MontvilleBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Morris",
+"Donations": 4,
+"Donation sum": 100},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MorrisBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Naugatuck",
+"Donations": 17,
+"Donation sum": 1061},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NaugatuckBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "New Britain",
+"Donations": 51,
+"Donation sum": 5067},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewBritainBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "New Canaan",
+"Donations": 388,
+"Donation sum": 420338.37},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewCanaanBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "New Fairfield",
+"Donations": 18,
+"Donation sum": 5550},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewFairfieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "New Hartford",
+"Donations": 17,
+"Donation sum": 3746.83},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewHartfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "New Haven",
+"Donations": 399,
+"Donation sum": 134713.07},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewHavenBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "New London",
+"Donations": 55,
+"Donation sum": 5504.8},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewLondonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "New Milford",
+"Donations": 98,
+"Donation sum": 8454.69},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewMilfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Newington",
+"Donations": 36,
+"Donation sum": 7488},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewingtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Newtown",
+"Donations": 140,
+"Donation sum": 17894.52},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewtownBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Norfolk",
+"Donations": 8,
+"Donation sum": 6137},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NorfolkBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "North Branford",
+"Donations": 21,
+"Donation sum": 3464.71},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NorthBranfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "North Canaan",
+"Donations": 22,
+"Donation sum": 3814.14},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NorthCanaanBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "North Haven",
+"Donations": 102,
+"Donation sum": 5643.16},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NorthHavenBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "North Stonington",
+"Donations": 7,
+"Donation sum": 617.5},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NorthStoningtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Norwalk",
+"Donations": 288,
+"Donation sum": 115128.64},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NorwalkBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Norwich",
+"Donations": 158,
+"Donation sum": 11784.22},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NorwichBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Old Lyme",
+"Donations": 64,
+"Donation sum": 5876.01},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": OldLymeBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Old Saybrook",
+"Donations": 43,
+"Donation sum": 11663.18},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": OldSaybrookBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Orange",
+"Donations": 44,
+"Donation sum": 6732.97},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": OrangeBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Oxford",
+"Donations": 22,
+"Donation sum": 3433.54},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": OxfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Plainfield",
+"Donations": 6,
+"Donation sum": 213},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": PlainfieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Plainville",
+"Donations": 26,
+"Donation sum": 1646.55},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": PlainvilleBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Plymouth",
+"Donations": 25,
+"Donation sum": 1202.81},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": PlymouthBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Pomfret",
+"Donations": 7,
+"Donation sum": 2850},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": PomfretBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Portland",
+"Donations": 51,
+"Donation sum": 5595.04},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": PortlandBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Preston",
+"Donations": 16,
+"Donation sum": 399},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": PrestonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Prospect",
+"Donations": 16,
+"Donation sum": 700.05},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ProspectBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Putnam",
+"Donations": 5,
+"Donation sum": 155},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": PutnamBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Redding",
+"Donations": 51,
+"Donation sum": 15840},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ReddingBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Ridgefield",
+"Donations": 208,
+"Donation sum": 101079.64},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": RidgefieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Rocky Hill",
+"Donations": 34,
+"Donation sum": 4340.35},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": RockyHillBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Roxbury",
+"Donations": 17,
+"Donation sum": 11561},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": RoxburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Salem",
+"Donations": 10,
+"Donation sum": 404.32},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SalemBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Salisbury",
+"Donations": 34,
+"Donation sum": 3621.54},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SalisburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Seymour",
+"Donations": 27,
+"Donation sum": 937},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SeymourBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Sharon",
+"Donations": 26,
+"Donation sum": 17748.34},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SharonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Shelton",
+"Donations": 81,
+"Donation sum": 8835.67},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SheltonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Sherman",
+"Donations": 23,
+"Donation sum": 8101},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ShermanBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Simsbury",
+"Donations": 109,
+"Donation sum": 24720.38},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SimsburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Somers",
+"Donations": 23,
+"Donation sum": 7271.11},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SomersBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "South Windsor",
+"Donations": 27,
+"Donation sum": 5654.65},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SouthWindsorBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Southbury",
+"Donations": 76,
+"Donation sum": 14671.95},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SouthburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Southington",
+"Donations": 54,
+"Donation sum": 7447.12},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SouthingtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Sprague",
+"Donations": 4,
+"Donation sum": 150},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SpragueBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Stafford",
+"Donations": 12,
+"Donation sum": 567.44},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": StaffordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Stamford",
+"Donations": 552,
+"Donation sum": 211584.98},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": StamfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Sterling",
+"Donations": 31,
+"Donation sum": 1165},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SterlingBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Stonington",
+"Donations": 178,
+"Donation sum": 25098.3},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": StoningtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Stratford",
+"Donations": 69,
+"Donation sum": 11731.86},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": StratfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Suffield",
+"Donations": 47,
+"Donation sum": 6673.89},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SuffieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Thomaston",
+"Donations": 1,
+"Donation sum": 12.5},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ThomastonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Thompson",
+"Donations": 5,
+"Donation sum": 2985},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ThompsonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Tolland",
+"Donations": 34,
+"Donation sum": 13895.25},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": TollandBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Torrington",
+"Donations": 28,
+"Donation sum": 3129.69},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": TorringtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Trumbull",
+"Donations": 143,
+"Donation sum": 29114.73},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": TrumbullBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Vernon",
+"Donations": 27,
+"Donation sum": 1491.48},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": VernonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Voluntown",
+"Donations": 5,
+"Donation sum": 417},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": VoluntownBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Wallingford",
+"Donations": 82,
+"Donation sum": 13681.65},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WallingfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Warren",
+"Donations": 6,
+"Donation sum": 345},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WarrenBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Washington",
+"Donations": 63,
+"Donation sum": 18372},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WashingtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Waterbury",
+"Donations": 117,
+"Donation sum": 16417.7},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WaterburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Waterford",
+"Donations": 40,
+"Donation sum": 3285.47},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WaterfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Watertown",
+"Donations": 24,
+"Donation sum": 4835},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WatertownBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "West Hartford",
+"Donations": 357,
+"Donation sum": 79791.38},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WestHartfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "West Haven",
+"Donations": 61,
+"Donation sum": 5275.66},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WestHavenBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Westbrook",
+"Donations": 18,
+"Donation sum": 12233},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WestbrookBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Weston",
+"Donations": 100,
+"Donation sum": 66349.79},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WestonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Westport",
+"Donations": 327,
+"Donation sum": 271231.12},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WestportBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Wethersfield",
+"Donations": 77,
+"Donation sum": 5030.85},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WethersfieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Willington",
+"Donations": 19,
+"Donation sum": 5065},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WillingtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Wilton",
+"Donations": 78,
+"Donation sum": 46038.99},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WiltonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Winchester",
+"Donations": 10,
+"Donation sum": 862},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WinchesterBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Windham",
+"Donations": 17,
+"Donation sum": 884.01},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WindhamBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Windsor",
+"Donations": 59,
+"Donation sum": 9350},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WindsorBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Windsor Locks",
+"Donations": 26,
+"Donation sum": 2190.69},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WindsorLocksBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Wolcott",
+"Donations": 6,
+"Donation sum": 316},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WolcottBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Woodbridge",
+"Donations": 56,
+"Donation sum": 36860},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WoodbridgeBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Woodbury",
+"Donations": 49,
+"Donation sum": 3725.36},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WoodburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "Town": "Woodstock",
+"Donations": 10,
+"Donation sum": 1385},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WoodstockBorders}
+} ]

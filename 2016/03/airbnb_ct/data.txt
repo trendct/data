@@ -1,0 +1,1475 @@
+[ {
+  "type": "Feature",
+  "properties": {
+    "town": "Andover",
+"airbnbs": 2,
+"avg.per.bed": 25.94,
+"median.per.bed": 25.94,
+"max.price": 55},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": AndoverBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Ashford",
+"airbnbs": 8,
+"avg.per.bed": 88.85,
+"median.per.bed": 85,
+"max.price": 175},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": AshfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Avon",
+"airbnbs": 4,
+"avg.per.bed": 179.17,
+"median.per.bed": 155.83,
+"max.price": 690},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": AvonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Barkhamsted",
+"airbnbs": 14,
+"avg.per.bed": 82.68,
+"median.per.bed": 62,
+"max.price": 695},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BarkhamstedBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Berlin",
+"airbnbs": 1,
+"avg.per.bed": 75,
+"median.per.bed": 75,
+"max.price": 75},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BerlinBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Bethany",
+"airbnbs": 4,
+"avg.per.bed": 83.38,
+"median.per.bed": 65.25,
+"max.price": 165},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BethanyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Bethel",
+"airbnbs": 3,
+"avg.per.bed": 72.5,
+"median.per.bed": 72.5,
+"max.price": 145},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BethelBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Bethlehem",
+"airbnbs": 5,
+"avg.per.bed": 88.07,
+"median.per.bed": 92,
+"max.price": 350},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BethlehemBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Bloomfield",
+"airbnbs": 9,
+"avg.per.bed": 95.37,
+"median.per.bed": 49.5,
+"max.price": 395},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BloomfieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Bolton",
+"airbnbs": 1,
+"avg.per.bed": 200,
+"median.per.bed": 200,
+"max.price": 200},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BoltonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Bozrah",
+"airbnbs": 1,
+"avg.per.bed": 100,
+"median.per.bed": 100,
+"max.price": 100},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BozrahBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Branford",
+"airbnbs": 17,
+"avg.per.bed": 115.96,
+"median.per.bed": 102.12,
+"max.price": 750},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BranfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Bridgeport",
+"airbnbs": 12,
+"avg.per.bed": 82.38,
+"median.per.bed": 75,
+"max.price": 129},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BridgeportBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Bridgewater",
+"airbnbs": 3,
+"avg.per.bed": 98.19,
+"median.per.bed": 100,
+"max.price": 545},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BridgewaterBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Bristol",
+"airbnbs": 6,
+"avg.per.bed": 48.17,
+"median.per.bed": 48.25,
+"max.price": 75},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BristolBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Brookfield",
+"airbnbs": 6,
+"avg.per.bed": 87.23,
+"median.per.bed": 72.5,
+"max.price": 595},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BrookfieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Brooklyn",
+"airbnbs": 1,
+"avg.per.bed": 49.17,
+"median.per.bed": 49.17,
+"max.price": 295},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BrooklynBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Burlington",
+"airbnbs": 4,
+"avg.per.bed": 66.94,
+"median.per.bed": 66.75,
+"max.price": 399},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": BurlingtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Canaan",
+"airbnbs": 7,
+"avg.per.bed": 74.29,
+"median.per.bed": 80,
+"max.price": 250},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": CanaanBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Canton",
+"airbnbs": 2,
+"avg.per.bed": 73.38,
+"median.per.bed": 73.38,
+"max.price": 191},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": CantonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Cheshire",
+"airbnbs": 3,
+"avg.per.bed": 86.67,
+"median.per.bed": 100,
+"max.price": 125},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": CheshireBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Chester",
+"airbnbs": 3,
+"avg.per.bed": 87.17,
+"median.per.bed": 65.75,
+"max.price": 263},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ChesterBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Clinton",
+"airbnbs": 6,
+"avg.per.bed": 118,
+"median.per.bed": 113,
+"max.price": 200},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ClintonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Colchester",
+"airbnbs": 2,
+"avg.per.bed": 60,
+"median.per.bed": 60,
+"max.price": 120},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ColchesterBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Colebrook",
+"airbnbs": 4,
+"avg.per.bed": 131.25,
+"median.per.bed": 75,
+"max.price": 325},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ColebrookBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Cornwall",
+"airbnbs": 15,
+"avg.per.bed": 101.26,
+"median.per.bed": 85,
+"max.price": 750},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": CornwallBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Coventry",
+"airbnbs": 1,
+"avg.per.bed": 150,
+"median.per.bed": 150,
+"max.price": 300},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": CoventryBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Danbury",
+"airbnbs": 15,
+"avg.per.bed": 71.13,
+"median.per.bed": 65,
+"max.price": 195},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": DanburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Darien",
+"airbnbs": 7,
+"avg.per.bed": 93.57,
+"median.per.bed": 85,
+"max.price": 500},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": DarienBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Deep River",
+"airbnbs": 2,
+"avg.per.bed": 65,
+"median.per.bed": 65,
+"max.price": 99},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": DeepRiverBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Durham",
+"airbnbs": 2,
+"avg.per.bed": 87.5,
+"median.per.bed": 87.5,
+"max.price": 100},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": DurhamBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "East Granby",
+"airbnbs": 1,
+"avg.per.bed": 30,
+"median.per.bed": 30,
+"max.price": 60},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EastGranbyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "East Haddam",
+"airbnbs": 3,
+"avg.per.bed": 66.89,
+"median.per.bed": 79,
+"max.price": 500},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EastHaddamBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "East Hampton",
+"airbnbs": 5,
+"avg.per.bed": 86.5,
+"median.per.bed": 80,
+"max.price": 2100},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EastHamptonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "East Hartford",
+"airbnbs": 1,
+"avg.per.bed": 107,
+"median.per.bed": 107,
+"max.price": 107},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EastHartfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "East Haven",
+"airbnbs": 14,
+"avg.per.bed": 60.22,
+"median.per.bed": 55,
+"max.price": 340},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EastHavenBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "East Lyme",
+"airbnbs": 9,
+"avg.per.bed": 74.26,
+"median.per.bed": 74.5,
+"max.price": 500},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EastLymeBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "East Windsor",
+"airbnbs": 2,
+"avg.per.bed": 40,
+"median.per.bed": 40,
+"max.price": 40},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EastWindsorBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Easton",
+"airbnbs": 7,
+"avg.per.bed": 79.33,
+"median.per.bed": 78,
+"max.price": 600},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EastonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Ellington",
+"airbnbs": 2,
+"avg.per.bed": 66.41,
+"median.per.bed": 66.41,
+"max.price": 175},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EllingtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Essex",
+"airbnbs": 1,
+"avg.per.bed": 45,
+"median.per.bed": 45,
+"max.price": 225},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": EssexBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Fairfield",
+"airbnbs": 29,
+"avg.per.bed": 87.63,
+"median.per.bed": 83.33,
+"max.price": 350},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": FairfieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Farmington",
+"airbnbs": 8,
+"avg.per.bed": 72.48,
+"median.per.bed": 60,
+"max.price": 400},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": FarmingtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Glastonbury",
+"airbnbs": 8,
+"avg.per.bed": 90,
+"median.per.bed": 72.5,
+"max.price": 200},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": GlastonburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Goshen",
+"airbnbs": 4,
+"avg.per.bed": 63.7,
+"median.per.bed": 62.4,
+"max.price": 300},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": GoshenBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Granby",
+"airbnbs": 2,
+"avg.per.bed": 66.84,
+"median.per.bed": 66.84,
+"max.price": 140},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": GranbyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Greenwich",
+"airbnbs": 42,
+"avg.per.bed": 109.44,
+"median.per.bed": 88.5,
+"max.price": 1000},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": GreenwichBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Groton",
+"airbnbs": 20,
+"avg.per.bed": 149.13,
+"median.per.bed": 90.62,
+"max.price": 1000},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": GrotonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Guilford",
+"airbnbs": 16,
+"avg.per.bed": 104.65,
+"median.per.bed": 97.5,
+"max.price": 350},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": GuilfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Haddam",
+"airbnbs": 3,
+"avg.per.bed": 84.58,
+"median.per.bed": 52.5,
+"max.price": 175},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": HaddamBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Hamden",
+"airbnbs": 19,
+"avg.per.bed": 53.72,
+"median.per.bed": 50,
+"max.price": 300},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": HamdenBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Hartford",
+"airbnbs": 43,
+"avg.per.bed": 64.81,
+"median.per.bed": 60,
+"max.price": 200},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": HartfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Harwinton",
+"airbnbs": 1,
+"avg.per.bed": 40,
+"median.per.bed": 40,
+"max.price": 120},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": HarwintonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Kent",
+"airbnbs": 19,
+"avg.per.bed": 97.35,
+"median.per.bed": 100,
+"max.price": 350},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": KentBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Killingly",
+"airbnbs": 4,
+"avg.per.bed": 49.16,
+"median.per.bed": 44.16,
+"max.price": 150},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": KillinglyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Killingworth",
+"airbnbs": 2,
+"avg.per.bed": 62.5,
+"median.per.bed": 62.5,
+"max.price": 300},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": KillingworthBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Ledyard",
+"airbnbs": 15,
+"avg.per.bed": 102.23,
+"median.per.bed": 100,
+"max.price": 350},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": LedyardBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Litchfield",
+"airbnbs": 19,
+"avg.per.bed": 118.68,
+"median.per.bed": 91.67,
+"max.price": 1500},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": LitchfieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Lyme",
+"airbnbs": 5,
+"avg.per.bed": 104.45,
+"median.per.bed": 112.5,
+"max.price": 850},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": LymeBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Madison",
+"airbnbs": 15,
+"avg.per.bed": 122.78,
+"median.per.bed": 100,
+"max.price": 750},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MadisonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Manchester",
+"airbnbs": 7,
+"avg.per.bed": 102.5,
+"median.per.bed": 72.5,
+"max.price": 300},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ManchesterBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Mansfield",
+"airbnbs": 11,
+"avg.per.bed": 90,
+"median.per.bed": 69,
+"max.price": 210},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MansfieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Marlborough",
+"airbnbs": 2,
+"avg.per.bed": 32.5,
+"median.per.bed": 32.5,
+"max.price": 70},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MarlboroughBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Meriden",
+"airbnbs": 2,
+"avg.per.bed": 42.5,
+"median.per.bed": 42.5,
+"max.price": 60},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MeridenBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Middlebury",
+"airbnbs": 1,
+"avg.per.bed": 50,
+"median.per.bed": 50,
+"max.price": 250},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MiddleburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Middletown",
+"airbnbs": 14,
+"avg.per.bed": 53.68,
+"median.per.bed": 47,
+"max.price": 170},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MiddletownBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Milford",
+"airbnbs": 25,
+"avg.per.bed": 87.58,
+"median.per.bed": 89,
+"max.price": 525},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MilfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Monroe",
+"airbnbs": 5,
+"avg.per.bed": 103.75,
+"median.per.bed": 67.5,
+"max.price": 250},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MonroeBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Montville",
+"airbnbs": 1,
+"avg.per.bed": 125,
+"median.per.bed": 125,
+"max.price": 125},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MontvilleBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Morris",
+"airbnbs": 4,
+"avg.per.bed": 166.7,
+"median.per.bed": 179.5,
+"max.price": 500},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": MorrisBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "New Britain",
+"airbnbs": 6,
+"avg.per.bed": 57.92,
+"median.per.bed": 65,
+"max.price": 85},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewBritainBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "New Canaan",
+"airbnbs": 5,
+"avg.per.bed": 203.8,
+"median.per.bed": 195,
+"max.price": 1450},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewCanaanBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "New Fairfield",
+"airbnbs": 9,
+"avg.per.bed": 74.94,
+"median.per.bed": 74.5,
+"max.price": 170},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewFairfieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "New Hartford",
+"airbnbs": 3,
+"avg.per.bed": 86.25,
+"median.per.bed": 99,
+"max.price": 495},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewHartfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "New Haven",
+"airbnbs": 247,
+"avg.per.bed": 70.21,
+"median.per.bed": 62.5,
+"max.price": 700},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewHavenBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "New London",
+"airbnbs": 25,
+"avg.per.bed": 98.83,
+"median.per.bed": 85,
+"max.price": 425},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewLondonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "New Milford",
+"airbnbs": 15,
+"avg.per.bed": 111.16,
+"median.per.bed": 119,
+"max.price": 500},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewMilfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Newington",
+"airbnbs": 5,
+"avg.per.bed": 62.4,
+"median.per.bed": 57,
+"max.price": 90},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewingtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Newtown",
+"airbnbs": 15,
+"avg.per.bed": 118.52,
+"median.per.bed": 108.33,
+"max.price": 600},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NewtownBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Norfolk",
+"airbnbs": 5,
+"avg.per.bed": 132.58,
+"median.per.bed": 50,
+"max.price": 5000},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NorfolkBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "North Canaan",
+"airbnbs": 2,
+"avg.per.bed": 57.5,
+"median.per.bed": 57.5,
+"max.price": 80},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NorthCanaanBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "North Haven",
+"airbnbs": 5,
+"avg.per.bed": 69.05,
+"median.per.bed": 72,
+"max.price": 165},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NorthHavenBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "North Stonington",
+"airbnbs": 5,
+"avg.per.bed": 105,
+"median.per.bed": 90,
+"max.price": 150},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NorthStoningtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Norwalk",
+"airbnbs": 44,
+"avg.per.bed": 106.06,
+"median.per.bed": 90,
+"max.price": 1000},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NorwalkBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Norwich",
+"airbnbs": 9,
+"avg.per.bed": 99.48,
+"median.per.bed": 75,
+"max.price": 700},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": NorwichBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Old Lyme",
+"airbnbs": 5,
+"avg.per.bed": 482.75,
+"median.per.bed": 116.67,
+"max.price": 2000},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": OldLymeBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Old Saybrook",
+"airbnbs": 11,
+"avg.per.bed": 126.9,
+"median.per.bed": 100,
+"max.price": 550},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": OldSaybrookBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Orange",
+"airbnbs": 4,
+"avg.per.bed": 75,
+"median.per.bed": 70,
+"max.price": 225},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": OrangeBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Pomfret",
+"airbnbs": 8,
+"avg.per.bed": 65.42,
+"median.per.bed": 66.67,
+"max.price": 400},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": PomfretBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Preston",
+"airbnbs": 7,
+"avg.per.bed": 120.43,
+"median.per.bed": 125,
+"max.price": 350},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": PrestonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Redding",
+"airbnbs": 11,
+"avg.per.bed": 165.48,
+"median.per.bed": 115,
+"max.price": 800},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ReddingBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Ridgefield",
+"airbnbs": 1,
+"avg.per.bed": 55,
+"median.per.bed": 55,
+"max.price": 55},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": RidgefieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Rocky Hill",
+"airbnbs": 1,
+"avg.per.bed": 33,
+"median.per.bed": 33,
+"max.price": 66},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": RockyHillBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Roxbury",
+"airbnbs": 5,
+"avg.per.bed": 161,
+"median.per.bed": 165,
+"max.price": 975},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": RoxburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Salisbury",
+"airbnbs": 28,
+"avg.per.bed": 111.24,
+"median.per.bed": 100,
+"max.price": 649},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SalisburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Scotland",
+"airbnbs": 1,
+"avg.per.bed": 75,
+"median.per.bed": 75,
+"max.price": 75},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ScotlandBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Sharon",
+"airbnbs": 15,
+"avg.per.bed": 92.62,
+"median.per.bed": 78.33,
+"max.price": 700},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SharonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Shelton",
+"airbnbs": 1,
+"avg.per.bed": 64,
+"median.per.bed": 64,
+"max.price": 64},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SheltonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Sherman",
+"airbnbs": 9,
+"avg.per.bed": 117.27,
+"median.per.bed": 116.67,
+"max.price": 750},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ShermanBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Simsbury",
+"airbnbs": 7,
+"avg.per.bed": 65.9,
+"median.per.bed": 65,
+"max.price": 550},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SimsburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Southbury",
+"airbnbs": 4,
+"avg.per.bed": 76.12,
+"median.per.bed": 74.75,
+"max.price": 135},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SouthburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Southington",
+"airbnbs": 1,
+"avg.per.bed": 22,
+"median.per.bed": 22,
+"max.price": 66},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SouthingtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Sprague",
+"airbnbs": 1,
+"avg.per.bed": 22.5,
+"median.per.bed": 22.5,
+"max.price": 45},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SpragueBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Stafford",
+"airbnbs": 2,
+"avg.per.bed": 50.25,
+"median.per.bed": 50.25,
+"max.price": 139},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": StaffordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Stamford",
+"airbnbs": 81,
+"avg.per.bed": 117.18,
+"median.per.bed": 100,
+"max.price": 800},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": StamfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Stonington",
+"airbnbs": 46,
+"avg.per.bed": 115.23,
+"median.per.bed": 99.25,
+"max.price": 550},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": StoningtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Stratford",
+"airbnbs": 6,
+"avg.per.bed": 170.75,
+"median.per.bed": 83.75,
+"max.price": 650},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": StratfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Suffield",
+"airbnbs": 3,
+"avg.per.bed": 26.11,
+"median.per.bed": 25,
+"max.price": 125},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": SuffieldBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Thompson",
+"airbnbs": 1,
+"avg.per.bed": 175,
+"median.per.bed": 175,
+"max.price": 175},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": ThompsonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Tolland",
+"airbnbs": 2,
+"avg.per.bed": 69,
+"median.per.bed": 69,
+"max.price": 69},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": TollandBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Torrington",
+"airbnbs": 9,
+"avg.per.bed": 94.21,
+"median.per.bed": 93.75,
+"max.price": 375},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": TorringtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Trumbull",
+"airbnbs": 9,
+"avg.per.bed": 74.72,
+"median.per.bed": 66,
+"max.price": 250},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": TrumbullBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Vernon",
+"airbnbs": 6,
+"avg.per.bed": 50.22,
+"median.per.bed": 38,
+"max.price": 286},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": VernonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Voluntown",
+"airbnbs": 3,
+"avg.per.bed": 70.59,
+"median.per.bed": 70,
+"max.price": 1000},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": VoluntownBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Wallingford",
+"airbnbs": 2,
+"avg.per.bed": 162,
+"median.per.bed": 162,
+"max.price": 249},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WallingfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Warren",
+"airbnbs": 7,
+"avg.per.bed": 151.47,
+"median.per.bed": 137.5,
+"max.price": 2000},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WarrenBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Washington",
+"airbnbs": 22,
+"avg.per.bed": 160.89,
+"median.per.bed": 120,
+"max.price": 1950},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WashingtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Waterbury",
+"airbnbs": 9,
+"avg.per.bed": 51.33,
+"median.per.bed": 35,
+"max.price": 125},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WaterburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Waterford",
+"airbnbs": 11,
+"avg.per.bed": 102.91,
+"median.per.bed": 100,
+"max.price": 600},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WaterfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Watertown",
+"airbnbs": 2,
+"avg.per.bed": 46.88,
+"median.per.bed": 46.88,
+"max.price": 75},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WatertownBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "West Hartford",
+"airbnbs": 24,
+"avg.per.bed": 60.08,
+"median.per.bed": 57.16,
+"max.price": 166},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WestHartfordBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "West Haven",
+"airbnbs": 15,
+"avg.per.bed": 50.12,
+"median.per.bed": 42,
+"max.price": 300},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WestHavenBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Westbrook",
+"airbnbs": 21,
+"avg.per.bed": 112.55,
+"median.per.bed": 100,
+"max.price": 1000},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WestbrookBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Weston",
+"airbnbs": 6,
+"avg.per.bed": 144.88,
+"median.per.bed": 160.62,
+"max.price": 795},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WestonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Westport",
+"airbnbs": 32,
+"avg.per.bed": 115.08,
+"median.per.bed": 100,
+"max.price": 900},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WestportBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Willington",
+"airbnbs": 1,
+"avg.per.bed": 60,
+"median.per.bed": 60,
+"max.price": 60},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WillingtonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Wilton",
+"airbnbs": 10,
+"avg.per.bed": 124.62,
+"median.per.bed": 115,
+"max.price": 575},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WiltonBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Winchester",
+"airbnbs": 4,
+"avg.per.bed": 92.25,
+"median.per.bed": 97.5,
+"max.price": 242},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WinchesterBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Windham",
+"airbnbs": 3,
+"avg.per.bed": 51.78,
+"median.per.bed": 33.33,
+"max.price": 100},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WindhamBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Windsor",
+"airbnbs": 9,
+"avg.per.bed": 59.89,
+"median.per.bed": 60,
+"max.price": 80},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WindsorBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Wolcott",
+"airbnbs": 1,
+"avg.per.bed": 75,
+"median.per.bed": 75,
+"max.price": 75},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WolcottBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Woodbridge",
+"airbnbs": 4,
+"avg.per.bed": 74.38,
+"median.per.bed": 78.75,
+"max.price": 115},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WoodbridgeBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Woodbury",
+"airbnbs": 8,
+"avg.per.bed": 138.96,
+"median.per.bed": 101.25,
+"max.price": 750},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WoodburyBorders}
+},{
+  "type": "Feature",
+  "properties": {
+    "town": "Woodstock",
+"airbnbs": 4,
+"avg.per.bed": 112.08,
+"median.per.bed": 100,
+"max.price": 950},
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": WoodstockBorders}
+} ]

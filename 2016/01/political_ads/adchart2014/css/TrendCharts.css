@@ -1,0 +1,32 @@
+
+svg.trend_chart {
+	width: 100%;
+}
+
+.trend_chart rect.bar {
+	fill: lightslategray;
+}
+
+.trend_chart .axis {
+	strokeWidth: 0.5;
+	stroke:lightgray;
+}
+
+.trend_chart .sourceline{
+	color: gray;
+	float:left;
+}
+
+.trend_chart .byline{
+	float:right;
+	color:gray;
+	text-transform: uppercase;
+}
+
+text.light_color{
+	fill: white;
+}
+
+text.dark_color{
+	fill: #555;
+}

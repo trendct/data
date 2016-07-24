@@ -1,0 +1,401 @@
+<!DOCTYPE HTML>
+      <html>
+      <head>
+          <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+          <title>Unemployment versus poverty rate by town2</title>
+          <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700' rel='stylesheet' type='text/css'>
+          <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+          <script type="text/javascript" src="http://code.highcharts.com/highcharts.js"> </script>  
+          <link rel=StyleSheet href="http://projects.ctmirror.org/libs/universal.css" type="text/css">
+          <link rel=StyleSheet href="http://projects.ctmirror.org/content/trend/2015/7/incidents/scatter/libs/style.css" type="text/css">
+          </head>
+          <body>
+          
+          <div class="interactiveContainer">
+          <div class="graphicHeader">Unemployment versus poverty rate by town2</div>
+<div class="explainer"></div>
+<div id="container"></div>
+<div class="sourceline"></div>
+<div class="smallByline">Andrew Ba Tran/TrendCT.org</div>
+<script>
+          
+          $(function () {
+          $('#container').highcharts({
+          chart: {
+          type: 'scatter'
+          },
+          title: {
+          text: '',
+          x: -20,
+          style: {
+          display: 'none'
+          }
+          },
+          subtitle: {
+          text: '',
+          x: -20,
+          style: {
+          display: 'none'
+          }
+          },
+          plotOptions: {
+          scatter: {
+          color: "rgba(35,100,35,0.6)",
+          marker: {
+          radius: 4,
+          symbol: "circle"
+          }
+          }
+          },
+          credits: {
+          enabled: false
+          },
+          exporting: {
+          enabled: false
+          },
+          xAxis: {
+          min: 0,
+          tickPixelInterval: 100,
+          title : {
+          text: ' Unemployment rate ', 
+          style: {
+          fontFamily: "Source Sans Pro, Arial",
+          color: "#444",
+          fontSize: 17,
+          fontWeight: "100"
+          }
+          },
+          labels: {
+          valueSuffix: "",
+          style: {
+          fontFamily: "Source Sans Pro, Arial",
+          color: "#aaa",
+          fontSize: 13,
+          fontWeight: "100"
+          },
+          formatter: function() {
+          return "" + comma(this.value) + "%";
+          }
+          }
+          },
+          yAxis: {
+          min: 0,
+          tickPixelInterval: 50,
+          title: {
+          text: 'Poverty rate',
+          style: {
+          fontFamily: "Source Sans Pro, Arial",
+          color: "#444",
+          fontSize: 17,
+          fontWeight: "100"
+          }
+          },
+          labels: {
+          style: {
+          fontFamily: "Source Sans Pro, Arial",
+          color: "#aaa",
+          fontSize: 13,
+          fontWeight: "100"
+          },
+          formatter: function() {
+          return "" + comma(this.value) + "%";
+          }
+          },
+          lineColor: "#eee"
+          },
+          tooltip: {
+          shadow: false,
+          backgroundColor: "#ffffff",
+          borderColor: "#444444",
+          borderWidth: 2,
+          useHTML: true,
+          headerFormat: '<div class="tooltipHead">{point.key}</div>',
+          formatter: function() {
+          return "<div class='toolTipper'><b>" + this.series.name + "</b><br><div class='kicker'>Poverty rate</div>" + comma(this.y) + "%</div><div class='tooltipbottom'><div class='kicker'>Unemployment rate</div>" + comma(this.key) + "%</div>";
+          },
+          //          formatter: function() {
+          //  return "<h2>" + this.series.name + "</h2><br><b>Density:</b> " +  Math.round(this.y) + " per sq. mile<br><b>Times won per 1,000 people:</b> " +  comma(this.x);
+          // },
+          style: {
+          fontFamily: "Lato, Arial",
+          color: "#333",
+          fontSize: 14,
+          opacity: 1,
+          fontWeight: "400"
+          }
+          },
+          legend: {
+          layout: 'vertical',
+          align: 'right',
+          verticalAlign: 'middle',
+          borderWidth: 0,
+          enabled: false,
+          itemStyle: {
+          fontFamily: "Source Sans Pro, Arial",
+          color: "#444",
+                      fontSize: 13,
+                      fontWeight: "100"
+                  }
+              },
+              series: data
+          });
+      
+      
+      function comma(val){
+        while (/(\d+)(\d{3})/.test(val.toString())){
+          val = val.toString().replace(/(\d+)(\d{3})/, '$1'+','+'$2');
+        }
+        return val;
+      }
+      });
+      var data = [ 
+ {
+"name" : "Hartford",
+"data" : [[34.4,8.9]]
+},{
+"name" : "Waterbury",
+"data" : [[24.2,7.9]]
+},{
+"name" : "Bridgeport",
+"data" : [[23.6,7.4]]
+},{
+"name" : "New London",
+"data" : [[25.3,7.2]]
+},{
+"name" : "New Britain",
+"data" : [[23.5,7]]
+},{
+"name" : "Ansonia",
+"data" : [[19.2,6.9]]
+},{
+"name" : "New Haven",
+"data" : [[26.4,6.5]]
+},{
+"name" : "Griswold",
+"data" : [[12.2,6.2]]
+},{
+"name" : "Norwich",
+"data" : [[15.1,6.2]]
+},{
+"name" : "Sterling",
+"data" : [[11.7,6.2]]
+},{
+"name" : "East Hartford",
+"data" : [[14.3,6.1]]
+},{
+"name" : "Meriden",
+"data" : [[14.9,6.1]]
+},{
+"name" : "Killingly",
+"data" : [[9.6,6]]
+},{
+"name" : "Sprague",
+"data" : [[7.1,6]]
+},{
+"name" : "Windham",
+"data" : [[25.2,6]]
+},{
+"name" : "West Haven",
+"data" : [[13.2,5.9]]
+},{
+"name" : "Derby",
+"data" : [[12.8,5.8]]
+},{
+"name" : "Plainfield",
+"data" : [[10.8,5.8]]
+},{
+"name" : "Putnam",
+"data" : [[9.6,5.7]]
+},{
+"name" : "Bristol",
+"data" : [[9.6,5.5]]
+},{
+"name" : "Plymouth",
+"data" : [[6.9,5.5]]
+},{
+"name" : "East Haven",
+"data" : [[9.9,5.4]]
+},{
+"name" : "Montville",
+"data" : [[5.4,5.4]]
+},{
+"name" : "Naugatuck",
+"data" : [[9.7,5.4]]
+},{
+"name" : "Stratford",
+"data" : [[7.4,5.4]]
+},{
+"name" : "Bloomfield",
+"data" : [[7.9,5.2]]
+},{
+"name" : "Seymour",
+"data" : [[5.6,5.1]]
+},{
+"name" : "Voluntown",
+"data" : [[2.8,4.9]]
+},{
+"name" : "Brooklyn",
+"data" : [[12.6,4.8]]
+},{
+"name" : "Canterbury",
+"data" : [[4,4.8]]
+},{
+"name" : "Chaplin",
+"data" : [[4.6,4.8]]
+},{
+"name" : "Hampton",
+"data" : [[5.9,4.8]]
+},{
+"name" : "Lisbon",
+"data" : [[2.1,4.8]]
+},{
+"name" : "Salem",
+"data" : [[3.9,4.8]]
+},{
+"name" : "Stafford",
+"data" : [[10.8,4.8]]
+},{
+"name" : "East Lyme",
+"data" : [[3.4,4.7]]
+},{
+"name" : "Mansfield",
+"data" : [[16.5,4.7]]
+},{
+"name" : "Middletown",
+"data" : [[12.5,4.7]]
+},{
+"name" : "Manchester",
+"data" : [[11.6,4.6]]
+},{
+"name" : "Preston",
+"data" : [[8,4.6]]
+},{
+"name" : "Windsor",
+"data" : [[5.7,4.6]]
+},{
+"name" : "Groton",
+"data" : [[8.6,4.5]]
+},{
+"name" : "Hamden",
+"data" : [[8.4,4.5]]
+},{
+"name" : "Thompson",
+"data" : [[7.3,4.5]]
+},{
+"name" : "Vernon",
+"data" : [[9.3,4.5]]
+},{
+"name" : "Bozrah",
+"data" : [[5.4,4.4]]
+},{
+"name" : "Shelton",
+"data" : [[5,4.4]]
+},{
+"name" : "Southbury",
+"data" : [[8.4,4.4]]
+},{
+"name" : "Westbrook",
+"data" : [[6,4.4]]
+},{
+"name" : "Branford",
+"data" : [[7.7,4.3]]
+},{
+"name" : "Plainville",
+"data" : [[8.8,4.3]]
+},{
+"name" : "East Haddam",
+"data" : [[4.9,4.2]]
+},{
+"name" : "Monroe",
+"data" : [[4.7,4.2]]
+},{
+"name" : "Watertown",
+"data" : [[3.6,4.2]]
+},{
+"name" : "Milford",
+"data" : [[5.6,4.1]]
+},{
+"name" : "Beacon Falls",
+"data" : [[1.8,4]]
+},{
+"name" : "Cromwell",
+"data" : [[4.5,4]]
+},{
+"name" : "Lebanon",
+"data" : [[4.4,4]]
+},{
+"name" : "Prospect",
+"data" : [[4.3,4]]
+},{
+"name" : "Wallingford",
+"data" : [[4.8,4]]
+},{
+"name" : "Wolcott",
+"data" : [[3.1,4]]
+},{
+"name" : "Clinton",
+"data" : [[9,3.9]]
+},{
+"name" : "Newington",
+"data" : [[4.9,3.9]]
+},{
+"name" : "Southington",
+"data" : [[4.4,3.9]]
+},{
+"name" : "Thomaston",
+"data" : [[3.4,3.9]]
+},{
+"name" : "Wethersfield",
+"data" : [[5.3,3.9]]
+},{
+"name" : "Barkhamsted",
+"data" : [[1.5,3.8]]
+},{
+"name" : "Coventry",
+"data" : [[2.7,3.8]]
+},{
+"name" : "Middlebury",
+"data" : [[4.2,3.8]]
+},{
+"name" : "New Hartford",
+"data" : [[1.6,3.8]]
+},{
+"name" : "North Stonington",
+"data" : [[5.7,3.8]]
+},{
+"name" : "Old Saybrook",
+"data" : [[4.1,3.8]]
+},{
+"name" : "Portland",
+"data" : [[6.2,3.8]]
+},{
+"name" : "Andover",
+"data" : [[3.7,3.7]]
+},{
+"name" : "Colchester",
+"data" : [[3.8,3.7]]
+},{
+"name" : "Columbia",
+"data" : [[4.8,3.7]]
+},{
+"name" : "East Hampton",
+"data" : [[3.5,3.7]]
+},{
+"name" : "Ashford",
+"data" : [[7.4,3.6]]
+},{
+"name" : "Pomfret",
+"data" : [[3.1,3.6]]
+},{
+"name" : "Bethlehem",
+"data" : [[7.7,3.5]]
+},{
+"name" : "Woodbury",
+"data" : [[6,3.4]]
+},{
+"name" : "Eastford",
+"data" : [[3,3]]
+}   ];
+</script>
+</body>
+</html>
