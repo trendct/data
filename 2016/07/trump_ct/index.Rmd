@@ -303,6 +303,46 @@ gg
 
 ```
 
+
+```{r census_analysis}
+source("keys.R")
+#install.packages("devtools")
+#devtools::install_github("hrecht/censusapi")
+library("censusapi")
+
+
+
+# apis <- listCensusApis()
+# View(apis)
+# geos2014 <- listCensusMetadata(name="acs5", vintage=2014, "g")
+# View(geos2014)
+# # tracts = 140
+# vars2014 <- listCensusMetadata(name="acs5", vintage=2014, "v")
+# View(vars2014)
+
+geos2014 <- listCensusMetadata(name="acs5", vintage=2014, "g")
+View(geos2014)
+#B23025
+#B23025. Employment Status for the Population 16 Years and Over
+#B23025_001E Total
+#B23025_002E In labor force
+#B23025_005E In labor force:!!Civilian labor force:!!Unemployed
+
+unemployment_towns <- getCensus(name="acs5",
+    vintage=2014,
+    key=census_key,
+    vars=c("NAME", "B23025_001E", "B23025_002E", "B23025_005E" ),
+    region="county subdivision:*", regionin="state:09")
+
+
+# race_tracts <- getCensus(name="acs5", 
+#     vintage=2014,
+#     key=census_key, 
+#     vars=c("NAME", "B02001_001E", "B02001_002E", "B02001_003E", "B03001_001E"), 
+#     region="tract:*", regionin="state:09")
+# 
+
+```
 [Scatterplot of unemployment percent to percent of unaffiliated voters]
 [Scatterplot of unemployment percent to Clinton win percent?]
 

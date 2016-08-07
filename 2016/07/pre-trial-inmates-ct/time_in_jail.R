@@ -86,4 +86,28 @@ write.csv(table(update$total.days, update$RACE), "race_days.csv")
 tapply(update$total.days, update$RACE, median, na.rm=T)
 tapply(update$total.days, update$RACE, mean, na.rm=T)
 
+out <- subset(update, !is.na(total.days))
+still_in <- subset(update, is.na(total.days))
+out_yet <- subset(still_in, last.date=="")
+still_in <- subset(still_in, last.date!="")
+
+
+out2 <- count(out[unique(out$IDENTIFIER),])
+out_yet2 <- count(out_yet[unique(out_yet$IDENTIFIER),])
+still_in2 <- count(still_in[unique(still_in$IDENTIFIER),])
+
+total_inmates <- length(unique(update$IDENTIFIER))
+
+still_in[unique(still_in$IDENTIFIER),] %>%
+  group_by(RACE) %>%
+  summarise(count=n())
+
+out[unique(out$IDENTIFIER),] %>%
+  group_by(RACE) %>%
+  summarise(count=n())
+
+out_yet[unique(out_yet$IDENTIFIER),] %>%
+  group_by(RACE) %>%
+  summarise(count=n())
+
 cat("total: ")
