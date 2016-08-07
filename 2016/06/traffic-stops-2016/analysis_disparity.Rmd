@@ -1,0 +1,788 @@
+---
+title: "spatial analysis"
+author: "Andrew Ba Tran"
+date: "August 4, 2016"
+output: html_document
+---
+
+```{r libraries, message=FALSE, warning=FALSE}
+require(scales)
+require(dplyr)
+require(gtools)
+require(ggplot2)
+require(rgdal)
+require(ggmap)
+require(Cairo)
+require(gpclib)
+require(maptools)
+require(reshape)
+library(devtools)
+library(stringr)
+library(raster)
+library(sp)
+library(lubridate)
+library(ggplot2)
+library(ggalt)
+## install_github("trendct/ctnamecleaner")
+##library(ctnamecleaner)
+library(leaflet)
+library(tidyr)
+library(extrafont)
+library(DT)
+source("keys.R")
+#install.packages("devtools")
+#devtools::install_github("hrecht/censusapi")
+library("censusapi")
+
+```
+
+Bringing in the data
+
+```{r data_ingesting}
+
+stops <- read.csv("data/mega.csv", stringsAsFactors=FALSE)
+stops <- stops[!is.na(stops$InterventionLocationLatitude),]
+
+```
+
+```{r prepping_the_data, fig.width=9}
+
+stops$timeofday <- as.POSIXct(as.Date(stops$InterventionTime, origin="1899-12-30"))
+
+
+stops$ethnicity <- ifelse(((stops$SubjectRaceCode ==  "W") & (stops$SubjectEthnicityCode =="N")), "White", "Minority")
+stops$RE <- paste0(stops$SubjectRaceCode, stops$SubjectEthnicityCode)
+stops$RE <- gsub("AH", "Hispanic", stops$RE)
+stops$RE <- gsub("AM", "Middle_eastern", stops$RE)
+stops$RE <- gsub("AN", "Asian", stops$RE)
+stops$RE <- gsub("BH", "Black", stops$RE)
+stops$RE <- gsub("BM", "Black", stops$RE)
+stops$RE <- gsub("BN", "Black", stops$RE)
+stops$RE <- gsub("IH", "Indian", stops$RE)
+stops$RE <- gsub("IM", "Middle_eastern", stops$RE)
+stops$RE <- gsub("IN", "Indian", stops$RE)
+stops$RE <- gsub("WH", "Hispanic", stops$RE)
+stops$RE <- gsub("WM", "Middle_eastern", stops$RE)
+stops$RE <- gsub("WN", "White", stops$RE)
+
+attr(stops$timeofday,"tzone") <- "EST"
+
+towntracts <- readOGR(dsn="shapes", layer="census_tracts")
+towntracts_only <- towntracts
+towntracts <- fortify(towntracts, region="GEOID10")
+
+tracts2towns <- read.csv("data/tracts_to_towns.csv", stringsAsFactors=FALSE)
+colnames(tracts2towns) <- c("id", "town_name")
+tracts2towns$id <- as.character(tracts2towns$id)
+tracts2towns$id <- paste0("0", tracts2towns$id)
+tracts2towns$town_name <- str_trim(tracts2towns$town_name)
+
+percent_first <- function(x) {
+  x <- sprintf("%d%%", round(x*100))
+  x[2:length(x)] <- sub("%$", "", x[2:length(x)])
+  x
+}
+
+
+stops$wday <- gsub(",.*", "", stops$InterventionDate)
+stops$Date<- gsub(".*y, ", "", stops$InterventionDate)
+stops$Date<- gsub(",.*", "", stops$Date)
+stops$Date<- gsub(".* ", "", stops$Date)
+
+stops$Date2 <- ifelse( (nchar(stops$Date)==2), stops$Date, "" )
+stops$Date3 <- ifelse( (nchar(stops$Date)==5), stops$Date, "" )
+stops$Date3 <- as.Date(as.numeric(stops$Date3), origin = "1899-12-30")
+stops$Date3 <- as.character(stops$Date3)
+stops$Date3 <- gsub(".*-", "", stops$Date3)
+stops$Date3 <- gsub("-.*", "", stops$Date3)
+
+stops$Date2 <- ifelse(stops$Date2=="", stops$Date3, stops$Date2)
+
+stops$Date2 <- as.numeric(stops$Date2)
+
+ggplot(stops, aes(Date2)) + geom_histogram(binwidth=1) + facet_grid(DepartmentName ~RE)
+```
+
+```{r spatial_prep}
+gpclibPermit()
+gpclibPermitStatus()
+
+# This is town borders
+townborders <- readOGR(dsn="shapes", layer="ctgeo")
+townborders_only <- townborders
+townborders<- fortify(townborders, region="NAME10")
+
+coords <- stops[c("InterventionLocationLongitude", "InterventionLocationLatitude")]
+coords <- coords[complete.cases(coords),]
+sp <- SpatialPoints(coords)
+
+proj4string(sp) <- "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
+proj4string(sp)
+```
+
+```{r plotting_points, fig.width=9}
+plot(towntracts_only)
+plot(sp, col="red" , add=TRUE)
+```
+
+```{r choropleths_1, message=F, fig.width=9}
+
+by_tract <- over(sp, towntracts_only)
+
+tract_id <- by_tract[c("GEOID10", "NAME10")]
+stops <- cbind(stops, tract_id)
+
+
+by_tract <- by_tract %>%
+  group_by(GEOID10) %>%
+  summarise(total=n())
+
+backup <- by_tract 
+
+by_tract <- by_tract[!is.na(by_tract$GEOID10),]
+colnames(by_tract) <- c("id", "total")
+by_tract$id <- as.character(by_tract$id)
+
+by_tract <- left_join(by_tract, tracts2towns)
+
+by_tract <- subset(by_tract, town_name!="Scotland")
+
+adjacent <- read.csv("data/adjacent_search.csv", stringsAsFactors = FALSE)
+
+by_tract <- left_join(by_tract, adjacent)
+
+total_map <- left_join(towntracts, by_tract)
+
+tm_ct <- ggplot() +
+  geom_polygon(data = total_map, aes(x=long, y=lat, group=group, fill=total), color = "black", size=0.2) +
+  geom_polygon(data = total_map, aes(x=long, y=lat, group=group, fill=total), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Where traffic stops occur", fill="")
+print(tm_ct)
+```
+
+# Building up dataset to analyze by race
+
+```{r min_w, fig.width=9, message=F}
+
+## Minorities versus whites 
+gpclibPermit()
+gpclibPermitStatus()
+
+towntracts <- readOGR(dsn="shapes", layer="census_tracts")
+towntracts_only <- towntracts
+towntracts <- fortify(towntracts, region="GEOID10")
+
+## Creating a dataframe that mathes census tract ids to town names
+tracts2towns <- read.csv("data/tracts_to_towns.csv", stringsAsFactors=FALSE)
+colnames(tracts2towns) <- c("id", "town_name")
+tracts2towns$id <- as.character(tracts2towns$id)
+tracts2towns$id <- paste0("0", tracts2towns$id)
+tracts2towns$town_name <- str_trim(tracts2towns$town_name)
+
+names(stops)[names(stops) == 'GEOID10'] <- 'id'
+stops <- left_join(stops, tracts2towns)
+stops$block <- paste(stops$town_name, stops$NAME10)
+
+table(stops$ethnicity)
+
+# Minority stops
+coords <- subset(stops, ethnicity=="Minority")
+coords <- coords[c("InterventionLocationLongitude", "InterventionLocationLatitude")]
+coords <- coords[complete.cases(coords),]
+sp <- SpatialPoints(coords)
+proj4string(sp) <- "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
+proj4string(sp)
+
+by_tract <- over(sp, towntracts_only)
+
+by_tract <- by_tract %>%
+  group_by(GEOID10) %>%
+  summarise(minority=n())
+
+by_tract <- by_tract[!is.na(by_tract$GEOID10),]
+colnames(by_tract) <- c("id", "minority")
+by_tract$id <- as.character(by_tract$id)
+
+colnames(backup) <- c("id", "total")
+backup <- left_join(backup, by_tract)
+by_tract <- left_join(backup, tracts2towns)
+by_tract <- subset(by_tract, town_name!="Scotland")
+
+adjacent <- read.csv("data/adjacent_search.csv", stringsAsFactors = FALSE)
+by_tract <- left_join(by_tract, adjacent)
+minority_tracts <- by_tract
+
+# White stops
+coords <- subset(stops, ethnicity=="White")
+coords <- coords[c("InterventionLocationLongitude", "InterventionLocationLatitude")]
+coords <- coords[complete.cases(coords),]
+sp <- SpatialPoints(coords)
+
+proj4string(sp) <- "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
+proj4string(sp)
+
+by_tract <- over(sp, towntracts_only)
+
+by_tract <- by_tract %>%
+  group_by(GEOID10) %>%
+  summarise(total=n())
+
+by_tract <- by_tract[!is.na(by_tract$GEOID10),]
+colnames(by_tract) <- c("id", "total")
+by_tract$id <- as.character(by_tract$id)
+
+by_tract <- left_join(by_tract, tracts2towns)
+by_tract <- subset(by_tract, town_name!="Scotland")
+
+adjacent <- read.csv("data/adjacent_search.csv", stringsAsFactors = FALSE)
+
+by_tract <- left_join(by_tract, adjacent)
+by_tract <- by_tract[c("id", "total")]
+colnames(by_tract) <- c("id", "white")
+
+mw_tract <- left_join(minority_tracts, by_tract)
+mw_tract$minority_p <- round(mw_tract$total/(mw_tract$total+mw_tract$white)*100,2)
+mw_tract$white_p <- round(mw_tract$white/(mw_tract$total+mw_tract$white)*100,2)
+
+total_map <- left_join(towntracts, mw_tract)
+
+# Black stops
+coords <- subset(stops, RE=="Black")
+coords <- coords[c("InterventionLocationLongitude", "InterventionLocationLatitude")]
+coords <- coords[complete.cases(coords),]
+sp <- SpatialPoints(coords)
+
+proj4string(sp) <- "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
+proj4string(sp)
+
+by_tract <- over(sp, towntracts_only)
+
+by_tract <- by_tract %>%
+  group_by(GEOID10) %>%
+  summarise(total=n())
+
+by_tract <- by_tract[!is.na(by_tract$GEOID10),]
+colnames(by_tract) <- c("id", "total")
+by_tract$id <- as.character(by_tract$id)
+
+by_tract <- left_join(by_tract, tracts2towns)
+by_tract <- subset(by_tract, town_name!="Scotland")
+
+adjacent <- read.csv("data/adjacent_search.csv", stringsAsFactors = FALSE)
+
+by_tract <- left_join(by_tract, adjacent)
+
+by_tract <- by_tract[c("id", "total")]
+colnames(by_tract) <- c("id", "black")
+
+mw_tract <- left_join(mw_tract, by_tract)
+
+mw_tract$black_p <- round(mw_tract$black/(mw_tract$total+mw_tract$white)*100,2)
+
+total_map <- left_join(towntracts, mw_tract)
+
+# Hispanic stops
+coords <- subset(stops, RE=="Hispanic")
+coords <- coords[c("InterventionLocationLongitude", "InterventionLocationLatitude")]
+coords <- coords[complete.cases(coords),]
+sp <- SpatialPoints(coords)
+
+proj4string(sp) <- "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
+proj4string(sp)
+
+by_tract <- over(sp, towntracts_only)
+
+by_tract <- by_tract %>%
+  group_by(GEOID10) %>%
+  summarise(total=n())
+
+by_tract <- by_tract[!is.na(by_tract$GEOID10),]
+colnames(by_tract) <- c("id", "total")
+by_tract$id <- as.character(by_tract$id)
+
+by_tract <- left_join(by_tract, tracts2towns)
+
+by_tract <- subset(by_tract, town_name!="Scotland")
+
+adjacent <- read.csv("data/adjacent_search.csv", stringsAsFactors = FALSE)
+
+by_tract <- left_join(by_tract, adjacent)
+
+by_tract <- by_tract[c("id", "total")]
+colnames(by_tract) <- c("id", "hispanic")
+
+mw_tract <- left_join(mw_tract, by_tract)
+
+mw_tract$hispanic_p <- round(mw_tract$hispanic/(mw_tract$total+mw_tract$white)*100,2)
+
+total_map <- left_join(towntracts, mw_tract)
+```
+
+# Getting CENSUS demographic data on each tract
+
+```{r census_data, message=F, fig.width=9}
+
+# B02001_001E - Total
+# B02001_002E - White alone
+# B02001_003E - Black alone
+# B03001_001E - Hispanic total
+
+race_tracts <- getCensus(name="acs5",
+    vintage=2014,
+    key=census_key,
+    vars=c("NAME", "B02001_001E", "B02001_002E", "B02001_003E", "B03001_001E"),
+    region="tract:*", regionin="state:09")
+
+race_tracts$NAME <- NULL
+race_tracts$id <- paste0(race_tracts$state, race_tracts$county, race_tracts$tract)
+colnames(race_tracts) <- c("state_code", "county_code", "tract_code", "total_pop", "white_pop", "black_pop", "hispanic_pop", "id")
+race_tracts$minority_pop <- race_tracts$total_pop - race_tracts$white_pop
+race_tracts$white_pop_p <- round(race_tracts$white_pop/race_tracts$total_pop*100,2)
+race_tracts$minority_pop_p <- round(race_tracts$minority_pop/race_tracts$total_pop*100,2)
+race_tracts$black_pop_p <- round(race_tracts$black_pop/race_tracts$total_pop*100,2)
+race_tracts$hispanic_pop_p <- round(race_tracts$black_pop/race_tracts$hispanic_pop*100,2)
+
+mw_tract <- left_join(mw_tract, race_tracts)
+
+## DISPARITY
+
+mw_tract$white_disp <- mw_tract$white_p - mw_tract$white_pop_p
+mw_tract$min_disp <- mw_tract$minority_p - mw_tract$minority_pop_p
+mw_tract$black_disp <- mw_tract$black_p - mw_tract$black_pop_p
+mw_tract$hispanic_disp <- mw_tract$hispanic_p - mw_tract$hispanic_pop_p
+total_map <- left_join(towntracts, mw_tract)
+```
+
+## Percent of traffic tickets by race by census tract
+
+```{r percent_race_tickets}
+table1 <- mw_tract[c("id", "town_department", "minority_p", "white_p", "black_p", "hispanic_p")]
+datatable(table1)
+```
+
+## Percent of population by race by census tract
+
+```{r percent_population}
+table2 <- mw_tract[c("id", "town_department", "minority_pop_p", "white_pop_p", "black_pop_p", "hispanic_pop_p")]
+datatable(table2)
+```
+
+## Percent stops minus percent population (disparity) by race by census tract
+
+```{r disparity_table}
+table3 <- mw_tract[c("id", "town_department", "min_disp", "white_disp", "black_disp", "hispanic_disp")]
+datatable(table3)
+```
+
+# Visualizations
+
+```{r percent_white, message=F, fig.width=9}
+
+# percent white population
+pm_ct <- ggplot() +
+  geom_polygon(data = total_map, aes(x=long, y=lat, group=group, fill=white_pop_p), color = "black", size=0.2) +
+  geom_polygon(data = total_map, aes(x=long, y=lat, group=group, fill=white_pop_p), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="White population by tract", fill="")
+print(pm_ct)
+
+pm_ct <- ggplot() +
+  geom_polygon(data = total_map, aes(x=long, y=lat, group=group, fill=minority_pop_p), color = "black", size=0.2) +
+  geom_polygon(data = total_map, aes(x=long, y=lat, group=group, fill=minority_pop_p), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Minority population by tract", fill="")
+print(pm_ct)
+
+
+```
+
+# Disparity
+
+```{r disparity, message=F, fig.width=9}
+
+corr_df <- mw_tract
+
+
+## Minority disparity
+pm_ct <- ggplot() +
+  geom_polygon(data = total_map, aes(x=long, y=lat, group=group, fill=min_disp), color = "black", size=0.2) +
+  geom_polygon(data = total_map, aes(x=long, y=lat, group=group, fill=min_disp), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Spectral", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Disparity between Minority drivers stopped and census tract population", fill="")
+print(pm_ct)
+
+## Black disparity
+pm_ct <- ggplot() +
+  geom_polygon(data = total_map, aes(x=long, y=lat, group=group, fill=black_disp), color = "black", size=0.2) +
+  geom_polygon(data = total_map, aes(x=long, y=lat, group=group, fill=black_disp), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Spectral", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Disparity between Minority drivers stopped and census tract population", fill="")
+print(pm_ct)
+
+## Hispanic disparity
+pm_ct <- ggplot() +
+  geom_polygon(data = total_map, aes(x=long, y=lat, group=group, fill=hispanic_disp), color = "black", size=0.2) +
+  geom_polygon(data = total_map, aes(x=long, y=lat, group=group, fill=hispanic_disp), color = "black", size=0.2) +
+  coord_map() +
+  scale_fill_distiller(type="seq", trans="reverse", palette = "Spectral", breaks=pretty_breaks(n=10)) +
+  theme_nothing(legend=TRUE) +
+  labs(title="Disparity between Hispanic drivers stopped and census tract population", fill="")
+print(pm_ct)
+
+
+```
+
+# Towns analysis
+
+```{r towns_loop, fig.width=9, message=F}
+total_map <- subset(total_map, !is.na(town_name))
+
+town_names <- unique(total_map$town_department)
+
+for (i in 1:length(town_names)) {
+  town_name <- town_names[i]
+    blah <- town_names[i]
+
+test_map <- subset(total_map, town_department==blah)
+test_map <- subset(test_map, !is.na(white_p))
+test_borders <- subset(townborders, id==town_name)
+
+test_map <- subset(test_map, !is.na(minority))
+# Hispanic
+
+max_h <- max(test_map$hispanic_disp, na.rm=T)
+min_h <- min(test_map$hispanic_disp, na.rm=T)
+min_h <- ifelse(min_h >=0, min_h, min_h*-1)
+max_h <- ifelse(max_h > min_h, max_h, min_h)
+min_h <- ifelse(max_h > min_h, max_h, min_h)
+min_h <- (min_h*-1/100)-.1
+max_h <- (max_h/100)+.1
+
+pm_ct <- ggplot() 
+pm_ct <- pm_ct + geom_polygon(data = test_map, aes(x=long, y=lat, group=group, fill=hispanic_disp/100), color="white", size=.25)
+pm_ct <- pm_ct + geom_polygon(data = test_borders, aes(x=long, y=lat, group=group), fill=NA, color = "black", size=0.5)
+pm_ct <- pm_ct + coord_map() 
+pm_ct <- pm_ct + scale_fill_distiller(type="seq", trans="reverse", palette = "PuOr", label=percent, breaks=pretty_breaks(n=10), limits=c(max_h, min_h), name="Gap"  ) 
+pm_ct <- pm_ct + theme_nothing(legend=TRUE) 
+pm_ct <- pm_ct + labs(x=NULL, y=NULL, title=paste0(town_name, ": Hispanic traffic stops versus population"))
+pm_ct <- pm_ct + theme(text = element_text(size=15))
+pm_ct <- pm_ct + theme(plot.title=element_text(face="bold", hjust=.4))
+pm_ct <- pm_ct + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(l=20)))
+pm_ct <- pm_ct + theme(plot.caption=element_text(size=12, margin=margin(t=12), color="#7a7d7e", hjust=0))
+pm_ct <- pm_ct + theme(legend.key.size = unit(1, "cm"))
+
+if (blah=="East Hartford") {
+  pm_ct <- pm_ct + annotate("segment", x = -72.58, xend = -72.675, y = 41.815, yend = 41.815, colour = "lightblue", size=.5) 
+  pm_ct <- pm_ct + annotate("point", x = -72.58, y = 41.815, colour = "lightblue", size = 2) 
+  pm_ct <- pm_ct + annotate("text", x = -72.71, y = 41.815, label = "South Windsor", size=5, colour="gray30") 
+  pm_ct <- pm_ct + annotate("segment", x = -72.5, xend = -72.55, y = 41.75, yend = 41.71, colour = "lightblue", size=.5) 
+  pm_ct <- pm_ct + annotate("point", x = -72.5, y = 41.75, colour = "lightblue", size = 2) 
+  pm_ct <- pm_ct + annotate("text", x = -72.578, y = 41.71, label = "Manchester", size=5, colour="gray30") 
+  pm_ct <- pm_ct + annotate("point", x = -72.75, y = 41.71, colour="white", size=.2) 
+} else if (blah=="Hamden") {
+  pm_ct <- pm_ct + annotate("segment", x = -73.07, xend = -73.05, y = 41.375, yend = 41.4, colour = "lightblue", size=.5)
+  pm_ct <- pm_ct + annotate("point", x = -73.07, y = 41.375, colour = "lightblue", size = 2) 
+  pm_ct <- pm_ct + annotate("text", x = -73.033, y = 41.404, label = "Seymour", size=5, colour="gray30") 
+  pm_ct <- pm_ct + annotate("segment", x = -72.93, xend = -72.87, y = 41.325, yend = 41.325, colour = "lightblue", size=.5) 
+  pm_ct <- pm_ct + annotate("point", x = -72.93, y = 41.325, colour = "lightblue", size = 2) 
+  pm_ct <- pm_ct + annotate("text", x = -72.85, y = 41.325, label = "New Haven", size=5, colour="gray30") 
+  pm_ct <- pm_ct + annotate("segment", x = -72.89, xend = -72.86, y = 41.375, yend = 41.375, colour = "lightblue", size=.5) 
+  pm_ct <- pm_ct + annotate("point", x = -72.89, y = 41.375, colour = "lightblue", size = 2) 
+  pm_ct <- pm_ct + annotate("text", x = -72.845, y = 41.375, label = "Hamden", size=5, colour="gray30") 
+  pm_ct <- pm_ct + annotate("point", x = -72.83, y = 41.375, colour="white", size=.2) 
+} else if (blah=="New Britain") {
+  pm_ct <- pm_ct + annotate("segment", x = -72.82, xend = -72.785, y = 41.73, yend = 41.73, colour = "lightblue", size=.5) 
+  pm_ct <- pm_ct + annotate("point", x = -72.82, y = 41.73, colour = "lightblue", size = 2) 
+  pm_ct <- pm_ct + annotate("text", x = -72.768, y = 41.73, label = "Farmington", size=5, colour="gray30")
+} else if (blah=="Stratford") {
+  pm_ct <- pm_ct + annotate("segment", x = -73.17, xend = -73.20, y = 41.24, yend = 41.24, colour = "lightblue", size=.5) 
+  pm_ct <- pm_ct + annotate("point", x = -73.17, y = 41.24, colour = "lightblue", size = 2) 
+  pm_ct <- pm_ct + annotate("text", x = -73.215, y = 41.24, label = "  Trumbull", size=5, colour="gray30") 
+  pm_ct <- pm_ct + annotate("segment", x = -73.16, xend = -73.19, y = 41.19, yend = 41.19, colour = "lightblue", size=.5) 
+  pm_ct <- pm_ct + annotate("point", x = -73.16, y = 41.19, colour = "lightblue", size = 2) 
+  pm_ct <- pm_ct + annotate("text", x = -73.205, y = 41.19, label = "Bridgeport", size=5, colour="gray30") 
+  pm_ct <- pm_ct + annotate("point", x = -73.22, y = 41.19, colour="white", size=.2) 
+} else if (blah=="Waterbury") {
+  pm_ct <- pm_ct + annotate("segment", x = -73.1, xend = -73.06, y = 41.64, yend = 41.64, colour = "lightblue", size=.5)
+  pm_ct <- pm_ct + annotate("point", x = -73.1, y = 41.64, colour = "lightblue", size = 2) 
+  pm_ct <- pm_ct + annotate("text", x = -73.04, y = 41.64, label = "Watertown", size=5, colour="gray30") 
+  pm_ct <- pm_ct + annotate("segment", x = -72.97, xend = -72.93, y = 41.57, yend = 41.57, colour = "lightblue", size=.5) 
+  pm_ct <- pm_ct + annotate("point", x = -72.97, y = 41.57, colour = "lightblue", size = 2) 
+  pm_ct <- pm_ct + annotate("text", x = -72.915, y = 41.57, label = "Wolcott", size=5, colour="gray30") 
+  pm_ct <- pm_ct + annotate("point", x = -72.9, y = 41.57, colour="white", size=.2) 
+} else {
+  
+}
+
+nospaces <- gsub(" ", "", town_name)
+ggsave(pm_ct, file = paste0("img/disp_", nospaces, "_hispanic.png"), width = 8, height = 6, type = "cairo-png")
+print(pm_ct)
+
+# Black
+
+max_h <- max(test_map$black_disp, na.rm=T)
+min_h <- min(test_map$black_disp, na.rm=T)
+min_h <- ifelse(min_h >=0, min_h, min_h*-1)
+max_h <- ifelse(max_h > min_h, max_h, min_h)
+min_h <- ifelse(max_h > min_h, max_h, min_h)
+min_h <- (min_h*-1/100)-.1
+max_h <- (max_h/100)+.1
+
+pm_ct <- ggplot() 
+pm_ct <- pm_ct + geom_polygon(data = test_map, aes(x=long, y=lat, group=group, fill=black_disp/100), color="white", size=.25)
+pm_ct <- pm_ct + geom_polygon(data = test_borders, aes(x=long, y=lat, group=group), fill=NA, color = "black", size=0.5)
+pm_ct <- pm_ct + coord_map() 
+pm_ct <- pm_ct + scale_fill_distiller(type="seq", trans="reverse", palette = "PuOr", label=percent, breaks=pretty_breaks(n=10), limits=c(max_h, min_h),name="Gap"  ) 
+pm_ct <- pm_ct + theme_nothing(legend=TRUE) 
+pm_ct <- pm_ct + labs(x=NULL, y=NULL, title=paste0(town_name, ": Black traffic stops versus population"))
+pm_ct <- pm_ct + theme(text = element_text(size=15))
+pm_ct <- pm_ct + theme(plot.title=element_text(face="bold", hjust=.4))
+pm_ct <- pm_ct + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(l=20)))
+pm_ct <- pm_ct + theme(plot.caption=element_text(size=12, margin=margin(t=12), color="#7a7d7e", hjust=0))
+pm_ct <- pm_ct + theme(legend.key.size = unit(1, "cm"))
+
+if (town_name=="East Hartford") {
+  pm_ct <- pm_ct + annotate("segment", x = -72.58, xend = -72.675, y = 41.815, yend = 41.815, colour = "lightblue", size=.5) 
+  pm_ct <- pm_ct + annotate("point", x = -72.58, y = 41.815, colour = "lightblue", size = 2) 
+  pm_ct <- pm_ct + annotate("text", x = -72.71, y = 41.815, label = "South Windsor", size=5, colour="gray30") 
+  pm_ct <- pm_ct + annotate("segment", x = -72.5, xend = -72.55, y = 41.75, yend = 41.71, colour = "lightblue", size=.5) 
+  pm_ct <- pm_ct + annotate("point", x = -72.5, y = 41.75, colour = "lightblue", size = 2) 
+  pm_ct <- pm_ct + annotate("text", x = -72.578, y = 41.71, label = "Manchester", size=5, colour="gray30") 
+  pm_ct <- pm_ct + annotate("point", x = -72.75, y = 41.71, colour="white", size=.2) 
+} else if (town_name=="Hamden") {
+  pm_ct <- pm_ct + annotate("segment", x = -73.07, xend = -73.05, y = 41.375, yend = 41.4, colour = "lightblue", size=.5)
+  pm_ct <- pm_ct + annotate("point", x = -73.07, y = 41.375, colour = "lightblue", size = 2) 
+  pm_ct <- pm_ct + annotate("text", x = -73.033, y = 41.404, label = "Seymour", size=5, colour="gray30") 
+  pm_ct <- pm_ct + annotate("segment", x = -72.93, xend = -72.87, y = 41.325, yend = 41.325, colour = "lightblue", size=.5) 
+  pm_ct <- pm_ct + annotate("point", x = -72.93, y = 41.325, colour = "lightblue", size = 2) 
+  pm_ct <- pm_ct + annotate("text", x = -72.85, y = 41.325, label = "New Haven", size=5, colour="gray30") 
+  pm_ct <- pm_ct + annotate("segment", x = -72.89, xend = -72.86, y = 41.375, yend = 41.375, colour = "lightblue", size=.5) 
+  pm_ct <- pm_ct + annotate("point", x = -72.89, y = 41.375, colour = "lightblue", size = 2) 
+  pm_ct <- pm_ct + annotate("text", x = -72.845, y = 41.375, label = "Hamden", size=5, colour="gray30") 
+  pm_ct <- pm_ct + annotate("point", x = -72.83, y = 41.375, colour="white", size=.2) 
+} else if (town_name=="New Britain") {
+  pm_ct <- pm_ct + annotate("segment", x = -72.82, xend = -72.785, y = 41.73, yend = 41.73, colour = "lightblue", size=.5) 
+  pm_ct <- pm_ct + annotate("point", x = -72.82, y = 41.73, colour = "lightblue", size = 2) 
+  pm_ct <- pm_ct + annotate("text", x = -72.768, y = 41.73, label = "Farmington", size=5, colour="gray30")
+} else if (town_name=="Stratford") {
+  pm_ct <- pm_ct + annotate("segment", x = -73.17, xend = -73.20, y = 41.24, yend = 41.24, colour = "lightblue", size=.5) 
+  pm_ct <- pm_ct + annotate("point", x = -73.17, y = 41.24, colour = "lightblue", size = 2) 
+  pm_ct <- pm_ct + annotate("text", x = -73.215, y = 41.24, label = "  Trumbull", size=5, colour="gray30") 
+  pm_ct <- pm_ct + annotate("segment", x = -73.16, xend = -73.19, y = 41.19, yend = 41.19, colour = "lightblue", size=.5) 
+  pm_ct <- pm_ct + annotate("point", x = -73.16, y = 41.19, colour = "lightblue", size = 2) 
+  pm_ct <- pm_ct + annotate("text", x = -73.205, y = 41.19, label = "Bridgeport", size=5, colour="gray30") 
+  pm_ct <- pm_ct + annotate("point", x = -73.22, y = 41.19, colour="white", size=.2) 
+} else if (town_name=="Waterbury") {
+  pm_ct <- pm_ct + annotate("segment", x = -73.1, xend = -73.06, y = 41.64, yend = 41.64, colour = "lightblue", size=.5)
+  pm_ct <- pm_ct + annotate("point", x = -73.1, y = 41.64, colour = "lightblue", size = 2) 
+  pm_ct <- pm_ct + annotate("text", x = -73.04, y = 41.64, label = "Watertown", size=5, colour="gray30") 
+  pm_ct <- pm_ct + annotate("segment", x = -72.97, xend = -72.93, y = 41.57, yend = 41.57, colour = "lightblue", size=.5) 
+  pm_ct <- pm_ct + annotate("point", x = -72.97, y = 41.57, colour = "lightblue", size = 2) 
+  pm_ct <- pm_ct + annotate("text", x = -72.915, y = 41.57, label = "Wolcott", size=5, colour="gray30") 
+  pm_ct <- pm_ct + annotate("point", x = -72.9, y = 41.57, colour="white", size=.2) 
+} else {
+}
+
+nospaces <- gsub(" ", "", town_name)
+ggsave(pm_ct, file = paste0("img/disp_", nospaces, "_black.png"), width = 8, height = 6, type = "cairo-png")
+print(pm_ct)
+
+
+
+# Minority
+max_h <- max(test_map$min_disp, na.rm=T)
+min_h <- min(test_map$min_disp, na.rm=T)
+min_h <- ifelse(min_h >=0, min_h, min_h*-1)
+max_h <- ifelse(max_h > min_h, max_h, min_h)
+min_h <- ifelse(max_h > min_h, max_h, min_h)
+min_h <- (min_h*-1/100)-.1
+max_h <- (max_h/100)+.1
+
+pm_ct <- ggplot() 
+pm_ct <- pm_ct + geom_polygon(data = test_map, aes(x=long, y=lat, group=group, fill=min_disp/100), color="white", size=.25)
+pm_ct <- pm_ct + geom_polygon(data = test_borders, aes(x=long, y=lat, group=group), fill=NA, color = "black", size=0.5)
+pm_ct <- pm_ct + coord_map() 
+pm_ct <- pm_ct + scale_fill_distiller(type="seq", trans="reverse", palette = "PuOr", label=percent, breaks=pretty_breaks(n=10), limits=c(max_h, min_h), name="Gap"  ) 
+pm_ct <- pm_ct + theme_nothing(legend=TRUE) 
+pm_ct <- pm_ct + labs(x=NULL, y=NULL, title=paste0(town_name, ": Minority traffic stops versus population"))
+pm_ct <- pm_ct + theme(text = element_text(size=15))
+pm_ct <- pm_ct + theme(plot.title=element_text(face="bold", hjust=.4))
+pm_ct <- pm_ct + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(l=20)))
+pm_ct <- pm_ct + theme(plot.caption=element_text(size=12, margin=margin(t=12), color="#7a7d7e", hjust=0))
+pm_ct <- pm_ct + theme(legend.key.size = unit(1, "cm"))
+
+if (town_name=="East Hartford") {
+  pm_ct <- pm_ct + annotate("segment", x = -72.58, xend = -72.675, y = 41.815, yend = 41.815, colour = "lightblue", size=.5) 
+  pm_ct <- pm_ct + annotate("point", x = -72.58, y = 41.815, colour = "lightblue", size = 2) 
+  pm_ct <- pm_ct + annotate("text", x = -72.71, y = 41.815, label = "South Windsor", size=5, colour="gray30") 
+  pm_ct <- pm_ct + annotate("segment", x = -72.5, xend = -72.55, y = 41.75, yend = 41.71, colour = "lightblue", size=.5) 
+  pm_ct <- pm_ct + annotate("point", x = -72.5, y = 41.75, colour = "lightblue", size = 2) 
+  pm_ct <- pm_ct + annotate("text", x = -72.578, y = 41.71, label = "Manchester", size=5, colour="gray30") 
+  pm_ct <- pm_ct + annotate("point", x = -72.75, y = 41.71, colour="white", size=.2) 
+} else if (town_name=="Hamden") {
+  pm_ct <- pm_ct + annotate("segment", x = -73.07, xend = -73.05, y = 41.375, yend = 41.4, colour = "lightblue", size=.5)
+  pm_ct <- pm_ct + annotate("point", x = -73.07, y = 41.375, colour = "lightblue", size = 2) 
+  pm_ct <- pm_ct + annotate("text", x = -73.033, y = 41.404, label = "Seymour", size=5, colour="gray30") 
+  pm_ct <- pm_ct + annotate("segment", x = -72.93, xend = -72.87, y = 41.325, yend = 41.325, colour = "lightblue", size=.5) 
+  pm_ct <- pm_ct + annotate("point", x = -72.93, y = 41.325, colour = "lightblue", size = 2) 
+  pm_ct <- pm_ct + annotate("text", x = -72.85, y = 41.325, label = "New Haven", size=5, colour="gray30") 
+  pm_ct <- pm_ct + annotate("segment", x = -72.89, xend = -72.86, y = 41.375, yend = 41.375, colour = "lightblue", size=.5) 
+  pm_ct <- pm_ct + annotate("point", x = -72.89, y = 41.375, colour = "lightblue", size = 2) 
+  pm_ct <- pm_ct + annotate("text", x = -72.845, y = 41.375, label = "Hamden", size=5, colour="gray30") 
+  pm_ct <- pm_ct + annotate("point", x = -72.83, y = 41.375, colour="white", size=.2) 
+} else if (town_name=="New Britain") {
+  pm_ct <- pm_ct + annotate("segment", x = -72.82, xend = -72.785, y = 41.73, yend = 41.73, colour = "lightblue", size=.5) 
+  pm_ct <- pm_ct + annotate("point", x = -72.82, y = 41.73, colour = "lightblue", size = 2) 
+  pm_ct <- pm_ct + annotate("text", x = -72.768, y = 41.73, label = "Farmington", size=5, colour="gray30")
+} else if (town_name=="Stratford") {
+  pm_ct <- pm_ct + annotate("segment", x = -73.17, xend = -73.20, y = 41.24, yend = 41.24, colour = "lightblue", size=.5) 
+  pm_ct <- pm_ct + annotate("point", x = -73.17, y = 41.24, colour = "lightblue", size = 2) 
+  pm_ct <- pm_ct + annotate("text", x = -73.215, y = 41.24, label = "  Trumbull", size=5, colour="gray30") 
+  pm_ct <- pm_ct + annotate("segment", x = -73.16, xend = -73.19, y = 41.19, yend = 41.19, colour = "lightblue", size=.5) 
+  pm_ct <- pm_ct + annotate("point", x = -73.16, y = 41.19, colour = "lightblue", size = 2) 
+  pm_ct <- pm_ct + annotate("text", x = -73.205, y = 41.19, label = "Bridgeport", size=5, colour="gray30") 
+  pm_ct <- pm_ct + annotate("point", x = -73.22, y = 41.19, colour="white", size=.2) 
+} else if (town_name=="Waterbury") {
+  pm_ct <- pm_ct + annotate("segment", x = -73.1, xend = -73.06, y = 41.64, yend = 41.64, colour = "lightblue", size=.5)
+  pm_ct <- pm_ct + annotate("point", x = -73.1, y = 41.64, colour = "lightblue", size = 2) 
+  pm_ct <- pm_ct + annotate("text", x = -73.04, y = 41.64, label = "Watertown", size=5, colour="gray30") 
+  pm_ct <- pm_ct + annotate("segment", x = -72.97, xend = -72.93, y = 41.57, yend = 41.57, colour = "lightblue", size=.5) 
+  pm_ct <- pm_ct + annotate("point", x = -72.97, y = 41.57, colour = "lightblue", size = 2) 
+  pm_ct <- pm_ct + annotate("text", x = -72.915, y = 41.57, label = "Wolcott", size=5, colour="gray30") 
+  pm_ct <- pm_ct + annotate("point", x = -72.9, y = 41.57, colour="white", size=.2) 
+} else {
+}
+
+
+nospaces <- gsub(" ", "", town_name)
+ggsave(pm_ct, file = paste0("img/disp_", nospaces, "_minority.png"), width = 8, height = 6, type = "cairo-png")
+print(pm_ct)
+
+
+# White
+max_h <- max(test_map$white_disp, na.rm=T)
+min_h <- min(test_map$white_disp, na.rm=T)
+min_h <- ifelse(min_h >=0, min_h, min_h*-1)
+max_h <- ifelse(max_h > min_h, max_h, min_h)
+min_h <- ifelse(max_h > min_h, max_h, min_h)
+min_h <- (min_h*-1/100)-.1
+max_h <- (max_h/100)+.1
+
+pm_ct <- ggplot() 
+pm_ct <- pm_ct + geom_polygon(data = test_map, aes(x=long, y=lat, group=group, fill=white_disp/100), color="white", size=.25)
+pm_ct <- pm_ct + geom_polygon(data = test_borders, aes(x=long, y=lat, group=group), fill=NA, color = "black", size=0.5)
+pm_ct <- pm_ct + coord_map() 
+pm_ct <- pm_ct + scale_fill_distiller(type="seq", trans="reverse", palette = "PuOr", label=percent, breaks=pretty_breaks(n=10),  limits=c(max_h, min_h), name="Gap"  ) 
+pm_ct <- pm_ct + theme_nothing(legend=TRUE) 
+pm_ct <- pm_ct + labs(x=NULL, y=NULL, title=paste0(town_name, ": White traffic stops versus population"))
+pm_ct <- pm_ct + theme(text = element_text(size=15))
+pm_ct <- pm_ct + theme(plot.title=element_text(face="bold", hjust=.4))
+pm_ct <- pm_ct + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(l=20)))
+pm_ct <- pm_ct + theme(plot.caption=element_text(size=12, margin=margin(t=12), color="#7a7d7e", hjust=0))
+pm_ct <- pm_ct + theme(legend.key.size = unit(1, "cm"))
+
+if (town_name=="East Hartford") {
+  pm_ct <- pm_ct + annotate("segment", x = -72.58, xend = -72.675, y = 41.815, yend = 41.815, colour = "lightblue", size=.5) 
+  pm_ct <- pm_ct + annotate("point", x = -72.58, y = 41.815, colour = "lightblue", size = 2) 
+  pm_ct <- pm_ct + annotate("text", x = -72.71, y = 41.815, label = "South Windsor", size=5, colour="gray30") 
+  pm_ct <- pm_ct + annotate("segment", x = -72.5, xend = -72.55, y = 41.75, yend = 41.71, colour = "lightblue", size=.5) 
+  pm_ct <- pm_ct + annotate("point", x = -72.5, y = 41.75, colour = "lightblue", size = 2) 
+  pm_ct <- pm_ct + annotate("text", x = -72.578, y = 41.71, label = "Manchester", size=5, colour="gray30") 
+  pm_ct <- pm_ct + annotate("point", x = -72.75, y = 41.71, colour="white", size=.2) 
+} else if (town_name=="Hamden") {
+  pm_ct <- pm_ct + annotate("segment", x = -73.07, xend = -73.05, y = 41.375, yend = 41.4, colour = "lightblue", size=.5)
+  pm_ct <- pm_ct + annotate("point", x = -73.07, y = 41.375, colour = "lightblue", size = 2) 
+  pm_ct <- pm_ct + annotate("text", x = -73.033, y = 41.404, label = "Seymour", size=5, colour="gray30") 
+  pm_ct <- pm_ct + annotate("segment", x = -72.93, xend = -72.87, y = 41.325, yend = 41.325, colour = "lightblue", size=.5) 
+  pm_ct <- pm_ct + annotate("point", x = -72.93, y = 41.325, colour = "lightblue", size = 2) 
+  pm_ct <- pm_ct + annotate("text", x = -72.85, y = 41.325, label = "New Haven", size=5, colour="gray30") 
+  pm_ct <- pm_ct + annotate("segment", x = -72.89, xend = -72.86, y = 41.375, yend = 41.375, colour = "lightblue", size=.5) 
+  pm_ct <- pm_ct + annotate("point", x = -72.89, y = 41.375, colour = "lightblue", size = 2) 
+  pm_ct <- pm_ct + annotate("text", x = -72.845, y = 41.375, label = "Hamden", size=5, colour="gray30") 
+  pm_ct <- pm_ct + annotate("point", x = -72.83, y = 41.375, colour="white", size=.2) 
+} else if (town_name=="New Britain") {
+  pm_ct <- pm_ct + annotate("segment", x = -72.82, xend = -72.785, y = 41.73, yend = 41.73, colour = "lightblue", size=.5) 
+  pm_ct <- pm_ct + annotate("point", x = -72.82, y = 41.73, colour = "lightblue", size = 2) 
+  pm_ct <- pm_ct + annotate("text", x = -72.768, y = 41.73, label = "Farmington", size=5, colour="gray30")
+} else if (town_name=="Stratford") {
+  pm_ct <- pm_ct + annotate("segment", x = -73.17, xend = -73.20, y = 41.24, yend = 41.24, colour = "lightblue", size=.5) 
+  pm_ct <- pm_ct + annotate("point", x = -73.17, y = 41.24, colour = "lightblue", size = 2) 
+  pm_ct <- pm_ct + annotate("text", x = -73.215, y = 41.24, label = "  Trumbull", size=5, colour="gray30") 
+  pm_ct <- pm_ct + annotate("segment", x = -73.16, xend = -73.19, y = 41.19, yend = 41.19, colour = "lightblue", size=.5) 
+  pm_ct <- pm_ct + annotate("point", x = -73.16, y = 41.19, colour = "lightblue", size = 2) 
+  pm_ct <- pm_ct + annotate("text", x = -73.205, y = 41.19, label = "Bridgeport", size=5, colour="gray30") 
+  pm_ct <- pm_ct + annotate("point", x = -73.22, y = 41.19, colour="white", size=.2) 
+} else if (town_name=="Waterbury") {
+  pm_ct <- pm_ct + annotate("segment", x = -73.1, xend = -73.06, y = 41.64, yend = 41.64, colour = "lightblue", size=.5)
+  pm_ct <- pm_ct + annotate("point", x = -73.1, y = 41.64, colour = "lightblue", size = 2) 
+  pm_ct <- pm_ct + annotate("text", x = -73.04, y = 41.64, label = "Watertown", size=5, colour="gray30") 
+  pm_ct <- pm_ct + annotate("segment", x = -72.97, xend = -72.93, y = 41.57, yend = 41.57, colour = "lightblue", size=.5) 
+  pm_ct <- pm_ct + annotate("point", x = -72.97, y = 41.57, colour = "lightblue", size = 2) 
+  pm_ct <- pm_ct + annotate("text", x = -72.915, y = 41.57, label = "Wolcott", size=5, colour="gray30") 
+  pm_ct <- pm_ct + annotate("point", x = -72.9, y = 41.57, colour="white", size=.2) 
+} else {
+}
+
+
+nospaces <- gsub(" ", "", town_name)
+ggsave(pm_ct, file = paste0("img/disp_", nospaces, "_white.png"), width = 8, height = 6, type = "cairo-png")
+print(pm_ct)
+
+}
+
+```
+
+
+```{r for_fun, fig.width=9, fig.height=150}
+mw_tract$majority_pop <- ifelse(mw_tract$minority_pop_p > mw_tract$white_pop_p, "minority", "white")
+
+stops_filtered <- subset(stops, !is.na(town_name))
+ggplot(stops_filtered, aes(Date2)) + geom_histogram(binwidth=1) + facet_grid(block ~ RE)
+```
+
+```{r line_charts, fig.width=9}
+library(ggalt)
+
+mw_tract$tract <- paste(mw_tract$town_name, mw_tract$tract_code)
+
+for (i in 1:length(town_names)) {
+  town_name <- town_names[i]
+    blah <- town_names[i]
+    
+sub_tract <- subset(mw_tract, town_department==blah)
+sub_tract <- subset(sub_tract, !is.na(minority_p))
+gg <- ggplot(sub_tract, aes(x=minority_pop_p, xend=minority_p, y=tract, group=tract))
+gg <- gg + geom_dumbbell(color="tomato", size=0.5, point.colour.l="#0e668b")
+# gg <- gg + scale_x_continuous(label=percent)
+gg <- gg + labs(x=NULL, y=NULL)
+gg <- gg + theme_bw(base_family="Calibri")
+gg <- gg + theme(plot.title=element_text(face="bold", family="Lato Black", size=22))
+gg <- gg + theme(plot.background=element_rect(fill="#f7f7f7"))
+gg <- gg + theme(panel.background=element_rect(fill="#f7f7f7"))
+gg <- gg + theme(panel.grid.minor=element_blank())
+gg <- gg + theme(panel.grid.major.y=element_blank())
+gg <- gg + theme(panel.grid.major.x=element_line())
+gg <- gg + theme(text = element_text(size=14))
+gg <- gg + theme(axis.ticks=element_blank())
+gg <- gg + theme(legend.position="top")
+gg <- gg + theme(panel.border=element_blank())
+gg <- gg + theme(plot.caption=element_text(size=12, face="italic", margin=margin(t=12), color="#7a7d7e"))
+
+nospaces <- gsub(" ", "", town_name)
+ggsave(gg, file = paste0("img/gap_", nospaces, "2.png"), width = 8, height = 5, type = "cairo-png")
+print(gg)
+
+
+}
+```
