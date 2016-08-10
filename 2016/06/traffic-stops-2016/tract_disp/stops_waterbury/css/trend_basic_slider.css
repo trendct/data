@@ -1,0 +1,63 @@
+body {
+	background-color: white;	
+	margin: 0px;
+}
+
+.trend_basic_slider_byline {
+	text-transform: uppercase;
+	float: right;
+}
+.trend_basic_slider_sourceline {
+	float: left;
+}
+.trend_basic_slider_sourceline,
+.trend_basic_slider_byline {
+	color: gray;
+ }
+
+ .trend_basic_slider_caption {
+ 	margin-bottom: 4px;
+ }
+
+.trend_basic_slider_container {
+	max-width: 100%;
+	border-bottom: 1px solid lightgray;
+}
+
+.trend_basic_slider_item img {
+	max-width: 100%;
+}
+
+.trend_basic_slider_item {
+	display: none;
+}
+
+.trend_basic_slider_button{
+	float: left;
+	background-color: lightgray;
+	padding-left: 10px;
+	padding-right: 10px;
+	border-radius: 4px;
+	margin-right: 5px;
+	margin-bottom: 5px;
+	border: 1px solid lightgray;
+}
+
+.trend_basic_slider_button_container {
+	display: inline;
+	margin-right: auto;
+	margin-left: auto;
+
+}
+
+.trend_basic_slider_button:hover,
+.trend_basic_slider_button.selected  {
+	background-color: white;
+	color: gray;
+	cursor: pointer;
+}
+
+/* Hack to make Bootstrap and Pym.js play nice */
+h3 {
+	margin-top: 0px !important;
+}
