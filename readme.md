@@ -1,3 +1,9 @@
+# IMPORTANT. THIS FOLDER WILL NO LONGER BE UPDATED
+
+## We've moved this over to its own organization ([TrendCT-Data](https://github.com/trendct-data)) so it'd be easier to download individual projects. We'll keep this repo but all future projects will be at the link above.
+
+---
+
 # What is this
 
 **This repository contains the data and data-processing scripts used in TrendCT.org stories.**
